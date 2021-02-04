@@ -19,7 +19,11 @@ class Pendaftaran extends CI_Controller
 			"page" => 'pages/pendaftaran/formulir.php',
 			"subheader" => [
 				'Pendaftaran',
-				'Data Camaru'
+				[
+					'text' => 'Data Camaru',
+					'href' => '/pendaftaran/data_camaru'
+				],
+				'Formulir'
 			]
 		);
 		$this->load->view('default', $data);
@@ -30,7 +34,10 @@ class Pendaftaran extends CI_Controller
 			"page" => 'pages/pendaftaran/informasi_pembayaran.php',
 			"subheader" => [
 				'Pendaftaran',
-				'Data Camaru',
+				[
+					'text' => 'Data Camaru',
+					'href' => '/pendaftaran/data_camaru'
+				],
 				'Informasi Pembayaran'
 			]
 		);
@@ -42,7 +49,10 @@ class Pendaftaran extends CI_Controller
 			"page" => 'pages/pendaftaran/upload_bukti_pembayaran.php',
 			"subheader" => [
 				'Pendaftaran',
-				'Data Camaru',
+				[
+					'text' => 'Data Camaru',
+					'href' => '/pendaftaran/data_camaru'
+				],
 				'Upload Bukti Pembayaran'
 			]
 		);

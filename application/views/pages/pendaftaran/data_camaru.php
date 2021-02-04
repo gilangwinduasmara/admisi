@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="d-flex justify-content-center">
-		<button class="btn btn-warning"><i class="fas fa-plus"></i> Formulir</button>
+		<a href="<?php echo base_url('/pendaftaran/formulir') ?>" class="btn btn-warning"><i class="fas fa-plus"></i> Formulir</a>
 	</div>
 	<div class="table-responsive mt-12">
 		<table class="table table table-vertical-center table-formulir">
