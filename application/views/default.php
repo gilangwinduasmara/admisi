@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<head>
 		<base href="">
 		<meta charset="utf-8" />
-		<title>Metronic Live preview | Keenthemes</title>
+		<title>Admisi | Univerisas Kristen Indonesia Toraja</title>
 		<meta name="description" content="Updates and statistics" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
