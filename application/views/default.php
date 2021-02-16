@@ -23,6 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</head>
 
 	<body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-static page-loading">
+		
 		<?php $this->load->view('layout.php')?>
 		<?php $this->load->view('partials/_extras/offcanvas/quick-notifications.php')?>
 		<?php $this->load->view('partials/_extras/offcanvas/quick-actions.php')?>
@@ -31,10 +32,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php $this->load->view('partials/_extras/chat.php')?>
 		<?php $this->load->view('partials/_extras/scrolltop.php')?>
 		<script>
-			var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+			var HOST_URL = '<?php echo base_url() ?>';
 		</script>
 
 		<script>
+			const BASE_URL = '<?php echo base_url() ?>';
+			let pendaftaran = <?php echo (json_encode($pendaftaran) ?? null) ?>;
 			var KTAppSettings = {
 				"breakpoints": {
 					"sm": 576,
@@ -97,11 +100,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<script src="<?php echo base_url('assets/plugins/global/plugins.bundle.js')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/prismjs/prismjs.bundle.js')?>"></script>
+		<script src="<?php echo base_url('assets/plugins/custom/axios/axios.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/scripts.bundle.js')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/pages/widgets.js')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/app.js')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/app.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 		<script src="<?php echo base_url('assets/js/src/inputmask.js')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/dropzone.js')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/validate.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/dropzone.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/daerah.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/penerimaan.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+	
 	</body>
 </html>

@@ -53,8 +53,13 @@ $route['default_controller'] = 'pages/landing';
 $route['register'] = 'pages/register';
 $route['login'] = 'pages/login';
 $route['api/auth/(:any)'] = 'api/Auth_controller/$1';
+$route['api/pendaftaran/(:any)'] = 'api/Pendaftaran_controller/$1';
+$route['api/pembayaran/(:any)'] = 'api/Pembayaran_controller/$1';
 $route['pendaftaran/formulir/(:any)'] = 'form/formulir/$1';
 $route['api/fakultas'] = 'api/Fakultas_controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['assets/(:any)'] = 'assets/$1';
+
+
+$route['api/daerah'] = 'api/Daerah_controller';

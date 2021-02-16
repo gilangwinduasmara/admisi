@@ -9,38 +9,61 @@
 					<th class="p-0 py-6 min-w-100px">No. Formulir</th>
 					<th class="p-0 py-6 min-w-150px">Nama Camaru</th>
 					<th class="p-0 py-6 min-w-120px">Tanggal Daftar</th>
-					<th class="p-0 py-6 min-w-100px">Status</th>
+					<th class="py-6 min-w-100px text-left">Status</th>
 					<th class="p-0 py-6 min-w-100px text-center">Aksi</th>
 					<th class="p-0 py-6 min-w-150px">Status Pembayaran</th>
 					<th class="p-0 py-6"></th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>2021001</td>
-					<td>Reinchart Labangkalang</td>
-					<td>2 Januari 2021</td>
-					<td> </td>
-					<td class="text-center">
-						<a class="btn btn-icon btn-light btn-sm" data-toggle="toltip" title="Informasi Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran") ?>"><i class="la la-info-circle"></i></a>
-						<a class="btn btn-icon btn-light btn-sm" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran") ?>"><i class="la la-check-circle"></i></a>
-					</td>
-					<td><span class="label label-lg label-light-warning label-inline">Belum dibayar</span></td>
-				</tr>
-				<tr>
-					<td>2021002</td>
-					<td>Gilang Windu Asmara</td>
-					<td>2 Januari 2021</td>
-					<td> </td>
-					<td class="text-center">
-						<a class="btn btn-icon btn-light btn-sm" href="<?php echo base_url("pendaftaran/informasi_pembayaran") ?>"><i class="la la-info-circle"></i></a>
-						<a class="btn btn-icon btn-light btn-sm" href="<?php echo base_url("pendaftaran/upload_pembayaran") ?>"><i class="la la-check-circle"></i></a>
-					</td>
-					<td><span class="label label-lg label-light-success label-inline">Sudah Dibayar</span></td>
-					<td> 
-						<a href="<?php echo base_url('pendaftaran/data_personal') ?>" class="btn btn-icon btn-light btn-sm"><i class="la la-arrow-right text-hover-primary"></i></a>
-					</td>
-				</tr>
+				<?php 
+					$status_pembayaran = [
+						'BELUM LUNAS' => 'warning', 
+						'VALIDASI' => 'info', 
+						'LUNAS' => 'success', 
+						'EXPIRED' => 'danger'
+					];
+					foreach($pendaftarans as $pendaftaran){
+						?>
+						<tr>
+							<?php
+							echo '
+								<td>'.$pendaftaran['id'].'</td>
+								<td>'.$pendaftaran['nama'].'</td>
+								<td>'.$pendaftaran['created_at'].'</td>
+								<td class="text-left">
+									'.((count($pendaftaran['hasil_penerimaan'])>0 ? '<span class="label label-lg label-light-info label-inline">SELEKSI</span>': '')).'
+								</td>
+								<td class="text-center">
+									<a class="btn btn-icon btn-light btn-sm" data-toggle="toltip" title="Informasi Pembayaran" href="'.base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]).'"><i class="la la-info-circle"></i></a>
+									<a class="btn btn-icon btn-light btn-sm" title="Upload Bukti Pembayaran" href="'.base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]).'"><i class="la la-check-circle"></i></a>
+								</td>
+								<td>
+									<span class="label label-lg label-light-'.$status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'].' label-inline">'.($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS').'</span>
+								</td>
+							';
+							?>
+							<?php
+								if(($pendaftaran['pembayaran'][0]['status']??'BELUM DIBAYAR') == 'LUNAS'){
+									?>
+									<td> 
+										<?php 
+										if(count($pendaftaran['hasil_penerimaan'])==0){
+											?>
+											<a href="<?php echo base_url('pendaftaran/formulir/data_diri?id='.$pendaftaran['id']) ?>" class="btn btn-icon btn-light btn-sm">
+												<i class="la la-arrow-right text-hover-primary"></i>
+											</a>
+											<?php
+										}
+										?>
+									</td>
+									<?php
+								}
+							?>
+						</tr>
+						<?php
+					}
+				?>
 			</tbody>
 		</table>
 	</div>

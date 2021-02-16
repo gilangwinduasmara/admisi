@@ -5,20 +5,33 @@
 				<div class="card-body">
 					<div class="form-group row">
 						<label for="" class="col-md-3 col-form-label">No. Formulir</label>
-						<input type="text" class="form-control" disabled>
+						<select name="" id="formulir_selector" class="form-control">
+							<option value="" >Pilih</option>
+							<?php
+								foreach($pendaftaran as $p){
+									if(count($p['hasil_penerimaan']) > 0){
+										echo '<option value="'.$p["id"].'">'.$p["id"].'	</option>';
+									}
+								}
+							?>
+						</select>
 					</div>
-					<div class="form-group row">
-						<label for="" class="col-md-3 col-form-label">Nama Camaru</label>
-						<input type="text" class="form-control" disabled>
-					</div>
-
-					<div class="d-flex flex-column align-items-center mt-24">
-						<div for="" class="">Fakultas Teknologi Informasi - S1 Teknik Informatika</div>
-						<button class="btn btn-primary">Download Surat Keputusan Penerimaan</button>
-					</div>
-					<div class="d-flex flex-column align-items-center mt-6">
-						<div for="" class="">Fakultas Teknologi Informasi - S1 Sistem Informasi</div>
-						<button class="btn btn-primary">Download Surat Keputusan Penerimaan</button>
+					<div class="penerimaan-wrapper" style="display: none">
+						<div class="form-group row">
+							<label for="" class="col-md-3 col-form-label">Nama Camaru</label>
+							<input id="nama_camaru" type="text" class="form-control" disabled>
+						</div>
+						<div class="penerimaan-list">
+							<div class="d-flex flex-column align-items-center mt-24">
+								<div for="" class="">Fakultas Teknologi Informasi - S1 Teknik Informatika</div>
+								<button class="btn btn-primary">Download Surat Keputusan Penerimaan</button>
+							</div>
+							<div class="d-flex flex-column align-items-center mt-6">
+								<div for="" class="">Fakultas Teknologi Informasi - S1 Sistem Informasi</div>
+								<button class="btn btn-primary">Download Surat Keputusan Penerimaan</button>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 			</div>

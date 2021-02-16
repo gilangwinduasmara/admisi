@@ -1,16 +1,26 @@
-function dropzoneFile(field){
-	const query = '.dropzone-file'
-	var previewNode = $(query + " .dropzone-item");
+function dropzoneFile(query){
+	// const query = '.dropzone-file'
+	var previewNode = $(query).find('.dropzone-item')
         previewNode.id = "";
         var previewTemplate = previewNode.parent('.dropzone-items').html();
         previewNode.remove();
-	let _dropzoneFile = new Dropzone(query, {
+	// let _dropzoneFile = new Dropzone(query, {
+	// 	url: "https://keenthemes.com/scripts/void.php",
+	// 	maxFilesize: 1, 
+	// 	maxFiles: 1,
+	// 	previewTemplate: previewTemplate,
+	// 	previewsContainer: query + " .dropzone-items", 
+	// 	clickable: query + " .dropzone-select" 
+	// });
+	
+	console.log('#'+$(query).attr('id')+' > div > .dropzone-select')
+	let _dropzoneFile = $('#'+$(query).attr('id')).dropzone({
 		url: "https://keenthemes.com/scripts/void.php",
 		maxFilesize: 1, 
 		maxFiles: 1,
-		previewTemplate: previewTemplate,
-		previewsContainer: query + " .dropzone-items", 
-		clickable: query + " .dropzone-select" 
+		// previewTemplate: previewTemplate,
+		// previewsContainer: $(query).find(".dropzone-items"), 
+		clickable: '#'+$(query).attr('id')+' > div > .dropzone-select'
 	});
 
 	_dropzoneFile.on("addedfile", function (file){
@@ -19,6 +29,9 @@ function dropzoneFile(field){
 		}
 		onAddedFile(file, query, this)
 	})
+	_dropzoneFile.on('sendingmultiple', function (data, xhr, formData) {
+		formData.append("Username", $(`[name='${$(query).data('field')}']`).val());
+	});
 }
 
 function onAddedFile (file, query, dropzone){
@@ -34,9 +47,14 @@ const fields = ['history_pendidikan_sma_ijazah', 'history_pendidikan_s1_ijazah',
 fields.map((field, index) => {
 })
 
-var history_pendidikan_sma_ijazah = dropzoneFile('.')
-
-$(document).ready(function(){
-	dropzoneFile()
-})
+if($('.dropzone').length){
+	$.each($('.dropzone'), function(i, v){
+		dropzoneFile(this)
+	})
+}
+// $(document).ready(function(){
+// 	if($('.dropzone').length){
+// 		dropzoneFile()
+// 	}
+// })
 
