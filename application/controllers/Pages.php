@@ -33,4 +33,10 @@ class Pages extends CI_Controller{
 		$this->load->view('default', $data);
 	}
 
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('/');
+	}
+
 }

@@ -36,4 +36,10 @@ class Hasil_penerimaan_model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
+	public function save($data){
+		$id = $data['id'];
+		unset($data['id']);
+		$this->db->update($this->table_name, $data, array('id' => $id));
+	}
+
 }

@@ -37,7 +37,7 @@
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">NIK</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" name="NIK" value="<?php echo $data_wali['NIK'] ?? null ?>">
+										<input type="number" class="form-control" name="NIK" value="<?php echo $data_wali['NIK'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -51,16 +51,16 @@
 									<div class="col-md-10">
 										<select class="form-control" required name="status_hubungan" value="<?php echo $data_wali['status_hubungan'] ?? null ?>">
 											<option value="">Pilih</option>
-											<option value="AYAH">Ayah</option>
-											<option value="IBU">Ibu</option>
-											<option value="WALI">Wali</option>
+											<option value="AYAH" <?php echo(($data_wali['status_hubungan'] ?? null) == "AYAH" ? "selected": "") ?>>Ayah</option>
+											<option value="IBU" <?php echo(($data_wali['status_hubungan'] ?? null) == "IBU" ? "selected": "") ?>>Ibu</option>
+											<option value="WALI" <?php echo(($data_wali['status_hubungan'] ?? null) == "WALI" ? "selected": "") ?>>Wali</option>
 										</select>
 									</div>
 								</div>
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">No. HP</label>
 									<div class="col-md-10">
-										<input class="form-control input-hp" name="no_hp" value="<?php echo $data_wali['no_hp'] ?? null ?>">
+										<input type="number" class="form-control" name="no_hp" value="<?php echo $data_wali['no_hp'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -96,13 +96,13 @@
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">No. Telepon Instansi</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" name="telp_instansi" value="<?php echo $data_wali['telp_instansi'] ?? null ?>">
+										<input type="number" class="form-control" name="telp_instansi" value="<?php echo $data_wali['telp_instansi'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Penghasilan Per Bulan</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control input-uang" name="penghasilan_perbulan" value="<?php echo $data_wali['penghasilan_perbulan'] ?? null ?>">
+										<input type="number" class="form-control input-uang" name="penghasilan_perbulan" value="<?php echo $data_wali['penghasilan_perbulan'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -133,15 +133,37 @@
 									</label>
 								</div>
 								<div class="same-address">
-									<div class="form-group row" hidden>
+									<!-- <div class="form-group row" hidden>
 										<label for="" class="col-md-2 col-form-label">Negara</label>
 										<div class="col-md-10">
 											<input type="text" class="form-control" name="negara" value="">
 										</div>
-									</div>
-									<div class="daerah-wrapper">
-	
-									</div>
+									</div> -->
+									<?php
+										if(!empty($data_wali['kelurahan_id'])){
+											?>
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Tempat Tinggal</label>
+													<div class="col-md-10">
+														<button class="btn btn-primary" data-toggle="sunting" data-target="daerah_selector" >Sunting</button>
+														<input name="kelurahan" value="<?php echo $data_wali['kelurahan_id']?>" hidden>
+													</div>
+												</div>
+											<?php
+										}else{
+											?>
+												<div class="daerah-wrapper" >
+										
+												</div>
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
+													<div class="col-md-10">
+														<textarea name="alamat_asal" id="" cols="30" rows="10" class="form-control"></textarea>
+													</div>
+												</div>
+											<?php
+										}
+									?>
 									
 									<div class="form-group row">
 										<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
@@ -157,7 +179,7 @@
 				<div class="d-flex justify-content-end mt-4">
 					<div class="d-flex">
 						<div class="mr-2">
-							<a href="data_personal" class="btn btn-primary">Kembali</a>
+							<a href="<?php echo base_url('/pendaftaran/formulir/data_diri?id='.$this->input->get('id')) ?>" class="btn btn-primary">Kembali</a>
 						</div>
 						<div class="">
 							<button type="button" class="btn btn-primary lanjut">Lanjut</button>

@@ -7,7 +7,7 @@
 					if(empty($nomor_pembayaran)){
 						if($pendaftaran){
 							?>
-							<form action="<?php echo base_url('/api/pembayaran/save_pembayaran') ?>" method="POST">
+							<form action="<?php echo base_url('/api/pembayaran/save_pembayaran') ?>" method="POST" name="informasi_pembayaran">
 								<div class="card-body">
 									<div class="form-group row">
 										<label class="col-md-3 col-form-label">No. Formulir</label>
@@ -15,7 +15,7 @@
 									</div>
 									<div class="form-group row">
 										<label class="col-md-3 col-form-label">Nama Camaru</label>
-										<input type="text" class="form-control" name="nama_camaru" value="<?php echo $pendaftaran['pembayaran'][0]['nama_camaru'] ?? $pendaftaran['nama']?>" >
+										<input type="text" class="form-control" name="nama_camaru" value="<?php echo $pendaftaran['pembayaran'][0]['nama_camaru'] ?? $pendaftaran['nama']?>" readonly>
 									</div>
 									<div class="form-group">
 										<label>Pilih metode pembayaran:</label>
@@ -24,7 +24,7 @@
 												foreach($jenis_pembayarans as $jenis_pembayaran){
 													?>
 														<label class="radio">
-															<input type="radio" name="jenis_pembayaran" value="<?php echo $jenis_pembayaran['id'] ?>" <?php echo count($pendaftaran['pembayaran'])>0 && $jenis_pembayaran['id'] == $pendaftaran['pembayaran'][0]['jenis_pembayaran_id'] ? 'checked':''  ?>>
+															<input type="radio" name="jenis_pembayaran" value="<?php echo $jenis_pembayaran['id'] ?>" <?php echo count($pendaftaran['pembayaran']??[])>0 && $jenis_pembayaran['id'] == $pendaftaran['pembayaran'][0]['jenis_pembayaran_id'] ? 'checked':''  ?>>
 															<span></span>
 															<?php echo $jenis_pembayaran['jenis_pembayaran'] ?>
 														</label>
@@ -32,9 +32,12 @@
 												}
 											?>
 										</div>
+										<div>
+											<input type="text" class="form-control" hidden name="metode_pembayaran">
+										</div>
 									</div>
 									<div class="d-flex justify-content-center">
-										<input type="submit" class="btn btn-primary">
+										<button type="button" class="btn btn-primary lanjut">Submit</button>
 									</div>
 								</div>
 							</form>

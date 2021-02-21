@@ -27,7 +27,7 @@
 				<div class="d-flex justify-content-end mt-4">
 					<div class="d-flex">
 						<div class="mr-2">
-							<a href="#kt_tab_pane_2" class="btn btn-primary disabled">Kembali</a>
+						<a href="<?php echo base_url('/pendaftaran/formulir/unggah_berkas?id='.$this->input->get('id')) ?>" class="btn btn-primary">Kembali</a>
 						</div>
 						<div class="">
 							<button class="btn btn-primary lanjut">Submit</button>

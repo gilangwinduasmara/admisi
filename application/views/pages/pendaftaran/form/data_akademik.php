@@ -10,7 +10,7 @@
 			<a class="nav-link disabled" data-toggle="tab">3. Data Pendidikan</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link acvtive" data-toggle="tab">3. Data Akademik</a>
+			<a class="nav-link acvtive"  href="#" data-toggle="tab">3. Data Akademik</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link disabled" data-toggle="tab">4. Unggah Berkas</a>
@@ -40,7 +40,7 @@
 											<option value="">Pilih</option>
 											<?php
 												foreach($prodi as $p){
-													echo '<option '.($p["id"] == ($data_akademik['prodi_1_id'] ?? null) ? 'selected': null).' value="'.$p['id'].'">'.$p['nama_prodi'].'</option>';
+													echo '<option '.($p["id"] == ($pendaftaran['prodi_1_id'] ?? null) ? 'selected': null).' value="'.$p['id'].'">'.$p['nama_prodi'].'</option>';
 												}
 											?>
 										</select>
@@ -53,7 +53,7 @@
 											<option value="">Pilih</option>
 											<?php
 												foreach($prodi as $p){
-													echo '<option '.($p["id"] == ($data_akademik['prodi_2_id'] ?? null) ? 'selected': null).' value="'.$p['id'].'">'.$p['nama_prodi'].'</option>';
+													echo '<option '.($p["id"] == ($pendaftaran['prodi_2_id'] ?? null) ? 'selected': null).' value="'.$p['id'].'">'.$p['nama_prodi'].'</option>';
 												}
 											?>
 										</select>
@@ -100,26 +100,7 @@
 											</div>
 											<div class="form-group row">
 												<label for="" class="col-md-2 col-form-label">Unggah Bukti Prestasi</label>
-												<div class="col-md-10">
-													<div class="dropzone dropzone-multi dropzone-file"  data-field="history_pendidikan_sma_ijazah">
-														<div class="dropzone-panel mb-lg-0 mb-2">
-															<a class="dropzone-select btn btn-light-primary font-weight-bold btn-sm dz-clickable">Pilih Berkas</a>
-															<a class="dropzone-upload btn btn-light-primary font-weight-bold btn-sm" style="display: none;">Upload All</a>
-															<a class="dropzone-remove-all btn btn-light-primary font-weight-bold btn-sm" style="display: none;">Remove All</a>
-														</div>
-														<div class="dropzone-items">
-															<div class="dropzone-item" style="display:none">
-																<div class="dropzone-file">
-																	<div class="dropzone-filename" title="some_image_file_name.jpg">
-																		<span data-dz-name="">some_image_file_name.jpg</span>
-																		<strong>(
-																		<span data-dz-size="">340kb</span>)</strong>
-																	</div>
-																</div>
-															</div>
-														</div>
-													<div class="dz-default dz-message"><button class="dz-button" type="button">Drop files here to upload</button></div></div>
-												</div>
+												<input type="file" name="unggah_bukti_prestasi">
 											</div>
 											<div class="separator separator-solid mb-8"></div>
 										</div>
@@ -139,7 +120,7 @@
 				<div class="d-flex justify-content-end mt-4">
 					<div class="d-flex">
 						<div class="mr-2">
-							<a href="#kt_tab_pane_2" class="btn btn-primary disabled">Kembali</a>
+						<a href="<?php echo base_url('/pendaftaran/formulir/data_pendidikan?id='.$this->input->get('id')) ?>" class="btn btn-primary">Kembali</a>
 						</div>
 						<div class="">
 							<button class="btn btn-primary lanjut">Lanjut</button>

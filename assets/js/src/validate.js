@@ -87,6 +87,46 @@ const forms = {
 					required: true
 				}
 			},
+			{
+				name: 'provinsi',
+				label: 'Provinsi',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'kota_kab',
+				label: 'Kabupaten',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'kecamatan',
+				label: 'Provinsi',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'kelurahan',
+				label: 'Kabupaten',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
 		]
 	},
 	data_wali: {
@@ -212,6 +252,142 @@ const forms = {
 				label: 'Sekolah',
 				rules: {
 					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'provinsi[]',
+				label: 'Provinsi',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'kota_kab[]',
+				label: 'Kabupaten',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'upload_ijazah[]',
+				label: 'Ijazah',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'upload_daftar_nilai[]',
+				label: 'Daftar nilai',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+		]
+	},
+	unggah_berkas: {
+		fields: [
+			{
+				name: 'upload_foto',
+				label: 'Foto',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'upload_kk',
+				label: 'KK',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'upload_akta_lahir',
+				label: 'Akta Lahir',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'upload_srt_pernyataan',
+				label: 'Surat Pernyataan',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+		]
+	},
+	informasi_pembayaran: {
+		fields: [
+			{
+				name: 'metode_pembayaran',
+				label: 'Metode Pembayaran',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+		]
+	},
+	upload_bukti_bayar: {
+		fields: [
+			{
+				name: 'pembayaran_id',
+				label: 'No Pembayaran',
+				rules: {
+					required: true,
+				}
+			},
+			{
+				name: 'pembayaran_id',
+				label: 'No Pembayaran',
+				rules: {
+					required: true,
+				}
+			},
+			{
+				name: 'total_bayar',
+				label: 'Total Bayar',
+				rules: {
+					required: true,
+				}
+			},
+			{
+				name: 'upload_bukti',
+				label: 'Bukti Bayar',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
 				}
 			},
 		]
@@ -227,19 +403,16 @@ const validationDict = {
 $('.lanjut').click(function(){
 	$('.collapse').addClass('show')
 	let form = $(this).closest('form')
-	if(validate(form)){
+	validate(form)
+	if($(".is-invalid").length==0){
 		form.submit();
-	}else{
-		console.log('scroll')
-		$($(".is-invalid")[0]).get(0).scrollIntoView();
 	}
 })
 
 $(document).ready(function(){
 	Object.keys(forms).map((key) => {
 		forms[key].fields.map((field) => {
-			$(`[name="${field.name}"]`).keyup(function(){
-				
+			$(`[name="${field.name}"]`).change(function(){
 				resetError($(this))
 			})
 		})
@@ -257,38 +430,47 @@ function validate(form){
 }
 
 function validateField(field){
-	let currentField = $(`[name="${field.name}"]`)
-	if(field.rules.required){
-		resetError(currentField)
-		if(currentField.val() == ""){
-			let error = validationDict.required.replace('%label%', field.label)
-			setInvalid(currentField, error)
-			return false
+	let isError = false;
+	$.each($(`[name="${field.name}"]`),function(){
+		console.log($(this).attr('name'))
+		let currentField = $(this)	
+		if(!$(this).attr('disabled')){
+			if(field.rules.required){
+				resetError(currentField)
+				if(currentField.val() == ""){
+					let errorDict = field.dict?.required!=null?field.dict.required : validationDict.required
+					let error = errorDict.replace('%label%', field.label)
+					setInvalid(currentField, error)
+					isError = true
+				}
+			}
+			if(field.rules.max){
+				resetError(currentField)
+				if(currentField.val().length > field.rules.max){
+					let error = validationDict.max.replace('%label%', field.label).replace('%max%', field.rules.max)
+					setInvalid(currentField, error)
+					isError = true
+				}
+			}
+		
+			if(field.rules.max){
+				resetError(currentField)
+				if(currentField.val().length < field.rules.min){
+					let error = validationDict.max.replace('%label%', field.label).replace('%min%', field.rules.min)
+					setInvalid(currentField, error)
+					isError = true
+				}
+			}
+		}else{
+			return isError = false;
 		}
-	}
-	if(field.rules.max){
-		resetError(currentField)
-		if(currentField.val().length > field.rules.max){
-			let error = validationDict.max.replace('%label%', field.label).replace('%max%', field.rules.max)
-			setInvalid(currentField, error)
-			return false
-		}
-	}
-
-	if(field.rules.max){
-		resetError(currentField)
-		if(currentField.val().length < field.rules.min){
-			let error = validationDict.max.replace('%label%', field.label).replace('%min%', field.rules.min)
-			setInvalid(currentField, error)
-			return false
-		}
-	}
-	console.log(field.name)
-	return true
+	})
+	return !isError
+	
 }
 
 function setInvalid(field, error){
-	console.log('set invalid')
+	console.log('set invalid', console.log(error))
 	field.addClass('is-invalid')
 	field.after('<div class="invalid-feedback">'+error+'</div>')
 }
@@ -298,3 +480,12 @@ function resetError(field){
 	field.next().remove()
 }
 
+
+
+
+
+
+// //////////////////////////
+$('[name="jenis_pembayaran"]').change(function(){
+	$('[name="metode_pembayaran"]').val($(this))
+})

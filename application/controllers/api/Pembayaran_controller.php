@@ -44,20 +44,46 @@ class Pembayaran_controller extends CI_Controller{
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('errors', $this->form_validation->error_array());
 		}else{
-			if(!$this->pembayaran_model->matchPendaftaran($this->input->post('pembayaran_id'), $this->input->post('id'))){
+			$pembayaran = $this->pembayaran_model->matchPendaftaran($this->input->post('pembayaran_id'), $this->input->post('id'));
+			if(empty($pembayaran)){
 				$this->session->set_flashdata('errors', ['Nomor pembayaran salah']);
 				redirect('/pendaftaran/upload_pembayaran?id='.$this->input->post('id'));
+			}else{
 			}
 			$pendaftaran = $this->pendaftaran_model->find($this->input->post('id'));
 			$data = array(
-				'id' => $pendaftaran['pembayaran'][0]['id'],
+				'id' => $pembayaran,
 				'status' => 'VALIDASI',
-				'total_bayar' => $this->input->post('total_bayar')
+				'total_bayar' => $this->input->post('total_bayar'),
+				'upload_bukti_bayar' => $this->upload('upload_bukti')
 			);
 			$this->pembayaran_model->save($data);
 			$this->session->set_flashdata('success', ['Bukti pembayaran berhasil disimpan']);
 		}
 		
 		redirect("/pendaftaran/data_camaru");
+	}
+
+	public function upload($field = 'userfile')
+	{
+		$config['upload_path']          = './uploads/';
+		$config['allowed_types']        = 'jpg|png';
+		$config['max_size']             = 20000;
+		$config['encrypt_name']         = TRUE;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload($field))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			return null;
+		}
+		
+		else
+		{
+			return $this->upload->data()['file_name'];
+		}
+
+		return null;
 	}
 }

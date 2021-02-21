@@ -13,6 +13,35 @@ class Pendaftaran_controller extends CI_Controller{
 		$this->load->model('detail_pendidikan_model');
 	}
 
+	public function upload($field = 'userfile')
+	{
+		$config['upload_path']          = './uploads/';
+		$config['allowed_types']        = 'gif|jpg|png|pdf';
+		$config['max_size']             = 20000;
+		$config['encrypt_name']         = TRUE;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload($field))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			$this->session->flashdata('errors', $error);
+			print_r($error);
+			return 'x';
+		}
+		
+		else
+		{
+			return $this->upload->data()['file_name'];
+				// $data = array('upload_data' => $this->upload->data());
+				// $this->response(array(
+				// 	'file_name' => $this->upload->data()['file_name']
+				// ), 200);		
+		}
+
+		return null;
+	}
+
 	public function new_formulir(){
 		$this->form_validation->set_rules('nama', 'Nama Camaru', 'required');
 		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required');
@@ -58,7 +87,14 @@ class Pendaftaran_controller extends CI_Controller{
 	}
 
 	private function unggah_berkas(){
-		redirect('/pendaftaran/formulir/submit');
+		$data = array(
+			'id' => $this->input->post('id')
+		);
+		foreach(['upload_foto', 'upload_kk', 'upload_akta_lahir', 'upload_srt_pernyataan'] as $field){
+			$data[$field] = $this->upload($field);
+		}
+		$this->pendaftaran_model->save($data);
+		redirect('/pendaftaran/formulir/submit?id='.$this->input->post('id'));
 	}
 	
 	private function submit(){
@@ -111,15 +147,37 @@ class Pendaftaran_controller extends CI_Controller{
 				]
 			]
 		] );
-		redirect('/pendaftaran/formulir/submit?id='.$this->input->post('id'));
+		redirect('/pendaftaran/formulir/unggah_berkas?id='.$this->input->post('id'));
 	}
 
 	private function update_data_pendidikan(){
+		// print_r($_FILES);
 		$pendaftaran = $this->pendaftaran_model->find($this->input->post('id'));
 		$data_pendidikan = array();
-		foreach(['status_pendidikan[]','npsn[]','tahun_masuk[]','tahun_lulus[]', 'jurusan[]', 'sekolah[]'] as $field){
+		foreach(['status_pendidikan[]','npsn[]','tahun_masuk[]','tahun_lulus[]', 'jurusan[]', 'sekolah[]', 'upload_ijazah[]', 'upload_daftar_nilai[]'] as $field){
 			$data_pendidikan[$field] = $this->input->post($field);
 		}
+		
+		$files = $_FILES;
+		$count = count($_FILES['upload_ijazah']['name']);
+		print_r($files);
+
+		$jenjang = ["SMA", "S1", "S2", "S3"];
+
+		foreach(['upload_ijazah', 'upload_daftar_nilai'] as $upload_file){
+			for($i=0; $i<$count; $i++)
+			{
+				$_FILES[$upload_file]['name']= $files[$upload_file]['name'][$i];
+				$_FILES[$upload_file]['type']= $files[$upload_file]['type'][$i];
+				$_FILES[$upload_file]['tmp_name']= $files[$upload_file]['tmp_name'][$i];
+				$_FILES[$upload_file]['error']= $files[$upload_file]['error'][$i];
+				$_FILES[$upload_file]['size']= $files[$upload_file]['size'][$i];
+
+				$data_pendidikan[$upload_file.'[]'][$i] = $this->upload($upload_file);
+			}
+		}
+		
+
 		$this->session->set_userdata( [
 			'form' => [
 				$this->input->post('id') => [
@@ -129,6 +187,7 @@ class Pendaftaran_controller extends CI_Controller{
 		] );
 		$pendidikan = array();
 		foreach($data_pendidikan['status_pendidikan[]'] as $key => $status_pendidikan){
+			$temp_pendidikan = $this->detail_pendidikan_model->findByPendaftaranAndStatus($this->input->post('id'), $status_pendidikan)[0];
 			$pendidikan[$status_pendidikan]['npsn'] = $data_pendidikan['npsn[]'][$key];
 			$pendidikan[$status_pendidikan]['tahun_masuk'] = $data_pendidikan['tahun_masuk[]'][$key];
 			$pendidikan[$status_pendidikan]['tahun_lulus'] = $data_pendidikan['tahun_lulus[]'][$key];
@@ -141,8 +200,9 @@ class Pendaftaran_controller extends CI_Controller{
 				'tahun_masuk' => $data_pendidikan['tahun_masuk[]'][$key],
 				'tahun_lulus' => $data_pendidikan['tahun_lulus[]'][$key],
 				'jurusan' => $data_pendidikan['jurusan[]'][$key],
-				// 'detail_alamat' => $data_pendidikan['detail_alamat[]'][$key],
 				'sekolah_id' => $data_pendidikan['sekolah[]'][$key],
+				'upload_daftar_nilai' => $data_pendidikan['upload_daftar_nilai[]'][$key] ?? $temp_pendidikan['upload_daftar_nilai'],
+				'upload_ijazah' => $data_pendidikan['upload_ijazah[]'][$key] ?? $temp_pendidikan['upload_ijazah']
 			);
 			$stored_pendidikan = $this->detail_pendidikan_model->findByPendaftaranAndStatus($this->input->post('id'), $status_pendidikan);
 			if(count($stored_pendidikan)>0){
@@ -151,10 +211,9 @@ class Pendaftaran_controller extends CI_Controller{
 			}else{
 				$this->detail_pendidikan_model->create($data);
 			}
-			var_dump($stored_pendidikan);
 
 		}
-		redirect('/pendaftaran/formulir/data_akademik?id='.$this->input->post('id'));
+		// redirect('/pendaftaran/formulir/data_akademik?id='.$this->input->post('id'));
 	}
 
 	private function update_data_wali(){
@@ -203,8 +262,10 @@ class Pendaftaran_controller extends CI_Controller{
 		$data_diri['kelurahan_id'] = $data_diri['kelurahan'];
 		unset($data_diri['kelurahan']);
 		$data_diri['id'] = $this->input->post('id');
-		if(empty($data_diri['kewarganegaraan'] == 'WNI')){
+		if($data_diri['kewarganegaraan'] == 'WNI'){
 			$data_diri['negara'] = 'Indonesia';
+		}else{
+			$data_diri['negara'] = $this->input->post('negara');
 		}
 		$this->pendaftaran_model->save($data_diri);
 		$this->session->set_userdata( [

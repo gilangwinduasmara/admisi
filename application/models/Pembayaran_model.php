@@ -18,7 +18,10 @@ class Pembayaran_model extends CI_Model{
 		return $query->result_array();
 	}
 
-	public function findByPendaftaranId($pendaftaran_id){
+	public function findByPendaftaranId($pendaftaran_id, $validasi=null){
+		if(isset($validasi)){
+			$this->db->where("status", $validasi);
+		}
 		$query = $this->db->where('pendaftaran_id', $pendaftaran_id)->get($this->table_name);
 		return $query->result_array();
 	}
@@ -30,7 +33,10 @@ class Pembayaran_model extends CI_Model{
 
 	public function matchPendaftaran($pembayaran_id, $pendaftaran_id){
 		$query = $this->db->where('pendaftaran_id', $pendaftaran_id)->where('id', $pembayaran_id)->get($this->table_name)->result_array();
-		return count($query)>0;
+		if($query>0){
+			return $query[0]['id'];
+		}
+		return null;
 	}
 
 	public function create($data){

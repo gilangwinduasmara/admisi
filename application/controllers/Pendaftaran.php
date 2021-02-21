@@ -13,6 +13,13 @@ class Pendaftaran extends CI_Controller
 		$this->load->model('pembayaran_model');
 		$this->load->model('hasil_penerimaan_model');
 		$this->akun_id = $this->session->userdata('id');
+		if(empty($this->session->userdata('id'))){
+			redirect('/login');
+		}else{
+			if($this->session->userdata('role')!='USER'){
+				redirect('/');
+			}
+		}
 	}
 	
 

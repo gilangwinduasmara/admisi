@@ -48,14 +48,14 @@
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">NISN</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" name="NISN" value="<?php echo $data_diri['NISN'] ?? null ?>">
+										<input type="number" class="form-control" name="NISN" value="<?php echo $data_diri['NISN'] ?? null ?>">
 										<!-- <div class="invalid-feedback">Shucks, check the formatting of that and try again.</div> -->
 									</div>
 								</div>
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">NIK</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" name="NIK" value="<?php echo $data_diri['NIK'] ?? null ?>">
+										<input type="number" class="form-control" name="NIK" value="<?php echo $data_diri['NIK'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -67,7 +67,7 @@
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">No. HP</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" name="no_hp" value="<?php echo $data_diri['no_hp'] ?? null ?>">
+										<input type="number" class="form-control" name="no_hp" value="<?php echo $data_diri['no_hp'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -172,21 +172,38 @@
 						</div>
 						<div id="collapse-alamat" class="collapse" data-parent="">
 							<div class="card-body">
-								<div class="form-group row" hidden>
+								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Negara</label>
 									<div class="col-md-10">
 										<input type="text" class="form-control" name="negara" value="<?php echo $data_diri['negara'] ?? null ?>">
 									</div>
 								</div>
-								<div class="daerah-wrapper" >
+								<?php
+									if(!empty($data_diri['kelurahan_id'])){
+										?>
+											<div class="form-group row">
+												<label for="" class="col-md-2 col-form-label">Tempat Tinggal</label>
+												<div class="col-md-10">
+													<button class="btn btn-primary" data-toggle="sunting" data-target="daerah_selector" >Sunting</button>
+													<input name="kelurahan" value="<?php echo $data_diri['kelurahan_id']?>" hidden>
+												</div>
+											</div>
+										<?php
+									}else{
+										?>
+											<div class="daerah-wrapper" >
 									
-								</div>
-								<div class="form-group row">
-									<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
-									<div class="col-md-10">
-										<textarea name="alamat_asal" id="" cols="30" rows="10" class="form-control"></textarea>
-									</div>
-								</div>
+											</div>
+											<div class="form-group row">
+												<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
+												<div class="col-md-10">
+													<textarea name="alamat_asal" id="" cols="30" rows="10" class="form-control"></textarea>
+												</div>
+											</div>
+										<?php
+									}
+								?>
+								
 							</div>
 						</div>
 					</div>

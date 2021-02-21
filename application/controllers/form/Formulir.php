@@ -10,11 +10,21 @@ class Formulir extends CI_Controller{
 		$this->load->model('fakultas_model');
 		$this->load->model('prodi_model');
 		$this->load->model('detail_pendidikan_model');
+		if(!is_numeric($this->input->get('id'))){
+			redirect('/pendaftaran/data_camaru');
+		}
+		if(empty($this->input->get('id'))){
+			redirect('/pendaftaran/data_camaru');
+		}
 		$this->pendaftaran = $this->pendaftaran_model->find($this->input->get('id'));
+		if($this->pendaftaran['status_formulir'] == 'AKTIF' ||( $this->session->userdata('id') != $this->pendaftaran['akun_id'])){
+			redirect('/pendaftaran/data_camaru');
+		}
 		
 	}
 	
 	public function data_diri(){
+
 		$data_diri = $this->pendaftaran;
 		$data = array(
 			"page" => 'pages/pendaftaran/form/data_personal.php',
@@ -30,8 +40,8 @@ class Formulir extends CI_Controller{
 	}
 
 	public function data_wali(){
-		$data_wali = $this->session->userdata('form')[$this->input->get('id')]['data_wali'] ?? null;
-		$data_wali = $this->pendaftaran['detail_wali'];
+		// $data_wali = $this->session->userdata('form')[$this->input->get('id')]['data_wali'];
+		$data_wali = $this->pendaftaran['detail_wali'] ?? null;
 		$data = array(
 			"page" => 'pages/pendaftaran/form/data_wali.php',
 			"subheader" => [
@@ -45,7 +55,7 @@ class Formulir extends CI_Controller{
 	}
 	
 	public function data_pendidikan(){
-		$pendidikan = $this->pendaftaran['detail_pendidikan'];
+		$pendidikan = $this->pendaftaran['detail_pendidikan'] ?? [];
 		$d = array();
 		if(count($pendidikan)>0){
 			for($i=0; $i<count($pendidikan); $i++){
@@ -56,6 +66,8 @@ class Formulir extends CI_Controller{
 				$d['tahun_lulus[]'][$i] = $pendidikan[$i]['tahun_lulus'];
 				$d['sekolah[]'][$i] = $pendidikan[$i]['sekolah_id'];
 				$d['detail_alamat[]'][$i] = $pendidikan[$i]['detail_alamat'] ?? null;
+				$d['upload_ijazah[]'][$i] = $pendidikan[$i]['upload_ijazah'] ?? null;
+				$d['upload_daftar_nilai[]'][$i] = $pendidikan[$i]['upload_daftar_nilai'] ?? null;
 			}
 		}
 		$data_pendidikan = $d;

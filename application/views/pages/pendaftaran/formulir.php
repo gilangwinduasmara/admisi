@@ -15,6 +15,7 @@
 								<option value="">Pilih</option>
 								<?php
 									foreach($jenjangs as $jenjang){
+										if($jenjang['jenjang'] != 'SMA')
 										echo '
 											<option value="'.$jenjang['id'].'">'.$jenjang['jenjang'].'</option>
 										';

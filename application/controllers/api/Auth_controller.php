@@ -27,10 +27,15 @@ class Auth_controller extends CI_Controller
 			if($akun && password_verify($this->input->post('password'), $akun->password)){
 				$user_data = array(
 					'id' => $akun->id,
+					'role' => $akun->role
 				);
 				$this->session->set_flashdata('success', ['Login berhasil']);
 				$this->session->set_userdata( $user_data );
-				redirect("/pendaftaran/data_camaru")				;
+				if($this->session->role == 'USER'){
+					redirect("/pendaftaran/data_camaru");
+				}else{
+					redirect("/admin/data_pendaftar");
+				}
 			}else{
 				$this->session->set_flashdata('input', $this->input->post());
 				$this->session->set_flashdata('errors', ['Email atau password yang anda masukkan salah']);
