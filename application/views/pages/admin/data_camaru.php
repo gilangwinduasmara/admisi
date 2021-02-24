@@ -16,12 +16,30 @@
 ?>
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-lg-12">
-			<!-- <?php print_r(json_encode($pendaftaran)) ?> -->
+		<div class="col-lg-10 mb-4">
+			<div class="row">
+				<div class="col-md-4">
+					<select class="form-control" id="search_status_penerimaan">
+						<option value="">Status Penerimaan</option>
+						<option value="Diproses">Diproses</option>
+						<option value="Diterima">Diterima</option>
+						<option value="Ditolak">Ditolak</option>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<div class="input-icon">
+						<input type="text" class="form-control" placeholder="Cari..." id="search_query">
+						<span><i class="flaticon2-search-1 text-muted"></i></span>
+					</div>
+				</div>
+
+			</div>
+			
 		</div>
+		
 		<div class="col-lg-10">
 			<div class="table-responsive">
-			<table class="table table-bordered table-checkable" id="data_pendaftar">
+			<table class="table table-bordered " id="data_pendaftar">
 					<thead>
 						<tr>
 							<th>No Formulir</th>
@@ -135,10 +153,33 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Tutup</button>
 					<button type="submit" class="btn btn-primary font-weight-bold">Simpan</button>
 				</div>
 			</form>
+		</div>
+	</div>
+	<div class="modal fade" id="modal__data_camaru_detail" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body" id="detail_body">
+					<div class="form-group">
+						<select id="data-selector" class="form-control">
+							<option value="DATA_PERSONAL">Data Personal</option>
+							<option value="DATA_WALI">Data Wali</option>
+							<option value="DATA_PENDIDIKAN">Data Pendidikan</option>
+							<option value="DATA_WALI">Data Akademik</option>
+							<option value="UNGGAH_BERKAS">Unggah Berkas</option>
+						</select>
+					</div>
+					<div class="data">
+					
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Tutup</button>
+				</div>
+			</div>
 		</div>
 	</div>
 

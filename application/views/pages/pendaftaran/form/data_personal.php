@@ -194,16 +194,16 @@
 											<div class="daerah-wrapper" >
 									
 											</div>
-											<div class="form-group row">
-												<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
-												<div class="col-md-10">
-													<textarea name="alamat_asal" id="" cols="30" rows="10" class="form-control"></textarea>
-												</div>
-											</div>
+											
 										<?php
 									}
 								?>
-								
+								<div class="form-group row">
+									<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
+									<div class="col-md-10">
+										<textarea name="alamat_asal" id="" cols="30" rows="10" class="form-control"></textarea>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

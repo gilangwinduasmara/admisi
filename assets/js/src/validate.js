@@ -391,6 +391,17 @@ const forms = {
 				}
 			},
 		]
+	},
+	data_akademik: {
+		fields: [
+			{
+				name: 'prodi_1_id',
+				label: 'Pilihan Pertama',
+				rules: {
+					required: true
+				}
+			}
+		]
 	}
 }
 

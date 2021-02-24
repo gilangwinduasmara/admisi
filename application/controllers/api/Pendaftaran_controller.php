@@ -10,7 +10,9 @@ class Pendaftaran_controller extends CI_Controller{
 		$this->load->model('pembayaran_model');
 		$this->load->model('jenjang_model');
 		$this->load->model('hasil_penerimaan_model');
-		$this->load->model('detail_pendidikan_model');
+		$this->load->model('hasil_penerimaan_model');
+		$this->load->model('registrasi_ulang_model');
+		$this->load->model('daftar_omb_model');
 	}
 
 	public function upload($field = 'userfile')
@@ -45,6 +47,7 @@ class Pendaftaran_controller extends CI_Controller{
 	public function new_formulir(){
 		$this->form_validation->set_rules('nama', 'Nama Camaru', 'required');
 		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required');
+		$this->form_validation->set_rules('jalur_pendaftaran', 'Jalur Pendaftaran', 'required');
 
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('errors', ['Terjadi kesalahan']);
@@ -53,6 +56,7 @@ class Pendaftaran_controller extends CI_Controller{
 			$pendaftaran = $this->pendaftaran_model->create([
 				'nama' => $this->input->post('nama'),
 				'jenjang_id' => $this->input->post('jenjang'),
+				'jalur_pendaftaran_id' => $this->input->post('jalur_pendaftaran'),
 				'akun_id' => $this->session->userdata('id')
 			]);
 
@@ -159,7 +163,7 @@ class Pendaftaran_controller extends CI_Controller{
 		}
 		
 		$files = $_FILES;
-		$count = count($_FILES['upload_ijazah']['name']);
+		$count = count($_FILES['upload_ijazah']['name'] ?? []);
 		print_r($files);
 
 		$jenjang = ["SMA", "S1", "S2", "S3"];
@@ -213,7 +217,7 @@ class Pendaftaran_controller extends CI_Controller{
 			}
 
 		}
-		// redirect('/pendaftaran/formulir/data_akademik?id='.$this->input->post('id'));
+		redirect('/pendaftaran/formulir/data_akademik?id='.$this->input->post('id'));
 	}
 
 	private function update_data_wali(){
@@ -277,6 +281,69 @@ class Pendaftaran_controller extends CI_Controller{
 		] );
 		
 		redirect('/pendaftaran/formulir/data_wali?id='.$this->input->post('id'));
+	}
+
+	public function registrasi_ulang(){
+		print_r($this->input->post());
+		if($this->input->post('double_degree') == "Ya"){
+			$hasil_penerimaan = $this->hasil_penerimaan_model->findBySkpm($this->input->post('skpm_1'));
+			$pendaftaran = $this->pendaftaran_model->find($hasil_penerimaan['pendaftaran_id']);
+			$registrasi_ulang = $this->registrasi_ulang_model->create([
+				'hasil_penerimaan_id' => $hasil_penerimaan['id'],
+				'nama_camaru' => $pendaftaran['nama'],
+				'prodi_id' => $hasil_penerimaan['prodi_id'],
+				'upload_bukti_bayar' => $this->upload('upload_bukti_pembayaran_1'),
+				'status' => 'VALIDASI'
+			]);
+
+			$this->daftar_omb_model->create([
+				'registrasi_ulang_id' => $registrasi_ulang['id']
+			]);
+
+			$hasil_penerimaan = $this->hasil_penerimaan_model->findBySkpm($this->input->post('skpm_2'));
+			$pendaftaran = $this->pendaftaran_model->find($hasil_penerimaan['pendaftaran_id']);
+			$registrasi_ulang = $this->registrasi_ulang_model->create([
+				'hasil_penerimaan_id' => $hasil_penerimaan['id'],
+				'nama_camaru' => $pendaftaran['nama'],
+				'prodi_id' => $hasil_penerimaan['prodi_id'],
+				'upload_bukti_bayar' => $this->upload('upload_bukti_pembayaran_2'),
+				'status' => 'VALIDASI'
+			]);
+
+			$this->daftar_omb_model->create([
+				'registrasi_ulang_id' => $registrasi_ulang['id']
+			]);
+
+		}else{
+			$hasil_penerimaan = $this->hasil_penerimaan_model->findBySkpm($this->input->post('skpm'));
+			$pendaftaran = $this->pendaftaran_model->find($hasil_penerimaan['pendaftaran_id']);
+		
+			$registrasi_ulang = $this->registrasi_ulang_model->create([
+				'hasil_penerimaan_id' => $hasil_penerimaan['id'],
+				'nama_camaru' => $pendaftaran['nama'],
+				'prodi_id' => $hasil_penerimaan['prodi_id'],
+				'upload_bukti_bayar' => $this->upload('upload_bukti_pembayaran'),
+				'status' => 'VALIDASI'
+			]);
+
+			$this->daftar_omb_model->create([
+				'registrasi_ulang_id' => $registrasi_ulang['id']
+			]);
+		}
+		
+		$this->session->set_flashdata('success', ['Data berhasil disimpan']);
+		redirect('/pendaftaran/registrasi_ulang');
+	}
+
+	public function omb(){
+		$pendaftaran = $this->pendaftaran_model->findByNim($this->input->post('nim'))[0];
+		print_r(json_encode($pendaftaran));
+		$this->daftar_omb_model->create([
+			'registrasi_ulang_id' => $pendaftaran['registrasi_ulang_id'],
+			'ukuran_jas_alma' => $this->input->post('ukuran_jas_alma')
+		]);
+		$this->session->set_flashdata('success', ['Data berhasil disimpan']);
+		redirect('/pendaftaran/omb');
 	}
 
 }

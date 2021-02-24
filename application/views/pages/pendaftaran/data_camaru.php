@@ -1,18 +1,38 @@
+<?php 
+	$status_pendaftaran = array(
+		'DIPROSES' => [
+			'label' => 'Mendaftar',
+			'color' => 'warning',
+		],
+		'DITERIMA' => [
+			'label' => 'Diterima',
+			'color' => 'success'
+		],
+		'DITOLAK' => [
+			'label' => 'Ditolak',
+			'color' => 'danger'
+		]
+	)
+?>
 <div class="container">
 	<div class="d-flex justify-content-center">
 		<a href="<?php echo base_url('/pendaftaran/formulir') ?>" class="btn btn-warning"><i class="fas fa-plus"></i> Formulir</a>
 	</div>
-	<div class=" mt-12">
-		<table class="table ">
+	<div>
+
+	</div>
+	<div class="mt-12">
+		<table class="table table-bordered" id="data_pendaftar">
 			<thead>
 				<tr>
-					<th class="p-0 py-6 min-w-100px">No. Formulir</th>
-					<th class="p-0 py-6 min-w-150px">Nama Camaru</th>
-					<th class="p-0 py-6 min-w-120px">Tanggal Daftar</th>
-					<th class="py-6 min-w-100px text-left">Status Pendaftaran</th>
-					<th class="p-0 py-6 min-w-100px text-center">Aksi</th>
-					<th class="p-0 py-6 min-w-150px">Status Pembayaran</th>
-					<th class="p-0 py-6"></th>
+					<th>No. Formulir</th>
+					<th>Nama Camaru</th>
+					<th>Tanggal Daftar</th>
+					<th style="min-width: 100px;">Aksi</th>
+					<th>Status Pembayaran</th>
+					<th>Isi Formulir</th>
+					<th class="text-center">Status Pendaftaran <br> Pilihan 1</th>
+					<th class="text-center">Status Pendaftaran <br> Pilihan 2</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,40 +46,77 @@
 					foreach($pendaftarans as $pendaftaran){
 						?>
 						<tr>
-							<?php
-							echo '
-								<td>'.$pendaftaran['id'].'</td>
-								<td>'.$pendaftaran['nama'].'</td>
-								<td>'.$pendaftaran['created_at'].'</td>
-								<td class="text-left">
-									'.((count($pendaftaran['hasil_penerimaan'])>0 ? '<span class="label label-lg label-light-info label-inline">SELEKSI</span>': '')).'
-								</td>
+								<td><?php echo($pendaftaran['id'])?></td>
+								<td><?php echo($pendaftaran['nama'])?></td>
+								<td><?php echo(explode(" ", $pendaftaran['created_at'])[0])?></td>
 								<td class="text-center">
-									<a class="btn btn-icon btn-light btn-sm" data-toggle="toltip" title="Informasi Pembayaran" href="'.base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]).'"><i class="la la-info-circle"></i></a>
-									<a class="btn btn-icon btn-light btn-sm" title="Upload Bukti Pembayaran" href="'.base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]).'"><i class="la la-check-circle"></i></a>
+									<a class="btn btn-icon btn-light btn-sm" data-toggle="toltip" title="Informasi Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-info-circle"></i></a>
+									<a class="btn btn-icon btn-light btn-sm" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-check-circle"></i></a>
 								</td>
 								<td>
-									<span class="label label-lg label-light-'.$status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'].' label-inline">'.($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS').'</span>
+									<span class="label label-lg label-light-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> label-inline"><?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?></span>
 								</td>
-							';
-							?>
-							<?php
-								if(($pendaftaran['pembayaran'][0]['status']??'BELUM DIBAYAR') == 'LUNAS'){
-									?>
-									<td> 
-										<?php 
-										if(count($pendaftaran['hasil_penerimaan'])==0){
+								<td> 
+								<?php
+									if(($pendaftaran['pembayaran'][0]['status']??'BELUM DIBAYAR') == 'LUNAS'){
+										?>
+										
+											<?php 
+											if(count($pendaftaran['hasil_penerimaan'])==0){
+												?>
+												<a title="Isi Formulir Pendaftaran" href="<?php echo base_url('pendaftaran/formulir/data_diri?id='.$pendaftaran['id']) ?>" class="btn btn-icon btn-light btn-sm">
+													<i class="la la-arrow-right text-hover-primary"></i>
+												</a>
+												<?php
+											}
 											?>
-											<a title="Isi Formulir Pendaftaran" href="<?php echo base_url('pendaftaran/formulir/data_diri?id='.$pendaftaran['id']) ?>" class="btn btn-icon btn-light btn-sm">
-												<i class="la la-arrow-right text-hover-primary"></i>
-											</a>
+										
+										<?php
+									}
+										?>
+								</td>
+								<td class="text-center">
+										<?php 
+											if(!empty($pendaftaran['hasil_penerimaan'][0])){
+												?>
+													<div>
+														<?php 
+															echo $pendaftaran['hasil_penerimaan'][0]['prodi']['nama_prodi'];
+														?>
+													</div>
+													<?php 
+														if(!empty($pendaftaran['hasil_penerimaan'][0]['status'])){
+															?>
+																<div class="label label-xl label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][0]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][0]['status'] ?? 'x')?></div>
+															<?php
+														}
+													?>
+												<?php
+											}
+										?>
+								</td>
+								<td class="text-center">
+									<?php 
+										if(!empty($pendaftaran['hasil_penerimaan'][1])){
+											?>
+												<div>
+													<div>
+														<?php 
+															echo $pendaftaran['hasil_penerimaan'][1]['prodi']['nama_prodi'];
+														?>
+													</div>
+													<?php 
+														if(!empty($pendaftaran['hasil_penerimaan'][1]['status'])){
+															?>
+																<div class="label label-xl label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][1]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][1]['status'] ?? 'x')?></div>
+															<?php
+														}
+													?>
+												</div>
 											<?php
 										}
-										?>
-									</td>
-									<?php
-								}
-							?>
+									?>
+								</td>
 						</tr>
 						<?php
 					}

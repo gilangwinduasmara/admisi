@@ -8,10 +8,12 @@ class Pendaftaran extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('jenjang_model');
+		$this->load->model('jalur_pendaftaran_model');
 		$this->load->model('pendaftaran_model');
 		$this->load->model('jenis_pembayaran_model');
 		$this->load->model('pembayaran_model');
 		$this->load->model('hasil_penerimaan_model');
+		$this->load->model('daftar_omb_model');
 		$this->akun_id = $this->session->userdata('id');
 		if(empty($this->session->userdata('id'))){
 			redirect('/login');
@@ -40,6 +42,7 @@ class Pendaftaran extends CI_Controller
 	public function formulir()
 	{
 		$jenjangs = $this->jenjang_model->get();
+		$jalur_pendaftarans = $this->jalur_pendaftaran_model->get();
 		$data = array(
 			"page" => 'pages/pendaftaran/formulir.php',
 			"subheader" => [
@@ -50,7 +53,8 @@ class Pendaftaran extends CI_Controller
 				],
 				'Formulir'
 			],
-			"jenjangs" => $jenjangs
+			"jenjangs" => $jenjangs,
+			"jalur_pendaftarans" => $jalur_pendaftarans
 		);
 		$this->load->view('default', $data);
 	}
@@ -121,23 +125,28 @@ class Pendaftaran extends CI_Controller
 	}
 	public function registrasi_ulang()
 	{
+		$pendaftaran = $this->pendaftaran_model->findByAkunId($this->session->userdata('id'), true);
 		$data = array(
 			"page" => 'pages/pendaftaran/registrasi_ulang.php',
 			"subheader" => [
 				'Pendaftaran',
 				'Registrasi Ulang'
-			]
+			],
+			"pendaftaran" => $pendaftaran
 		);
 		$this->load->view('default', $data);
 	}
 	public function omb()
 	{
+		
+		$daftar_omb = $this->pendaftaran_model->findByVerifiedRegistrasiUlang($this->session->userdata('id'));
+		
 		$data = array(
 			"page" => 'pages/pendaftaran/omb.php',
 			"subheader" => [
 				'Pendaftaran',
-				'OMB'
-			]
+			],
+			'daftar_omb' => $daftar_omb
 		);
 		$this->load->view('default', $data);
 	}

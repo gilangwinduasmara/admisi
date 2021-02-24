@@ -1,69 +1,51 @@
 <div class="container">
+
 	<div class="row justify-content-center">
 		<div class="col-lg-8">
 			<div class="card card-custom">
 				<div class="card-body">
-					<form action="">
+					<form action="<?php echo base_url('/api/pendaftaran/registrasi_ulang') ?>" method="post" enctype="multipart/form-data">
 						<div class="form-group row">
-							<label for="" class="col-3 col-form-label">No. Formulir</label>
-							<div class="col-9">
-								<input type="text" class="form-control" value="" required>
+							<label for="" class="col-md-3 col-form-label">No. Formulir</label>
+							<div class="col-md-9">
+								<select name="id" class="form-control">
+									<option value="">Pilih</option>
+									<?php
+										foreach($pendaftaran as $p){
+											?>
+												<option value="<?php echo $p['id'] ?>"><?php echo $p['id'] ?></option>
+											<?php
+										}
+									?>
+								</select>
 							</div>
 						</div>
-						<div class="form-group row">
-							<label for="" class="col-3 col-form-label">Nama Camaru</label>
-							<div class="col-9">
-								<input type="text" class="form-control" value="" required>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="" class="col-3 col-form-label">Nama Camaru</label>
-							<div class="col-9">
-								<div class="dropzone dropzone-default dropzone-primary">
-		
+						<div class="detail-wrapper" style="display: none;">
+							<div class="form-group row">
+								<label for="" class="col-md-3 col-form-label">Nama Camaru</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" value="" disabled>
 								</div>
 							</div>
-						</div>
-						<div class="d-flex justify-content-center">
-							<input type="Submit" class="btn btn-primary" value="Submit">
+							<div class="form-group row">
+								<label for="" class="col-md-3 col-form-label">Bukti Pembayaran</label>
+								<div class="col-md-9">
+									<input type="file" name="upload_bukti_bayar">
+								</div>
+							</div>
+							<div class="d-flex justify-content-center">
+								<input type="Submit" class="btn btn-primary" value="Submit">
+							</div>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-8 mt-4">
-			<div class="card card-custom bg-light">
-				<div class="card-body">
-					<div class="row mb-4">
-						<div class="col-md-4">
-							Status Registrasi Ulang: 
-						</div>
-						<div class="col-8 font-weight-bolder">
-							Registrasi Ulang Berhasil
-						</div>
-					</div>
-					<div class="row font-weight-bolder">
-						<div class="col-3">
-							Nim
-						</div>
-						<div class="col-9 mb-3">
-							672018200
-						</div>
-						<div class="col-3">
-							Nama
-						</div>
-						<div class="col-9 mb-3">
-							Gilang Windu Asmara
-						</div>
-						<div class="col-3">
-							Program Studi
-						</div>
-						<div class="col-9 mb-3">
-							S1 Teknik Informatika
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="col-lg-8 mt-4" id="registrasi_ulang_wrapper">
+			
 		</div>
 	</div>
 </div>
+<?php 
+	// echo json_encode($pendaftaran);
+?>

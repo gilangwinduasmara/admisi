@@ -11,7 +11,7 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-form-label">Jenjang</label>
-							<select name="jenjang" id="" class="form-control">
+							<select name="jenjang" id="" class="form-control" required>
 								<option value="">Pilih</option>
 								<?php
 									foreach($jenjangs as $jenjang){
@@ -22,8 +22,21 @@
 									}
 
 								?>
-								<!-- <option value="S1">S1</option>
-								<option value="S2">S2</option> -->
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="col-md-3 col-form-label">Jalur Pendaftaran</label>
+							<select name="jalur_pendaftaran" class="form-control" required>
+								<option value="">Pilih</option>
+								<?php
+									foreach($jalur_pendaftarans as $jalur_pendaftaran){
+										if($jalur_pendaftaran['jalur_pendaftaran'] != 'SMA')
+										echo '
+											<option value="'.$jalur_pendaftaran['id'].'">'.$jalur_pendaftaran['jalur_pendaftaran'].'</option>
+										';
+									}
+
+								?>
 							</select>
 						</div>
 						<div class="d-flex justify-content-center"><input type="Submit" class="btn btn-primary" value="Submit"></div>

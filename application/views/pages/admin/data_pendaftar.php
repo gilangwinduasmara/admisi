@@ -1,8 +1,28 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-lg-10">
-			<div class="table-responsive">
-			<table class="table table-bordered table-checkable" id="data_pendaftar">
+			<div class="card card-custom">
+				
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-4">
+						<select class="form-control" id="search_status_pembayaran">
+							<option value="">Status Pembayaran</option>
+							<option value="Belum Bayar">Belum Bayar</option>
+							<option value="Menunggu Validasi">Menunggu Validasi</option>
+							<option value="Sudah Bayar">Sudah Bayar</option>
+						</select>
+					</div>
+					<div class="col-md-4">
+						<div class="input-icon">
+							<input type="text" class="form-control" placeholder="Cari..." id="search_query">
+							<span><i class="flaticon2-search-1 text-muted"></i></span>
+						</div>
+					</div>
+
+				</div>
+				<table class="table table-bordered mt-4" id="data_pendaftar">
 					<thead>
 						<tr>
 							<th>No Formulir</th>
@@ -25,18 +45,27 @@
 										<div>
 											<?php
 											if($p['pembayaran_lunas']){
-												echo '<span class="label label-lg label-light-success label-inline">Lunas</span>';
+												echo '<span class="label label-lg label-light-success label-inline">Sudah Bayar</span>';
 											}else if($p['pembayaran_validasi']){
 												echo '<span class="label label-lg label-light-warning label-inline">Menunggu Validasi</span>';
 											}else{
-												echo '<span class="label label-lg label-light-danger label-inline">Belum Dibayar</span>';
+												echo '<span class="label label-lg label-light-danger label-inline">Belum Bayar</span>';
 											}
 											?>
 										</div>
 									</td>
 									<td class="text-center">
 										<?php
-											if(!empty($p['pembayaran_validasi'])){
+											if(!empty($p['pembayaran_lunas'])){
+												?>
+												<div class="symbol symbol-40 symbol-light-white">
+													<div class="symbol-label">
+														<img style="max-height: 50px; obj-fit: contain" src="<?php echo base_url("uploads/".$p['pembayaran_lunas']['upload_bukti_bayar']) ?>">
+													</div>
+												</div>
+												<?php
+											}
+											else if(!empty($p['pembayaran_validasi'])){
 												?>
 												<div class="symbol symbol-40 symbol-light-white">
 													<div class="symbol-label">
@@ -52,6 +81,10 @@
 											if(!empty($p['pembayaran_validasi'])){
 												?>
 													<button class="btn btn-primary" data-toggle="validasi_pembayaran" data-id="<?php echo $p['pembayaran_validasi']['id'] ?>" data-nama="<?php echo $p['nama'] ?>">Validasi</button>
+												<?php
+											}else{
+												?>
+													<button class="btn btn-dark disabled" disabled>Validasi</button>
 												<?php
 											}
 										?>

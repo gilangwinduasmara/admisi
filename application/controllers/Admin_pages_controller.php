@@ -42,6 +42,24 @@ class Admin_pages_controller extends CI_Controller {
 		$this->load->view('default', $data);
 	}
 
+	public function data_registrasi_ulang(){
+		$registrasi_ulang = $this->registrasi_ulang_model->get();
+		$data = array(
+			'page' => 'pages/admin/data_reg_ulang.php',
+			'registrasi_ulang' => $registrasi_ulang
+		);
+		$this->load->view('default', $data);
+	}
+
+	public function data_omb(){
+		$daftar_omb = $this->daftar_omb_model->get();
+		$data = array(
+			'page' => 'pages/admin/data_omb.php',
+			'daftar_omb' => $daftar_omb
+		);
+		$this->load->view('default', $data);
+	}
+
 }
 
 /* End of file Admin_pages_controller.php */

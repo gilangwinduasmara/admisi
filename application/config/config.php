@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://192.168.43.152/UKIT/Admisi';
+$config['base_url'] = 'http://192.168.137.23/UKIT/Admisi';
 
 /*
 |--------------------------------------------------------------------------

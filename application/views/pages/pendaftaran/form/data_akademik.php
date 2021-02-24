@@ -21,7 +21,7 @@
 	</ul>
 	<div class="tab-content mt-5" id="myTabContent">
 		<div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_2">
-			<form action="<?php echo base_url('/api/pendaftaran/update_form')?>" method="POST">
+			<form action="<?php echo base_url('/api/pendaftaran/update_form')?>" method="POST" name="data_akademik">
 				<input type="text" class="form-control" readonly name="form_type" hidden value="data_akademik">
 				<input type="text" class="form-control" readonly name="id" hidden value="<?php echo $pendaftaran['id'] ?>">
 				<div class="accordion accordion-toggle-arrow" id="accordion-program-studi">
@@ -123,7 +123,7 @@
 						<a href="<?php echo base_url('/pendaftaran/formulir/data_pendidikan?id='.$this->input->get('id')) ?>" class="btn btn-primary">Kembali</a>
 						</div>
 						<div class="">
-							<button class="btn btn-primary lanjut">Lanjut</button>
+							<button type="button" class="btn btn-primary lanjut">Lanjut</button>
 						</div>
 					</div>
 				</div>

@@ -26,7 +26,7 @@ $('[name="kewarganegaraan"]').change(function(){
 })
 
 $(document).ready(function(){
-	if($('[name="kewarganegaraan"]')){
+	if($('[name="kewarganegaraan"]').length){
 		onKewarganegaraanChange($('[name="kewarganegaraan"]:checked'))
 	}
 })
@@ -41,8 +41,7 @@ function onKewarganegaraanChange(el){
 		$('[name="kecamatan"]').attr('disabled', false)
 		$('[name="kelurahan"]').attr('disabled', false)
 		$('[name="provinsi"]').parent().parent().parent().show()
-		$('[name="alamat_asal"]').attr('disabled', false)
-		$('[name="alamat_asal"]').parent().parent().show()
+		$('[data-target="daerah_selector"]').parent().parent().show()
 	}else{
 		$('[name="negara"]').attr('disabled', false)
 		$('[name="negara"]').parent().parent().show()
@@ -51,16 +50,18 @@ function onKewarganegaraanChange(el){
 		$('[name="kecamatan"]').attr('disabled', true)
 		$('[name="kelurahan"]').attr('disabled', true)
 		$('[name="provinsi"]').parent().parent().parent().hide()
-		$('[name="alamat_asal"]').attr('disabled', true)
-		$('[name="alamat_asal"]').parent().parent().hide()
+		$('[data-target="daerah_selector"]').parent().parent().hide()
 	}
 }
 
 $('[name="prodi_1_id"]').change(function(){
-	$('[name="prodi_2_id"]').html($('[name="prodi_1_id"]').html());
-	if($(this).val()!=""){
-		$('[name="prodi_2_id"] > option[value="'+$(this).val()+'"]').remove();
-	}
+	// $('[name="prodi_2_id"]').html($('[name="prodi_1_id"]').html());
+	// if($(this).val()!=""){
+	// 	$('[name="prodi_2_id"] > option[value="'+$(this).val()+'"]').remove();
+	// 	setTimeout(() => {
+	// 		$('[name="prodi_2_id"]').val("")
+	// 	}, 200)
+	// }
 	// if($(this).val()==$('[name="prodi_2_id"]').val()){
 		
 		
@@ -85,3 +86,13 @@ function post(path, params={}){
 	form.submit();
 	return form;
 }
+
+$('.dropdown-toggle').click(function(){
+	$(this).click()
+})
+
+$('.dropdown-item').click(function(){
+	window.location.href = $(this).attr('href')
+})
+
+
