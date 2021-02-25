@@ -15,8 +15,6 @@ class Daerah extends RestController {
 	}
 	
 	public function index_get(){
-		$res = [
-		];
 		
 		$this->output->parse_exec_vars = FALSE;
 		switch($this->input->get('type')){
@@ -35,6 +33,8 @@ class Daerah extends RestController {
 			case 'sekolah':
 				$res['sekolah'] = $this->sekolah_model->findByKota($this->input->get('kota_id'));
 				break;
+			default:
+				$res = $this->kelurahan_model->getParents();
 		};
 		$this->response($res, 200);
 	}

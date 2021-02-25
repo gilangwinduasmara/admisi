@@ -57,6 +57,7 @@ function withArray(name,isArray = false){
 }
 
 function daerahSelectorInit(element = $('.daerah-wrapper')){
+	console.log('selector init')
 	if(element.length){
 		$.each(element, function (el, index){
 			let key = $(this).data('isarray')
@@ -68,7 +69,9 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 			let that = this
 			for(var i=0; i<daerahs.length; i++){
 				if(i==4)break;
+				
 				if(daerahs[i].name==until){
+					if($(`[name="${withArray('sekolah', key)}"]`).length) break
 					$(that).append(
 						`<div class="form-group row" data-sekolah="true" style="display: none">
 							<label for="" class="col-md-2 col-form-label">Nama Sekolah/Universitas</label>
@@ -82,26 +85,32 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 					)
 					break
 				}
-				$(that).append(
-					`<div class="form-group row" data-${daerahs[i].name}="true" style="display: none">
-						<label for="" class="col-md-2 col-form-label">${daerahs[i].label}</label>
-						<div class="col-md-10">
-							<select name="${withArray(daerahs[i].name, key)}" class="form-control" >
-								<option value="">Pilih</option>
-							</select>
+				if($(`[name="${withArray(daerahs[i].name, key)}"]`).length==0){
+					$(that).append(
+						`<div class="form-group row" data-${daerahs[i].name}="true" style="display: none">
+							<label for="" class="col-md-2 col-form-label">${daerahs[i].label}</label>
+							<div class="col-md-10">
+								<select name="${withArray(daerahs[i].name, key)}" class="form-control" >
+									<option value="">Pilih</option>
+								</select>
+							</div>
 						</div>
-					</div>
-					`
-				)
+						`
+					)
+				}
 			}
 			const provinsiSelect = $(that).find('[data-provinsi] > div > select')
-			axios.get(daerahs[0].fetch(daerahs[0].parent)).then((res) => {
-				res.data.provinsi.map((item, index) => {
-					$(provinsiSelect).append(`<option value="${item.id}">${item.provinsi}</option>`)
-				})
-				$(that).find('[data-provinsi]').show()
+			if(provinsiSelect.length == 0){
+				axios.get(daerahs[0].fetch(daerahs[0].parent)).then((res) => {
+					res.data.provinsi.map((item, index) => {
+						$(provinsiSelect).append(`<option value="${item.id}">${item.provinsi}</option>`)
+					})
+					$(that).find('[data-provinsi]').show()
+					removeLoader(element)
+				});
+			}else{
 				removeLoader(element)
-			});
+			}
 
 			$(that).find('div > div > select').change(function(){
 				const selectName = $(this).attr('name')

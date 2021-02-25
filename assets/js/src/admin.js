@@ -1,4 +1,4 @@
-$('[data-toggle="validasi_pembayaran"]').click(function(){
+$("#table_data_pendaftar").on('click', '[data-toggle="validasi_pembayaran"]', function(){
 	const data = {
 		pembayaran_id: $(this).data('id')
 	}

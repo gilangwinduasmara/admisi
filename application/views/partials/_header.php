@@ -73,7 +73,7 @@
 								<i class="far fa-user-circle"></i>
 							</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuProfile">
-								<a class="dropdown-item" href="<?php echo base_url("admin/data_pendaftar") ?>">Logout</a>
+								<a class="dropdown-item" href="<?php echo base_url("/logout") ?>">Logout</a>
 							</div>
 						</div>
 					</div>
@@ -100,7 +100,7 @@
 							<i class="far fa-user-circle"></i>
 						</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuProfile">
-							<a class="dropdown-item" href="<?php echo base_url("admin/data_pendaftar") ?>">Logout</a>
+							<a class="dropdown-item" href="<?php echo base_url("/logout") ?>">Logout</a>
 						</div>
 					</div>
 				</div>

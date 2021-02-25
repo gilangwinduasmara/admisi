@@ -181,27 +181,88 @@
 								<?php
 									if(!empty($data_diri['kelurahan_id'])){
 										?>
-											<div class="form-group row">
-												<label for="" class="col-md-2 col-form-label">Tempat Tinggal</label>
-												<div class="col-md-10">
-													<button class="btn btn-primary" data-toggle="sunting" data-target="daerah_selector" >Sunting</button>
-													<input name="kelurahan" value="<?php echo $data_diri['kelurahan_id']?>" hidden>
-												</div>
+											<div class="daerah-wrapper" >
+												<?php 
+													if(!empty($daerah)){
+														?>
+															<div class="form-group row" data-provinsi="true" >
+																<label for="" class="col-md-2 col-form-label">Provinsi</label>
+																<div class="col-md-10">
+																	<select name="provinsi" class="form-control" >
+																		<option value="">Pilih</option>
+																		<?php
+																			foreach($daerah['provinsi'] as $provinsi){
+																				echo '<option '.($provinsi['id'] == $parentIds['selected_provinsi_id'] ? 'selected': '').' value="'.$provinsi['id'].'">'.$provinsi['provinsi'].'</option>';
+																			}
+																		?>
+																		
+																	</select>
+																</div>
+															</div>
+
+															<div class="form-group row" data-kota_kab="true" >
+																<label for="" class="col-md-2 col-form-label">Kabupaten/Kota</label>
+																<div class="col-md-10">
+																	<select name="kota_kab" class="form-control" >
+																		<option value="">Pilih</option>
+																		<?php
+																			foreach($daerah['kota_kab'] as $kota_kab){
+																				echo '<option '.($kota_kab['id'] == $parentIds['selected_kota_id'] ? 'selected': '').' value="'.$kota_kab['id'].'">'.$kota_kab['kota_kab'].'</option>';
+																			}
+																		?>
+																		
+																	</select>
+																</div>
+															</div>
+
+															<div class="form-group row" data-kecamatan="true" >
+																<label for="" class="col-md-2 col-form-label">Kecamatan</label>
+																<div class="col-md-10">
+																	<select name="kecamatan" class="form-control" >
+																		<option value="">Pilih</option>
+																		<?php
+																			foreach($daerah['kecamatan'] as $kecamatan){
+																				echo '<option '.($kecamatan['id'] == $parentIds['selected_kecamatan_id'] ? 'selected': '').' value="'.$kecamatan['id'].'">'.$kecamatan['kecamatan'].'</option>';
+																			}
+																		?>
+																		
+																	</select>
+																</div>
+															</div>
+
+															<div class="form-group row" data-kelurahan="true" >
+																<label for="" class="col-md-2 col-form-label">Kelurahan</label>
+																<div class="col-md-10">
+																	<select name="kelurahan" class="form-control" >
+																		<option value="">Pilih</option>
+																		<?php
+																			foreach($daerah['kelurahan'] as $kelurahan){
+																				echo '<option '.($kelurahan['id'] == $parentIds['selected_kelurahan_id'] ? 'selected': '').' value="'.$kelurahan['id'].'">'.$kelurahan['kelurahan'].'</option>';
+																			}
+																		?>
+																		
+																	</select>
+																</div>
+															</div>
+
+														<?php
+														
+													}
+												?>
 											</div>
 										<?php
 									}else{
 										?>
 											<div class="daerah-wrapper" >
-									
+
 											</div>
-											
 										<?php
 									}
 								?>
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
 									<div class="col-md-10">
-										<textarea name="alamat_asal" id="" cols="30" rows="10" class="form-control"></textarea>
+										<textarea name="alamat_asal" id="" cols="30" rows="10" class="form-control"><?php echo($data_diri['alamat_asal'] ?? null) ?></textarea>
 									</div>
 								</div>
 							</div>
@@ -225,3 +286,4 @@
 	
 </div>
 
+<?php echo json_encode($daerah) ?>

@@ -14,7 +14,6 @@ class Hasil_penerimaan_model extends CI_Model {
 		$this->load->model('prodi_model');
 		$this->load->model('registrasi_ulang_model');
 	}
-	
 
 	public function findByPendaftaran($pendaftaran_id, $status=null){
 		if(!empty($status)){

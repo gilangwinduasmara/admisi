@@ -233,7 +233,7 @@ class Pendaftaran_controller extends CI_Controller{
 		unset($data_wali['kelurahan']);
 		unset($data_wali['negara']);
 		$pendaftaran = $this->pendaftaran_model->find($this->input->post('id'));
-		if(empty($this->input->post('kelurahan'))){
+		if($this->input->post('same_address')){
 			$data_wali['kelurahan_id'] = $pendaftaran['kelurahan_id'];
 			$data_wali['alamat'] = $pendaftaran['alamat_asal'];
 		}
@@ -250,7 +250,8 @@ class Pendaftaran_controller extends CI_Controller{
 				]
 			]
 		] );
-		redirect('/pendaftaran/formulir/data_pendidikan?id='.$this->input->post('id'));
+		print_r(json_encode($data_wali));
+		// redirect('/pendaftaran/formulir/data_pendidikan?id='.$this->input->post('id'));
 	}
 
 	private function update_data_diri(){
@@ -293,7 +294,7 @@ class Pendaftaran_controller extends CI_Controller{
 				'nama_camaru' => $pendaftaran['nama'],
 				'prodi_id' => $hasil_penerimaan['prodi_id'],
 				'upload_bukti_bayar' => $this->upload('upload_bukti_pembayaran_1'),
-				'status' => 'VALIDASI'
+				'status' => 'VALIDASI KEUANGAN'
 			]);
 
 			$this->daftar_omb_model->create([
@@ -307,7 +308,7 @@ class Pendaftaran_controller extends CI_Controller{
 				'nama_camaru' => $pendaftaran['nama'],
 				'prodi_id' => $hasil_penerimaan['prodi_id'],
 				'upload_bukti_bayar' => $this->upload('upload_bukti_pembayaran_2'),
-				'status' => 'VALIDASI'
+				'status' => 'VALIDASI KEUANGAN'
 			]);
 
 			$this->daftar_omb_model->create([
@@ -323,7 +324,7 @@ class Pendaftaran_controller extends CI_Controller{
 				'nama_camaru' => $pendaftaran['nama'],
 				'prodi_id' => $hasil_penerimaan['prodi_id'],
 				'upload_bukti_bayar' => $this->upload('upload_bukti_pembayaran'),
-				'status' => 'VALIDASI'
+				'status' => 'VALIDASI KEUANGAN'
 			]);
 
 			$this->daftar_omb_model->create([

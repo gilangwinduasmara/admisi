@@ -1,3 +1,9 @@
+
+const STATUS_REGISTRASI_ULANG = {
+	'VALIDASI KEUANGAN': 'Sedang divalidasi',
+	'BELUM BAYAR': 'Belum Registrasi Ulang',
+	'LUNAS': 'Sudah Registrasi Ulang'
+}
 let hasil_penerimaan = null
 let registrasi_ulang = []
 $('[name="id"]').change(function(){
@@ -58,7 +64,7 @@ $('[name="id"]').change(function(){
 								Status Registrasi Ulang: 
 							</div>
 							<div class="col-8 font-weight-bolder">
-								${registrasi.status ? registrasi.status : '-'}
+								${registrasi.status ? STATUS_REGISTRASI_ULANG[registrasi.status] : '-'}
 							</div>
 						</div>
 						<div class="row font-weight-bolder">
@@ -179,7 +185,7 @@ function singleDegree(){
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Upload Bukti Pembayaran</label>
 			<div class="col-md-9">
-				<input class="form-control" type="file" name="upload_bukti_pembayaran">
+				<input class="form-control" type="file" name="upload_bukti_pembayaran" accept="image/png,image/jpeg">
 			</div>
 		</div>
 

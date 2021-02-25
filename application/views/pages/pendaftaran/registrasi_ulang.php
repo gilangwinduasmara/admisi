@@ -30,7 +30,7 @@
 							<div class="form-group row">
 								<label for="" class="col-md-3 col-form-label">Bukti Pembayaran</label>
 								<div class="col-md-9">
-									<input type="file" name="upload_bukti_bayar">
+									<input type="file" name="upload_bukti_bayar" accept="image/png,image/jpeg">
 								</div>
 							</div>
 							<div class="d-flex justify-content-center">

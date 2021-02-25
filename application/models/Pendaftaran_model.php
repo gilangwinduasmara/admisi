@@ -43,7 +43,7 @@ class Pendaftaran_model extends CI_Model{
 		return $query->result_array();
 	}
 	
-	public function get($hasil_pendaftaran = false, $search="", $limit="", $start="", $order_field="", $order_ascdesc=""){
+	public function get($hasil_pendaftaran = false){
 		$this->db->order_by('id DESC');
 		if($hasil_pendaftaran){
 			$this->db->where('status_formulir', 'AKTIF');
@@ -73,8 +73,84 @@ class Pendaftaran_model extends CI_Model{
 		return $pendaftarans;
 	}
 
+	public function filter($search, $limit, $start, $order_field, $order_ascdesc, $status_pembayaran=null, $date_from=null, $date_to=null){
+		// $this->db->like('nama', $search); // Untuk menambahkan query where LIKE
+		// // $this->db->or_like('nama', $search); // Untuk menambahkan query where OR LIKE
+		// $this->db->order_by($order_field, $order_ascdesc); // Untuk menambahkan query ORDER BY
+		$this->db->limit($limit, $start); // Untuk menambahkan query LIMIT
+		$sql = ("SELECT * 
+		FROM pendaftaran AS pen
+			LEFT JOIN pembayaran AS pem 
+			ON pem.id = (
+				SELECT id FROM pembayaran WHERE pembayaran.pendaftaran_id = pen.id ORDER BY status = 'LUNAS' DESC, status = 'VALIDASI' DESC, status = 'BELUM LUNAS' DESC LIMIT 1
+			)
+			where status is not null and nama like '%$search'
+			
+		");
+
+
+		if(!empty($status_pembayaran)){
+			$sql .= "AND status = '$status_pembayaran'";
+		}
+
+		if(!empty($date_from)){
+			$sql .= " AND created_at >='$date_from' and created_at <= '$date_to'";
+		}
+
+		$sql .= " order by pen.$order_field $order_ascdesc limit $limit offset $start";
+		$query = $this->db->query($sql);
+		$pendaftarans = $query->result_array();
+		// foreach($pendaftarans as $key=>&$pendaftaran){
+		// 	$validasi = $this->pembayaran_model->findByPendaftaranId($pendaftaran['id'], "VALIDASI");
+		// 	$lunas = $this->pembayaran_model->findByPendaftaranId($pendaftaran['id'], "LUNAS");
+		// 	$pendaftaran['status_pembayaran'] = 'Belum Bayar';
+		// 	if(count($validasi) > 0){
+		// 		$pendaftaran['status_pembayaran'] = 'Menunggu Validasi';
+		// 		$pendaftaran['upload_bukti_bayar'] = $validasi[0]['upload_bukti_bayar'];
+		// 	}
+		// 	if(count($lunas) > 0){
+		// 		$pendaftaran['status_pembayaran'] = 'Sudah Bayar';
+		// 		$pendaftaran['upload_bukti_bayar'] = $lunas[0]['upload_bukti_bayar'];
+		// 	}
+
+		// }
+		return $pendaftarans;
+	}
+
+	public function count_filter($search, $status_pembayaran, $date_from=null, $date_to=null){
+		$sql = ("SELECT * 
+		FROM pendaftaran AS pen
+			LEFT JOIN pembayaran AS pem 
+			ON pem.id = (
+				SELECT id FROM pembayaran WHERE pembayaran.pendaftaran_id = pen.id ORDER BY status = 'LUNAS' DESC, status = 'VALIDASI' DESC, status = 'BELUM LUNAS' DESC LIMIT 1
+			)
+			where status is not null and nama like '%$search'
+		");
+
+		if(!empty($date_from)){
+			$sql .= " AND created_at >='$date_from' and created_at <= '$date_to'";
+		}
+
+		if(!empty($status_pembayaran)){
+			$sql .= " AND status = '$status_pembayaran'";
+		}
+		$query = $this->db->query($sql);
+		return $query->num_rows();
+	}
+
+
+
 	public function count_all(){
-		return $this->db->count_all($this->table_name);
+		$sql = ("SELECT * 
+		FROM pendaftaran AS pen
+			LEFT JOIN pembayaran AS pem 
+			ON pem.id = (
+				SELECT id FROM pembayaran WHERE pembayaran.pendaftaran_id = pen.id ORDER BY status = 'LUNAS' DESC, status = 'VALIDASI' DESC, status = 'BELUM LUNAS' DESC LIMIT 1
+			)
+		");
+
+		$query = $this->db->query($sql);
+		return $query->num_rows();
 	}
 	
 	public function find($id, $registrasi_ulang=false){

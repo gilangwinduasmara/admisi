@@ -72,7 +72,16 @@
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Pendidikan Terakhir</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" name="pendidikan_terakhir" value="<?php echo $data_wali['pendidikan_terakhir'] ?? null ?>">
+										<select name="pendidikan_terakhir" class="form-control">
+											<option value="">Pilih</option>
+											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'Tidak Sekolah' ? 'selected': '') ?> value="Tidak Sekolah">Tidak Sekolah</option>
+											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'SD' ? 'selected': '') ?> value="SD">SD</option>
+											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'SMP/Sederajat' ? 'selected': '') ?> value="SMP/Sederajat">SMP/Sederajat</option>
+											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'SMA/Sederajat' ? 'selected': '') ?> value="SMA/Sederajat">SMA/Sederajat</option>
+											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'S1' ? 'selected': '') ?> value="S1">S1</option>
+											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'S2' ? 'selected': '') ?> value="S2">S2</option>
+											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'S3' ? 'selected': '') ?> value="S3">S3</option>
+										</select>
 									</div>
 								</div>
 								<div class="form-group row">
@@ -142,24 +151,80 @@
 									<?php
 										if(!empty($data_wali['kelurahan_id'])){
 											?>
-												<div class="form-group row">
-													<label for="" class="col-md-2 col-form-label">Tempat Tinggal</label>
-													<div class="col-md-10">
-														<button class="btn btn-primary" data-toggle="sunting" data-target="daerah_selector" >Sunting</button>
-														<input name="kelurahan" value="<?php echo $data_wali['kelurahan_id']?>" hidden>
-													</div>
+												<div class="daerah-wrapper" >
+													<?php 
+														if(!empty($daerah)){
+															?>
+																<div class="form-group row" data-provinsi="true" >
+																	<label for="" class="col-md-2 col-form-label">Provinsi</label>
+																	<div class="col-md-10">
+																		<select name="provinsi" class="form-control" >
+																			<option value="">Pilih</option>
+																			<?php
+																				foreach($daerah['provinsi'] as $provinsi){
+																					echo '<option '.($provinsi['id'] == $parentIds['selected_provinsi_id'] ? 'selected': '').' value="'.$provinsi['id'].'">'.$provinsi['provinsi'].'</option>';
+																				}
+																			?>
+																			
+																		</select>
+																	</div>
+																</div>
+
+																<div class="form-group row" data-kota_kab="true" >
+																	<label for="" class="col-md-2 col-form-label">Kabupaten/Kota</label>
+																	<div class="col-md-10">
+																		<select name="kota_kab" class="form-control" >
+																			<option value="">Pilih</option>
+																			<?php
+																				foreach($daerah['kota_kab'] as $kota_kab){
+																					echo '<option '.($kota_kab['id'] == $parentIds['selected_kota_id'] ? 'selected': '').' value="'.$kota_kab['id'].'">'.$kota_kab['kota_kab'].'</option>';
+																				}
+																			?>
+																			
+																		</select>
+																	</div>
+																</div>
+
+																<div class="form-group row" data-kecamatan="true" >
+																	<label for="" class="col-md-2 col-form-label">Kecamatan</label>
+																	<div class="col-md-10">
+																		<select name="kecamatan" class="form-control" >
+																			<option value="">Pilih</option>
+																			<?php
+																				foreach($daerah['kecamatan'] as $kecamatan){
+																					echo '<option '.($kecamatan['id'] == $parentIds['selected_kecamatan_id'] ? 'selected': '').' value="'.$kecamatan['id'].'">'.$kecamatan['kecamatan'].'</option>';
+																				}
+																			?>
+																			
+																		</select>
+																	</div>
+																</div>
+
+																<div class="form-group row" data-kelurahan="true" >
+																	<label for="" class="col-md-2 col-form-label">Kelurahan</label>
+																	<div class="col-md-10">
+																		<select name="kelurahan" class="form-control" >
+																			<option value="">Pilih</option>
+																			<?php
+																				foreach($daerah['kelurahan'] as $kelurahan){
+																					echo '<option '.($kelurahan['id'] == $data_wali['kelurahan_id'] ? 'selected': '').' value="'.$kelurahan['id'].'">'.$kelurahan['kelurahan'].'</option>';
+																				}
+																			?>
+																			
+																		</select>
+																	</div>
+																</div>
+
+															<?php
+															
+														}
+													?>
 												</div>
 											<?php
 										}else{
 											?>
 												<div class="daerah-wrapper" >
 										
-												</div>
-												<div class="form-group row">
-													<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
-													<div class="col-md-10">
-														<textarea name="alamat_asal" id="" cols="30" rows="10" class="form-control"></textarea>
-													</div>
 												</div>
 											<?php
 										}
@@ -168,7 +233,7 @@
 									<div class="form-group row">
 										<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
 										<div class="col-md-10">
-											<textarea name="alamat_asal" cols="30" rows="10" class="form-control"></textarea>
+											<textarea name="alamat" cols="30" rows="10" class="form-control"><?php echo $data_wali['alamat'] ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -192,3 +257,5 @@
 	</div>
 	
 </div>
+
+<?php echo json_encode($daerah) ?>

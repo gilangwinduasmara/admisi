@@ -85,16 +85,59 @@
 											<h3 class="card-title text-primary">Data Sekolah</h3>		
 											<?php
 												if(!empty($data_pendidikan['sekolah[]'][$key])){
+													$sekolah = $data_pendidikan['sekolah[]'][$key]
 													?>
-														<div class="form-group row">
-															<label for="" class="col-md-2 col-form-label">Alamat</label>
-															<div class="col-md-10">
-																<!-- <button class="btn btn-light-primary" ><i class="fas fa-pen"></i>Sunting</button> -->
-																<button id="button_sunting_<?php echo $key ?>" type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="sekolah_selector">
-																	<i class="fas fa-pen"></i> Sunting
-																</button>
-																<input name="sekolah[]" value="<?php echo $data_pendidikan['sekolah[]'][$key]?>" hidden>
-															</div>
+														<div class="daerah-wrapper" data-isarray="true" data-pendidikan="true">
+															<?php 
+																if(!empty($sekolah)){
+																	?>
+																		<div class="form-group row" data-provinsi="true" >
+																			<label for="" class="col-md-2 col-form-label">Provinsi</label>
+																			<div class="col-md-10">
+																				<select name="provinsi[]" class="form-control" >
+																					<option value="">Pilih</option>
+																					<?php
+																						foreach($provinsi as $p){
+																							echo '<option '.($p['id'] == $data_pendidikan['sekolah_parentIds[]'][$key]['selected_provinsi_id'] ? 'selected': '').' value="'.$p['id'].'">'.$p['provinsi'].'</option>';
+																						}
+																					?>
+																					
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="form-group row" data-kota_kab="true" >
+																			<label for="" class="col-md-2 col-form-label">Kabupaten/Kota</label>
+																			<div class="col-md-10">
+																				<select name="kota_kab[]" class="form-control" >
+																					<option value="">Pilih</option>
+																					<?php
+																						foreach($data_pendidikan['kota_kab[]'][$key] as $kota_kab){
+																							echo '<option '.($kota_kab['id'] == $data_pendidikan['sekolah_parentIds[]'][$key]['selected_kota_id'] ? 'selected': '').' value="'.$kota_kab['id'].'">'.$kota_kab['kota_kab'].'</option>';
+																						}
+																					?>
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="form-group row" data-kota_kab="true" >
+																			<label for="" class="col-md-2 col-form-label">Nama Sekolah/Universitas</label>
+																			<div class="col-md-10">
+																				<select name="sekolah[]" class="form-control" >
+																					<option value="">Pilih</option>
+																					<?php
+																						foreach($data_pendidikan['data_sekolah[]'][$key] as $sekolah){
+																							echo '<option '.($sekolah['id'] == $data_pendidikan['sekolah_parentIds[]'][$key]['selected_sekolah_id'] ? 'selected': '').' value="'.$sekolah['id'].'">'.$sekolah['sekolah'].'</option>';
+																						}
+																					?>
+																				</select>
+																			</div>
+																		</div>
+
+																	<?php
+																	
+																}
+															?>
 														</div>
 													<?php
 												}else{
@@ -123,6 +166,7 @@
 															<?php
 														}else{
 															?>
+																<a href="<?php echo base_url('uploads/'.$data_pendidikan['upload_ijazah[]'][$key]) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
 																<button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_ijazah[]">
 																	<i class="fas fa-pen"></i> Sunting
 																</button>
@@ -141,6 +185,7 @@
 															<?php
 														}else{
 															?>
+																<a href="<?php echo base_url('uploads/'.$data_pendidikan['upload_daftar_nilai[]'][$key]) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
 																<button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_daftar_nilai[]">
 																	<i class="fas fa-pen"></i> Sunting
 																</button>

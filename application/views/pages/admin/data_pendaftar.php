@@ -9,9 +9,9 @@
 					<div class="col-md-4">
 						<select class="form-control" id="search_status_pembayaran">
 							<option value="">Status Pembayaran</option>
-							<option value="Belum Bayar">Belum Bayar</option>
-							<option value="Menunggu Validasi">Menunggu Validasi</option>
-							<option value="Sudah Bayar">Sudah Bayar</option>
+							<option value="BELUM LUNAS">Belum Bayar</option>
+							<option value="VALIDASI">Menunggu Validasi</option>
+							<option value="LUNAS">Sudah Bayar</option>
 						</select>
 					</div>
 					<div class="col-md-4">
@@ -21,20 +21,27 @@
 						</div>
 					</div>
 
+					<div class="col-md-2">
+						<input type="date" id="search_date_from" class="form-control search-by-date">
+					</div>
+					<div class="col-md-2">
+						<input type="date" id="search_date_to" class="form-control search-by-date">
+					</div>
+
 				</div>
-				<table class="table table-bordered mt-4" id="data_pendaftar">
+				<table class="table table-bordered mt-4" id="table_data_pendaftar">
 					<thead>
 						<tr>
 							<th>No Formulir</th>
 							<th>Nama Camaru</th>
 							<th>Tanggal Daftar</th>
-							<th>Status Pembayaran</th>
+							<th style="min-width: 200px;">Status Pembayaran</th>
 							<th>Bukti Pembayaran</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php 
+						<!-- <?php 
 							foreach($pendaftaran as $p){
 								?>
 								<tr>
@@ -92,7 +99,7 @@
 								</tr>
 								<?php
 							}
-						?>
+						?> -->
 					</tbody>
 				</table>
 			</div>

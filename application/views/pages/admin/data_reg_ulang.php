@@ -36,9 +36,9 @@
 				<div class="col-md-4">
 					<select class="form-control" id="search_status_penerimaan">
 						<option value="">Status Penerimaan</option>
-						<option value="Belum Registrasi">Belum Registrasi</option>
-						<option value="Sedang Validasi">Sedang Validasi</option>
-						<option value="Sudah Registrasi">Sudah Registrasi</option>
+						<option value="Belum Registrasi">Belum Registrasi Ulang</option>
+						<option value="Sedang Validasi">Validasi</option>
+						<option value="Sudah Registrasi">Sudah Registrasi Ulang</option>
 					</select>
 				</div>
 				<div class="col-md-4">
@@ -71,7 +71,7 @@
 							foreach($registrasi_ulang as $registrasi){
 								?>
 									<tr>
-										<td><?php echo $registrasi['pendaftaran_id'] ?></td>
+										<td><?php echo $registrasi['registrasi_ulang_id'] ?></td>
 										<td><?php echo $registrasi['nama_prodi'] ?></td>
 										<td><?php echo $registrasi['nama_camaru'] ?></td>
 										<td><?php echo $registrasi['nim'] ?></td>
