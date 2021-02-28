@@ -1,35 +1,40 @@
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-lg-10">
+		<div class="col-lg-12">
 			<div class="card card-custom">
 				
 			</div>
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-4">
+						<label for="">Cari berdasarkan status pembayaran</label>
 						<select class="form-control" id="search_status_pembayaran">
-							<option value="">Status Pembayaran</option>
+							<option value="">All</option>
 							<option value="BELUM LUNAS">Belum Bayar</option>
 							<option value="VALIDASI">Menunggu Validasi</option>
 							<option value="LUNAS">Sudah Bayar</option>
 						</select>
 					</div>
 					<div class="col-md-4">
+						<label for="">Dari</label>
+						<input type="date" id="search_date_from" class="form-control search-by-date">
+					</div>
+					<div class="col-md-4">
+						<label for="">Sampai</label>
+						<input type="date" id="search_date_to" class="form-control search-by-date">
+					</div>
+					<div class="col-md-4 mt-4">
 						<div class="input-icon">
 							<input type="text" class="form-control" placeholder="Cari..." id="search_query">
 							<span><i class="flaticon2-search-1 text-muted"></i></span>
 						</div>
 					</div>
-
-					<div class="col-md-2">
-						<input type="date" id="search_date_from" class="form-control search-by-date">
+					<div class="col-md-12"></div>
+					<div class="col-md-4 mt-4 mb-4">
+						<div class="count-camaru"></div>
 					</div>
-					<div class="col-md-2">
-						<input type="date" id="search_date_to" class="form-control search-by-date">
-					</div>
-
 				</div>
-				<table class="table table-bordered mt-4" id="table_data_pendaftar">
+				<table class="table table-bordered mt-8" id="table_data_pendaftar">
 					<thead>
 						<tr>
 							<th>No Formulir</th>

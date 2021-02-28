@@ -45,7 +45,7 @@ class Formulir extends CI_Controller{
 			"pendaftaran" => $this->pendaftaran,
 			'data_diri' => $data_diri,
 			'daerah' => $daerah,
-			'parentIds' => $parentsIds
+			'parentIds' => $parentsIds ?? null
 		);
 		
 		$this->load->view('default', $data);
@@ -62,6 +62,16 @@ class Formulir extends CI_Controller{
 			$daerah['kecamatan'] = $this->kecamatan_model->findByKota($parentsIds['selected_kota_id']);
 			$daerah['kelurahan'] = $this->kelurahan_model->findByKecamatan($parentsIds['selected_kecamatan_id']);
 		}
+
+		$alamat_camaru = array();
+		if(!empty($this->pendaftaran['kelurahan_id'])){
+			$alamat_camaru_parents = $this->kelurahan_model->getParents($this->pendaftaran['kelurahan_id']);
+			$alamat_camaru['provinsi'] = $this->provinsi_model->find($alamat_camaru_parents['selected_provinsi_id']);
+			$alamat_camaru['kota'] = $this->kota_model->find($alamat_camaru_parents['selected_kota_id']);
+			$alamat_camaru['kecamatan'] = $this->kecamatan_model->find($alamat_camaru_parents['selected_kecamatan_id']);
+			$alamat_camaru['kelurahan'] = $this->kelurahan_model->find($alamat_camaru_parents['selected_kelurahan_id']);
+		}
+
 		$data = array(
 			"page" => 'pages/pendaftaran/form/data_wali.php',
 			"subheader" => [
@@ -71,7 +81,9 @@ class Formulir extends CI_Controller{
 			"pendaftaran" => $this->pendaftaran,
 			'data_wali' => $data_wali,
 			'daerah' => $daerah,
-			"parentIds" => $parentsIds
+			"parentIds" => $parentsIds ?? null,
+			"alamat_camaru" => $alamat_camaru
+			
 		);
 		$this->load->view('default', $data);
 	}
@@ -140,13 +152,62 @@ class Formulir extends CI_Controller{
 		$this->load->view('default', $data);
 	}
 	public function submit(){
+		$pendidikan = $this->pendaftaran['detail_pendidikan'] ?? [];
+		$d = array();
+		$provinsi = $this->provinsi_model->get();
+		if(count($pendidikan)>0){
+			for($i=0; $i<count($pendidikan); $i++){
+				$d['status_pendidikan[]'][$i] = $pendidikan[$i]['status'];
+				$d['npsn[]'][$i] = $pendidikan[$i]['npsn'];
+				$d['jurusan[]'][$i] = $pendidikan[$i]['jurusan'];
+				$d['tahun_masuk[]'][$i] = $pendidikan[$i]['tahun_masuk'];
+				$d['tahun_lulus[]'][$i] = $pendidikan[$i]['tahun_lulus'];
+				$d['sekolah[]'][$i] = $pendidikan[$i]['sekolah_id'];
+				$d['detail_alamat[]'][$i] = $pendidikan[$i]['detail_alamat'] ?? null;
+				$d['upload_ijazah[]'][$i] = $pendidikan[$i]['upload_ijazah'] ?? null;
+				$d['upload_daftar_nilai[]'][$i] = $pendidikan[$i]['upload_daftar_nilai'] ?? null;
+
+				$d['sekolah_parentIds[]'][$i] = $this->sekolah_model->getParents($pendidikan[$i]['sekolah_id']);
+				$d['kota_kab[]'][$i] = $this->kota_model->findByProvinsi($d['sekolah_parentIds[]'][$i]['selected_provinsi_id']);
+				$d['data_sekolah[]'][$i] = $this->sekolah_model->findByKota($d['sekolah_parentIds[]'][$i]['selected_kota_id']);
+
+			}
+		}
+		$data_pendidikan = $d;
+
+
+
+		$data_diri = $this->pendaftaran;
+		$daerah = null;
+		if(!empty($data_diri['kelurahan_id'])){
+			$parentsIds = $this->kelurahan_model->getParents($data_diri['kelurahan_id']);
+			$daerah['provinsi'] = $this->provinsi_model->get();
+			$daerah['kota_kab'] = $this->kota_model->findByProvinsi($parentsIds['selected_provinsi_id']);
+			$daerah['kecamatan'] = $this->kecamatan_model->findByKota($parentsIds['selected_kota_id']);
+			$daerah['kelurahan'] = $this->kelurahan_model->findByKecamatan($parentsIds['selected_kecamatan_id']);
+		}
+
+		$data_wali = $this->pendaftaran['detail_wali'] ?? null;
+		$daerah_wali = null;
+		if(!empty($data_wali['kelurahan_id'])){
+			$parentsIds = $this->kelurahan_model->getParents($data_wali['kelurahan_id']);
+			$daerah_wali['provinsi'] = $this->provinsi_model->get();
+			$daerah_wali['kota_kab'] = $this->kota_model->findByProvinsi($parentsIds['selected_provinsi_id']);
+			$daerah_wali['kecamatan'] = $this->kecamatan_model->findByKota($parentsIds['selected_kota_id']);
+			$daerah_wali['kelurahan'] = $this->kelurahan_model->findByKecamatan($parentsIds['selected_kecamatan_id']);
+		}
 		$data = array(
 			"page" => 'pages/pendaftaran/form/submit.php',
 			"subheader" => [
 				'Pendaftaran',
 				'Data Camaru'
 			],
-			"pendaftaran" => $this->pendaftaran
+			"pendaftaran" => $this->pendaftaran,
+			"data_diri" => $data_diri,
+			"daerah_wali" => $daerah_wali,
+			"data_wali" => $data_wali,
+			"data_pendidikan" => $data_pendidikan,
+			"provinsi" => $provinsi
 		);
 		$this->load->view('default', $data);
 	}

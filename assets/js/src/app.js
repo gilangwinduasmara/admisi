@@ -3,6 +3,7 @@ $(document).ready(function(){
 	if($('.dropzone').length){
 		$('.dropzone').dropzone({url: "/"});
 	}
+	onKewarganegaraanChange($('[name="kewarganegaraan"]:checked'))
 })
 
 $('#kt_repeater_1').repeater({
@@ -26,9 +27,11 @@ $('[name="kewarganegaraan"]').change(function(){
 })
 
 $(document).ready(function(){
-	if($('[name="kewarganegaraan"]').length){
-		onKewarganegaraanChange($('[name="kewarganegaraan"]:checked'))
-	}
+	setTimeout(() => {
+		if($('[name="kewarganegaraan"]').length){
+			onKewarganegaraanChange($('[name="kewarganegaraan"]:checked'))
+		}
+	}, 400)
 })
 
 function onKewarganegaraanChange(el){
@@ -94,5 +97,12 @@ $('.dropdown-toggle').click(function(){
 $('.dropdown-item').click(function(){
 	window.location.href = $(this).attr('href')
 })
+
+
+$('table').on('click','.img-preview', function(){
+	$('#modalImagePreview').modal('show')
+	$('.modal-image').attr('src', $(this).attr('src'))
+})
+
 
 

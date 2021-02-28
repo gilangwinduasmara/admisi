@@ -34,6 +34,7 @@
 								<?php
 							}else{
 								?>
+									<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_foto']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
 									<button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_foto">
 										<i class="fas fa-pen"></i> Sunting
 									</button>
@@ -52,6 +53,7 @@
 								<?php
 							}else{
 								?>
+								<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_kk']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
 									<button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_kk">
 										<i class="fas fa-pen"></i> Sunting
 									</button>
@@ -70,6 +72,7 @@
 								<?php
 							}else{
 								?>
+									<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_akta_lahir']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
 									<button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_akta_lahir">
 										<i class="fas fa-pen"></i> Sunting
 									</button>
@@ -88,6 +91,7 @@
 								<?php
 							}else{
 								?>
+									<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_srt_pernyataan']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
 									<button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_srt_pernyataan">
 										<i class="fas fa-pen"></i> Sunting
 									</button>

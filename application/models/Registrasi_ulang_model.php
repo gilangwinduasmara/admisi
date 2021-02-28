@@ -43,13 +43,75 @@ class Registrasi_ulang_model extends CI_Model {
 	}
 	
 	public function get(){
-		return $this->db->query('SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
+		$sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
 		FROM registrasi_ulang
 		JOIN hasil_penerimaan
 			on registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
 		JOIN prodi
-			on hasil_penerimaan.prodi_id = prodi.id')->result_array();
-		 
+			on hasil_penerimaan.prodi_id = prodi.id";
+		return $this->db->query($sql)->result_array();
+	}
+
+	public function data_registrasi_ulang_filter($search, $limit, $start, $order_field, $order_ascdesc, $status=null, $prodi=null, $date_from=null, $date_to=null){
+		$sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
+		FROM registrasi_ulang
+		JOIN (select id as hasil_penerimaan_id, prodi_id, kode_skpm, pendaftaran_id from hasil_penerimaan) as hp
+			on registrasi_ulang.hasil_penerimaan_id = hp.hasil_penerimaan_id
+		JOIN (SELECT id as pendaftaran_id, akun_id, status_formulir, created_at FROM pendaftaran) AS pen 
+			ON pen.pendaftaran_id = (
+				SELECT id FROM pendaftaran WHERE pendaftaran.id = hp.pendaftaran_id 
+			)
+		JOIN (select id as prodi_id, nama_prodi from prodi) as prodi
+			on hp.prodi_id = prodi.prodi_id
+		where lower(registrasi_ulang.nama_camaru) like lower('%$search%')";
+		if(!empty($status)){
+			$sql .= " and registrasi_ulang.status = '$status' ";
+		}
+		if(!empty($prodi)){
+			$sql .= " and hp.prodi_id = '$prodi' ";
+		}
+		if(!empty($date_from)){
+			$sql .= " AND (pen.created_at >='$date_from' and pen.created_at <= '$date_to') ";
+		}
+		$sql .= " order by $order_field $order_ascdesc limit $limit offset $start";
+		return $this->db->query($sql)->result_array();
+	}
+
+	public function data_registrasi_ulang_count_all(){
+		$sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
+		FROM registrasi_ulang
+		JOIN hasil_penerimaan
+			on registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
+		JOIN (SELECT id, akun_id, status_formulir FROM pendaftaran) AS pen 
+			ON pen.id = (
+				SELECT id FROM pendaftaran WHERE pendaftaran.id = hasil_penerimaan.pendaftaran_id 
+			)
+		JOIN prodi
+			on hasil_penerimaan.prodi_id = prodi.id";
+		
+		return $this->db->query($sql)->num_rows();
+	}
+
+
+	public function data_registrasi_ulang_filter_count($search, $status=null, $prodi=null, $date_from=null, $date_to=null){
+		$sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
+		FROM registrasi_ulang
+		JOIN hasil_penerimaan
+			on registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
+		JOIN (SELECT id, akun_id, status_formulir FROM pendaftaran) AS pen 
+			ON pen.id = (
+				SELECT id FROM pendaftaran WHERE pendaftaran.id = hasil_penerimaan.pendaftaran_id 
+			)
+		JOIN prodi
+			on hasil_penerimaan.prodi_id = prodi.id
+		where lower(registrasi_ulang.nama_camaru) like lower('%$search%')";
+		if(!empty($status)){
+			$sql .= " and registrasi_ulang.status = '$status' ";
+		}
+		if(!empty($prodi)){
+			$sql .= " and hasil_penerimaan.prodi_id = '$prodi' ";
+		}
+		return $this->db->query($sql)->num_rows();
 	}
 
 	public function findByHasilPenerimaan($pendaftaran_id){

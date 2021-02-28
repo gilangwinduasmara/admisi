@@ -79,3 +79,11 @@
 		</div>
 
 		<!--end::Main-->
+
+<div class="modal fade" id="modalImagePreview" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <img src="" class="modal-image">
+        </div>
+    </div>
+</div>

@@ -57,7 +57,7 @@ function withArray(name,isArray = false){
 }
 
 function daerahSelectorInit(element = $('.daerah-wrapper')){
-	console.log('selector init')
+	console.log('selector init', element,length)
 	if(element.length){
 		$.each(element, function (el, index){
 			let key = $(this).data('isarray')
@@ -100,7 +100,7 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 				}
 			}
 			const provinsiSelect = $(that).find('[data-provinsi] > div > select')
-			if(provinsiSelect.length == 0){
+			if(provinsiSelect.children().length == 1){
 				axios.get(daerahs[0].fetch(daerahs[0].parent)).then((res) => {
 					res.data.provinsi.map((item, index) => {
 						$(provinsiSelect).append(`<option value="${item.id}">${item.provinsi}</option>`)
@@ -202,8 +202,16 @@ $('[data-toggle="sunting"]').click(function(){
 
 $('input[name="same_address"]').change(function(){
 	if($(this).is(':checked')){
-		$('.same-address').hide()
+		$('.alamat-camaru').show()
+		$('.alamat-wali').hide()
+		// $('.same-address').hide()
 	}else{
-		$('.same-address').show()
+		// $('.same-address').show()
+		$('.alamat-wali').show()
+		$('.alamat-camaru').hide()
 	}
+})
+
+$(document).ready(function(){
+	$('.alamat-wali > .daerah-wrapper').show()
 })

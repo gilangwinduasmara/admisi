@@ -6,8 +6,8 @@
 
 		<div class="d-none d-lg-flex align-items-center mr-3">
 
-			<a href="<?php echo base_url() ?>" class="btn btn-light-warning">
-				Logo
+			<a href="<?php echo base_url() ?>" class="">
+				<img class="header-logo" src="<?php echo base_url('/assets/media/logo.png') ?>" alt="">
 			</a>
 
 		</div>
@@ -91,6 +91,8 @@
 								<a class="dropdown-item" href="<?php echo base_url("admin/data_camaru") ?>">Data Camaru</a>
 								<a class="dropdown-item" href="<?php echo base_url("admin/data_registrasi_ulang") ?>">Data Registrasi Ulang</a>
 								<a class="dropdown-item" href="<?php echo base_url("admin/data_omb") ?>">Data OMB</a>
+								<a class="dropdown-item" href="<?php echo base_url("admin/pengumuman") ?>">Pengumuman</a>
+								<a class="dropdown-item" href="<?php echo base_url("admin/data_user") ?>">Data User</a>
 							</div>
 						</div>
 					</div>

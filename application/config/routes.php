@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['admin/login'] = 'Admin_pages_controller/login';
+$route['admin/pengumuman/edit'] = 'Admin_pages_controller/pengumuman_edit';
 $route['admin/(:any)'] = 'Admin_pages_controller/$1';
 
 $route['default_controller'] = 'pages/landing';

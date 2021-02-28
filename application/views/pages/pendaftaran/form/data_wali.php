@@ -74,13 +74,13 @@
 									<div class="col-md-10">
 										<select name="pendidikan_terakhir" class="form-control">
 											<option value="">Pilih</option>
-											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'Tidak Sekolah' ? 'selected': '') ?> value="Tidak Sekolah">Tidak Sekolah</option>
-											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'SD' ? 'selected': '') ?> value="SD">SD</option>
-											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'SMP/Sederajat' ? 'selected': '') ?> value="SMP/Sederajat">SMP/Sederajat</option>
-											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'SMA/Sederajat' ? 'selected': '') ?> value="SMA/Sederajat">SMA/Sederajat</option>
-											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'S1' ? 'selected': '') ?> value="S1">S1</option>
-											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'S2' ? 'selected': '') ?> value="S2">S2</option>
-											<option <?php echo ($data_wali['pendidikan_terakhir'] == 'S3' ? 'selected': '') ?> value="S3">S3</option>
+											<option <?php echo (($data_wali['pendidikan_terakhir'] ?? 'x') == 'Tidak Sekolah' ? 'selected': '') ?> value="Tidak Sekolah">Tidak Sekolah</option>
+											<option <?php echo (($data_wali['pendidikan_terakhir'] ?? 'x') == 'SD' ? 'selected': '') ?> value="SD">SD</option>
+											<option <?php echo (($data_wali['pendidikan_terakhir'] ?? 'x') == 'SMP/Sederajat' ? 'selected': '') ?> value="SMP/Sederajat">SMP/Sederajat</option>
+											<option <?php echo (($data_wali['pendidikan_terakhir'] ?? 'x') == 'SMA/Sederajat' ? 'selected': '') ?> value="SMA/Sederajat">SMA/Sederajat</option>
+											<option <?php echo (($data_wali['pendidikan_terakhir'] ?? 'x') == 'S1' ? 'selected': '') ?> value="S1">S1</option>
+											<option <?php echo (($data_wali['pendidikan_terakhir'] ?? 'x') == 'S2' ? 'selected': '') ?> value="S2">S2</option>
+											<option <?php echo (($data_wali['pendidikan_terakhir'] ?? 'x') == 'S3' ? 'selected': '') ?> value="S3">S3</option>
 										</select>
 									</div>
 								</div>
@@ -141,16 +141,35 @@
 										Alamat wali sama dengan alamat camaru
 									</label>
 								</div>
+									
 								<div class="same-address">
-									<!-- <div class="form-group row" hidden>
-										<label for="" class="col-md-2 col-form-label">Negara</label>
-										<div class="col-md-10">
-											<input type="text" class="form-control" name="negara" value="">
-										</div>
-									</div> -->
 									<?php
 										if(!empty($data_wali['kelurahan_id'])){
 											?>
+											<div class="alamat-wali">
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Kewarganegaraan</label>
+													<div class="col-md-10">
+														<div class="radio-inline">
+															<label class="radio">
+																<input type="radio" name="kewarganegaraan" value="WNI" <?php echo (($data_wali['kewarganegaraan'] ?? 'WNI') == 'WNI' ? 'checked': '') ?>/>
+																<span></span>
+																WNI
+															</label>
+															<label class="radio">
+																<input type="radio" name="kewarganegaraan" value="WNA" <?php echo (($data_wali['kewarganegaraan'] ?? 'WNI') == 'WNA' ? 'checked': '') ?>/>
+																<span></span>
+																WNA
+															</label>
+														</div>
+													</div>
+												</div>	
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Negara</label>
+													<div class="col-md-10">
+														<input type="text" class="form-control" name="negara" value="<?php echo $data_wali['negara'] ?? null ?>">
+													</div>
+												</div>
 												<div class="daerah-wrapper" >
 													<?php 
 														if(!empty($daerah)){
@@ -217,25 +236,97 @@
 
 															<?php
 															
+														}else{
+															echo "nope";
 														}
+
 													?>
 												</div>
+											</div>
 											<?php
 										}else{
 											?>
-												<div class="daerah-wrapper" >
-										
+												<div class="alamat-wali">
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Kewarganegaraan</label>
+														<div class="col-md-10">
+															<div class="radio-inline">
+																<label class="radio">
+																	<input type="radio" name="kewarganegaraan" value="WNI" <?php echo (($data_wali['kewarganegaraan'] ?? 'WNI') == 'WNI' ? 'checked': '') ?>/>
+																	<span></span>
+																	WNI
+																</label>
+																<label class="radio">
+																	<input type="radio" name="kewarganegaraan" value="WNA" <?php echo (($data_wali['kewarganegaraan'] ?? 'WNI') == 'WNA' ? 'checked': '') ?>/>
+																	<span></span>
+																	WNA
+																</label>
+															</div>
+														</div>
+													</div>	
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Negara</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" name="negara" value="<?php echo $data_wali['negara'] ?? null ?>">
+														</div>
+													</div>
+													<div class="daerah-wrapper" data>
+											
+													</div>
 												</div>
 											<?php
 										}
 									?>
-									
+									<?php
+										if(($pendaftaran['kewarganegaraan']) == 'WNI'){
+											?>
+												<div class="alamat-camaru" style="display: none;">
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Provinsi</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" value="<?php echo $alamat_camaru['provinsi']['provinsi'] ?>" disabled>
+														</div>
+													</div>	
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Kab/Kota</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" value="<?php echo $alamat_camaru['kota']['kota_kab'] ?>" disabled>
+														</div>
+													</div>	
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Kecamatan</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" value="<?php echo $alamat_camaru['kecamatan']['kecamatan'] ?>" disabled>
+														</div>
+													</div>	
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Kelurahan</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" value="<?php echo $alamat_camaru['kelurahan']['kelurahan'] ?>" disabled>
+														</div>
+													</div>	
+												</div>
+											<?php
+										}else{
+											?>
+												<div class="alamat-camaru" style="display: none;">
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Negara</label>
+														<div class="col-md-10">
+															<input type="text" class="form-control" value="<?php echo $pendaftaran['negara'] ?>" disabled>
+														</div>
+													</div>
+												</div>
+											<?php
+										}
+									?>
 									<div class="form-group row">
 										<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
 										<div class="col-md-10">
-											<textarea name="alamat" cols="30" rows="10" class="form-control"><?php echo $data_wali['alamat'] ?></textarea>
+											<textarea name="alamat" cols="30" rows="10" class="form-control"><?php echo ($data_wali['alamat'] ?? null) ?></textarea>
 										</div>
 									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -258,4 +349,6 @@
 	
 </div>
 
-<?php echo json_encode($daerah) ?>
+<?php echo json_encode($alamat_camaru) ?>
+<br>
+<?php echo json_encode($pendaftaran) ?>

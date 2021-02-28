@@ -400,7 +400,38 @@ const forms = {
 				rules: {
 					required: true
 				}
-			}
+			},
+			{
+				name: 'jenis_prestasi[]',
+				label: 'Jenis Prestasi',
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: 'nama_kegiatan[]',
+				label: 'Nama Kegiatan',
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: 'tgl_kegiatan[]',
+				label: 'Tanggal Kegiatan',
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: 'unggah_bukti_prestasi[]',
+				label: 'Unggah Bukti Prestasi',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
 		]
 	}
 }
@@ -416,7 +447,27 @@ $('.lanjut').click(function(){
 	let form = $(this).closest('form')
 	validate(form)
 	if($(".is-invalid").length==0){
-		form.submit();
+		switch($('.lanjut').parentsUntil("form").parent().attr('name')){
+			case 'submit':
+				$("#kt_sweetalert_demo_9").click(function(e) {
+					Swal.fire({
+						title: "Submit",
+						text: "Sebelum melakukan submit, pastikan data dan informasi CAMARU sudah sesuai dan benar.",
+						icon: "warning",
+						showCancelButton: true,
+						confirmButtonText: "Submit",
+						cancelButtonText: "Batal",
+						reverseButtons: true
+					}).then(function(result) {
+						if (result.value) {
+							form.submit();
+						}
+					});
+				});
+				break
+			default:
+				form.submit();
+		}
 	}
 })
 
@@ -443,7 +494,6 @@ function validate(form){
 function validateField(field){
 	let isError = false;
 	$.each($(`[name="${field.name}"]`),function(){
-		console.log($(this).attr('name'))
 		let currentField = $(this)	
 		if(!$(this).attr('disabled')){
 			if(field.rules.required){

@@ -18,4 +18,13 @@ class Kecamatan_model extends CI_Model{
 		return $query->result_array();
 	}
 
+	public function find($id){
+		$data = $this->db->where('id', $id)->get($this->table_name)->result_array();
+		if(count($data) > 0){
+			return $data[0];
+		}else{
+			return null;
+		}
+	}
+
 }

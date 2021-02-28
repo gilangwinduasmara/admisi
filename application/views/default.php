@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link href="<?php echo base_url('assets/plugins/global/plugins.bundle.css')?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/plugins/custom/prismjs/prismjs.bundle.css')?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/css/style.bundle.css')?>" rel="stylesheet" type="text/css" />
-		<link href="<?php echo base_url('assets/css/style.css')?>" rel="stylesheet" type="text/css" />
+		<link href="<?php echo base_url('assets/css/style.css?'.date('l jS \of F Y h:i:s A'))?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/plugins/custom/datatables/datatables.bundle.css')?>" rel="stylesheet" type="text/css" />
 
 		<link rel="shortcut icon" href="<?php echo base_url('assets/media/logos/favicon.ico')?>" />
@@ -100,24 +100,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			};
 		</script>
 
-		<script src="<?php echo base_url('assets/plugins/global/plugins.bundle.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/plugins/custom/prismjs/prismjs.bundle.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/plugins/custom/axios/axios.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/plugins/custom/repeater/repeater.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/js/scripts.bundle.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/js/pages/widgets.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/plugins/global/plugins.bundle.js?')?>"></script>
+		<script src="<?php echo base_url('assets/plugins/custom/prismjs/prismjs.bundle.js?')?>"></script>
+		<script src="<?php echo base_url('assets/plugins/custom/axios/axios.js?')?>"></script>
+		<script src="<?php echo base_url('assets/plugins/custom/repeater/repeater.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/scripts.bundle.js?')?>"></script>
+		<script src="<?php echo base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/pages/widgets.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/app.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 		<script src="<?php echo base_url('assets/js/src/inputmask.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/validate.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/js/src/dropzone.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/dropzone.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/daerah.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 		<script src="<?php echo base_url('assets/js/src/penerimaan.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/plugins/custom/datatables/datatables.bundle.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/plugins/custom/datatables/datatables.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/datatables.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 		<script src="<?php echo base_url('assets/js/src/admin.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 		<script src="<?php echo base_url('assets/js/src/registrasi-ulang.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 		<script src="<?php echo base_url('assets/js/src/omb.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/prestasi.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/pengumuman.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 	
 	</body>
 </html>

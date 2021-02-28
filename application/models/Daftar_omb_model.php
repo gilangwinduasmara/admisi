@@ -23,17 +23,17 @@ class Daftar_omb_model extends CI_Model {
 	}
 
 	public function findByVerifiedRegistrasiUlang($akun_id){
-		$query = $this->db->query("SELECT *, registrasi_ulang.id AS registrasi_ulang_id
-							FROM pendaftaran
-							JOIN hasil_penerimaan
-								ON pendaftaran.id = hasil_penerimaan.pendaftaran_id
-							JOIN registrasi_ulang
-								ON registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
-							LEFT JOIN (SELECT ukuran_jas_alma, registrasi_ulang_id AS kode_hasil_seleksi from daftar_omb) AS daftar_omb
-								ON daftar_omb.kode_hasil_seleksi = registrasi_ulang.id
-							Join prodi
-								ON prodi.id = registrasi_ulang.prodi_id
-							WHERE pendaftaran.akun_id = '$akun_id' and registrasi_ulang.status = 'LUNAS' and hasil_penerimaan.status = 'DITERIMA'");
+		$query = $this->db->query("SELECT * 
+		FROM registrasi_ulang
+		JOIN hasil_penerimaan ON hasil_penerimaan.id = registrasi_ulang.hasil_penerimaan_id
+		JOIN (SELECT id, akun_id, status_formulir FROM pendaftaran) AS pen 
+			ON pen.id = (
+				SELECT id FROM pendaftaran WHERE pendaftaran.id = hasil_penerimaan.pendaftaran_id 
+			)
+		JOIN daftar_omb ON daftar_omb.registrasi_ulang_id = registrasi_ulang.id
+		WHERE pen.status_formulir = 'AKTIF'
+		AND hasil_penerimaan.status = 'DITERIMA'
+		AND registrasi_ulang.status = 'LUNAS'");
 		return $query->result_array();
 	}
 

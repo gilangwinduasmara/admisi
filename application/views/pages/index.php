@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<div class="col-lg-4 bg-primary p-0">
-				<img style="opacity: .2; object-fit: cover;" src="<?php echo base_url('assets/media/univ.jpg') ?>" alt="">
+				<img style="object-fit: cover;" src="<?php echo base_url('assets/media/univ.jpg') ?>" alt="">
 			</div>
 			<div class="col-lg-12">
 				<div class="p-4">

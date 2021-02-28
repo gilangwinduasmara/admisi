@@ -13,6 +13,7 @@ class Pendaftaran_model extends CI_Model{
 		$this->load->model('hasil_penerimaan_model');
 		$this->load->model('pembayaran_model');
 		$this->load->model('registrasi_ulang_model');
+		$this->load->model('detail_prestasi_model');
 	}
 
 	public function findByNim($nim){
@@ -22,7 +23,7 @@ class Pendaftaran_model extends CI_Model{
 									ON pendaftaran.id = hasil_penerimaan.pendaftaran_id
 								JOIN registrasi_ulang
 									ON registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
-								LEFT JOIN (SELECT ukuran_jas_alma, registrasi_ulang_id AS kode_hasil_seleksi from daftar_omb) AS daftar_omb
+								LEFT JOIN (SELECT id as daftar_omb_id, ukuran_jas_alma, registrasi_ulang_id AS kode_hasil_seleksi from daftar_omb) AS daftar_omb
 									ON daftar_omb.kode_hasil_seleksi = registrasi_ulang.id
 								Join prodi
 								ON prodi.id = registrasi_ulang.prodi_id
@@ -30,16 +31,22 @@ class Pendaftaran_model extends CI_Model{
 		return $query->result_array();
 	}
 
-	public function findByVerifiedRegistrasiUlang($akun_id){
-		$query = $this->db->query("SELECT * 
-							FROM pendaftaran
-							JOIN hasil_penerimaan
-								ON pendaftaran.id = hasil_penerimaan.pendaftaran_id
-							JOIN registrasi_ulang
-								ON registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
-							LEFT JOIN daftar_omb
-								ON daftar_omb.registrasi_ulang_id = registrasi_ulang.id
-							WHERE pendaftaran.akun_id = '$akun_id' and registrasi_ulang.status = 'LUNAS' and hasil_penerimaan.status = 'DITERIMA'");
+	public function findByVerifiedRegistrasiUlang($akun_id, $where=""){
+		$sql = "SELECT * 
+			FROM registrasi_ulang
+			JOIN hasil_penerimaan ON hasil_penerimaan.id = registrasi_ulang.hasil_penerimaan_id
+			JOIN (SELECT id, akun_id, status_formulir FROM pendaftaran) AS pen 
+				ON pen.id = (
+					SELECT id FROM pendaftaran WHERE pendaftaran.id = hasil_penerimaan.pendaftaran_id 
+				)
+			JOIN daftar_omb ON daftar_omb.registrasi_ulang_id = registrasi_ulang.id
+			WHERE pen.status_formulir = 'AKTIF'
+			AND hasil_penerimaan.status = 'DITERIMA'
+			AND registrasi_ulang.status = 'LUNAS'
+			and pen.akun_id='$akun_id'
+			and daftar_omb.ukuran_jas_alma is null";
+		$sql .= $where;
+		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
 	
@@ -67,24 +74,109 @@ class Pendaftaran_model extends CI_Model{
 			if($hasil_pendaftaran){
 				$pendaftaran['hasil_penerimaan'] = $this->hasil_penerimaan_model->findByPendaftaran($pendaftaran['id']);
 				$pendaftaran['prodi_1'] = $this->prodi_model->find($pendaftaran['prodi_1_id']);
-				$pendaftaran['prodi_2'] = $this->prodi_model->find($pendaftaran['prodi_2_id']);
+				$pendaftaran['prodi_2'] = $this->prodi_model->find($pendaftaran['prodi_2_id'] ?? null);
 			}
 		}
 		return $pendaftarans;
 	}
 
+	public function data_camaru_filter($search, $limit, $start, $order_field, $order_ascdesc, $status_formulir=null, $date_from=null, $date_to=null, $prodi=null, $jalur_pendaftaran=null){
+		$sql = ("SELECT * FROM pendaftaran AS pen
+		right JOIN (SELECT id AS status_penerimaan_1_id, status AS status_penerimaan_1 FROM hasil_penerimaan) AS hp1 ON hp1.status_penerimaan_1_id = (
+			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_1_id LIMIT 1
+		)
+		left JOIN (SELECT id AS status_penerimaan_2_id, status AS status_penerimaan_2 FROM hasil_penerimaan) AS hp2 ON hp2.status_penerimaan_2_id = (
+			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_2_id  LIMIT 1
+		)
+		left join (select id as jalur_pendaftaran_id, jalur_pendaftaran from jalur_pendaftaran) as jp on jp.jalur_pendaftaran_id = pen.jalur_pendaftaran_id
+		left join (select id as prodi_1_id, nama_prodi as prodi_1 from prodi) as prod1 on pen.prodi_1_id = prod1.prodi_1_id
+		left join (select id as prodi_2_id, nama_prodi as prodi_2 from prodi) as prod2 on pen.prodi_2_id = prod2.prodi_2_id
+		WHERE LOWER(pen.nama) like LOWER('%$search%') AND pen.status_formulir = 'AKTIF' ");
+
+
+		if(!empty($status_formulir)){
+			$sql .= " AND (status_penerimaan_1 = '$status_formulir' OR status_penerimaan_2 = '$status_formulir')";
+		}
+
+		if(!empty($date_from)){
+			$sql .= " AND (pen.created_at >='$date_from' and pen.created_at <= '$date_to')";
+		}
+
+		if(!empty($prodi)){
+			$sql .= " AND (pen.prodi_1_id = '$prodi' OR pen.prodi_2_id = '$prodi')";
+		}
+
+		if(!empty($jalur_pendaftaran)){
+			$sql .= " AND pen.jalur_pendaftaran_id = '$jalur_pendaftaran'";
+		}
+
+		$sql .= " order by pen.$order_field $order_ascdesc limit $limit offset $start";
+		$query = $this->db->query($sql);
+		$pendaftarans = $query->result_array();
+		// foreach($pendaftarans as &$pendaftaran){
+		// 	$pendaftaran['prodi_1'] = $this->prodi_model->find($pendaftaran['prodi_1_id']);
+		// 	if(!empty($pendaftaran['prodi_2_id'])){
+		// 		$pendaftaran['prodi_2'] = $this->prodi_model->find($pendaftaran['prodi_2_id']);
+		// 	}
+		// }
+		return $pendaftarans;
+	}
+	public function data_camaru_count_all(){
+		$sql = ("SELECT * FROM pendaftaran AS pen
+		right JOIN (SELECT id AS status_penerimaan_1_id, status AS status_penerimaan_1 FROM hasil_penerimaan) AS hp1 ON hp1.status_penerimaan_1_id = (
+			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_1_id LIMIT 1
+		)
+		left JOIN (SELECT id AS status_penerimaan_2_id, status AS status_penerimaan_2 FROM hasil_penerimaan) AS hp2 ON hp2.status_penerimaan_2_id = (
+			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_2_id  LIMIT 1
+		)
+		WHERE pen.status_formulir = 'AKTIF' ");
+
+		$query = $this->db->query($sql);
+		$pendaftarans = $query->num_rows();
+		return $pendaftarans;
+	}
+
+	public function data_camaru_count_filter($search, $status_formulir=null, $date_from=null, $date_to=null, $prodi=null, $jalur_pendaftaran){
+		$sql = ("SELECT * FROM pendaftaran AS pen
+		right JOIN (SELECT id AS status_penerimaan_1_id, status AS status_penerimaan_1 FROM hasil_penerimaan) AS hp1 ON hp1.status_penerimaan_1_id = (
+			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_1_id LIMIT 1
+		)
+		left JOIN (SELECT id AS status_penerimaan_2_id, status AS status_penerimaan_2 FROM hasil_penerimaan) AS hp2 ON hp2.status_penerimaan_2_id = (
+			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_2_id  LIMIT 1
+		)
+		left join (select id as jalur_pendaftaran_id, jalur_pendaftaran from jalur_pendaftaran) as jp on jp.jalur_pendaftaran_id = pen.jalur_pendaftaran_id
+		left join (select id as prodi_1_id, nama_prodi as prodi_1 from prodi) as prod1 on pen.prodi_1_id = prod1.prodi_1_id
+		left join (select id as prodi_2_id, nama_prodi as prodi_2 from prodi) as prod2 on pen.prodi_2_id = prod2.prodi_2_id
+		WHERE LOWER(pen.nama) like LOWER('%$search%') AND pen.status_formulir = 'AKTIF' ");
+
+		if(!empty($status_formulir)){
+			$sql .= " AND (status_penerimaan_1 = '$status_formulir' OR status_penerimaan_2 = '$status_formulir')";
+		}
+
+		if(!empty($date_from)){
+			$sql .= " AND (created_at >='$date_from' and created_at <= '$date_to')";
+		}
+
+		if(!empty($prodi)){
+			$sql .= " AND (pen.prodi_1_id = '$prodi' OR pen.prodi_2_id = '$prodi')";
+		}
+
+		if(!empty($jalur_pendaftaran)){
+			$sql .= " AND pen.jalur_pendaftaran_id = '$jalur_pendaftaran'";
+		}
+
+		$query = $this->db->query($sql);
+		return $query->num_rows();
+	}
+
 	public function filter($search, $limit, $start, $order_field, $order_ascdesc, $status_pembayaran=null, $date_from=null, $date_to=null){
-		// $this->db->like('nama', $search); // Untuk menambahkan query where LIKE
-		// // $this->db->or_like('nama', $search); // Untuk menambahkan query where OR LIKE
-		// $this->db->order_by($order_field, $order_ascdesc); // Untuk menambahkan query ORDER BY
-		$this->db->limit($limit, $start); // Untuk menambahkan query LIMIT
 		$sql = ("SELECT * 
 		FROM pendaftaran AS pen
 			LEFT JOIN pembayaran AS pem 
 			ON pem.id = (
 				SELECT id FROM pembayaran WHERE pembayaran.pendaftaran_id = pen.id ORDER BY status = 'LUNAS' DESC, status = 'VALIDASI' DESC, status = 'BELUM LUNAS' DESC LIMIT 1
 			)
-			where status is not null and nama like '%$search'
+			where status is not null and LOWER(pen.nama) like LOWER('%$search%') 
 			
 		");
 
@@ -100,20 +192,6 @@ class Pendaftaran_model extends CI_Model{
 		$sql .= " order by pen.$order_field $order_ascdesc limit $limit offset $start";
 		$query = $this->db->query($sql);
 		$pendaftarans = $query->result_array();
-		// foreach($pendaftarans as $key=>&$pendaftaran){
-		// 	$validasi = $this->pembayaran_model->findByPendaftaranId($pendaftaran['id'], "VALIDASI");
-		// 	$lunas = $this->pembayaran_model->findByPendaftaranId($pendaftaran['id'], "LUNAS");
-		// 	$pendaftaran['status_pembayaran'] = 'Belum Bayar';
-		// 	if(count($validasi) > 0){
-		// 		$pendaftaran['status_pembayaran'] = 'Menunggu Validasi';
-		// 		$pendaftaran['upload_bukti_bayar'] = $validasi[0]['upload_bukti_bayar'];
-		// 	}
-		// 	if(count($lunas) > 0){
-		// 		$pendaftaran['status_pembayaran'] = 'Sudah Bayar';
-		// 		$pendaftaran['upload_bukti_bayar'] = $lunas[0]['upload_bukti_bayar'];
-		// 	}
-
-		// }
 		return $pendaftarans;
 	}
 
@@ -124,7 +202,7 @@ class Pendaftaran_model extends CI_Model{
 			ON pem.id = (
 				SELECT id FROM pembayaran WHERE pembayaran.pendaftaran_id = pen.id ORDER BY status = 'LUNAS' DESC, status = 'VALIDASI' DESC, status = 'BELUM LUNAS' DESC LIMIT 1
 			)
-			where status is not null and nama like '%$search'
+			where status is not null and LOWER(pen.nama) like LOWER('%$search%') 
 		");
 
 		if(!empty($date_from)){
@@ -137,8 +215,6 @@ class Pendaftaran_model extends CI_Model{
 		$query = $this->db->query($sql);
 		return $query->num_rows();
 	}
-
-
 
 	public function count_all(){
 		$sql = ("SELECT * 
@@ -177,6 +253,7 @@ class Pendaftaran_model extends CI_Model{
 			}else{
 				$lunas = null;
 			}
+			$pendaftaran['detail_prestasi'] = $this->detail_prestasi_model->findByPendaftaran($pendaftaran['id']);
 			$pendaftaran['pembayaran_validasi'] = $validasi;
 			$pendaftaran['pembayaran_lunas'] = $lunas;
 			$pendaftaran['detail_pendidikan'] = $this->detail_pendidikan_model->findByPendaftaran($pendaftaran['id']);

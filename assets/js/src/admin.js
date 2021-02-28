@@ -17,7 +17,7 @@ $("#table_data_pendaftar").on('click', '[data-toggle="validasi_pembayaran"]', fu
     });
 })
 
-$('[data-toggle="validasi_registrasi_ulang"]').click(function(){
+$('#table_data_registrasi_ulang').on('click', '[data-toggle="validasi_registrasi_ulang"]', function(){
 	const data = {
 		registrasi_ulang_id: $(this).data('id')
 	}
@@ -36,20 +36,25 @@ $('[data-toggle="validasi_registrasi_ulang"]').click(function(){
     });
 })
 
-$('[data-toggle="data-camaru-edit"]').click(function(){
+$('#table_data_camaru').on('click','[data-toggle="data-camaru-edit"]',function (){
 	$('#modal__data_camaru_edit').modal('show')
 	axios.get(BASE_URL+'/service/api/pendaftaran?id='+$(this).data('id')).then(res => {
 		$('[name="prodi_1_id"]').val(res.data.hasil_penerimaan[0].id)
 		$('[name="modal__data_camaru_edit_pilihan_1"]').val(res.data.hasil_penerimaan[0].prodi.nama_prodi)
 		$('[name="prodi_1_status"]').val(res.data.hasil_penerimaan[0].status)
 		if(res.data.hasil_penerimaan[0].status != "DIPROSES"){
+			console.log(res.data.hasil_penerimaan[0].status)
 			$('[name="prodi_1_status"]').attr('disabled', true)
+		}else{
+			$('[name="prodi_1_status"]').attr('disabled', false)
 		}
 		$('[name="prodi_2_id"]').val(res.data.hasil_penerimaan[1].id)
 		$('[name="modal__data_camaru_edit_pilihan_2"]').val(res.data.hasil_penerimaan[1].prodi.nama_prodi)
 		$('[name="prodi_2_status"]').val(res.data.hasil_penerimaan[1].status)
 		if(res.data.hasil_penerimaan[1].status != "DIPROSES"){
 			$('[name="prodi_2_status"]').attr('disabled', true)
+		}else{
+			$('[name="prodi_2_status"]').attr('disabled', false)
 		}
 		
 	}).catch(err => {
@@ -57,7 +62,7 @@ $('[data-toggle="data-camaru-edit"]').click(function(){
 	})
 })
 
-$('[data-toggle="data-camaru-detail"]').click(function(){
+$('#table_data_camaru').on('click','[data-toggle="data-camaru-detail"]', function(){
 	$('#data-selector').val('DATA_PERSONAL')
 	$('#modal__data_camaru_detail').modal('show')
 	axios.get(BASE_URL+"/service/api/pendaftaran?id="+$(this).data('id')).then(res => {

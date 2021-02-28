@@ -21,7 +21,7 @@
 	</ul>
 	<div class="tab-content mt-5" id="myTabContent">
 		<div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_2">
-			<form action="<?php echo base_url('/api/pendaftaran/update_form')?>" method="POST" name="data_akademik">
+			<form action="<?php echo base_url('/api/pendaftaran/update_form')?>" method="POST" name="data_akademik" enctype="multipart/form-data">
 				<input type="text" class="form-control" readonly name="form_type" hidden value="data_akademik">
 				<input type="text" class="form-control" readonly name="id" hidden value="<?php echo $pendaftaran['id'] ?>">
 				<div class="accordion accordion-toggle-arrow" id="accordion-program-studi">
@@ -73,45 +73,48 @@
 						</div>
 						<div id="collapse-prestasi" class="collapse" data-parent="#accordion-prestasi">
 							<div class="card-body">
-								<div id="kt_repeater_1">
-									<div data-repeater-list>
-										<div data-repeater-item>
-											<div class="form-group row">
-												<label for="" class="col-md-2 col-form-label">Jenis prestasi</label>
-												<div class="col-md-10">
-													<select name="jenis_prestasi"  class="form-control">
-														<option value="">Pilih</option>
-														<option value="NASIONAL">Nasional</option>
-														<option value="INTERNASIONAL">Internasional</option>
-													</select>
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="" class="col-md-2 col-form-label">Nama Kegiatan</label>
-												<div class="col-md-10">
-													<input type="text" class="form-control" name="nama_kegiatan">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="" class="col-md-2 col-form-label">Tanggal Kegiatan</label>
-												<div class="col-md-10">
-													<input type="date" class="form-control" name="tgl_kegiatan">
-												</div>
-											</div>
-											<div class="form-group row">
-												<label for="" class="col-md-2 col-form-label">Unggah Bukti Prestasi</label>
-												<input type="file" name="unggah_bukti_prestasi">
-											</div>
-											<div class="separator separator-solid mb-8"></div>
-										</div>
+									<div class="prestasi-wrapper">
+										<?php 
+											foreach($pendaftaran['detail_prestasi'] as $prestasi){
+												?>
+													<input type="hidden" name="detail_prestasi_id[]" value="<?php echo $prestasi['id'] ?>">
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Jenis prestasi</label>
+														<div class="col-md-10">
+															<select name="jenis_prestasi[]"  class="form-control">
+																<option value="">Pilih</option>
+																<option <?php  if ($prestasi['jenis_prestasi'] == 'NASIONAL') echo 'selected' ?> value="NASIONAL">Nasional</option>
+																<option <?php  if ($prestasi['jenis_prestasi'] == 'INTERNASIONAL') echo 'selected' ?> value="INTERNASIONAL">Internasional</option>
+															</select>
+														</div>
+													</div>
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Nama Kegiatan</label>
+														<div class="col-md-10">
+															<input value="<?php  echo $prestasi['nama_kegiatan'] ?>" type="text" class="form-control" name="nama_kegiatan[]">
+														</div>
+													</div>
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Tanggal Kegiatan</label>
+														<div class="col-md-10">
+															<input value="<?php  echo $prestasi['tgl_kegiatan'] ?>" type="date" class="form-control" name="tgl_kegiatan[]">
+														</div>
+													</div>
+													<div class="form-group row">
+														<label for="" class="col-md-2 col-form-label">Unggah Bukti Prestasi</label>
+														<input type="file" name="unggah_bukti_prestasi[]">
+													</div>
+													<div class="separator separator-solid mb-8"></div>
+												<?php
+											}
+										?>
 									</div>
 									<div class="d-flex justify-content-center">
-										<div data-repeater-create="" class="btn font-weight-bold btn-light-primary">
+										<button type="button" data-prestasi-create="" class="btn font-weight-bold btn-light-primary">
 											<i class="la la-plus"></i>
 											Tambah Prestasi
-										</div>
+										</button>
 									</div>
-								</div>
 							</div>
 						</div>
 					</div>

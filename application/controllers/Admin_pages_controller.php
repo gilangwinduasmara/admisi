@@ -10,6 +10,17 @@ class Admin_pages_controller extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('pendaftaran_model');
+		$this->load->model('jalur_pendaftaran_model');
+		$this->load->model('pengumuman_model');
+		if(current_url() != base_url('admin/login')){
+			if(empty($this->session->userdata('id'))){
+				redirect('/login');
+			}else{
+				if($this->session->userdata('role')!='ADMIN'){
+					redirect('/');
+				}
+			}
+		}
 	}
 	
 
@@ -34,19 +45,25 @@ class Admin_pages_controller extends CI_Controller {
 	}
 
 	public function data_camaru(){
-		$pendaftaran = $this->pendaftaran_model->get(true);
+		// $pendaftaran = $this->pendaftaran_model->get(true);
+		$prodi = $this->prodi_model->get();
+		$jalur_pendaftaran = $this->jalur_pendaftaran_model->get();
 		$data = array(
 			'page' => 'pages/admin/data_camaru.php',
-			'pendaftaran' => $pendaftaran
+			'prodi' => $prodi,
+			'jalur_pendaftaran' => $jalur_pendaftaran,
+			// 'pendaftaran' => $pendaftaran
 		);
 		$this->load->view('default', $data);
 	}
 
 	public function data_registrasi_ulang(){
 		$registrasi_ulang = $this->registrasi_ulang_model->get();
+		$prodi = $this->prodi_model->get();
 		$data = array(
 			'page' => 'pages/admin/data_reg_ulang.php',
-			'registrasi_ulang' => $registrasi_ulang
+			'registrasi_ulang' => $registrasi_ulang,
+			'prodi' => $prodi
 		);
 		$this->load->view('default', $data);
 	}
@@ -56,6 +73,34 @@ class Admin_pages_controller extends CI_Controller {
 		$data = array(
 			'page' => 'pages/admin/data_omb.php',
 			'daftar_omb' => $daftar_omb
+		);
+		$this->load->view('default', $data);
+	}
+
+	public function pengumuman(){
+		$daftar_omb = $this->daftar_omb_model->get();
+		$pengumuman = $this->pengumuman_model->get();
+		$data = array(
+			'page' => 'pages/admin/pengumuman.php',
+			'pengumuman' => $pengumuman
+		);
+		$this->load->view('default', $data);
+	}
+
+	public function pengumuman_edit(){
+		$daftar_omb = $this->daftar_omb_model->get();
+		$pengumuman = $this->pengumuman_model->find($this->input->get('id'));
+		$data = array(
+			'page' => 'pages/admin/pengumuman_edit.php',
+			'pengumuman' => $pengumuman
+		);
+		$this->load->view('default', $data);
+	}
+
+	public function user(){
+		$daftar_omb = $this->daftar_omb_model->get();
+		$data = array(
+			'page' => 'pages/admin/user.php',
 		);
 		$this->load->view('default', $data);
 	}

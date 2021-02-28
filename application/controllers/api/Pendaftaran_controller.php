@@ -13,6 +13,7 @@ class Pendaftaran_controller extends CI_Controller{
 		$this->load->model('hasil_penerimaan_model');
 		$this->load->model('registrasi_ulang_model');
 		$this->load->model('daftar_omb_model');
+		$this->load->model('detail_prestasi_model');
 	}
 
 	public function upload($field = 'userfile')
@@ -29,7 +30,7 @@ class Pendaftaran_controller extends CI_Controller{
 			$error = array('error' => $this->upload->display_errors());
 			$this->session->flashdata('errors', $error);
 			print_r($error);
-			return 'x';
+			return null;
 		}
 		
 		else
@@ -128,6 +129,9 @@ class Pendaftaran_controller extends CI_Controller{
 			'status_formulir' => 'AKTIF'
 		]);
 
+		$this->session->set_flashdata('success', ['Pendaftaran Berhasil, Silahkan mengunggu proses seleksi']);
+		
+
 		redirect('/pendaftaran/data_camaru');
 	}
 	
@@ -139,9 +143,44 @@ class Pendaftaran_controller extends CI_Controller{
 		$data = array(
 			'id' => $this->input->post('id'),
 			'prodi_1_id' => $data_akademik['prodi_1_id'],
-			'prodi_2_id' => $data_akademik['prodi_2_id'] ?? null,
 		);
 
+		if($this->input->post('prodi_2_id')){
+			$data['prodi_2_id'] = $this->input->post('prodi_2_id');
+		}
+		
+		$count_files = count($_FILES['unggah_bukti_prestasi']['name']);
+		print_r($_FILES);
+		print_r($_POST);
+		$uploaded_files = [];
+
+		for($i=0; $i<$count_files; $i++){
+			if(!empty($_FILES['unggah_bukti_prestasi']['name'][$i])){
+				$_FILES['upload']['name'] = $_FILES['unggah_bukti_prestasi']['name'][$i];
+				$_FILES['upload']['type'] = $_FILES['unggah_bukti_prestasi']['type'][$i];
+				$_FILES['upload']['tmp_name'] = $_FILES['unggah_bukti_prestasi']['tmp_name'][$i];
+				$_FILES['upload']['error'] = $_FILES['unggah_bukti_prestasi']['error'][$i];
+				$_FILES['upload']['size'] = $_FILES['unggah_bukti_prestasi']['size'][$i];
+			}
+			$uploaded_files[$i] = $this->upload('upload');
+		}
+		$file_upload_index = 0;
+		foreach($this->input->post("detail_prestasi_id[]") as $key=>$id){
+			$data_prestasi = [
+				'pendaftaran_id' => $this->input->post('id'),
+				'nama_kegiatan' => $this->input->post('nama_kegiatan')[$key],
+				'jenis_prestasi' => $this->input->post('jenis_prestasi')[$key],
+				'tgl_kegiatan' => $this->input->post('tgl_kegiatan')[$key],
+				'upload_bukti_prestasi' => $uploaded_files[$file_upload_index++]
+			];
+			if($id == "skip"){
+				$this->detail_prestasi_model->create($data_prestasi);
+			}else{
+				$data_prestasi['id'] = $id;
+				$this->detail_prestasi_model->save($data_prestasi);
+			}
+		}
+		echo json_encode($this->input->post());
 		$pendaftaran = $this->pendaftaran_model->save($data);
 		
 		$this->session->set_userdata( [
@@ -224,7 +263,7 @@ class Pendaftaran_controller extends CI_Controller{
 
 		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required');
 		$data_wali = array();
-		foreach(['nama', 'NIK', 'no_hp','email','pendidikan_terakhir', 'status_hubungan', 'pekerjaan','nama_instansi','alamat_instansi','telp_instansi','penghasilan_perbulan','nama_ibu_kandung','same_address','negara', 'kelurahan', 'alamat'] as $field){
+		foreach(['nama', 'NIK', 'no_hp','email','pendidikan_terakhir', 'status_hubungan', 'pekerjaan','nama_instansi','alamat_instansi','telp_instansi','penghasilan_perbulan','nama_ibu_kandung','same_address','negara', 'kelurahan', 'alamat', 'kewarganegaraan'] as $field){
 			$data_wali[$field] = $this->input->post($field);
 		}
 
@@ -234,8 +273,23 @@ class Pendaftaran_controller extends CI_Controller{
 		unset($data_wali['negara']);
 		$pendaftaran = $this->pendaftaran_model->find($this->input->post('id'));
 		if($this->input->post('same_address')){
-			$data_wali['kelurahan_id'] = $pendaftaran['kelurahan_id'];
-			$data_wali['alamat'] = $pendaftaran['alamat_asal'];
+			if($pendaftaran['kewarganegaraan' == 'WNI']){
+				$data_wali['kelurahan_id'] = $pendaftaran['kelurahan_id'];
+				$data_wali['alamat'] = $pendaftaran['alamat_asal'];
+				$data_wali['negara'] = 'Indonesia';
+			}else{
+				$data_wali['kelurahan_id'] = null;
+				$data_wali['alamat'] = null;
+				$data_wali['negara'] = $pendaftaran['negara'];
+			}
+		}else{
+			if($data_wali['kewarganegaraan' == 'WNI']){
+				$data_wali['negara'] = 'Indonesia';
+			}else{
+				$data_wali['kelurahan_id'] = null;
+				$data_wali['alamat'] = null;
+				$data_wali['negara'] = $this->input->post('negara');
+			}
 		}
 		if(isset($pendaftaran['detail_wali'])){
 			$data_wali['id'] = $pendaftaran['detail_wali']['id'];
@@ -251,7 +305,7 @@ class Pendaftaran_controller extends CI_Controller{
 			]
 		] );
 		print_r(json_encode($data_wali));
-		// redirect('/pendaftaran/formulir/data_pendidikan?id='.$this->input->post('id'));
+		redirect('/pendaftaran/formulir/data_pendidikan?id='.$this->input->post('id'));
 	}
 
 	private function update_data_diri(){
@@ -271,6 +325,7 @@ class Pendaftaran_controller extends CI_Controller{
 			$data_diri['negara'] = 'Indonesia';
 		}else{
 			$data_diri['negara'] = $this->input->post('negara');
+			unset($data_diri['kelurahan_id']);
 		}
 		$this->pendaftaran_model->save($data_diri);
 		$this->session->set_userdata( [
@@ -339,7 +394,8 @@ class Pendaftaran_controller extends CI_Controller{
 	public function omb(){
 		$pendaftaran = $this->pendaftaran_model->findByNim($this->input->post('nim'))[0];
 		print_r(json_encode($pendaftaran));
-		$this->daftar_omb_model->create([
+		$this->daftar_omb_model->save([
+			'id' => $pendaftaran['daftar_omb_id'],
 			'registrasi_ulang_id' => $pendaftaran['registrasi_ulang_id'],
 			'ukuran_jas_alma' => $this->input->post('ukuran_jas_alma')
 		]);

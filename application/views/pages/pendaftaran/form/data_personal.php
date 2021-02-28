@@ -42,7 +42,7 @@
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Nama Camaru</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" disabled value="<?php echo $pendaftaran['nama'] ?>">
+										<input type="text" class="form-control" value="<?php echo $pendaftaran['nama'] ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -281,7 +281,6 @@
 				</div>
 			</form>
 		</div>
-		
 	</div>
 	
 </div>

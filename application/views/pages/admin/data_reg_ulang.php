@@ -31,33 +31,58 @@
 ?>
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-lg-10 mb-4">
+		<div class="col-lg-12 mb-4">
 			<div class="row">
 				<div class="col-md-4">
-					<select class="form-control" id="search_status_penerimaan">
-						<option value="">Status Penerimaan</option>
-						<option value="Belum Registrasi">Belum Registrasi Ulang</option>
-						<option value="Sedang Validasi">Validasi</option>
-						<option value="Sudah Registrasi">Sudah Registrasi Ulang</option>
+					<label for="">Cari berdasarkan status penerimaan</label>
+					<select class="form-control" id="search_status_registrasi_ulang">
+						<option value="">ALL</option>
+						<option value="BELUM BAYAR">Belum Registrasi Ulang</option>
+						<option value="VALIDASI KEUANGAN">Validasi</option>
+						<option value="LUNAS">Sudah Registrasi Ulang</option>
 					</select>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
+					<label for="">Cari berdasarkan prodi</label>
+					<select class="form-control" id="search_prodi">
+						<option value="">All</option>
+						<?php 
+							foreach($prodi as $p){
+								echo "<option value='$p[id]'>$p[nama_prodi]</option>";
+							}
+						?>
+					</select>
+				</div>
+				<div class="col-md-2">
+					<label for="">Dari</label>
+					<input type="date" id="search_date_from" class="form-control search-by-date">
+				</div>
+				<div class="col-md-2">
+					<label for="">Sampai</label>
+					<input type="date" id="search_date_to" class="form-control search-by-date">
+				</div>
+				<div class="col-md-3 my-4">
 					<div class="input-icon">
 						<input type="text" class="form-control" placeholder="Cari..." id="search_query">
 						<span><i class="flaticon2-search-1 text-muted"></i></span>
 					</div>
+				</div>
+				<div class="col-md-12"></div>
+				<div class="col-md-4">
+					<div class="count-camaru"></div>
 				</div>
 
 			</div>
 			
 		</div>
 		
-		<div class="col-lg-10">
+		<div class="col-lg-12">
 			<div class="table-responsive">
-			<table class="table table-bordered " id="data_pendaftar">
+			<table class="table table-bordered " id="table_data_registrasi_ulang">
 					<thead>
 						<tr>
-							<th>No. Pendaftaran</th>
+							<th >No. Pendaftaran</th>
+							<th>Kode Skpm</th>
 							<th>Prodi</th>
 							<th>Nama Camaru</th>
 							<th>NIM</th>
@@ -67,11 +92,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php 
+						<!-- <?php 
 							foreach($registrasi_ulang as $registrasi){
 								?>
 									<tr>
-										<td><?php echo $registrasi['registrasi_ulang_id'] ?></td>
+										<td><?php echo $registrasi['id'] ?></td>
+										<td><?php echo $registrasi['kode_skpm'] ?></td>
 										<td><?php echo $registrasi['nama_prodi'] ?></td>
 										<td><?php echo $registrasi['nama_camaru'] ?></td>
 										<td><?php echo $registrasi['nim'] ?></td>
@@ -84,7 +110,7 @@
 											<?php 
 												if(!empty($registrasi['upload_bukti_bayar'])){
 													?>
-														<img style="max-height: 50px; obj-fit: contain" src="<?php echo base_url('/uploads/'.$registrasi['upload_bukti_bayar']) ?>" alt="">
+														<img class="img-preview" style="max-height: 50px; obj-fit: contain" src="<?php echo base_url('/uploads/'.$registrasi['upload_bukti_bayar']) ?>" alt="">
 													<?php
 												}
 											?>
@@ -95,7 +121,7 @@
 									</tr>
 								<?php
 							}
-						?>
+						?> -->
 					</tbody>
 				</table>
 			</div>

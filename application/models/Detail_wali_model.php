@@ -24,7 +24,6 @@ class Detail_wali_model extends CI_Model {
 	public function create($data){
 		unset($data['id']);
 		unset($data['same_address']);
-		unset($data['negara']);
 		$this->db->insert($this->table_name, $data);
 	}
 
