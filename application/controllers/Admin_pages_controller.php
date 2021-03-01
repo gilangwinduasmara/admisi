@@ -12,6 +12,7 @@ class Admin_pages_controller extends CI_Controller {
 		$this->load->model('pendaftaran_model');
 		$this->load->model('jalur_pendaftaran_model');
 		$this->load->model('pengumuman_model');
+		$this->load->model('akun_model');
 		if(current_url() != base_url('admin/login')){
 			if(empty($this->session->userdata('id'))){
 				redirect('/login');
@@ -97,10 +98,9 @@ class Admin_pages_controller extends CI_Controller {
 		$this->load->view('default', $data);
 	}
 
-	public function user(){
-		$daftar_omb = $this->daftar_omb_model->get();
+	public function data_user(){
 		$data = array(
-			'page' => 'pages/admin/user.php',
+			'page' => 'pages/admin/data_user.php',
 		);
 		$this->load->view('default', $data);
 	}

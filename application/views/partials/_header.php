@@ -91,8 +91,14 @@
 								<a class="dropdown-item" href="<?php echo base_url("admin/data_camaru") ?>">Data Camaru</a>
 								<a class="dropdown-item" href="<?php echo base_url("admin/data_registrasi_ulang") ?>">Data Registrasi Ulang</a>
 								<a class="dropdown-item" href="<?php echo base_url("admin/data_omb") ?>">Data OMB</a>
-								<a class="dropdown-item" href="<?php echo base_url("admin/pengumuman") ?>">Pengumuman</a>
-								<a class="dropdown-item" href="<?php echo base_url("admin/data_user") ?>">Data User</a>
+								<?php 
+									if($this->session->userdata('role') == 'ADMIN'){
+										?>
+											<a class="dropdown-item" href="<?php echo base_url("admin/pengumuman") ?>">Pengumuman</a>
+											<a class="dropdown-item" href="<?php echo base_url("admin/data_user") ?>">Data User</a>
+										<?php
+									}
+								?>
 							</div>
 						</div>
 					</div>

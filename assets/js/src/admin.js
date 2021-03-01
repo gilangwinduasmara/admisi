@@ -1,3 +1,9 @@
+$("#create_panitia").click(function(){
+	const modal = $('#modal__data_user')
+	modal.find('.modal-body');
+	modal.modal('show')
+})
+
 $("#table_data_pendaftar").on('click', '[data-toggle="validasi_pembayaran"]', function(){
 	const data = {
 		pembayaran_id: $(this).data('id')
@@ -199,3 +205,5 @@ function showDataDiri(data){
 		`)
 	})
 }
+
+

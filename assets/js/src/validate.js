@@ -433,6 +433,9 @@ const forms = {
 				}
 			},
 		]
+	},
+	submit: {
+		fields: []
 	}
 }
 
@@ -449,20 +452,18 @@ $('.lanjut').click(function(){
 	if($(".is-invalid").length==0){
 		switch($('.lanjut').parentsUntil("form").parent().attr('name')){
 			case 'submit':
-				$("#kt_sweetalert_demo_9").click(function(e) {
-					Swal.fire({
-						title: "Submit",
-						text: "Sebelum melakukan submit, pastikan data dan informasi CAMARU sudah sesuai dan benar.",
-						icon: "warning",
-						showCancelButton: true,
-						confirmButtonText: "Submit",
-						cancelButtonText: "Batal",
-						reverseButtons: true
-					}).then(function(result) {
-						if (result.value) {
-							form.submit();
-						}
-					});
+				Swal.fire({
+					title: "Submit",
+					text: "Sebelum melakukan submit, pastikan data dan informasi CAMARU sudah sesuai dan benar.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonText: "Submit",
+					cancelButtonText: "Batal",
+					reverseButtons: true
+				}).then(function(result) {
+					if (result.value) {
+						form.submit();
+					}
 				});
 				break
 			default:

@@ -57,6 +57,7 @@ $route['default_controller'] = 'pages/landing';
 $route['register'] = 'pages/register';
 $route['login'] = 'pages/login';
 $route['logout'] = 'pages/logout';
+$route['pengumuman'] = 'pages/pengumuman';
 $route['api/auth/(:any)'] = 'api/Auth_controller/$1';
 $route['api/pendaftaran/(:any)'] = 'api/Pendaftaran_controller/$1';
 $route['api/pembayaran/(:any)'] = 'api/Pembayaran_controller/$1';

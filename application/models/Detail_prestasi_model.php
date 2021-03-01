@@ -6,6 +6,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Detail_prestasi_model extends CI_Model {
 	private $table_name = "detail_prestasi";
 
+	public function find($id){
+		$data = $this->db->where('id', $id)->get($this->table_name)->result_array();
+		if(count($data)>0){
+			return $data[0];
+		}else{
+			return null;
+		}
+	}
+
 	public function findByPendaftaran($pendaftaran_id){
 		$detail_prestasi = $this->db->where("pendaftaran_id", $pendaftaran_id)->get($this->table_name);
 		return $detail_prestasi->result_array();

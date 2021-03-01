@@ -162,12 +162,12 @@
 													<?php
 														if(empty($data_pendidikan['upload_ijazah[]'][$key])){
 															?>
-																<input type="file" name="upload_ijazah[]" accept="application/pdf">
+																<input type="file" name="upload_ijazah_<?php echo $pendidikan ?>" accept="application/pdf">
 															<?php
 														}else{
 															?>
 																<a href="<?php echo base_url('uploads/'.$data_pendidikan['upload_ijazah[]'][$key]) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
-																<button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_ijazah[]">
+																<button type="button" data-name="upload_ijazah_<?php echo $pendidikan ?>" data-id="<?php echo $pendidikan ?>" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_ijazah[]">
 																	<i class="fas fa-pen"></i> Sunting
 																</button>
 															<?php
@@ -181,12 +181,12 @@
 													<?php
 														if(empty($data_pendidikan['upload_daftar_nilai[]'][$key])){
 															?>
-																<input type="file" name="upload_daftar_nilai[]" accept="application/pdf">
+																<input type="file" name="upload_daftar_nilai_<?php echo $pendidikan ?>" accept="application/pdf">
 															<?php
 														}else{
 															?>
 																<a href="<?php echo base_url('uploads/'.$data_pendidikan['upload_daftar_nilai[]'][$key]) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
-																<button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_daftar_nilai[]">
+																<button type="button" class="btn btn-light-primary" data-name="upload_daftar_nilai<?php echo $pendidikan ?>" data-id="<?php echo $pendidikan ?>" data-toggle="sunting" data-target="upload" data-field="upload_daftar_nilai[]">
 																	<i class="fas fa-pen"></i> Sunting
 																</button>
 															<?php

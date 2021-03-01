@@ -102,7 +102,20 @@
 													</div>
 													<div class="form-group row">
 														<label for="" class="col-md-2 col-form-label">Unggah Bukti Prestasi</label>
-														<input type="file" name="unggah_bukti_prestasi[]">
+														<?php 
+															if(empty($prestasi['upload_bukti_prestasi'])){
+																?>
+																	<input type="file" name="upload_bukti_prestasi_<?php echo $prestasi['id'] ?>">
+																<?php
+															}else{
+																?>
+																	<a href="<?php echo base_url('uploads/'.$prestasi['upload_bukti_prestasi']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
+																	<button type="button" class="btn btn-light-primary" data-name="upload_bukti_prestasi_<?php echo $prestasi['id'] ?>" data-toggle="sunting" data-target="upload" >
+																		<i class="fas fa-pen"></i> Sunting
+																	</button>
+																<?php
+															}
+														?>
 													</div>
 													<div class="separator separator-solid mb-8"></div>
 												<?php

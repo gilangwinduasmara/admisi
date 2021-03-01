@@ -95,8 +95,9 @@ class Pendaftaran_controller extends CI_Controller{
 		$data = array(
 			'id' => $this->input->post('id')
 		);
+		$pendaftaran = $this->pendaftaran_model->find($data['id']);
 		foreach(['upload_foto', 'upload_kk', 'upload_akta_lahir', 'upload_srt_pernyataan'] as $field){
-			$data[$field] = $this->upload($field);
+			$data[$field] = $this->upload($field) ?? $pendaftaran[$field] ?? null;
 		}
 		$this->pendaftaran_model->save($data);
 		redirect('/pendaftaran/formulir/submit?id='.$this->input->post('id'));
@@ -149,11 +150,11 @@ class Pendaftaran_controller extends CI_Controller{
 			$data['prodi_2_id'] = $this->input->post('prodi_2_id');
 		}
 		
-		$count_files = count($_FILES['unggah_bukti_prestasi']['name']);
+		$count_files = count($_FILES['unggah_bukti_prestasi']['name'] ?? []);
 		print_r($_FILES);
 		print_r($_POST);
 		$uploaded_files = [];
-
+		$file_upload_index = 0;
 		for($i=0; $i<$count_files; $i++){
 			if(!empty($_FILES['unggah_bukti_prestasi']['name'][$i])){
 				$_FILES['upload']['name'] = $_FILES['unggah_bukti_prestasi']['name'][$i];
@@ -161,8 +162,8 @@ class Pendaftaran_controller extends CI_Controller{
 				$_FILES['upload']['tmp_name'] = $_FILES['unggah_bukti_prestasi']['tmp_name'][$i];
 				$_FILES['upload']['error'] = $_FILES['unggah_bukti_prestasi']['error'][$i];
 				$_FILES['upload']['size'] = $_FILES['unggah_bukti_prestasi']['size'][$i];
+				$uploaded_files[$file_upload_index++] = $this->upload('upload');
 			}
-			$uploaded_files[$i] = $this->upload('upload');
 		}
 		$file_upload_index = 0;
 		foreach($this->input->post("detail_prestasi_id[]") as $key=>$id){
@@ -170,17 +171,18 @@ class Pendaftaran_controller extends CI_Controller{
 				'pendaftaran_id' => $this->input->post('id'),
 				'nama_kegiatan' => $this->input->post('nama_kegiatan')[$key],
 				'jenis_prestasi' => $this->input->post('jenis_prestasi')[$key],
-				'tgl_kegiatan' => $this->input->post('tgl_kegiatan')[$key],
-				'upload_bukti_prestasi' => $uploaded_files[$file_upload_index++]
+				'tgl_kegiatan' => $this->input->post('tgl_kegiatan')[$key]
 			];
 			if($id == "skip"){
+				$data_prestasi['upload_bukti_prestasi'] = $uploaded_files[0];
 				$this->detail_prestasi_model->create($data_prestasi);
 			}else{
+				$stored_prestasi = $this->detail_prestasi_model->find($id);
 				$data_prestasi['id'] = $id;
+				$data_prestasi['upload_bukti_prestasi'] = $this->upload('upload_bukti_prestasi_'.$id) ?? $stored_prestasi['upload_bukti_prestasi'] ?? null;
 				$this->detail_prestasi_model->save($data_prestasi);
 			}
 		}
-		echo json_encode($this->input->post());
 		$pendaftaran = $this->pendaftaran_model->save($data);
 		
 		$this->session->set_userdata( [
@@ -194,41 +196,11 @@ class Pendaftaran_controller extends CI_Controller{
 	}
 
 	private function update_data_pendidikan(){
-		// print_r($_FILES);
-		$pendaftaran = $this->pendaftaran_model->find($this->input->post('id'));
 		$data_pendidikan = array();
-		foreach(['status_pendidikan[]','npsn[]','tahun_masuk[]','tahun_lulus[]', 'jurusan[]', 'sekolah[]', 'upload_ijazah[]', 'upload_daftar_nilai[]'] as $field){
+		foreach(['status_pendidikan[]','npsn[]','tahun_masuk[]','tahun_lulus[]', 'jurusan[]', 'sekolah[]', 'upload_ijazah[]', 'upload_daftar_nilai[]', 'identifier_upload_ijazah[]', 'identifier_upload_daftar_nilai[]'] as $field){
 			$data_pendidikan[$field] = $this->input->post($field);
 		}
 		
-		$files = $_FILES;
-		$count = count($_FILES['upload_ijazah']['name'] ?? []);
-		print_r($files);
-
-		$jenjang = ["SMA", "S1", "S2", "S3"];
-
-		foreach(['upload_ijazah', 'upload_daftar_nilai'] as $upload_file){
-			for($i=0; $i<$count; $i++)
-			{
-				$_FILES[$upload_file]['name']= $files[$upload_file]['name'][$i];
-				$_FILES[$upload_file]['type']= $files[$upload_file]['type'][$i];
-				$_FILES[$upload_file]['tmp_name']= $files[$upload_file]['tmp_name'][$i];
-				$_FILES[$upload_file]['error']= $files[$upload_file]['error'][$i];
-				$_FILES[$upload_file]['size']= $files[$upload_file]['size'][$i];
-
-				$data_pendidikan[$upload_file.'[]'][$i] = $this->upload($upload_file);
-			}
-		}
-		
-
-		$this->session->set_userdata( [
-			'form' => [
-				$this->input->post('id') => [
-					'data_pendidikan' => $data_pendidikan,
-				]
-			]
-		] );
-		$pendidikan = array();
 		foreach($data_pendidikan['status_pendidikan[]'] as $key => $status_pendidikan){
 			$temp_pendidikan = $this->detail_pendidikan_model->findByPendaftaranAndStatus($this->input->post('id'), $status_pendidikan)[0];
 			$pendidikan[$status_pendidikan]['npsn'] = $data_pendidikan['npsn[]'][$key];
@@ -244,9 +216,10 @@ class Pendaftaran_controller extends CI_Controller{
 				'tahun_lulus' => $data_pendidikan['tahun_lulus[]'][$key],
 				'jurusan' => $data_pendidikan['jurusan[]'][$key],
 				'sekolah_id' => $data_pendidikan['sekolah[]'][$key],
-				'upload_daftar_nilai' => $data_pendidikan['upload_daftar_nilai[]'][$key] ?? $temp_pendidikan['upload_daftar_nilai'],
-				'upload_ijazah' => $data_pendidikan['upload_ijazah[]'][$key] ?? $temp_pendidikan['upload_ijazah']
+				'upload_daftar_nilai' => $this->upload('upload_daftar_nilai_'.$status_pendidikan) ?? $temp_pendidikan['upload_daftar_nilai'],
+				'upload_ijazah' => $this->upload('upload_ijazah_'.$status_pendidikan) ?? $temp_pendidikan['upload_ijazah']
 			);
+			
 			$stored_pendidikan = $this->detail_pendidikan_model->findByPendaftaranAndStatus($this->input->post('id'), $status_pendidikan);
 			if(count($stored_pendidikan)>0){
 				$data['id'] = $stored_pendidikan[0]['id'];

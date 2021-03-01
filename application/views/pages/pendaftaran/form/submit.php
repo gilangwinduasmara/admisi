@@ -631,7 +631,7 @@
 						<a href="<?php echo base_url('/pendaftaran/formulir/unggah_berkas?id='.$this->input->get('id')) ?>" class="btn btn-primary">Kembali</a>
 						</div>
 						<div class="">
-							<button class="btn btn-primary lanjut">Submit</button>
+							<button class="btn btn-primary lanjut" type="button">Submit</button>
 						</div>
 					</div>
 				</div>

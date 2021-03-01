@@ -27,7 +27,7 @@
 										<tr>
 											<td><?php echo $key+1 ?></td>
 											<td><?php echo $p['judul'] ?></td>
-											<td><?php echo substr($p['isi'], 0, 20) ?></td>
+											<td><?php echo strip_tags(substr($p['isi'], 0, 20)) ?></td>
 											<td>
 												<a href="<?php echo base_url('admin/pengumuman/edit?id='.$p['id']) ?>" class="btn btn-icon btn-light">
 													<i class="far fa-edit"></i>

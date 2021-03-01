@@ -13,6 +13,7 @@ class Admin_controller extends CI_Controller {
 		$this->load->model('hasil_penerimaan_model');
 		$this->load->model('registrasi_ulang_model');
 		$this->load->model('pengumuman_model');
+		$this->load->model('akun_model');
 		if(empty($this->session->userdata('id'))){
 			redirect('/login');
 		}else{
@@ -118,6 +119,19 @@ class Admin_controller extends CI_Controller {
 		}
 
 		return null;
+	}
+
+	public function create_panitia(){
+		$data = array(
+			'nama' => $this->input->post('nama'),
+			'email' => $this->input->post('email'),
+			'no_hp' => $this->input->post('no_hp'),
+			'role' => "PPMB",
+			'password ' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
+		);
+		$this->akun_model->create($data);
+		$this->session->flashdata('success', ['Data berhasil disimpan']);
+		redirect('/admin/data_user');
 	}
 
 }

@@ -3,12 +3,12 @@
 <div class="d-flex flex-column-fluid ">
 	<div class="container-fluid p-0 overflow-hidden">
 		<div class="row">
-			<div class="col-lg-8 bg-warning py-32">
+			<div class="col-lg-8 py-32" style="background-color: #F7C806;">
 				<div class="d-flex flex-column align-items-center">
-					<div class="text-dark display-1 font-weight-bolder text-center">
+					<div class="text-dark display-2 font-weight-bolder text-center">
 						SISTEM INFORMASI ADMISI
 					</div>
-					<div class="display-1 text-primary font-weight-bolder text-center">
+					<div class="display-1 text-primary font-weight-boldest text-center">
 						UKI TORAJA
 					</div>
 					<div>
@@ -22,10 +22,53 @@
 			<div class="col-lg-12">
 				<div class="p-4">
 					<div class="font-size-h1">Alur Pendaftaran</div>
-					<div class="row">
-						<div class="col">
-							<div>
-								Buat Akun
+					<div class="row align-items-end">
+						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
+							<div class="text-center">
+								<img src="http://192.168.137.23/UKIT/Admisi/assets/media/landing-icons/1.png" alt="" style="max-width: 100px">
+								<div class="text-center font-weight-bold" style="height: 100px">
+									Buat Akun
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
+							<div class="text-center">
+								<img src="http://192.168.137.23/UKIT/Admisi/assets/media/landing-icons/2.png" alt="" style="max-width: 100px">
+								<div class="text-center font-weight-bold" style="height: 100px">
+									Membayar Biaya Formulir
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
+							<div style="text-center">
+								<img src="http://192.168.137.23/UKIT/Admisi/assets/media/landing-icons/3.png" alt="" style="max-height: 100px">
+								<div class="text-center font-weight-bold" style="height: 100px">
+									Isi Form Pendaftaran
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
+							<div class="text-center">
+								<img src="http://192.168.137.23/UKIT/Admisi/assets/media/landing-icons/4.png" alt="" style="max-width: 100px">
+								<div class="text-center font-weight-bold" style="height: 100px">
+									Seleksi
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
+							<div class="text-center">
+								<img src="http://192.168.137.23/UKIT/Admisi/assets/media/landing-icons/5.png" alt="" style="max-width: 100px">
+								<div class="text-center font-weight-bold" style="height: 100px">
+									Registrasi Ulang
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
+							<div class="text-center">
+								<img src="http://192.168.137.23/UKIT/Admisi/assets/media/landing-icons/6.png" alt="" style="max-width: 100px">
+								<div class="text-center font-weight-bold" style="height: 100px">
+									Pendaftaran Orientasi Mahasiswa Baru
+								</div>
 							</div>
 						</div>
 					</div>

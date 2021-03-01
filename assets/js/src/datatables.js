@@ -45,6 +45,7 @@ let tableDataPendaftar = null
 let tableDataCamaru = null
 let tableDataRegistrasiUlang = null
 let tablePengumuman = null
+let tableDataUser = null
 
 $(document).ready(function(){
 	let data_pendaftar = $('#data_pendaftar').DataTable({
@@ -72,6 +73,47 @@ $(document).ready(function(){
 
 	
 
+	tableDataUser = $('#table_data_user').DataTable({
+		"processing": true,
+		"serverSide": true,
+		"ordering": true, // Set true agar bisa di sorting
+		"order": [[ 0, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+		"ajax":
+		{
+			"url": BASE_URL+"/service/api/user/dt_user", // URL file untuk proses select datanya
+			"type": "GET",
+			"data": function(data){
+				const date_from = $('#search_date_from').val()
+				const date_to = $('#search_date_to').val()
+				const jenis_user = $('#search_jenis_user').val()
+				
+				data.searchByJenisUser = jenis_user
+				if(date_from && date_to){
+					data.searchByFromDate = date_from
+					data.searchByToDate = date_to
+				}
+				return data
+			}
+		},
+		"deferRender": true,
+		"aLengthMenu": [[5, 10, 50],[ 5, 10, 50]], // Combobox Limit
+		"columns": [
+			{ "data": "id" }, // Tampilkan nis
+			{ "data": "nama" },  // Tampilkan nama
+			{ "data": "email" },  // Tampilkan nama
+			{ "data": "no_hp" },  // Tampilkan nama
+			{ 
+				"data": "role",
+				"render": function(data){
+					if(data == 'PPMB'){
+						return 'Panitia'
+					}
+					return 'User'
+				}
+			},  // Tampilkan nama
+			
+		],
+	});
 	tableDataPendaftar = $('#table_data_pendaftar').DataTable({
 		"processing": true,
 		"serverSide": true,
@@ -84,11 +126,13 @@ $(document).ready(function(){
 			"data": function(data){
 				const date_from = $('#search_date_from').val()
 				const date_to = $('#search_date_to').val()
-
+				
 				if(date_from && date_to){
 					data.searchByFromDate = date_from
 					data.searchByToDate = date_to
 				}
+				
+				
 				return data
 			}
 		},
@@ -328,6 +372,9 @@ $(document).ready(function(){
 	})
 	$('#search_jalur_pendaftaran').change(function(){
 		tableDataCamaru.draw()
+	})
+	$('#search_jenis_user').change(function(){
+		tableDataUser.draw()
 	})
 	$('#search_status_penerimaan').change(function(){
 		localStorage.selectedStatusPenerimaan = $(this).val()

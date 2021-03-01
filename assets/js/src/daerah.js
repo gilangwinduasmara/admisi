@@ -195,7 +195,7 @@ $('[data-toggle="sunting"]').click(function(){
 	if($(this).data('target') == 'upload'){
 		const parent = $(this).parent()
 		parent.html(`
-			<input type="file" name="${$(this).data('field')}" accept="application/pdf">
+			<input type="file" name="${$(this).data('name')}" accept="application/pdf">
 		`)
 	}
 })

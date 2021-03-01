@@ -4,6 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 class Pages extends CI_Controller{
+
+	
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('pengumuman_model');
+	}
+	
+
 	public function landing(){
 		$data = array(
 			'page' => 'pages/index.php'
@@ -37,6 +46,33 @@ class Pages extends CI_Controller{
 	{
 		$this->session->sess_destroy();
 		redirect('/');
+	}
+
+	public function pengumuman(){
+		if(empty($this->input->get('id'))){
+			$pengumuman = $this->pengumuman_model->get();
+			$data = array(
+				'page' => 'pages/pengumuman.php',
+				'pengumuman' => $pengumuman
+			);
+		}else{
+			$pengumuman = $this->pengumuman_model->find($this->input->get('id'));
+			if(empty($pengumuman)){
+				redirect('/pengumuman');
+			}
+			$data = array(
+				'page' => 'pages/pengumuman_detail.php',
+				'pengumuman' => $pengumuman,
+				"subheader" => [
+					[
+						'text' => 'Pengumuman',
+						'href' => '/pengumuman'
+					],
+					"Detail Pengumuman"
+				],
+			);
+		}
+		$this->load->view('default', $data);
 	}
 
 }
