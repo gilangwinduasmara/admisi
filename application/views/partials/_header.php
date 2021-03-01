@@ -15,6 +15,9 @@
 			if(empty($this->session->userdata('role'))){
 				?>
 					<div class="topbar">
+						<div class="topbar-item mr-4" data-offset="10px,0px">
+							<a href="<?php echo base_url('/pengumuman') ?>" class="btn font-weight-bolder btn-sm btn-link px-5">Pengumuman</a>
+						</div>
 						<div class="dropdown">
 							<button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Pendaftaran
@@ -47,7 +50,9 @@
 			}else if($this->session->userdata('role') == 'USER'){
 				?>
 					<div class="topbar">
-						
+						<div class="topbar-item mr-4" data-offset="10px,0px">
+							<a href="<?php echo base_url('/pengumuman') ?>" class="btn font-weight-bolder btn-sm btn-link px-5">Pengumuman</a>
+						</div>
 						<div class="topbar-item mr-4" data-toggle="dropdown" data-offset="10px,0px">
 							<div class="dropdown">
 								<button class="btn btn-link dropdown-toggle" type="button" id="dropdownData" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,6 +86,9 @@
 			}else{
 				?>
 				<div class="topbar">
+					<div class="topbar-item mr-4" data-offset="10px,0px">
+						<a href="<?php echo base_url('/pengumuman') ?>" class="btn font-weight-bolder btn-sm btn-link px-5">Pengumuman</a>
+					</div>
 					<div class="topbar-item mr-4" data-toggle="dropdown" data-offset="10px,0px">
 						<div class="dropdown">
 							<button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuData" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

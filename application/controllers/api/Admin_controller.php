@@ -17,7 +17,7 @@ class Admin_controller extends CI_Controller {
 		if(empty($this->session->userdata('id'))){
 			redirect('/login');
 		}else{
-			if($this->session->userdata('role')!='ADMIN'){
+			if($this->session->userdata('role')=='USER'){
 				redirect('/');
 			}
 		}

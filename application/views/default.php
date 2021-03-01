@@ -27,12 +27,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-static page-loading">
 		
 		<?php $this->load->view('layout.php')?>
-		<?php $this->load->view('partials/_extras/offcanvas/quick-notifications.php')?>
-		<?php $this->load->view('partials/_extras/offcanvas/quick-actions.php')?>
-		<?php $this->load->view('partials/_extras/offcanvas/quick-user.php')?>
-		<?php $this->load->view('partials/_extras/offcanvas/quick-panel.php')?>
-		<?php $this->load->view('partials/_extras/chat.php')?>
-		<?php $this->load->view('partials/_extras/scrolltop.php')?>
 		<script>
 			var HOST_URL = '<?php echo base_url() ?>';
 		</script>
@@ -104,6 +98,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/plugins/custom/prismjs/prismjs.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/axios/axios.js?')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/repeater/repeater.js?')?>"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+		
+		<script src="<?php echo base_url('assets/js/pages/crud/datatables/extensions/buttons.js"?'.date('l jS \of F Y h:i:s A'))?>"></script>
 		<script src="<?php echo base_url('assets/js/scripts.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/pages/widgets.js?')?>"></script>

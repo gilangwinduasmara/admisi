@@ -68,7 +68,7 @@
 					<!--end::Content-->
 
 					<?php 
-						// $this->load->view('partials/_footer.php') 
+						$this->load->view('partials/_footer.php') 
 					?>
 				</div>
 

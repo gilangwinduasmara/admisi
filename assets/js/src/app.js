@@ -104,5 +104,3 @@ $('table').on('click','.img-preview', function(){
 	$('.modal-image').attr('src', $(this).attr('src'))
 })
 
-
-

@@ -115,6 +115,13 @@ $(document).ready(function(){
 		],
 	});
 	tableDataPendaftar = $('#table_data_pendaftar').DataTable({
+		buttons: [
+			'pdfHtml5',
+			'excelHtml5',
+			'print',
+			'copyHtml5',
+			'csvHtml5',
+		],
 		"processing": true,
 		"serverSide": true,
 		"ordering": true, // Set true agar bisa di sorting
@@ -151,7 +158,6 @@ $(document).ready(function(){
 				"data": "status",
 				"orderable": false,
 				"render": function (data, type, row){
-					console.log(row)
 					let html = `<span class="label label-lg label-light-${statusPembayaran[data].color} label-inline">${statusPembayaran[data].label}</span>`
 					return html
 				}
@@ -170,7 +176,6 @@ $(document).ready(function(){
 				"data": "status",
 				"orderable": false,
 				"render": function(data, type, row){
-					console.log(row)
 					if(data == 'VALIDASI'){
 						return `<button class="btn btn-primary" data-toggle="validasi_pembayaran" data-id="${row.id}" data-nama="${row.nama}">Validasi</button>`
 					}else{
@@ -272,7 +277,6 @@ $(document).ready(function(){
 		},
 		"drawCallback": function(){
 			var api = this.api();
-			console.log(api)
 		}
 	});
 	tableDataRegistrasiUlang = $('#table_data_registrasi_ulang').DataTable({
@@ -346,7 +350,6 @@ $(document).ready(function(){
 		},
 		"drawCallback": function(){
 			var api = this.api();
-			console.log(api)
 		}
 	});
 
@@ -395,6 +398,22 @@ $(document).ready(function(){
 			tableDataCamaru.draw()
 			tableDataRegistrasiUlang.draw()
 		}
+	})
+
+	$('#export_pdf').click(function () {
+		console.log('export pdf')
+		tableDataPendaftar.button(0).trigger();
+		tableDataCamaru.button(0).trigger();
+		tableDataRegistrasiUlang.button(0).trigger();
+		tablePengumuman.button(0).trigger();
+		tableDataUser.button(0).trigger();
+	})
+	$('#export_excel').click(function () {
+		tableDataPendaftar.button(1).trigger();
+		tableDataCamaru.button(1).trigger();
+		tableDataRegistrasiUlang.button(1).trigger();
+		tablePengumuman.button(1).trigger();
+		tableDataUser.button(1).trigger();
 	})
 })
 
