@@ -14,6 +14,7 @@ class Pendaftaran extends CI_Controller
 		$this->load->model('pembayaran_model');
 		$this->load->model('hasil_penerimaan_model');
 		$this->load->model('daftar_omb_model');
+		$this->load->model('tahun_akademik_model');
 		$this->akun_id = $this->session->userdata('id');
 		if(empty($this->session->userdata('id'))){
 			redirect('/login');
@@ -43,6 +44,7 @@ class Pendaftaran extends CI_Controller
 	{
 		$jenjangs = $this->jenjang_model->get();
 		$jalur_pendaftarans = $this->jalur_pendaftaran_model->get();
+		$tahun_akademik = $this->tahun_akademik_model->findByStatus('AKTIF')[0]['tahun_akademik'] ?? null;
 		$data = array(
 			"page" => 'pages/pendaftaran/formulir.php',
 			"subheader" => [
@@ -54,7 +56,8 @@ class Pendaftaran extends CI_Controller
 				'Formulir'
 			],
 			"jenjangs" => $jenjangs,
-			"jalur_pendaftarans" => $jalur_pendaftarans
+			"jalur_pendaftarans" => $jalur_pendaftarans,
+			"tahun_akademik" => $tahun_akademik 
 		);
 		$this->load->view('default', $data);
 	}

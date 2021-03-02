@@ -278,7 +278,7 @@ const forms = {
 				}
 			},
 			{
-				name: 'upload_ijazah[]',
+				name: 'upload_ijazah',
 				label: 'Ijazah',
 				rules: {
 					required: true,
@@ -288,7 +288,7 @@ const forms = {
 				}
 			},
 			{
-				name: 'upload_daftar_nilai[]',
+				name: 'upload_daftar_nilai',
 				label: 'Daftar nilai',
 				rules: {
 					required: true,
@@ -357,7 +357,7 @@ const forms = {
 			},
 		]
 	},
-	upload_bukti_bayar: {
+	up_bukti_pembayaran: {
 		fields: [
 			{
 				name: 'pembayaran_id',
@@ -475,7 +475,7 @@ $('.lanjut').click(function(){
 $(document).ready(function(){
 	Object.keys(forms).map((key) => {
 		forms[key].fields.map((field) => {
-			$(`[name="${field.name}"]`).change(function(){
+			$(`[name^="${field.name}"]`).change(function(){
 				resetError($(this))
 			})
 		})
@@ -494,12 +494,12 @@ function validate(form){
 
 function validateField(field){
 	let isError = false;
-	$.each($(`[name="${field.name}"]`),function(){
+	$.each($(`[name^="${field.name}"]`),function(){
 		let currentField = $(this)	
 		if(!$(this).attr('disabled')){
 			if(field.rules.required){
 				resetError(currentField)
-				if(currentField.val() == ""){
+				if(!currentField.val()){
 					let errorDict = field.dict?.required!=null?field.dict.required : validationDict.required
 					let error = errorDict.replace('%label%', field.label)
 					setInvalid(currentField, error)

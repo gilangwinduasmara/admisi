@@ -11,6 +11,8 @@ class Admin_pages_controller extends CI_Controller {
 		parent::__construct();
 		$this->load->model('pendaftaran_model');
 		$this->load->model('jalur_pendaftaran_model');
+		$this->load->model('tahun_akademik_model');
+		$this->load->model('jenis_pembayaran_model');
 		$this->load->model('pengumuman_model');
 		$this->load->model('akun_model');
 		if(current_url() != base_url('admin/login')){
@@ -71,9 +73,11 @@ class Admin_pages_controller extends CI_Controller {
 
 	public function data_omb(){
 		$daftar_omb = $this->daftar_omb_model->get();
+		$prodi = $this->prodi_model->get();
 		$data = array(
 			'page' => 'pages/admin/data_omb.php',
-			'daftar_omb' => $daftar_omb
+			'daftar_omb' => $daftar_omb,
+			'prodi' => $prodi
 		);
 		$this->load->view('default', $data);
 	}
@@ -101,6 +105,19 @@ class Admin_pages_controller extends CI_Controller {
 	public function data_user(){
 		$data = array(
 			'page' => 'pages/admin/data_user.php',
+		);
+		$this->load->view('default', $data);
+	}
+
+	public function master_data(){
+		$jalur_pendaftaran = $this->load->model('jalur_pendaftaran_model');
+		$tahun_akademik = $this->load->model('tahun_akademik_model');
+		$jenis_pembayaran = $this->load->model('jenis_pembayaran_model');
+		$data = array(
+			'page' => 'pages/admin/master_data.php',
+			'jalur_pendaftaran' => $jalur_pendaftaran,
+			'tahun_akademik' => $tahun_akademik,
+			'jenis_pembayaran' => $jenis_pembayaran,
 		);
 		$this->load->view('default', $data);
 	}

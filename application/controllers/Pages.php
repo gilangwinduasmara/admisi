@@ -75,4 +75,11 @@ class Pages extends CI_Controller{
 		$this->load->view('default', $data);
 	}
 
+	public function scrap_sekolah(){
+		$data = array(
+			'page' => 'pages/scrap-sekolah.php',
+		);
+		$this->load->view('default', $data);
+	}
+
 }

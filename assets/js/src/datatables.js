@@ -42,12 +42,16 @@ const statusRegistrasiUlang = {
 	},
 }
 let tableDataPendaftar = null
+let tableDataOmb = null
 let tableDataCamaru = null
 let tableDataRegistrasiUlang = null
 let tablePengumuman = null
 let tableDataUser = null
 
 $(document).ready(function(){
+
+	
+
 	let data_pendaftar = $('#data_pendaftar').DataTable({
 		responsive: true,
 		lengthMenu: [5, 10, 25, 50],
@@ -74,6 +78,13 @@ $(document).ready(function(){
 	
 
 	tableDataUser = $('#table_data_user').DataTable({
+		buttons: [
+			'pdfHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'print',
+			'copyHtml5',
+		],
 		"processing": true,
 		"serverSide": true,
 		"ordering": true, // Set true agar bisa di sorting
@@ -114,13 +125,14 @@ $(document).ready(function(){
 			
 		],
 	});
+	
 	tableDataPendaftar = $('#table_data_pendaftar').DataTable({
 		buttons: [
 			'pdfHtml5',
 			'excelHtml5',
+			'csvHtml5',
 			'print',
 			'copyHtml5',
-			'csvHtml5',
 		],
 		"processing": true,
 		"serverSide": true,
@@ -147,6 +159,7 @@ $(document).ready(function(){
 		"aLengthMenu": [[5, 10, 50],[ 5, 10, 50]], // Combobox Limit
 		"columns": [
 			{ "data": "id" }, // Tampilkan nis
+			{ "data": "tahun_akademik" },  // Tampilkan nama
 			{ "data": "nama" },  // Tampilkan nama
 			{ 
 				"data": "created_at", 
@@ -185,7 +198,57 @@ $(document).ready(function(){
 			},
 		],
 	});
+	tableDataOmb = $('#table_data_omb').DataTable({
+		buttons: [
+			'pdfHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'print',
+			'copyHtml5',
+		],
+		"processing": true,
+		"serverSide": true,
+		"ordering": true, // Set true agar bisa di sorting
+		"order": [[ 0, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+		"ajax":
+		{
+			"url": BASE_URL+"/service/api/daftar_omb/dt_daftar_omb", // URL file untuk proses select datanya
+			"type": "GET",
+			"data": function(data){
+				const date_from = $('#search_date_from').val()
+				const date_to = $('#search_date_to').val()
+				const search_prodi = $('#search_prodi').val()
+
+				data.searchByProdi = search_prodi
+				
+				if(date_from && date_to){
+					data.searchByFromDate = date_from
+					data.searchByToDate = date_to
+				}
+				
+				
+				return data
+			}
+		},
+		"deferRender": true,
+		"aLengthMenu": [[5, 10, 50],[ 5, 10, 50]], // Combobox Limit
+		"columns": [
+			{ "data": "nim" }, 
+			{ "data": "nama_camaru" },  
+			{ "data": "nama_prodi" },  
+			{ "data": "created_at" },  
+			{ "data": "ukuran_jas_alma" },  
+			
+		],
+	});
 	tableDataCamaru = $('#table_data_camaru').DataTable({
+		buttons: [
+			'pdfHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'print',
+			'copyHtml5',
+		],
 		"processing": true,
 		"serverSide": true,
 		"ordering": true, // Set true agar bisa di sorting
@@ -216,6 +279,7 @@ $(document).ready(function(){
 		"aLengthMenu": [[5, 10, 50],[ 5, 10, 50]], // Combobox Limit
 		"columns": [
 			{ "data": "id" }, // Tampilkan nis
+			{ "data": "tahun_akademik" },  
 			{ "data": "nama" },  
 			{ 
 				"data": "created_at",
@@ -280,6 +344,13 @@ $(document).ready(function(){
 		}
 	});
 	tableDataRegistrasiUlang = $('#table_data_registrasi_ulang').DataTable({
+		buttons: [
+			'pdfHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'print',
+			'copyHtml5',
+		],
 		"processing": true,
 		"serverSide": true,
 		"ordering": true, // Set true agar bisa di sorting
@@ -308,6 +379,7 @@ $(document).ready(function(){
 		"aLengthMenu": [[5, 10, 50],[ 5, 10, 50]], // Combobox Limit
 		"columns": [
 			{ "data": "id" }, // Tampilkan nis
+			{ "data": "tahun_akademik" },  
 			{ "data": "kode_skpm" },  
 			{ "data": "nama_prodi" },  
 			{ "data": "nama_camaru" },  
@@ -360,11 +432,14 @@ $(document).ready(function(){
 		tableDataPendaftar.search($(this).val()).draw()
 		tableDataCamaru.search($(this).val()).draw()
 		tableDataRegistrasiUlang.search($(this).val()).draw()
+		tableDataOmb.search($(this).val()).draw()
 	})
 
 	$('#table_data_pendaftar_filter').hide()
+	$('#table_data_omb_filter').hide()
 	// $('#table_data_pendaftar_length').hide()
 	$('#table_data_camaru_filter').hide()
+	$('#table_data_registrasi_ulang_filter').hide()
 	// $('#table_data_camaru_length').hide()
 	$('#search_status_pembayaran').change(function(){
 		tableDataPendaftar.columns(3).search($(this).val()).draw()
@@ -372,6 +447,7 @@ $(document).ready(function(){
 	$('#search_prodi').change(function(){
 		tableDataCamaru.draw()
 		tableDataRegistrasiUlang.draw()
+		tableDataOmb.draw()
 	})
 	$('#search_jalur_pendaftaran').change(function(){
 		tableDataCamaru.draw()
@@ -380,7 +456,7 @@ $(document).ready(function(){
 		tableDataUser.draw()
 	})
 	$('#search_status_penerimaan').change(function(){
-		localStorage.selectedStatusPenerimaan = $(this).val()
+		// localStorage.selectedStatusPenerimaan = $(this).val()
 		tableDataCamaru.draw();
 		tableDataRegistrasiUlang.draw()
 	})
@@ -391,13 +467,13 @@ $(document).ready(function(){
 	$('.search-by-date').change(function(){
 		const date_from = $('#search_date_from').val()
 		const date_to = $('#search_date_to').val()
-		localStorage.dateFrom = date_from
-		localStorage.dateTo = date_to
-		if(date_from && date_to){
-			tableDataPendaftar.draw()
-			tableDataCamaru.draw()
-			tableDataRegistrasiUlang.draw()
-		}
+		// localStorage.dateFrom = date_from
+		// localStorage.dateTo = date_to
+		// if(date_from && date_to){
+		// 	tableDataPendaftar.draw()
+		// 	tableDataCamaru.draw()
+		// 	tableDataRegistrasiUlang.draw()
+		// }
 	})
 
 	$('#export_pdf').click(function () {
@@ -423,4 +499,125 @@ $('table').on("xhr.dt", function (e, settings, json, xhr) {
         data: json
     };
 	$('.count-camaru').text(settings.json.data.recordsFiltered+" Camaru")
+})
+
+let tableMasterJalurPendaftaran = null
+let tableMasterTahunAkademik = null
+let tableMasterPembayaran = null
+
+$(document).ready(function(){
+	tableMasterJalurPendaftaran = $('#table_master_jalur_pendaftaran').DataTable({
+		buttons: [
+			'pdfHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'print',
+			'copyHtml5',
+		],
+		"processing": true,
+		"serverSide": true,
+		"ordering": true, // Set true agar bisa di sorting
+		"order": [[ 0, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+		"ajax":
+		{
+			"url": BASE_URL+"/service/api/jalur_pendaftaran/dt", // URL file untuk proses select datanya
+			"type": "GET",
+		},
+		"deferRender": true,
+		"aLengthMenu": [[5, 10, 50],[ 5, 10, 50]], // Combobox Limit
+		"columns": [
+			{ "data": "id" }, // Tampilkan nis
+			{ "data": "jalur_pendaftaran" },  // Tampilkan nama
+			{ 
+				"render": function(){
+					return `<a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+					<span class="svg-icon svg-icon-md svg-icon-primary">
+						<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/Communication/Write.svg-->
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<rect x="0" y="0" width="24" height="24"></rect>
+								<path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)"></path>
+								<path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+							</g>
+						</svg>
+						<!--end::Svg Icon-->
+					</span>
+				</a>`
+				} 
+			}
+		],
+	});
+	tableMasterTahunAkademik = $('#table_master_tahun_akademik').DataTable({
+		buttons: [
+			'pdfHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'print',
+			'copyHtml5',
+		],
+		"processing": true,
+		"serverSide": true,
+		"ordering": true, // Set true agar bisa di sorting
+		"order": [[ 0, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+		"ajax":
+		{
+			"url": BASE_URL+"/service/api/tahun_akademik/dt", // URL file untuk proses select datanya
+			"type": "GET",
+		},
+		"deferRender": true,
+		"aLengthMenu": [[5, 10, 50],[ 5, 10, 50]], // Combobox Limit
+		"columns": [
+			{ "data": "id" }, // Tampilkan nis
+			{ "data": "tahun_akademik" },  // Tampilkan nama
+			{ "data": "status" },  // Tampilkan nama
+			{ 
+				"render": function(){
+					return `<a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+					<span class="svg-icon svg-icon-md svg-icon-primary">
+						<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/Communication/Write.svg-->
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+								<rect x="0" y="0" width="24" height="24"></rect>
+								<path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)"></path>
+								<path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+							</g>
+						</svg>
+						<!--end::Svg Icon-->
+					</span>
+				</a>`
+				} 
+			}
+		],
+	});
+	tableMasterPembayaran = $('#table_master_pembayaran').DataTable({
+		buttons: [
+			'pdfHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'print',
+			'copyHtml5',
+		],
+		"processing": true,
+		"serverSide": true,
+		"ordering": true, // Set true agar bisa di sorting
+		"order": [[ 0, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+		"ajax":
+		{
+			"url": BASE_URL+"/service/api/jenis_pembayaran/dt", // URL file untuk proses select datanya
+			"type": "GET",
+		},
+		"deferRender": true,
+		"aLengthMenu": [[5, 10, 50],[ 5, 10, 50]], // Combobox Limit
+		"columns": [
+			{ "data": "id" }, // Tampilkan nis
+			{ "data": "jenis_pembayaran" },  // Tampilkan nama
+			{ "data": "info_pembayaran" },  // Tampilkan nama
+			{ 
+				"render": function(){
+					return `.`
+				} 
+			}
+		],
+	});
+	
 })

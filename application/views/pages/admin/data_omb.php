@@ -17,8 +17,20 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-lg-10 mb-4">
-			<div class="row">
+			<div class="row align-items-end">
 				<div class="col-md-4">
+					<label for="">Cari berdasarkan prodi</label>
+					<select class="form-control" id="search_prodi">
+						<option value="">All</option>
+						<?php 
+							foreach($prodi as $p){
+								echo "<option value='$p[id]'>$p[nama_prodi]</option>";
+							}
+						?>
+					</select>
+				</div>
+				<div class="col-md-4">
+					<label for="">Cari berdasarkan nama</label>
 					<div class="input-icon">
 						<input type="text" class="form-control" placeholder="Cari..." id="search_query">
 						<span><i class="flaticon2-search-1 text-muted"></i></span>
@@ -29,7 +41,7 @@
 		
 		<div class="col-lg-10">
 			<div class="table-responsive">
-			<table class="table table-bordered " id="data_pendaftar">
+			<table class="table table-bordered " id="table_data_omb">
 					<thead>
 						<tr>
 							<th>NIM</th>
@@ -39,7 +51,7 @@
 							<th>Ukuran Jas Almamater</th>
 						</tr>
 					</thead>
-					<tbody>
+					<!-- <tbody>
 						<?php 
 							foreach($daftar_omb as $omb){
 								?>
@@ -53,7 +65,7 @@
 								<?php
 							}
 						?>
-					</tbody>
+					</tbody> -->
 				</table>
 			</div>
 		</div>

@@ -5,7 +5,7 @@
 				<?php
 					if(!$isValidating){
 						?>
-							<form action="<?php echo base_url('/api/pembayaran/upload_bukti') ?>" method="POST" name="upload_bukti_bayar" enctype="multipart/form-data">
+							<form action="<?php echo base_url('/api/pembayaran/upload_bukti') ?>" method="POST" name="up_bukti_pembayaran" enctype="multipart/form-data">
 								<div class="card-body">
 									<div class="form-group row">
 										<label for="" class="col-md-3 col-form-label">No. Formulir</label>
@@ -28,14 +28,6 @@
 										<label for="" class="col-md-3 col-form-label">Upload Bukti Pembayaran</label>
 										<input type="file" class="form-control" name="upload_bukti" accept="image/jpeg, image/png">
 									</div>
-									<!-- <div class="form-group">
-										<label for="" >Upload bukti pembayaran</label>
-										<div action="" class="dropzone dropzone-default dropzone-primary">
-											<div class="callback">
-											</div>
-										</div>
-										<input type="text" hidden name="upload_bukti_bayar" value="_">
-									</div> -->
 									<div class="d-flex justify-content-center">
 										<button type="button" value="Submit" class="btn btn-primary lanjut">Submit</button>
 									</div> 

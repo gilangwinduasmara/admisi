@@ -63,11 +63,23 @@
 						<span><i class="flaticon2-search-1 text-muted"></i></span>
 					</div>
 				</div>
-				<div class="col-md-12"></div>
-				<div class="col-md-4">
+				
+			</div>
+			<div class="row align-items-center">
+				<div class="col-md-6">
 					<div class="count-camaru"></div>
 				</div>
-
+				<div class="col-md-6 mt-4 mb-4 text-right">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Export
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="#" id="export_pdf">PDF</a>
+						<a class="dropdown-item" href="#" id="export_excel">Excel</a>
+					</div>
+				</div>
+				</div>
 			</div>
 			
 		</div>
@@ -78,6 +90,7 @@
 					<thead>
 						<tr>
 							<th>No Formulir</th>
+							<th>Tahun Akademik</th>
 							<th>Nama Camaru</th>
 							<th>Tanggal Submit</th>
 							<th>Jalur Pendaftaran</th>

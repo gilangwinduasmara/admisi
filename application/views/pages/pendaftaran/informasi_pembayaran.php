@@ -17,21 +17,18 @@
 										<label class="col-md-3 col-form-label">Nama Camaru</label>
 										<input type="text" class="form-control" name="nama_camaru" value="<?php echo $pendaftaran['pembayaran'][0]['nama_camaru'] ?? $pendaftaran['nama']?>" readonly>
 									</div>
-									<div class="form-group">
-										<label>Pilih metode pembayaran:</label>
-										<div class="radio-list">
+									<div class="form-group row">
+									<label class="col-md-3 col-form-label">Pilih Metode Pembayaran</label>
+										<select name="metode_pembayaran" id="" class="form-control">
+											<option value="">Pilih</option>
 											<?php
 												foreach($jenis_pembayarans as $jenis_pembayaran){
 													?>
-														<label class="radio">
-															<input type="radio" name="jenis_pembayaran" value="<?php echo $jenis_pembayaran['id'] ?>" <?php echo count($pendaftaran['pembayaran']??[])>0 && $jenis_pembayaran['id'] == $pendaftaran['pembayaran'][0]['jenis_pembayaran_id'] ? 'checked':''  ?>>
-															<span></span>
-															<?php echo $jenis_pembayaran['jenis_pembayaran'] ?>
-														</label>
+														<option value="<?php echo $jenis_pembayaran['id'] ?>"><?php echo $jenis_pembayaran['jenis_pembayaran'] ?></option>
 													<?php
 												}
 											?>
-										</div>
+										</select>
 										<div>
 											<input type="text" class="form-control" hidden name="metode_pembayaran">
 										</div>

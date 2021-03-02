@@ -57,7 +57,7 @@ class Registrasi_ulang_model extends CI_Model {
 		FROM registrasi_ulang
 		JOIN (select id as hasil_penerimaan_id, prodi_id, kode_skpm, pendaftaran_id from hasil_penerimaan) as hp
 			on registrasi_ulang.hasil_penerimaan_id = hp.hasil_penerimaan_id
-		JOIN (SELECT id as pendaftaran_id, akun_id, status_formulir, created_at FROM pendaftaran) AS pen 
+		JOIN (SELECT id as pendaftaran_id, akun_id, status_formulir, created_at, tahun_akademik FROM pendaftaran left JOIN (select id as tahun_akademik_id, tahun_akademik from tahun_akademik) as ta ON pendaftaran.tahun_akademik_id = ta.tahun_akademik_id) AS pen 
 			ON pen.pendaftaran_id = (
 				SELECT id FROM pendaftaran WHERE pendaftaran.id = hp.pendaftaran_id 
 			)
@@ -98,8 +98,8 @@ class Registrasi_ulang_model extends CI_Model {
 		FROM registrasi_ulang
 		JOIN hasil_penerimaan
 			on registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
-		JOIN (SELECT id, akun_id, status_formulir FROM pendaftaran) AS pen 
-			ON pen.id = (
+		JOIN (SELECT id as pendaftaran_id, akun_id, status_formulir, created_at, tahun_akademik FROM pendaftaran left JOIN (select id as tahun_akademik_id, tahun_akademik from tahun_akademik) as ta ON pendaftaran.tahun_akademik_id = ta.tahun_akademik_id) AS pen 
+			ON pen.pendaftaran_id = (
 				SELECT id FROM pendaftaran WHERE pendaftaran.id = hasil_penerimaan.pendaftaran_id 
 			)
 		JOIN prodi

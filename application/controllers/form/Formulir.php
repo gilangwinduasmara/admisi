@@ -40,7 +40,7 @@ class Formulir extends CI_Controller{
 			"page" => 'pages/pendaftaran/form/data_personal.php',
 			"subheader" => [
 				'Pendaftaran',
-				'Data Camaru'
+				'Isi Formulir'
 			],
 			"pendaftaran" => $this->pendaftaran,
 			'data_diri' => $data_diri,
@@ -76,7 +76,7 @@ class Formulir extends CI_Controller{
 			"page" => 'pages/pendaftaran/form/data_wali.php',
 			"subheader" => [
 				'Pendaftaran',
-				'Data Camaru'
+				'Isi Formulir'
 			],
 			"pendaftaran" => $this->pendaftaran,
 			'data_wali' => $data_wali,
@@ -115,13 +115,13 @@ class Formulir extends CI_Controller{
 			"page" => 'pages/pendaftaran/form/data_pendidikan.php',
 			"subheader" => [
 				'Pendaftaran',
-				'Data Camaru'
+				'Isi Formulir'
 				],
-				"pendaftaran" => $this->pendaftaran,
-				"data_pendidikan" => $data_pendidikan,
-				"provinsi" => $provinsi
-			);
-			$this->load->view('default', $data);
+			"pendaftaran" => $this->pendaftaran,
+			"data_pendidikan" => $data_pendidikan,
+			"provinsi" => $provinsi
+		);
+		$this->load->view('default', $data);
 		}
 		
 	public function data_akademik(){
@@ -131,7 +131,7 @@ class Formulir extends CI_Controller{
 			"page" => 'pages/pendaftaran/form/data_akademik.php',
 			"subheader" => [
 				'Pendaftaran',
-				'Data Camaru'
+				'Isi Formulir'
 			],
 			"pendaftaran" => $this->pendaftaran,
 			"prodi" => $prodi,
@@ -145,7 +145,7 @@ class Formulir extends CI_Controller{
 			"page" => 'pages/pendaftaran/form/unggah_berkas.php',
 			"subheader" => [
 				'Pendaftaran',
-				'Data Camaru'
+				'Isi Formulir'
 			],
 			"pendaftaran" => $this->pendaftaran
 		);
@@ -200,7 +200,7 @@ class Formulir extends CI_Controller{
 			"page" => 'pages/pendaftaran/form/submit.php',
 			"subheader" => [
 				'Pendaftaran',
-				'Data Camaru'
+				'Isi Formulir'
 			],
 			"pendaftaran" => $this->pendaftaran,
 			"data_diri" => $data_diri,

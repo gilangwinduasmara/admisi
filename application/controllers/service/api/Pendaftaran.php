@@ -118,10 +118,11 @@ class Pendaftaran extends RestController {
 
 			$searchByFromDate = $_GET['searchByFromDate'] ?? null;
 			$searchByToDate = $_GET['searchByToDate'] ?? null;
+			$searchByTahunAkademik = $_GET['searchByTahunAkademik'] ?? null;
 
 			$count = $this->pendaftaran_model->count_all();
-			$data = $this->pendaftaran_model->filter($search, $limit, $start, $order_field, $order_ascdesc, $status_pembayaran, $searchByFromDate, $searchByToDate);
-			$count_filter = $this->pendaftaran_model->count_filter($search, $status_pembayaran, $searchByFromDate, $searchByToDate);
+			$data = $this->pendaftaran_model->filter($search, $limit, $start, $order_field, $order_ascdesc, $status_pembayaran, $searchByFromDate, $searchByToDate, $searchByTahunAkademik);
+			$count_filter = $this->pendaftaran_model->count_filter($search, $status_pembayaran, $searchByFromDate, $searchByToDate, $searchByTahunAkademik);
 			
 			$response = array(
 				'draw'=>$_GET['draw'], // Ini dari datatablenya

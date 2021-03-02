@@ -4,7 +4,10 @@
 			<div class="card card-custom">
 				<div class="card-body">
 					<?php echo form_open('/api/pendaftaran/new_formulir') ?>
-					<!-- <form action=""> -->
+						<div class="form-group">
+							<label for="" class="col-md-3 col-form-label">Tahun Akademik</label>
+							<input type="text" class="form-control" value="<?php echo $tahun_akademik  ?>" disabled>
+						</div>
 						<div class="form-group">
 							<label class="col-md-3 col-form-label">Nama Camaru</label>
 							<input type="text" class="form-control" name="nama">

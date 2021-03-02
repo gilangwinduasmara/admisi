@@ -111,13 +111,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/src/dropzone.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/daerah.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 		<script src="<?php echo base_url('assets/js/src/penerimaan.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/plugins/custom/datatables/datatables.bundle.js?')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/datatables.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/js/src/admin.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<?php
+			if(($subheader[1] ?? 'null') != 'Isi Formulir'){
+				?>
+					<script src="<?php echo base_url('assets/plugins/custom/datatables/datatables.bundle.js?')?>"></script>
+					<script src="<?php echo base_url('assets/js/src/datatables.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+				<?php
+			}
+		?>
 		<script src="<?php echo base_url('assets/js/src/registrasi-ulang.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 		<script src="<?php echo base_url('assets/js/src/omb.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 		<script src="<?php echo base_url('assets/js/src/prestasi.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		
 		<script src="<?php echo base_url('assets/js/src/pengumuman.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/admin.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/master-data.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/scrap-sekolah.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
 	
 	</body>
 </html>

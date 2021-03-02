@@ -57,7 +57,7 @@ function withArray(name,isArray = false){
 }
 
 function daerahSelectorInit(element = $('.daerah-wrapper')){
-	console.log('selector init', element,length)
+	console.log(element.html())
 	if(element.length){
 		$.each(element, function (el, index){
 			let key = $(this).data('isarray')
@@ -85,7 +85,7 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 					)
 					break
 				}
-				if($(`[name="${withArray(daerahs[i].name, key)}"]`).length==0){
+				if($(that).find(`[name="${withArray(daerahs[i].name, key)}"]`).length==0){
 					$(that).append(
 						`<div class="form-group row" data-${daerahs[i].name}="true" style="display: none">
 							<label for="" class="col-md-2 col-form-label">${daerahs[i].label}</label>
@@ -157,7 +157,9 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 }
 
 $(document).ready(function(){
-	daerahSelectorInit();
+	$.each($('.daerah-wrapper'), function(i,e){
+		daerahSelectorInit($(this));
+	})
 })
 
 

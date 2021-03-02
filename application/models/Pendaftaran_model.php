@@ -14,6 +14,7 @@ class Pendaftaran_model extends CI_Model{
 		$this->load->model('pembayaran_model');
 		$this->load->model('registrasi_ulang_model');
 		$this->load->model('detail_prestasi_model');
+		$this->load->model('tahun_akademik_model');
 	}
 
 	public function findByNim($nim){
@@ -91,6 +92,7 @@ class Pendaftaran_model extends CI_Model{
 		left join (select id as jalur_pendaftaran_id, jalur_pendaftaran from jalur_pendaftaran) as jp on jp.jalur_pendaftaran_id = pen.jalur_pendaftaran_id
 		left join (select id as prodi_1_id, nama_prodi as prodi_1 from prodi) as prod1 on pen.prodi_1_id = prod1.prodi_1_id
 		left join (select id as prodi_2_id, nama_prodi as prodi_2 from prodi) as prod2 on pen.prodi_2_id = prod2.prodi_2_id
+		left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
 		WHERE LOWER(pen.nama) like LOWER('%$search%') AND pen.status_formulir = 'AKTIF' ");
 
 
@@ -147,6 +149,7 @@ class Pendaftaran_model extends CI_Model{
 		left join (select id as jalur_pendaftaran_id, jalur_pendaftaran from jalur_pendaftaran) as jp on jp.jalur_pendaftaran_id = pen.jalur_pendaftaran_id
 		left join (select id as prodi_1_id, nama_prodi as prodi_1 from prodi) as prod1 on pen.prodi_1_id = prod1.prodi_1_id
 		left join (select id as prodi_2_id, nama_prodi as prodi_2 from prodi) as prod2 on pen.prodi_2_id = prod2.prodi_2_id
+		left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
 		WHERE LOWER(pen.nama) like LOWER('%$search%') AND pen.status_formulir = 'AKTIF' ");
 
 		if(!empty($status_formulir)){
@@ -169,17 +172,21 @@ class Pendaftaran_model extends CI_Model{
 		return $query->num_rows();
 	}
 
-	public function filter($search, $limit, $start, $order_field, $order_ascdesc, $status_pembayaran=null, $date_from=null, $date_to=null){
+	public function filter($search, $limit, $start, $order_field, $order_ascdesc, $status_pembayaran=null, $date_from=null, $date_to=null, $tahun_akademik=null){
 		$sql = ("SELECT * 
 		FROM pendaftaran AS pen
 			LEFT JOIN pembayaran AS pem 
 			ON pem.id = (
 				SELECT id FROM pembayaran WHERE pembayaran.pendaftaran_id = pen.id ORDER BY status = 'LUNAS' DESC, status = 'VALIDASI' DESC, status = 'BELUM LUNAS' DESC LIMIT 1
 			)
+			left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
 			where status is not null and LOWER(pen.nama) like LOWER('%$search%') 
 			
 		");
 
+		if(!empty($tahun_akademik)){
+			$sql .= "AND pen.tahun_akademik_id = '$status_pembayaran'";
+		}
 
 		if(!empty($status_pembayaran)){
 			$sql .= "AND status = '$status_pembayaran'";
@@ -195,15 +202,20 @@ class Pendaftaran_model extends CI_Model{
 		return $pendaftarans;
 	}
 
-	public function count_filter($search, $status_pembayaran, $date_from=null, $date_to=null){
+	public function count_filter($search, $status_pembayaran, $date_from=null, $date_to=null, $tahun_akademik=null){
 		$sql = ("SELECT * 
 		FROM pendaftaran AS pen
 			LEFT JOIN pembayaran AS pem 
 			ON pem.id = (
 				SELECT id FROM pembayaran WHERE pembayaran.pendaftaran_id = pen.id ORDER BY status = 'LUNAS' DESC, status = 'VALIDASI' DESC, status = 'BELUM LUNAS' DESC LIMIT 1
 			)
+			left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
 			where status is not null and LOWER(pen.nama) like LOWER('%$search%') 
 		");
+
+		if(!empty($tahun_akademik)){
+			$sql .= " AND pen.tahun_akademik_id = '$status_pembayaran'";
+		}
 
 		if(!empty($date_from)){
 			$sql .= " AND created_at >='$date_from' and created_at <= '$date_to'";
@@ -296,6 +308,7 @@ class Pendaftaran_model extends CI_Model{
 	}
 
 	public function create($data){
+		$data['tahun_akademik_id'] = $this->tahun_akademik_model->findByStatus('AKTIF')[0]['id'] ?? null;
 		return $this->db->insert($this->table_name, $data);
 	}
 
