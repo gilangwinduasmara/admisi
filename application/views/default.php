@@ -18,10 +18,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link href="<?php echo base_url('assets/plugins/global/plugins.bundle.css')?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/plugins/custom/prismjs/prismjs.bundle.css')?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/css/style.bundle.css')?>" rel="stylesheet" type="text/css" />
-		<link href="<?php echo base_url('assets/css/style.css?'.date('l jS \of F Y h:i:s A'))?>" rel="stylesheet" type="text/css" />
+		<link href="<?php echo base_url('assets/css/style.css?')?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/plugins/custom/datatables/datatables.bundle.css')?>" rel="stylesheet" type="text/css" />
 
-		<link rel="shortcut icon" href="<?php echo base_url('assets/media/logos/favicon.ico')?>" />
+		<link rel="shortcut icon" href="<?php echo base_url('assets/media/logo.png')?>" />
 	</head>
 
 	<body id="kt_body" class="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-static page-loading">
@@ -101,32 +101,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 		
-		<script src="<?php echo base_url('assets/js/pages/crud/datatables/extensions/buttons.js"?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/pages/crud/datatables/extensions/buttons.js"?')?>"></script>
 		<script src="<?php echo base_url('assets/js/scripts.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/pages/widgets.js?')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/app.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/app.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/inputmask.js')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/validate.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/validate.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/dropzone.js?')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/daerah.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/js/src/penerimaan.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/daerah.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/penerimaan.js?')?>"></script>
 		<?php
 			if(($subheader[1] ?? 'null') != 'Isi Formulir'){
 				?>
 					<script src="<?php echo base_url('assets/plugins/custom/datatables/datatables.bundle.js?')?>"></script>
-					<script src="<?php echo base_url('assets/js/src/datatables.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+					<script src="<?php echo base_url('assets/js/src/datatables.js?')?>"></script>
 				<?php
 			}
 		?>
-		<script src="<?php echo base_url('assets/js/src/registrasi-ulang.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/js/src/omb.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/js/src/prestasi.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/registrasi-ulang.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/omb.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/prestasi.js?')?>"></script>
 		
-		<script src="<?php echo base_url('assets/js/src/pengumuman.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/js/src/admin.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/js/src/master-data.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
-		<script src="<?php echo base_url('assets/js/src/scrap-sekolah.js?'.date('l jS \of F Y h:i:s A'))?>"></script>
+		<script src="<?php echo base_url('assets/js/src/pengumuman.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/admin.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/master-data.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/scrap-sekolah.js?')?>"></script>
 	
 	</body>
 </html>
