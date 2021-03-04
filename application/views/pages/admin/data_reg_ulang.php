@@ -12,7 +12,7 @@
 			'label' => 'Ditolak',
 			'color' => 'danger'
 		]
-		);
+	);
 
 	$status_registrasi_ulang = array(
 		'VALIDASI KEUANGAN' => [
@@ -32,7 +32,7 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-lg-12 mb-4">
-			<div class="row">
+			<div class="row gutter-b">
 				<div class="col-md-4">
 					<label for="">Cari berdasarkan status penerimaan</label>
 					<select class="form-control" id="search_status_registrasi_ulang">
@@ -61,13 +61,30 @@
 					<label for="">Sampai</label>
 					<input type="date" id="search_date_to" class="form-control search-by-date">
 				</div>
-				<div class="col-md-3 my-4">
+				
+			</div>
+			<div class="row gutter-b">
+				<div class="col-md-4">
+					<label for="">Cari berdasarkan tahun akademik</label>
+					<select class="form-control" id="search_tahun_akademik">
+						<option value="">All</option>
+						<?php 
+							foreach($tahun_akademik as $tahun){
+								?>
+									<option value="<?php echo $tahun['id'] ?>"><?php echo $tahun["tahun_akademik"] ?></option>
+								<?php
+							}
+						?>
+					</select>
+				</div>
+			</div>
+			<div class="row gutter-b">
+				<div class="col-md-4 my-4">
 					<div class="input-icon">
 						<input type="text" class="form-control" placeholder="Cari..." id="search_query">
 						<span><i class="flaticon2-search-1 text-muted"></i></span>
 					</div>
 				</div>
-				
 			</div>
 			<div class="row align-items-center">
 				<div class="col-md-6">

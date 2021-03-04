@@ -1,16 +1,17 @@
-
-<div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
-	<div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
-		<div class="text-dark order-2 order-md-1">
-			<span class="text-muted font-weight-bold mr-2">2021©</span>
-			<a href="http://marikhsalatiga.com" target="_blank" class="text-dark-75 text-hover-primary">Universitas Kristen Indonesia Toraja</a>
+<div class="footer py-4 d-flex flex-lg-column" style="background-color: #F7C806" id="kt_footer">
+	<div class="container d-flex flex-column flex-md-row align-items-center">
+		<div class="px-24 gutter-b">
+			<img src="<?php echo base_url('/assets/media/logo ukit 1.png')?>" alt="">
 		</div>
-
-		<div class="nav nav-dark order-1 order-md-2">
-			<a href="http://marikhsalatiga.com" target="_blank" class="nav-link pr-3 pl-0">Footer</a>
-			<!-- <a href="http://keenthemes.com/metronic" target="_blank" class="nav-link px-3">Team</a>
-			<a href="http://keenthemes.com/metronic" target="_blank" class="nav-link pl-3 pr-0">Contact</a> -->
+		<div style="color: #B22D34">
+			<div>Universitas Kristen Indonesia Toraja</div>
+			<div>Jalan Nusantara No 12</div>
+			<div>Jalan Nusantara No 12</div>
+			<div>Telp : (0423)22468 / (0423)22887</div>
+			<div>Fax : (0423)22073</div>
+			<div>Kode Pos: 91811 Makale, Tana Toraja Sulawesi Selatan, Indonesia</div>
 		</div>
-
+			<!-- <span class="text-muted font-weight-bold mr-2">2021©</span>
+			<a href="http://marikhsalatiga.com" target="_blank" class="text-dark-75 text-hover-primary">Universitas Kristen Indonesia Toraja</a> -->
 	</div>
 </div>

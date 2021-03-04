@@ -12,6 +12,8 @@ class Registrasi_ulang_model extends CI_Model {
 		parent::__construct();
 		$this->load->model('prodi_model');
 		$this->load->model('daftar_omb_model');
+		$this->load->model('hasil_penerimaan_model');
+		$this->load->model('pendaftaran_model');
 	}
 
 	public function findByNim($nim){
@@ -43,21 +45,44 @@ class Registrasi_ulang_model extends CI_Model {
 	}
 	
 	public function get(){
-		$sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
-		FROM registrasi_ulang
-		JOIN hasil_penerimaan
-			on registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
-		JOIN prodi
-			on hasil_penerimaan.prodi_id = prodi.id";
-		return $this->db->query($sql)->result_array();
+		// $sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
+		// FROM registrasi_ulang
+		// JOIN hasil_penerimaan
+		// 	on registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
+		// JOIN prodi
+		// 	on hasil_penerimaan.prodi_id = prodi.id";
+		// $sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
+		// FROM registrasi_ulang
+		// JOIN (select id as hasil_penerimaan_id, prodi_id, kode_skpm, pendaftaran_id from hasil_penerimaan) as hp
+		// 	on registrasi_ulang.hasil_penerimaan_id = hp.hasil_penerimaan_id
+		// JOIN (SELECT id as pendaftaran_id, akun_id, status_formulir, created_at, tahun_akademik, pendaftaran.tahun_akademik_id as tahun_akademik_id FROM pendaftaran left JOIN (select id as tahun_akademik_id, tahun_akademik from tahun_akademik) as ta ON pendaftaran.tahun_akademik_id = ta.tahun_akademik_id) AS pen 
+		// 	ON pen.pendaftaran_id = (
+		// 		SELECT id FROM pendaftaran WHERE pendaftaran.id = hp.pendaftaran_id 
+		// 	)
+		// JOIN (select id as prodi_id, nama_prodi from prodi) as prodi
+		// 	on hp.prodi_id = prodi.prodi_id";
+		// return $this->db->query($sql)->result_array();
+
+		$registrasi_ulang = $this->db->where('hasil_penerimaan_id is not null')->get($this->table_name)->result_array();
+		foreach($registrasi_ulang as &$registrasi){
+			$registrasi['hasil_penerimaan'] = $this->hasil_penerimaan_model->find($registrasi['hasil_penerimaan_id']);
+			if(!empty($registrasi['hasil_penerimaan'])){
+				$formulir = $this->pendaftaran_model->findByHasilPenerimaan($registrasi['hasil_penerimaan']['pendaftaran_id']);
+				$registrasi['hasil_penerimaan']['pendaftaran'] = $formulir;
+			}
+			$registrasi['prodi'] = $this->prodi_model->find($registrasi['prodi_id']);
+		}
+
+		return $registrasi_ulang;
+
 	}
 
-	public function data_registrasi_ulang_filter($search, $limit, $start, $order_field, $order_ascdesc, $status=null, $prodi=null, $date_from=null, $date_to=null){
+	public function data_registrasi_ulang_filter($search, $limit, $start, $order_field, $order_ascdesc, $status=null, $prodi=null, $date_from=null, $date_to=null, $tahun_akademik=null){
 		$sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
 		FROM registrasi_ulang
 		JOIN (select id as hasil_penerimaan_id, prodi_id, kode_skpm, pendaftaran_id from hasil_penerimaan) as hp
 			on registrasi_ulang.hasil_penerimaan_id = hp.hasil_penerimaan_id
-		JOIN (SELECT id as pendaftaran_id, akun_id, status_formulir, created_at, tahun_akademik FROM pendaftaran left JOIN (select id as tahun_akademik_id, tahun_akademik from tahun_akademik) as ta ON pendaftaran.tahun_akademik_id = ta.tahun_akademik_id) AS pen 
+		JOIN (SELECT id as pendaftaran_id, akun_id, status_formulir, created_at, tahun_akademik, pendaftaran.tahun_akademik_id as tahun_akademik_id FROM pendaftaran left JOIN (select id as tahun_akademik_id, tahun_akademik from tahun_akademik) as ta ON pendaftaran.tahun_akademik_id = ta.tahun_akademik_id) AS pen 
 			ON pen.pendaftaran_id = (
 				SELECT id FROM pendaftaran WHERE pendaftaran.id = hp.pendaftaran_id 
 			)
@@ -67,6 +92,11 @@ class Registrasi_ulang_model extends CI_Model {
 		if(!empty($status)){
 			$sql .= " and registrasi_ulang.status = '$status' ";
 		}
+
+		if(!empty($tahun_akademik)){
+			$sql .= " and tahun_akademik_id = '$tahun_akademik' ";
+		}
+
 		if(!empty($prodi)){
 			$sql .= " and hp.prodi_id = '$prodi' ";
 		}
@@ -93,12 +123,12 @@ class Registrasi_ulang_model extends CI_Model {
 	}
 
 
-	public function data_registrasi_ulang_filter_count($search, $status=null, $prodi=null, $date_from=null, $date_to=null){
+	public function data_registrasi_ulang_filter_count($search, $status=null, $prodi=null, $date_from=null, $date_to=null, $tahun_akademik=null){
 		$sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
 		FROM registrasi_ulang
 		JOIN hasil_penerimaan
 			on registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
-		JOIN (SELECT id as pendaftaran_id, akun_id, status_formulir, created_at, tahun_akademik FROM pendaftaran left JOIN (select id as tahun_akademik_id, tahun_akademik from tahun_akademik) as ta ON pendaftaran.tahun_akademik_id = ta.tahun_akademik_id) AS pen 
+		JOIN (SELECT id as pendaftaran_id, akun_id, status_formulir, created_at, tahun_akademik, pendaftaran.tahun_akademik_id as tahun_akademik_id FROM pendaftaran left JOIN (select id as tahun_akademik_id, tahun_akademik from tahun_akademik) as ta ON pendaftaran.tahun_akademik_id = ta.tahun_akademik_id) AS pen 
 			ON pen.pendaftaran_id = (
 				SELECT id FROM pendaftaran WHERE pendaftaran.id = hasil_penerimaan.pendaftaran_id 
 			)
@@ -110,6 +140,9 @@ class Registrasi_ulang_model extends CI_Model {
 		}
 		if(!empty($prodi)){
 			$sql .= " and hasil_penerimaan.prodi_id = '$prodi' ";
+		}
+		if(!empty($tahun_akademik)){
+			$sql .= " and tahun_akademik_id = '$tahun_akademik' ";
 		}
 		return $this->db->query($sql)->num_rows();
 	}

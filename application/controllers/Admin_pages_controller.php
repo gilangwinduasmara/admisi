@@ -40,9 +40,11 @@ class Admin_pages_controller extends CI_Controller {
 
 	public function data_pendaftar(){
 		$pendaftaran = $this->pendaftaran_model->get();
+		$tahun_akademik = $this->tahun_akademik_model->get();
 		$data = array(
 			'page' => 'pages/admin/data_pendaftar.php',
-			'pendaftaran' => $pendaftaran
+			'pendaftaran' => $pendaftaran,
+			'tahun_akademik' => $tahun_akademik
 		);
 		$this->load->view('default', $data);
 	}
@@ -51,10 +53,12 @@ class Admin_pages_controller extends CI_Controller {
 		// $pendaftaran = $this->pendaftaran_model->get(true);
 		$prodi = $this->prodi_model->get();
 		$jalur_pendaftaran = $this->jalur_pendaftaran_model->get();
+		$tahun_akademik = $this->tahun_akademik_model->get();
 		$data = array(
 			'page' => 'pages/admin/data_camaru.php',
 			'prodi' => $prodi,
 			'jalur_pendaftaran' => $jalur_pendaftaran,
+			'tahun_akademik' => $tahun_akademik
 			// 'pendaftaran' => $pendaftaran
 		);
 		$this->load->view('default', $data);
@@ -63,10 +67,12 @@ class Admin_pages_controller extends CI_Controller {
 	public function data_registrasi_ulang(){
 		$registrasi_ulang = $this->registrasi_ulang_model->get();
 		$prodi = $this->prodi_model->get();
+		$tahun_akademik = $this->tahun_akademik_model->get();
 		$data = array(
 			'page' => 'pages/admin/data_reg_ulang.php',
 			'registrasi_ulang' => $registrasi_ulang,
-			'prodi' => $prodi
+			'prodi' => $prodi,
+			'tahun_akademik' => $tahun_akademik
 		);
 		$this->load->view('default', $data);
 	}
@@ -110,11 +116,47 @@ class Admin_pages_controller extends CI_Controller {
 	}
 
 	public function master_data(){
-		$jalur_pendaftaran = $this->load->model('jalur_pendaftaran_model');
-		$tahun_akademik = $this->load->model('tahun_akademik_model');
-		$jenis_pembayaran = $this->load->model('jenis_pembayaran_model');
+		$jalur_pendaftaran = $this->jalur_pendaftaran_model->get();
+		$tahun_akademik = $this->tahun_akademik_model->get();
+		$jenis_pembayaran = $this->jenis_pembayaran_model->get();
 		$data = array(
 			'page' => 'pages/admin/master_data.php',
+			'jalur_pendaftaran' => $jalur_pendaftaran,
+			'tahun_akademik' => $tahun_akademik,
+			'jenis_pembayaran' => $jenis_pembayaran,
+		);
+		$this->load->view('default', $data);
+	}
+	public function master_pembayaran(){
+		$jalur_pendaftaran = $this->jalur_pendaftaran_model->get();
+		$tahun_akademik = $this->tahun_akademik_model->get();
+		$jenis_pembayaran = $this->jenis_pembayaran_model->get();
+		$data = array(
+			'page' => 'pages/admin/master_pembayaran.php',
+			'jalur_pendaftaran' => $jalur_pendaftaran,
+			'tahun_akademik' => $tahun_akademik,
+			'jenis_pembayaran' => $jenis_pembayaran,
+		);
+		$this->load->view('default', $data);
+	}
+	public function master_jalur_pendaftaran(){
+		$jalur_pendaftaran = $this->jalur_pendaftaran_model->get();
+		$tahun_akademik = $this->tahun_akademik_model->get();
+		$jenis_pembayaran = $this->jenis_pembayaran_model->get();
+		$data = array(
+			'page' => 'pages/admin/master_jalur_pendaftaran.php',
+			'jalur_pendaftaran' => $jalur_pendaftaran,
+			'tahun_akademik' => $tahun_akademik,
+			'jenis_pembayaran' => $jenis_pembayaran,
+		);
+		$this->load->view('default', $data);
+	}
+	public function master_tahun_akademik(){
+		$jalur_pendaftaran = $this->jalur_pendaftaran_model->get();
+		$tahun_akademik = $this->tahun_akademik_model->get();
+		$jenis_pembayaran = $this->jenis_pembayaran_model->get();
+		$data = array(
+			'page' => 'pages/admin/master_tahun_akademik.php',
 			'jalur_pendaftaran' => $jalur_pendaftaran,
 			'tahun_akademik' => $tahun_akademik,
 			'jenis_pembayaran' => $jenis_pembayaran,

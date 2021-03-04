@@ -15,6 +15,17 @@ class Pendaftaran_model extends CI_Model{
 		$this->load->model('registrasi_ulang_model');
 		$this->load->model('detail_prestasi_model');
 		$this->load->model('tahun_akademik_model');
+		$this->load->model('jenjang_model');
+	}
+
+	public function findByHasilPenerimaan($hasil_penerimaan_id){
+		$pendaftaran = $this->db->where('id', $hasil_penerimaan_id)->get($this->table_name)->result_array();
+		if(count($pendaftaran) > 0){
+			$pendaftaran = $pendaftaran[0];
+			$pendaftaran['jenjang'] = $this->jenjang_model->findById($pendaftaran['jenjang_id']);
+			return $pendaftaran;
+		}
+		return $pendaftaran;
 	}
 
 	public function findByNim($nim){
@@ -81,7 +92,7 @@ class Pendaftaran_model extends CI_Model{
 		return $pendaftarans;
 	}
 
-	public function data_camaru_filter($search, $limit, $start, $order_field, $order_ascdesc, $status_formulir=null, $date_from=null, $date_to=null, $prodi=null, $jalur_pendaftaran=null){
+	public function data_camaru_filter($search, $limit, $start, $order_field, $order_ascdesc, $status_formulir=null, $date_from=null, $date_to=null, $prodi=null, $jalur_pendaftaran=null, $tahun_akademik=null){
 		$sql = ("SELECT * FROM pendaftaran AS pen
 		right JOIN (SELECT id AS status_penerimaan_1_id, status AS status_penerimaan_1 FROM hasil_penerimaan) AS hp1 ON hp1.status_penerimaan_1_id = (
 			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_1_id LIMIT 1
@@ -98,6 +109,10 @@ class Pendaftaran_model extends CI_Model{
 
 		if(!empty($status_formulir)){
 			$sql .= " AND (status_penerimaan_1 = '$status_formulir' OR status_penerimaan_2 = '$status_formulir')";
+		}
+
+		if(!empty($tahun_akademik)){
+			$sql .= " AND pen.tahun_akademik_id = '$tahun_akademik'";
 		}
 
 		if(!empty($date_from)){
@@ -138,7 +153,7 @@ class Pendaftaran_model extends CI_Model{
 		return $pendaftarans;
 	}
 
-	public function data_camaru_count_filter($search, $status_formulir=null, $date_from=null, $date_to=null, $prodi=null, $jalur_pendaftaran){
+	public function data_camaru_count_filter($search, $status_formulir=null, $date_from=null, $date_to=null, $prodi=null, $jalur_pendaftaran, $tahun_akademik=null){
 		$sql = ("SELECT * FROM pendaftaran AS pen
 		right JOIN (SELECT id AS status_penerimaan_1_id, status AS status_penerimaan_1 FROM hasil_penerimaan) AS hp1 ON hp1.status_penerimaan_1_id = (
 			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_1_id LIMIT 1
@@ -168,6 +183,10 @@ class Pendaftaran_model extends CI_Model{
 			$sql .= " AND pen.jalur_pendaftaran_id = '$jalur_pendaftaran'";
 		}
 
+		if(!empty($tahun_akademik)){
+			$sql .= " AND pen.tahun_akademik_id = '$tahun_akademik'";
+		}
+
 		$query = $this->db->query($sql);
 		return $query->num_rows();
 	}
@@ -185,7 +204,7 @@ class Pendaftaran_model extends CI_Model{
 		");
 
 		if(!empty($tahun_akademik)){
-			$sql .= "AND pen.tahun_akademik_id = '$status_pembayaran'";
+			$sql .= "AND pen.tahun_akademik_id = '$tahun_akademik'";
 		}
 
 		if(!empty($status_pembayaran)){
@@ -214,7 +233,7 @@ class Pendaftaran_model extends CI_Model{
 		");
 
 		if(!empty($tahun_akademik)){
-			$sql .= " AND pen.tahun_akademik_id = '$status_pembayaran'";
+			$sql .= " AND pen.tahun_akademik_id = '$tahun_akademik'";
 		}
 
 		if(!empty($date_from)){

@@ -13,6 +13,20 @@ class Hasil_penerimaan_model extends CI_Model {
 		parent::__construct();
 		$this->load->model('prodi_model');
 		$this->load->model('registrasi_ulang_model');
+		$this->load->model('pendaftaran_model');
+	}
+
+	public function findByRegistrasiUlang($registrasi_ulang_id){
+		// $hasil_penerimaan = $this->db->where('id', $registrasi_ulang_id)->get($this->table_name)->result_array();
+
+		// if(count($hasil_penerimaan) > 0){
+		// 	$hasil_penerimaan = $hasil_penerimaan[0];
+		// 	$hasil_penerimaan['formulir'] = $this->pendaftaran_model->findByHasilPenerimaan($hasil_penerimaan['id']);
+		// 	return $hasil_penerimaan;
+		// }
+
+		// return null;
+		
 	}
 
 	public function findByPendaftaran($pendaftaran_id, $status=null){

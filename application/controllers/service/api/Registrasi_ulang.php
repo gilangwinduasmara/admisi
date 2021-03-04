@@ -14,7 +14,12 @@ class Registrasi_ulang extends RestController {
 	}
 	
 	public function index_get(){
+		$data = $this->registrasi_ulang_model->get();
+		$this->response($data, 200);
+	}
 
+	public function tes_get(){
+		$this->response(json_decode(""), 200);
 	}
 	
 	public function dt_registrasi_ulang_get(){
@@ -29,10 +34,11 @@ class Registrasi_ulang extends RestController {
 		$searchByToDate = $_GET['searchByToDate'] ?? null;
 		$searchByProdi = $_GET['searchByProdi'] ?? null;
 		$searchByStatus = $_GET['searchByStatus'] ?? null;
+		$searchByTahunAkademik = $_GET['columns'][1]['search']['value'] ?? null;
 
 		$count = $this->registrasi_ulang_model->data_registrasi_ulang_count_all();
-		$data = $this->registrasi_ulang_model->data_registrasi_ulang_filter($search, $limit, $start, $order_field, $order_ascdesc, $searchByStatus, $searchByProdi, $searchByFromDate, $searchByToDate);
-		$count_filter = $this->registrasi_ulang_model->data_registrasi_ulang_filter_count($search, $searchByStatus, $searchByProdi, $searchByFromDate, $searchByToDate);
+		$data = $this->registrasi_ulang_model->data_registrasi_ulang_filter($search, $limit, $start, $order_field, $order_ascdesc, $searchByStatus, $searchByProdi, $searchByFromDate, $searchByToDate, $searchByTahunAkademik);
+		$count_filter = $this->registrasi_ulang_model->data_registrasi_ulang_filter_count($search, $searchByStatus, $searchByProdi, $searchByFromDate, $searchByToDate, $searchByTahunAkademik);
 		
 		$response = array(
 			'draw'=>$_GET['draw'], // Ini dari datatablenya

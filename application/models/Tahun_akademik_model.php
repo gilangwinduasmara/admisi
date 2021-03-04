@@ -7,7 +7,7 @@ class Tahun_akademik_model extends CI_Model {
 	private $table_name = "tahun_akademik";
 
 	public function get(){
-		$this->db->get($this->table_name)->result_array();
+		return $this->db->get($this->table_name)->result_array();
 	}
 
 	public function findByStatus($status){

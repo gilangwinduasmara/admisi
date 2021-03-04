@@ -86,9 +86,37 @@
 			}else{
 				?>
 				<div class="topbar">
+
 					<div class="topbar-item mr-4" data-offset="10px,0px">
 						<a href="<?php echo base_url('/pengumuman') ?>" class="btn font-weight-bolder btn-sm btn-link px-5">Pengumuman</a>
 					</div>
+					<?php
+						
+						if($this->session->userdata('role') == 'ADMIN'){
+							?>
+								<div class="topbar-item mr-4" data-toggle="dropdown" data-offset="10px,0px">
+									<div class="dropdown">
+										<button class="btn btn-link dropdown-toggle" type="button" id="dropdownMasterData" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Master Data
+										</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMasterData">
+											<a class="dropdown-item" href="<?php echo base_url("admin/master_pembayaran") ?>">Master Pembayaran</a>
+											<a class="dropdown-item" href="<?php echo base_url("admin/master_tahun_akademik") ?>">Master Tahun Akademik</a>
+											<a class="dropdown-item" href="<?php echo base_url("admin/master_jalur_pendaftaran") ?>">Master Jalur Pendaftaran</a>
+											<?php 
+												if($this->session->userdata('role') == 'ADMIN'){
+													?>
+														<a class="dropdown-item" href="<?php echo base_url("admin/data_user") ?>">Data User</a>
+													<?php
+												}
+											?>
+										</div>
+									</div>
+								</div>
+							<?php
+						}
+						
+					?>
 					<div class="topbar-item mr-4" data-toggle="dropdown" data-offset="10px,0px">
 						<div class="dropdown">
 							<button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuData" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

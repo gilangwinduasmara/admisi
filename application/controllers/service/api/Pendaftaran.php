@@ -35,13 +35,14 @@ class Pendaftaran extends RestController {
 			$order_field = $_GET['columns'][$order_index]['data']; // Untuk mengambil nama field yg menjadi acuan untuk sorting
 			$order_ascdesc = $_GET['order'][0]['dir']; // Untuk menentukan order by "ASC" atau "DESC"
 			$status_pembayaran = $_GET['columns'][3]['search']['value'] ?? null;
+			$searchByTahunAkademik = $_GET['columns'][1]['search']['value'] ?? null;
 	
 			$searchByFromDate = $_GET['searchByFromDate'] ?? null;
 			$searchByToDate = $_GET['searchByToDate'] ?? null;
 	
 			$count = $this->pendaftaran_model->count_all();
-			$data = $this->pendaftaran_model->filter($search, $limit, $start, $order_field, $order_ascdesc, $status_pembayaran, $searchByFromDate, $searchByToDate);
-			$count_filter = $this->pendaftaran_model->count_filter($search, $status_pembayaran, $searchByFromDate, $searchByToDate);
+			$data = $this->pendaftaran_model->filter($search, $limit, $start, $order_field, $order_ascdesc, $status_pembayaran, $searchByFromDate, $searchByToDate, $searchByTahunAkademik);
+			$count_filter = $this->pendaftaran_model->count_filter($search, $status_pembayaran, $searchByFromDate, $searchByToDate, $searchByTahunAkademik);
 			
 			$response = array(
 				'draw'=>$_GET['draw'], // Ini dari datatablenya
@@ -93,10 +94,11 @@ class Pendaftaran extends RestController {
 		$searchByToDate = $_GET['searchByToDate'] ?? null;
 		$searchByProdi = $_GET['searchByProdi'] ?? null;
 		$searchByJalurPendaftaran = $_GET['searchByJalurPendaftaran'] ?? null;
+		$searchByTahunAkademik = $_GET['columns'][1]['search']['value'] ?? null;
 
 		$count = $this->pendaftaran_model->data_camaru_count_all();
-		$data = $this->pendaftaran_model->data_camaru_filter($search, $limit, $start, $order_field, $order_ascdesc, $searchByStatusFormulir, $searchByFromDate, $searchByToDate, $searchByProdi, $searchByJalurPendaftaran);
-		$count_filter = $this->pendaftaran_model->data_camaru_count_filter($search, $searchByStatusFormulir, $searchByFromDate, $searchByToDate, $searchByProdi, $searchByJalurPendaftaran);
+		$data = $this->pendaftaran_model->data_camaru_filter($search, $limit, $start, $order_field, $order_ascdesc, $searchByStatusFormulir, $searchByFromDate, $searchByToDate, $searchByProdi, $searchByJalurPendaftaran, $searchByTahunAkademik);
+		$count_filter = $this->pendaftaran_model->data_camaru_count_filter($search, $searchByStatusFormulir, $searchByFromDate, $searchByToDate, $searchByProdi, $searchByJalurPendaftaran, $searchByTahunAkademik);
 		
 		$response = array(
 			'draw'=>$_GET['draw'], // Ini dari datatablenya
@@ -118,11 +120,11 @@ class Pendaftaran extends RestController {
 
 			$searchByFromDate = $_GET['searchByFromDate'] ?? null;
 			$searchByToDate = $_GET['searchByToDate'] ?? null;
-			$searchByTahunAkademik = $_GET['searchByTahunAkademik'] ?? null;
+			$searchByTahunAkademik = $_GET['columns'][1]['search']['value'] ?? null;
 
 			$count = $this->pendaftaran_model->count_all();
-			$data = $this->pendaftaran_model->filter($search, $limit, $start, $order_field, $order_ascdesc, $status_pembayaran, $searchByFromDate, $searchByToDate, $searchByTahunAkademik);
-			$count_filter = $this->pendaftaran_model->count_filter($search, $status_pembayaran, $searchByFromDate, $searchByToDate, $searchByTahunAkademik);
+			$data = $this->pendaftaran_model->filter($search, $limit, $start, $order_field, $order_ascdesc, $status_pembayaran, $searchByFromDate, $searchByToDate, $searchByTahunAkademik, $searchByTahunAkademik);
+			$count_filter = $this->pendaftaran_model->count_filter($search, $status_pembayaran, $searchByFromDate, $searchByToDate, $searchByTahunAkademik, $searchByTahunAkademik);
 			
 			$response = array(
 				'draw'=>$_GET['draw'], // Ini dari datatablenya
