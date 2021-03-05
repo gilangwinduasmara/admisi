@@ -103,13 +103,7 @@
 											<a class="dropdown-item" href="<?php echo base_url("admin/master_pembayaran") ?>">Master Pembayaran</a>
 											<a class="dropdown-item" href="<?php echo base_url("admin/master_tahun_akademik") ?>">Master Tahun Akademik</a>
 											<a class="dropdown-item" href="<?php echo base_url("admin/master_jalur_pendaftaran") ?>">Master Jalur Pendaftaran</a>
-											<?php 
-												if($this->session->userdata('role') == 'ADMIN'){
-													?>
-														<a class="dropdown-item" href="<?php echo base_url("admin/data_user") ?>">Data User</a>
-													<?php
-												}
-											?>
+											<a class="dropdown-item" href="<?php echo base_url("admin/master_prodi") ?>">Master Prodi</a>
 										</div>
 									</div>
 								</div>

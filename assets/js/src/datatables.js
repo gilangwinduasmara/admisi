@@ -515,6 +515,7 @@ $('table').on("xhr.dt", function (e, settings, json, xhr) {
 let tableMasterJalurPendaftaran = null
 let tableMasterTahunAkademik = null
 let tableMasterPembayaran = null
+let tableMasterProdi = null
 
 $(document).ready(function(){
 	tableMasterJalurPendaftaran = $('#table_master_jalur_pendaftaran').DataTable({
@@ -582,8 +583,8 @@ $(document).ready(function(){
 			{ "data": "tahun_akademik" },  // Tampilkan nama
 			{ "data": "status" },  // Tampilkan nama
 			{ 
-				"render": function(){
-					return `<a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+				"render": function(data, type, row){
+					return `<a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 " data-id="${row.id}" data-tahun_akademik="${row.tahun_akademik}" data-toggle="set_tahun_akademik">
 					<span class="svg-icon svg-icon-md svg-icon-primary">
 						<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/Communication/Write.svg-->
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -623,6 +624,36 @@ $(document).ready(function(){
 			{ "data": "id" }, // Tampilkan nis
 			{ "data": "jenis_pembayaran" },  // Tampilkan nama
 			{ "data": "info_pembayaran" },  // Tampilkan nama
+			// { 
+			// 	"render": function(){
+			// 		return `.`
+			// 	} 
+			// }
+		],
+	});
+	tableMasterProdi = $('#table_master_prodi').DataTable({
+		buttons: [
+			'pdfHtml5',
+			'excelHtml5',
+			'csvHtml5',
+			'print',
+			'copyHtml5',
+		],
+		"processing": true,
+		"serverSide": true,
+		"ordering": true, // Set true agar bisa di sorting
+		"order": [[ 0, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+		"ajax":
+		{
+			"url": BASE_URL+"/service/api/prodi/dt", // URL file untuk proses select datanya
+			"type": "GET",
+		},
+		"deferRender": true,
+		"aLengthMenu": [[5, 10, 50],[ 5, 10, 50]], // Combobox Limit
+		"columns": [
+			{ "data": "id" }, // Tampilkan nis
+			{ "data": "nama_fakultas" },  // Tampilkan nama
+			{ "data": "nama_prodi" },  // Tampilkan nama
 			// { 
 			// 	"render": function(){
 			// 		return `.`

@@ -42,6 +42,8 @@ class Pendaftaran extends CI_Controller
 	}
 	public function formulir()
 	{
+		// cek jadwal
+
 		$jenjangs = $this->jenjang_model->get();
 		$jalur_pendaftarans = $this->jalur_pendaftaran_model->get();
 		$tahun_akademik = $this->tahun_akademik_model->findByStatus('AKTIF')[0]['tahun_akademik'] ?? null;

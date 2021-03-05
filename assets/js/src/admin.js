@@ -4,6 +4,25 @@ $("#create_panitia").click(function(){
 	modal.modal('show')
 })
 
+$('#table_master_tahun_akademik').on('click', '[data-toggle="set_tahun_akademik"]', function(){
+	const data = {
+		pembayaran_id: $(this).data('id')
+	}
+	Swal.fire({
+        title: "Tahun Akdemik",
+        text: "Apakah Anda yakin akan menggunakan tahun akademik "+$(this).data('tahun_akademik')+"?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak",
+        reverseButtons: true
+    }).then(function(result) {
+        if (result.value) {
+            post(BASE_URL+'/api/admin/set_tahun_akademik', data)
+        }
+    });
+})
+
 $("#table_data_pendaftar").on('click', '[data-toggle="validasi_pembayaran"]', function(){
 	const data = {
 		pembayaran_id: $(this).data('id')

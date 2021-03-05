@@ -20,6 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link href="<?php echo base_url('assets/css/style.bundle.css')?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/css/style.css?')?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/plugins/custom/datatables/datatables.bundle.css')?>" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 
 		<link rel="shortcut icon" href="<?php echo base_url('assets/media/logo.png')?>" />
 	</head>
@@ -98,16 +99,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/plugins/custom/prismjs/prismjs.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/axios/axios.js?')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/repeater/repeater.js?')?>"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-		
 		<script src="<?php echo base_url('assets/js/pages/crud/datatables/extensions/buttons.js"?')?>"></script>
 		<script src="<?php echo base_url('assets/js/scripts.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/pages/widgets.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/app.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/inputmask.js')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/validate.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/validate.js?v=2')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/dropzone.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/daerah.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/penerimaan.js?')?>"></script>
@@ -124,8 +125,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/src/prestasi.js?')?>"></script>
 		
 		<script src="<?php echo base_url('assets/js/src/pengumuman.js?')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/admin.js?')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/master-data.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/admin.js?v=2')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/master-data.js?v=2.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/scrap-sekolah.js?')?>"></script>
 	
 	</body>

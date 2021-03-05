@@ -30,7 +30,7 @@
 											?>
 										</select>
 										<div>
-											<input type="text" class="form-control" hidden name="metode_pembayaran">
+											<!-- <input type="text" class="form-control" hidden name="metode_pembayaran"> -->
 										</div>
 									</div>
 									<div class="d-flex justify-content-center">

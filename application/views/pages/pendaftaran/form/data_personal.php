@@ -42,7 +42,7 @@
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Nama Camaru</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" value="<?php echo $pendaftaran['nama'] ?>">
+										<input type="text" name="nama" class="form-control" value="<?php echo $pendaftaran['nama'] ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -121,7 +121,7 @@
 									<label for="" class="col-md-2 col-form-label">Golongan Darah</label>
 									<div class="col-md-10">
 										<select name="gol_darah" id="" class="form-control">
-											<option value="">Pilih</option>
+											<option value="">-</option>
 											<option value="A" <?php echo (($data_diri['gol_darah'] ?? null) == 'A' ? 'selected': '') ?>>A</option>
 											<option value="B" <?php echo (($data_diri['gol_darah'] ?? null) == 'B' ? 'selected': '') ?>>B</option>
 											<option value="AB" <?php echo (($data_diri['gol_darah'] ?? null) == 'AB' ? 'selected': '') ?>>AB</option>
@@ -130,13 +130,13 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<label for="" class="col-md-2 col-form-label">Tinggi Badan</label>
+									<label for="" class="col-md-2 col-form-label">Tinggi Badan (cm)</label>
 									<div class="col-md-10">
 										<input type="number" class="form-control" name="tinggi_badan" value="<?php echo $data_diri['tinggi_badan'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">
-									<label for="" class="col-md-2 col-form-label">Berat Badan</label>
+									<label for="" class="col-md-2 col-form-label">Berat Badan (kg)</label>
 									<div class="col-md-10">
 										<input type="number" class="form-control" name="berat_badan" value="<?php echo $data_diri['berat_badan'] ?? null ?>">
 									</div>

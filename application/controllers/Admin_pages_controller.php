@@ -163,6 +163,30 @@ class Admin_pages_controller extends CI_Controller {
 		);
 		$this->load->view('default', $data);
 	}
+	public function master_prodi(){
+		$jalur_pendaftaran = $this->jalur_pendaftaran_model->get();
+		$tahun_akademik = $this->tahun_akademik_model->get();
+		$jenis_pembayaran = $this->jenis_pembayaran_model->get();
+		$data = array(
+			'page' => 'pages/admin/master_prodi.php',
+			'jalur_pendaftaran' => $jalur_pendaftaran,
+			'tahun_akademik' => $tahun_akademik,
+			'jenis_pembayaran' => $jenis_pembayaran,
+		);
+		$this->load->view('default', $data);
+	}
+	public function pengaturan(){
+		$jalur_pendaftaran = $this->jalur_pendaftaran_model->get();
+		$tahun_akademik = $this->tahun_akademik_model->get();
+		$jenis_pembayaran = $this->jenis_pembayaran_model->get();
+		$data = array(
+			'page' => 'pages/admin/pengaturan.php',
+			'jalur_pendaftaran' => $jalur_pendaftaran,
+			'tahun_akademik' => $tahun_akademik,
+			'jenis_pembayaran' => $jenis_pembayaran,
+		);
+		$this->load->view('default', $data);
+	}
 
 }
 

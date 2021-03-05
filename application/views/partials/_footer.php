@@ -6,7 +6,6 @@
 		<div style="color: #B22D34">
 			<div>Universitas Kristen Indonesia Toraja</div>
 			<div>Jalan Nusantara No 12</div>
-			<div>Jalan Nusantara No 12</div>
 			<div>Telp : (0423)22468 / (0423)22887</div>
 			<div>Fax : (0423)22073</div>
 			<div>Kode Pos: 91811 Makale, Tana Toraja Sulawesi Selatan, Indonesia</div>

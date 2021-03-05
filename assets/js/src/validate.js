@@ -25,6 +25,13 @@ const forms = {
 				}
 			},
 			{
+				name: 'nama',
+				label: 'Nama',
+				rules: {
+					required: true
+				}
+			},
+			{
 				name: 'no_hp',
 				label: 'No. HP',
 				rules: {
@@ -55,13 +62,6 @@ const forms = {
 			{
 				name: 'status_sipil',
 				label: 'Status Pernikahan',
-				rules: {
-					required: true
-				}
-			},
-			{
-				name: 'gol_darah',
-				label: 'Golongan Darah',
 				rules: {
 					required: true
 				}
