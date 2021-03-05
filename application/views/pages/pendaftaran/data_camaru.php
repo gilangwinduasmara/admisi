@@ -50,8 +50,19 @@
 								<td><?php echo($pendaftaran['nama'])?></td>
 								<td><?php echo(explode(" ", $pendaftaran['created_at'])[0])?></td>
 								<td class="text-center">
-									<a class="btn btn-icon btn-light btn-sm" data-toggle="toltip" title="Informasi Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-info-circle"></i></a>
-									<a class="btn btn-icon btn-light btn-sm" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-check-circle"></i></a>
+									<?php
+									if(($pendaftaran['pembayaran'][0]['status']??'BELUM DIBAYAR') == 'LUNAS'){
+										?>
+											<button class="btn btn-icon btn-light btn-sm" data-toggle="sudah_bayar" href="#"><i class="la la-info-circle"></i></button>
+											<button class="btn btn-icon btn-light btn-sm" data-toggle="sudah_bayar" href=""><i class="la la-check-circle"></i></button>
+										<?php
+									}else{
+										?>
+											<a class="btn btn-icon btn-light btn-sm" data-toggle="toltip" title="Informasi Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-info-circle"></i></a>
+											<a class="btn btn-icon btn-light btn-sm" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-check-circle"></i></a>
+										<?php
+									}
+									?>
 								</td>
 								<td>
 									<span class="label label-lg label-light-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> label-inline"><?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?></span>

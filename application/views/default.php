@@ -106,7 +106,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/scripts.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/pages/widgets.js?')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/app.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/app.js?v=2')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/inputmask.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/validate.js?v=2')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/dropzone.js?')?>"></script>
