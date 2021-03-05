@@ -17,8 +17,14 @@
 										<label class="col-md-3 col-form-label">Nama Camaru</label>
 										<input type="text" class="form-control" name="nama_camaru" value="<?php echo $pendaftaran['pembayaran'][0]['nama_camaru'] ?? $pendaftaran['nama']?>" readonly>
 									</div>
+									<div class="info-pembayaran-wrapper" style="display: none;">
+										<div class="card card-custom bg-light">
+											<div class="card-body">
+											</div>
+										</div>
+									</div>
 									<div class="form-group row">
-									<label class="col-md-3 col-form-label">Pilih Metode Pembayaran</label>
+										<label class="col-md-3 col-form-label">Pilih Metode Pembayaran</label>
 										<select name="jenis_pembayaran" id="" class="form-control">
 											<option value="">Pilih</option>
 											<?php
