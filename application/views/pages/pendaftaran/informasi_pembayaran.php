@@ -19,7 +19,7 @@
 									</div>
 									<div class="form-group row">
 									<label class="col-md-3 col-form-label">Pilih Metode Pembayaran</label>
-										<select name="metode_pembayaran" id="" class="form-control">
+										<select name="jenis_pembayaran" id="" class="form-control">
 											<option value="">Pilih</option>
 											<?php
 												foreach($jenis_pembayarans as $jenis_pembayaran){

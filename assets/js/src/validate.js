@@ -346,7 +346,7 @@ const forms = {
 	informasi_pembayaran: {
 		fields: [
 			{
-				name: 'metode_pembayaran',
+				name: 'jenis_pembayaran',
 				label: 'Metode Pembayaran',
 				rules: {
 					required: true,
