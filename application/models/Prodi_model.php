@@ -11,6 +11,14 @@ class Prodi_model extends CI_Model{
 		$this->load->model('fakultas_model');
 	}
 	
+	public function getNamaProdi(){
+		$data = [];
+		$prodi = $this->db->select("nama_prodi")->get($this->table_name)->result_array();
+		foreach($prodi as $p){
+			$data[] = $p['nama_prodi'];
+		}
+		return $data;
+	}
 
 	public function find($prodi_id){
 		$prodi = $this->db->where('id', $prodi_id)->limit(1)->get($this->table_name)->result_array()[0];

@@ -230,3 +230,72 @@ function showDataDiri(data){
 }
 
 
+$(document).ready(function(){
+	const chartEl = $('#chart')
+
+	
+
+	fetch(BASE_URL+'/api/admin/chart', {
+		headers: {
+			'Content-type': 'application/json'
+		}
+	}).then(res => {
+		res.json().then(data => {
+			console.log(data)
+			$('#formulir_keluar').text(data.formulir_keluar)
+			$('#formulir_submit').text(data.formulir_submit)
+			$('#daftar_ulang').text(data.daftar_ulang)
+			$('#daftar_omb').text(data.daftar_omb)
+			let mendaftar = data.mendaftar.map((item, index) => (item.count))
+			let registrasi_ulang = data.registrasi_ulang.map((item, index) => (item.count))
+
+			const options = {
+				series: [
+				  {
+					name: "Mendaftar",
+					data: mendaftar
+				  },
+				  {
+					name: "Registrasi Ulang",
+					data: registrasi_ulang
+				  }
+				],
+				chart: {
+				  type: "bar",
+				  height: 350
+				},
+				plotOptions: {
+				  bar: {
+					horizontal: false,
+					columnWidth: "15%",
+					endingShape: "rounded"
+				  }
+				},
+				dataLabels: {
+				  enabled: false
+				},
+				stroke: {
+				  show: true,
+				  width: 2,
+				  colors: ["transparent"]
+				},
+				xaxis: {
+					// prodi
+				  categories: data.prodi
+				},
+				yaxis: {
+				  title: {
+					text: "Formulir"
+				  }
+				},
+				fill: {
+				  opacity: 1
+				},
+			};
+			var chart = new ApexCharts(document.querySelector("#chart"), options);
+			chart.render();
+
+		})
+	})
+
+})

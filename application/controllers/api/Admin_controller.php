@@ -157,7 +157,10 @@ class Admin_controller extends CI_Controller {
 			'tahun_akademik_id' => $this->input->post('tahun_akademik_id'),
 			'nama_gelombang' => $this->input->post('nama_gelombang'),
 			'tanggal_mulai' => $this->input->post('tanggal_mulai'),
-			'tanggal_selesai' => $this->input->post('tanggal_selesai')
+			'tanggal_selesai' => $this->input->post('tanggal_selesai'),
+			"column" => [
+
+			]
 		]);
 
 		$this->session->set_flashdata('success', ['Data berhasil disimpan']);
@@ -193,6 +196,18 @@ class Admin_controller extends CI_Controller {
 		redirect('admin/master_tahun_akademik');
 	
 
+	}
+
+	public function chart(){
+		echo json_encode(array(
+			'formulir_keluar' =>$this->pendaftaran_model->count(),
+			'formulir_submit' =>$this->pendaftaran_model->count_submit(),
+			'daftar_ulang' =>$this->registrasi_ulang_model->count(),
+			'daftar_omb' =>$this->daftar_omb_model->count(),
+			'prodi' =>$this->prodi_model->getNamaProdi(),
+			'mendaftar'=>$this->hasil_penerimaan_model->countByProdi(),
+			'registrasi_ulang'=>$this->registrasi_ulang_model->countByProdi()
+		));
 	}
 
 }

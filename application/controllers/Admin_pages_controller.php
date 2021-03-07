@@ -196,6 +196,23 @@ class Admin_pages_controller extends CI_Controller {
 		$this->load->view('default', $data);
 	}
 
+	public function dashboard(){
+		// $tahun_akademik = $this->tahun_akademik_model->findByStatus("AKTIF");
+		// $formulir_keluar = $this->pendaftaran_model->count_formulir_keluar();
+		// $formulir_submit = $this->pendaftaran_model->count_formulir_submit();
+		// $daftar_ulang = $this->registrasi_ulang_model->count();
+		// $daftar_omb = $this->daftar_omb_model->count();
+		$data = array(
+			'page' => 'pages/admin/dashboard.php',
+			// 'tahun_akademik' => $tahun_akademik,
+			// 'formulir_keluar' => $formulir_keluar,
+			// 'formulir_submit' => $formulir_submit,
+			// 'daftar_ulang_count' => $daftar_ulang,
+			// 'daftar_omb' => $daftar_omb,
+		);
+		$this->load->view('default', $data);
+	}
+
 }
 
 /* End of file Admin_pages_controller.php */

@@ -16,6 +16,15 @@ class Registrasi_ulang_model extends CI_Model {
 		$this->load->model('pendaftaran_model');
 	}
 
+	public function count(){
+		return $this->db->get($this->table_name)->num_rows();
+	}
+
+	public function countByProdi(){
+		$sql = 'select prodi_id, nama_prodi, count(*) from registrasi_ulang join prodi on prodi.id = prodi_id group by prodi_id, nama_prodi order by prodi_id';
+		return $this->db->query($sql)->result_array();
+	}
+
 	public function findByNim($nim){
 		$query = $this->db->query("SELECT * 
 							FROM pendaftaran

@@ -18,6 +18,14 @@ class Pendaftaran_model extends CI_Model{
 		$this->load->model('jenjang_model');
 	}
 
+	public function count(){
+		return $this->db->get($this->table_name)->num_rows();
+	}
+
+	public function count_submit(){
+		return $this->db->where('status_formulir', 'AKTIF')->get($this->table_name)->num_rows();
+	}
+
 	public function findByHasilPenerimaan($hasil_penerimaan_id){
 		$pendaftaran = $this->db->where('id', $hasil_penerimaan_id)->get($this->table_name)->result_array();
 		if(count($pendaftaran) > 0){

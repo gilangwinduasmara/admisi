@@ -58,7 +58,9 @@ class Daftar_omb_model extends CI_Model {
 
 
 
-
+	public function count(){
+		return $this->db->get($this->table_name)->num_rows();
+	}
 
 	public function data_omb_filter($search, $limit, $start, $order_field, $order_ascdesc, $date_from=null, $date_to=null, $prodi=null){
 		$sql = ("SELECT *, registrasi_ulang.id AS registrasi_ulang_id

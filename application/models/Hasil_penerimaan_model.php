@@ -29,6 +29,11 @@ class Hasil_penerimaan_model extends CI_Model {
 		
 	}
 
+	public function countByProdi(){
+		$sql = 'select prodi_id, nama_prodi, count(*) from hasil_penerimaan join prodi on prodi.id = prodi_id group by prodi_id, nama_prodi order by prodi_id';
+		return $this->db->query($sql)->result_array();
+	}
+
 	public function findByPendaftaran($pendaftaran_id, $status=null){
 		if(!empty($status)){
 			$this->db->where('status', $status);
