@@ -14,13 +14,47 @@ class Registrasi_ulang extends RestController {
 	}
 	
 	public function index_get(){
+		$status = $this->get('status');
+		// $this->response($this->get(), 200);	
+		
 		$data = $this->registrasi_ulang_model->get();
 		$this->response($data, 200);
 	}
 
-	public function tes_get(){
-		$this->response(json_decode(""), 200);
+
+
+	public function status_get(){
+		$get = $this->get();
+		$status = urldecode((array_keys($get)[0]) ?? null);
+		if($status){
+			$enum = ["LUNAS", "VALIDASI NIM", "VALIDASI KEUANGAN", "BELUM BAYAR"];
+			if(!in_array($status, $enum)){
+				$this->response(array(
+					"error" => true,
+					"message" => 'must be any enum of LUNAS, VALIDASI NIM, VALIDASI KEUANGAN, BELUM BAYAR'
+				), 200);	
+			}
+			$data = $this->registrasi_ulang_model->get($status);
+			$this->response($data, 200);
+		}
+		$this->response($status, 200);
 	}
+
+	public function index_put(){
+		$id = last_segment($this->uri);
+		$data = array('id' => $id);
+		foreach(["hasil_penerimaan_id","nama_camaru","upload_bukti_bayar","nim","prodi_id","status"] as $field){
+			if(!empty($this->put($field))){
+				$data[$field] = $this->put($field);
+			}
+		}
+		$this->registrasi_ulang_model->save($data);
+		$this->response(array(
+			'success' => true,
+			'message' => "Data successfully updated"
+		), 200);
+	}
+
 	
 	public function dt_registrasi_ulang_get(){
 		$search = $_GET['search']['value']; // Ambil data yang di ketik user pada textbox pencarian

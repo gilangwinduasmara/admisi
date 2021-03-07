@@ -17,8 +17,11 @@
 								<input required class="form-control" type="password" value="" name="password">
 							</div>
 						</div>
-						<div class="row w-100 justify-content-center">
+						<div class="row w-100 justify-content-center gutter-b">
 							<input type="submit" value="Login" class="btn btn-primary">
+						</div>
+						<div class="form-group">
+							<span>Belum punya akun? <a href="<?php echo base_url('register') ?>">Buat Akun</a> </span>
 						</div>
 					</form>
 				</div>

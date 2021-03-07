@@ -1,3 +1,7 @@
+$('[data-toggle="create_gelombang"').click(function(){
+	$('#modal_create_gelombang').modal('show')
+})
+
 $("#create_panitia").click(function(){
 	const modal = $('#modal__data_user')
 	modal.find('.modal-body');
@@ -6,7 +10,7 @@ $("#create_panitia").click(function(){
 
 $('#table_master_tahun_akademik').on('click', '[data-toggle="set_tahun_akademik"]', function(){
 	const data = {
-		pembayaran_id: $(this).data('id')
+		tahun_akademik_id: $(this).data('id')
 	}
 	Swal.fire({
         title: "Tahun Akdemik",

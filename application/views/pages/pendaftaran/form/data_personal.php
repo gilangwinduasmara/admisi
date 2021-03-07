@@ -46,10 +46,9 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<label for="" class="col-md-2 col-form-label">NISN</label>
+									<label for="" class="col-md-2 col-form-label">No Kartu Keluarga</label>
 									<div class="col-md-10">
-										<input type="number" class="form-control" name="NISN" value="<?php echo $data_diri['NISN'] ?? null ?>">
-										<!-- <div class="invalid-feedback">Shucks, check the formatting of that and try again.</div> -->
+										<input type="number" class="form-control" name="KK" value="<?php echo $data_diri['KK'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -106,6 +105,21 @@
 									</div>
 								</div>
 								<div class="form-group row">
+									<label for="" class="col-md-2 col-form-label">Agama</label>
+									<div class="col-md-10">
+										<select type="text" class="form-control" name="agama">
+											<option value="">Pilih</option>
+											<?php 
+												foreach(['Kristen', 'Islam', 'Katolik', 'Hindu', 'Budha', 'Konghucu'] as $agama){
+													?>
+														<option <?php if ($pendaftaran['agama'] == $agama) echo 'selected'  ?> value="<?php echo $agama ?>"><?php echo $agama ?></option>
+													<?php
+												}
+											?>
+										</select>
+									</div>
+								</div>
+								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Status Pernikahan</label>
 									<div class="col-md-10">
 										<select name="status_sipil" id="" class="form-control">
@@ -139,6 +153,23 @@
 									<label for="" class="col-md-2 col-form-label">Berat Badan (kg)</label>
 									<div class="col-md-10">
 										<input type="number" class="form-control" name="berat_badan" value="<?php echo $data_diri['berat_badan'] ?? null ?>">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="" class="col-md-2 col-form-label">Suku</label>
+									<div class="col-md-10">
+										<input class="form-control" name="suku" value="<?php echo $data_diri['suku'] ?? null ?>">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="" class="col-md-2 col-form-label">Status Tinggal</label>
+									<div class="col-md-10">
+										<select name="status_tinggal" class="form-control">
+											<option value="">Pilih</option>
+											<option <?php echo ($data_diri['status_tinggal'] ?? null) == 'Kost/kontrak' ? 'selected': '' ?> value="Kost/kontrak">Kost/kontrak</option>
+											<option <?php echo ($data_diri['status_tinggal'] ?? null) == 'Tinggal bersama keluarga' ? 'selected': '' ?> value="Tinggal bersama keluarga">Tinggal bersama keluarga</option>
+											<option <?php echo ($data_diri['status_tinggal'] ?? null) == 'Rumah sendiri' ? 'selected': '' ?> value="Rumah sendiri">Rumah sendiri</option>
+										</select>
 									</div>
 								</div>
 								<div class="form-group row">
@@ -284,5 +315,3 @@
 	</div>
 	
 </div>
-
-<?php echo json_encode($daerah) ?>

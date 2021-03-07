@@ -10,6 +10,7 @@ class Pages extends CI_Controller{
 	{
 		parent::__construct();
 		$this->load->model('pengumuman_model');
+		$this->load->model('akun_model');
 	}
 	
 
@@ -32,6 +33,43 @@ class Pages extends CI_Controller{
 		$this->load->view('default', $data);
 	}
 
+	public function request_verification(){
+		$akun = $this->akun_model->find($this->session->userdata('id'));
+		if(!empty($akun->email_verified_at)){
+			redirect('login');
+		}
+		$verificationCode = $this->akun_model->generateVerificationEmail($akun->id);
+		$this->session->set_flashdata('success', ['Link aktivasi telah dikirim ke email anda '.base_url('/verify?code='.$verificationCode)]);
+		redirect('verify');
+	}
+
+	public function verify()
+	{
+		$akun_id = $this->session->userdata('id');
+		if(empty($akun_id)){
+			redirect('login');
+		}
+		$akun = $this->akun_model->find($akun_id);
+		if(!empty($akun->email_verified_at)){
+			redirect('data_camaru');
+		}
+		$code = $this->input->get('code');
+		if(empty($code)){
+			$data = array(
+				'page' => 'pages/verify.php'
+			);
+		}else{
+			$valid = $this->akun_model->verify($akun_id, $code);
+			if($valid){
+				$this->session->userdata('not_validated', FALSE);
+			}
+			$data = array(
+				'page' => 'pages/verify_with_code.php',
+				'valid' => $valid
+			);
+		}
+		$this->load->view('default', $data);
+	}
 
 	public function login()
 	{

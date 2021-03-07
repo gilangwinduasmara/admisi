@@ -349,6 +349,3 @@
 	
 </div>
 
-<?php echo json_encode($alamat_camaru) ?>
-<br>
-<?php echo json_encode($pendaftaran) ?>

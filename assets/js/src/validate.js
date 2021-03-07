@@ -53,6 +53,48 @@ const forms = {
 				}
 			},
 			{
+				name: 'rt',
+				label: 'RT',
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: 'rw',
+				label: 'RW',
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: 'agama',
+				label: 'Agama',
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: 'suku',
+				label: 'Suku',
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: 'status_tinggal',
+				label: 'Status Tinggal',
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: 'KK',
+				label: 'No Kartu Keluarga',
+				rules: {
+					required: true
+				}
+			},
+			{
 				name: 'pekerjaan',
 				label: 'Pekerjaan',
 				rules: {
@@ -436,6 +478,47 @@ const forms = {
 	},
 	submit: {
 		fields: []
+	},
+	register: {
+		fields: [
+			{
+				name: "nama",
+				label: "Nama",
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: "no_hp",
+				label: "No. Hp",
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: "email",
+				label: "Email",
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: "password",
+				label: "Password",
+				rules: {
+					required: true,
+					min: 8
+				}
+			},
+			{
+				name: "confirm_password",
+				label: "Konfirmasi",
+				rules: {
+					required: true,
+					sameAs: "password"
+				}
+			}
+		]
 	}
 }
 
@@ -443,6 +526,7 @@ const validationDict = {
 	required: '%label% harus diisi',
 	min: '%label% harus minimal %min% karakter',
 	max: '%label% tidak boleh lebih dari %max% karakter',
+	sameAs: '%label% harus sama dengan %ref%',
 }
 
 $('.lanjut').click(function(){
@@ -515,14 +599,27 @@ function validateField(field){
 				}
 			}
 		
-			if(field.rules.max){
+			if(field.rules.min){
 				resetError(currentField)
 				if(currentField.val().length < field.rules.min){
-					let error = validationDict.max.replace('%label%', field.label).replace('%min%', field.rules.min)
+					let error = validationDict.min.replace('%label%', field.label).replace('%min%', field.rules.min)
 					setInvalid(currentField, error)
 					isError = true
 				}
 			}
+
+			if(field.rules.sameAs){
+				resetError(currentField)
+				const refField = $(`[name="${field.rules.sameAs}"]`)
+				if(currentField.val() != refField.val()){
+					let error = validationDict.sameAs.replace('%label%', field.label).replace('%ref%', field.rules.sameAs)
+					setInvalid(currentField, error)
+					isError = true
+				}
+			}
+
+
+
 		}else{
 			return isError = false;
 		}

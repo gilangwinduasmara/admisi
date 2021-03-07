@@ -36,6 +36,23 @@
 											';
 										}
 									}
+									$warnings = $this->session->flashdata('warnings');
+									if(!empty($warnings)){
+										foreach($warnings as $warning){
+											echo '
+											<div class="col-lg-10">
+												<div class="alert alert-custom alert-light-warning fade show mb-5" role="alert">
+													<div class="alert-text">'.$warning.'</div>
+													<div class="alert-close">
+														<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+															<span aria-hidden="true"><i class="ki ki-close"></i></span>
+														</button>
+													</div>
+												</div>
+											</div>
+											';
+										}
+									}
 									$errors = $this->session->flashdata('errors');
 									if(!empty($errors)){
 										foreach($errors as $error){

@@ -27,7 +27,8 @@ class Auth_controller extends CI_Controller
 			if($akun && password_verify($this->input->post('password'), $akun->password)){
 				$user_data = array(
 					'id' => $akun->id,
-					'role' => $akun->role
+					'role' => $akun->role,
+					'not_validated' => empty($akun->email_verified_at)
 				);
 				$this->session->set_flashdata('success', ['Login berhasil']);
 				$this->session->set_userdata( $user_data );
@@ -52,20 +53,33 @@ class Auth_controller extends CI_Controller
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|max_length[32]');
 		$this->form_validation->set_rules('confirm_password', 'Konfirmasi Password', 'required|min_length[8]|max_length[32]');
 
+		if(!empty($this->akun_model->findByEmail($this->input->post('email')))){
+			$this->session->set_flashdata('errors', ['Email sudah digunakan']);
+			redirect('register');
+		}
+
 		if($this->form_validation->run() == FALSE){
 			$errors = $this->form_validation->error_array();
-			$this->session->set_flashdata('errors', $errors);
+			$this->session->set_flashdata('errors', 'Terjadi kesalahan');
 			$this->session->set_flashdata('input', $this->input->post());
 			redirect('register');
 		}else{
-			$this->akun_model->create([
+			$verificationCode = $this->akun_model->create([
 				'nama' => $this->input->post('nama'),
 				'no_hp' => $this->input->post('no_hp'),
 				'email' => $this->input->post('email'),
 				'password' =>  password_hash($this->input->post('password'), PASSWORD_DEFAULT) ,
 			]);
-			$this->session->set_flashdata('success', ['Registrasi berhasil, silahkan login']);
-			redirect('login');
+			$akun = $this->akun_model->findByEmail($this->input->post('email'));
+			$user_data = array(
+				'id' => $akun->id,
+				'role' => $akun->role,
+				'not_validated' => true
+			);
+			$this->session->set_userdata($user_data);
+			$this->session->set_flashdata('success', ['Link aktivasi telah dikirim ke email anda '.base_url('/verify?code='.$verificationCode)]);
+			// $this->session->set_flashdata('success', ['Registrasi berhasil, silahkan login']);
+			redirect('verify');
 		}
 		
 	}
@@ -73,5 +87,6 @@ class Auth_controller extends CI_Controller
 	public function verify_email(){
 		
 	}
+
 
 }

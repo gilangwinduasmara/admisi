@@ -3,8 +3,7 @@
 		<div class="col-md-10">
 			<div class="card card-custom">
 				<div class="card-body">
-					<!-- <form action="" method="POST"> -->
-					<?php echo form_open("/api/auth/register") ?>
+					<form action="<?php echo base_url('/api/auth/register') ?>" method="POST" name="register">
 						<div class="form-group row align-items-center">
 							<label class="col-md-3 col-form-label">Nama</label>
 							<div class="col-md-9">
@@ -36,7 +35,7 @@
 							</div>
 						</div>
 						<div class="row w-100 justify-content-center">
-							<input type="submit" value="Buat Akun" class="btn btn-primary">
+							<button type="button" class="btn btn-primary lanjut">Buat Akun</button>
 						</div>
 					</form>
 				</div>

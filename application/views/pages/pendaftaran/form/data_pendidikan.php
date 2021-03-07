@@ -1,5 +1,4 @@
 <div class="container">
-	<?php echo json_encode($data_pendidikan) ?>
 	<ul class="nav nav-tabs nav-tabs-line">
 		<li class="nav-item">
 			<a class="nav-link disabled" data-toggle="tab" href="#kt_tab_pane_1">1. Data Personal</a>
@@ -58,7 +57,7 @@
 												<input type="text" name="status_pendidikan[]" value="<?php echo $pendidikan ?>" readonly hidden>
 											</div>
 											<div class="form-group row">
-												<label for="" class="col-md-2 col-form-label">NPSN / NIM</label>
+												<label for="" class="col-md-2 col-form-label">NISN / NIM</label>
 												<div class="col-md-10">
 													<input type="number" class="form-control" name="npsn[]" value="<?php echo ($data_pendidikan['npsn[]'][$key] ?? null) ?>">
 												</div>

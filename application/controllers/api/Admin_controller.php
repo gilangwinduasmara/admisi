@@ -14,6 +14,8 @@ class Admin_controller extends CI_Controller {
 		$this->load->model('registrasi_ulang_model');
 		$this->load->model('pengumuman_model');
 		$this->load->model('akun_model');
+		$this->load->model('jadwal_model');
+		$this->load->model('gelombang_model');
 		if(empty($this->session->userdata('id'))){
 			redirect('/login');
 		}else{
@@ -132,6 +134,65 @@ class Admin_controller extends CI_Controller {
 		$this->akun_model->create($data);
 		$this->session->flashdata('success', ['Data berhasil disimpan']);
 		redirect('/admin/data_user');
+	}
+
+	public function save_jadwal(){
+		$jadwal = $this->jadwal_model->get();
+		foreach($jadwal as $j){
+			$this->jadwal_model->save(array(
+				'id' => $j['id'],
+				'jam_mulai' => $this->input->post('jam_mulai_'.$j['id']),
+				'jam_selesai' => $this->input->post('jam_selesai_'.$j['id']),
+				'status' => empty($this->input->post('status_'.$j['id'])) ? 'NONAKTIF' : 'AKTIF'
+			));
+		}
+		$this->session->set_flashdata('success', ['Data berhasil disimpan']);
+		
+		redirect('/admin/jadwal_pendaftaran');
+	}
+
+	public function create_gelombang(){
+
+		$this->gelombang_model->create([
+			'tahun_akademik_id' => $this->input->post('tahun_akademik_id'),
+			'nama_gelombang' => $this->input->post('nama_gelombang'),
+			'tanggal_mulai' => $this->input->post('tanggal_mulai'),
+			'tanggal_selesai' => $this->input->post('tanggal_selesai')
+		]);
+
+		$this->session->set_flashdata('success', ['Data berhasil disimpan']);
+		
+		redirect('admin/master_gelombang');
+	}
+
+	public function save_gelombang(){
+		$this->session->set_flashdata('success', ['Data berhasil disimpan']);
+
+		redirect('admin/master_gelombang');
+	}
+
+	public function set_tahun_akademik(){
+		$tahun_akademik_id = $this->input->post('tahun_akademik_id');
+		$tahun_akademik = $this->tahun_akademik_model->find($tahun_akademik_id);
+		if(empty($tahun_akademik)){
+			$this->session->set_flashdata('errors', ['Terjadi kesalahan']);
+			redirect('admin/master_tahun_akademik');
+		}
+
+		$tahun_akademik_list = $this->tahun_akademik_model->get();
+		foreach($tahun_akademik_list as $tahun_akademik){
+			if($tahun_akademik['id'] == $tahun_akademik_id){
+				$tahun_akademik['status'] = 'AKTIF';
+			}else{
+				$tahun_akademik['status'] = 'NONAKTIF';
+			}
+			$this->tahun_akademik_model->save($tahun_akademik);
+		}
+
+		$this->session->set_flashdata('success', ['Data berhasil disimpan']);
+		redirect('admin/master_tahun_akademik');
+	
+
 	}
 
 }

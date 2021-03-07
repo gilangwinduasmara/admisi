@@ -25,7 +25,7 @@
 					<div class="row align-items-end">
 						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
 							<div class="text-center">
-								<img src="<?php echo base_url('/UKIT/Admisi/assets/media/landing-icons/1.png') ?>" alt="" style="max-width: 100px">
+								<img src="<?php echo base_url('assets/media/landing-icons/1.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
 									Buat Akun
 								</div>
@@ -33,7 +33,7 @@
 						</div>
 						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
 							<div class="text-center">
-								<img src="<?php echo base_url('/UKIT/Admisi/assets/media/landing-icons/2.png') ?>" alt="" style="max-width: 100px">
+								<img src="<?php echo base_url('assets/media/landing-icons/2.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
 									Membayar Biaya Formulir
 								</div>
@@ -41,7 +41,7 @@
 						</div>
 						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
 							<div style="text-center">
-								<img src="<?php echo base_url('/UKIT/Admisi/assets/media/landing-icons/3.png') ?>" alt="" style="max-height: 100px">
+								<img src="<?php echo base_url('assets/media/landing-icons/3.png') ?>" alt="" style="max-height: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
 									Isi Form Pendaftaran
 								</div>
@@ -49,7 +49,7 @@
 						</div>
 						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
 							<div class="text-center">
-								<img src="<?php echo base_url('/UKIT/Admisi/assets/media/landing-icons/4.png') ?>" alt="" style="max-width: 100px">
+								<img src="<?php echo base_url('assets/media/landing-icons/4.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
 									Seleksi
 								</div>
@@ -57,7 +57,7 @@
 						</div>
 						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
 							<div class="text-center">
-								<img src="<?php echo base_url('/UKIT/Admisi/assets/media/landing-icons/5.png') ?>" alt="" style="max-width: 100px">
+								<img src="<?php echo base_url('assets/media/landing-icons/5.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
 									Registrasi Ulang
 								</div>
@@ -65,7 +65,7 @@
 						</div>
 						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
 							<div class="text-center">
-								<img src="<?php echo base_url('/UKIT/Admisi/assets/media/landing-icons/6.png') ?>" alt="" style="max-width: 100px">
+								<img src="<?php echo base_url('assets/media/landing-icons/6.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
 									Pendaftaran Orientasi Mahasiswa Baru
 								</div>

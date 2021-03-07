@@ -44,25 +44,10 @@ class Registrasi_ulang_model extends CI_Model {
 		return $query->result_array();
 	}
 	
-	public function get(){
-		// $sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
-		// FROM registrasi_ulang
-		// JOIN hasil_penerimaan
-		// 	on registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
-		// JOIN prodi
-		// 	on hasil_penerimaan.prodi_id = prodi.id";
-		// $sql = "SELECT *, registrasi_ulang.status as status_registrasi_ulang, registrasi_ulang.id as registrasi_ulang_id
-		// FROM registrasi_ulang
-		// JOIN (select id as hasil_penerimaan_id, prodi_id, kode_skpm, pendaftaran_id from hasil_penerimaan) as hp
-		// 	on registrasi_ulang.hasil_penerimaan_id = hp.hasil_penerimaan_id
-		// JOIN (SELECT id as pendaftaran_id, akun_id, status_formulir, created_at, tahun_akademik, pendaftaran.tahun_akademik_id as tahun_akademik_id FROM pendaftaran left JOIN (select id as tahun_akademik_id, tahun_akademik from tahun_akademik) as ta ON pendaftaran.tahun_akademik_id = ta.tahun_akademik_id) AS pen 
-		// 	ON pen.pendaftaran_id = (
-		// 		SELECT id FROM pendaftaran WHERE pendaftaran.id = hp.pendaftaran_id 
-		// 	)
-		// JOIN (select id as prodi_id, nama_prodi from prodi) as prodi
-		// 	on hp.prodi_id = prodi.prodi_id";
-		// return $this->db->query($sql)->result_array();
-
+	public function get($status = false){
+		if(!empty($status)){
+			$this->db->where('status', $status);
+		}
 		$registrasi_ulang = $this->db->where('hasil_penerimaan_id is not null')->get($this->table_name)->result_array();
 		foreach($registrasi_ulang as &$registrasi){
 			$registrasi['hasil_penerimaan'] = $this->hasil_penerimaan_model->find($registrasi['hasil_penerimaan_id']);
@@ -72,9 +57,7 @@ class Registrasi_ulang_model extends CI_Model {
 			}
 			$registrasi['prodi'] = $this->prodi_model->find($registrasi['prodi_id']);
 		}
-
 		return $registrasi_ulang;
-
 	}
 
 	public function data_registrasi_ulang_filter($search, $limit, $start, $order_field, $order_ascdesc, $status=null, $prodi=null, $date_from=null, $date_to=null, $tahun_akademik=null){

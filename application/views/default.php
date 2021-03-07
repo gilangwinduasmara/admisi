@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<head>
 		<base href="">
 		<meta charset="utf-8" />
-		<title>Admisi | Univerisas Kristen Indonesia Toraja	</title>
+		<title>Admisi | UKIT	</title>
 		<meta name="description" content="Updates and statistics" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -108,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/pages/widgets.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/app.js?v=2')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/inputmask.js')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/validate.js?v=2')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/validate.js?v=3'.now())?>"></script>
 		<script src="<?php echo base_url('assets/js/src/dropzone.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/daerah.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/penerimaan.js?')?>"></script>
@@ -125,7 +125,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/src/prestasi.js?')?>"></script>
 		
 		<script src="<?php echo base_url('assets/js/src/pengumuman.js?')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/admin.js?v=2')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/admin.js?v=2'.now())?>"></script>
 		<script src="<?php echo base_url('assets/js/src/master-data.js?v=2.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/scrap-sekolah.js?')?>"></script>
 	

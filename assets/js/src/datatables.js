@@ -466,13 +466,11 @@ $(document).ready(function(){
 	})
 
 	$('#search_tahun_akademik').change(function(){
+		console.log($(this).val())
 		tableDataPendaftar.columns(1).search($(this).val()).draw()
 		tableDataCamaru.columns(1).search($(this).val()).draw()
 		tableDataRegistrasiUlang.columns(1).search($(this).val()).draw()
-		// tableDataCamaru.draw()
-		// tableDataPendaftar.draw()
-		// tableDataRegistrasiUlang.draw()
-		// tableDataRegistrasiUlang.draw()
+		data_pendaftar.columns(1).search($(this).val()).draw()
 	})
 	
 	$('.search-by-date').change(function(){
@@ -661,5 +659,6 @@ $(document).ready(function(){
 			// }
 		],
 	});
+	
 	
 })

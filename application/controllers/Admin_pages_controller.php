@@ -15,6 +15,8 @@ class Admin_pages_controller extends CI_Controller {
 		$this->load->model('jenis_pembayaran_model');
 		$this->load->model('pengumuman_model');
 		$this->load->model('akun_model');
+		$this->load->model('gelombang_model');
+		$this->load->model('jadwal_model');
 		if(current_url() != base_url('admin/login')){
 			if(empty($this->session->userdata('id'))){
 				redirect('/login');
@@ -175,15 +177,21 @@ class Admin_pages_controller extends CI_Controller {
 		);
 		$this->load->view('default', $data);
 	}
-	public function pengaturan(){
-		$jalur_pendaftaran = $this->jalur_pendaftaran_model->get();
-		$tahun_akademik = $this->tahun_akademik_model->get();
-		$jenis_pembayaran = $this->jenis_pembayaran_model->get();
+	public function jadwal_pendaftaran(){
+		$jadwal = $this->jadwal_model->get();
 		$data = array(
-			'page' => 'pages/admin/pengaturan.php',
-			'jalur_pendaftaran' => $jalur_pendaftaran,
+			'page' => 'pages/admin/jadwal_pendaftaran.php',
+			'jadwal' => $jadwal
+		);
+		$this->load->view('default', $data);
+	}
+	public function master_gelombang(){
+		$tahun_akademik = $this->tahun_akademik_model->get();
+		$gelombang = $this->gelombang_model->get();
+		$data = array(
+			'page' => 'pages/admin/master_gelombang.php',
 			'tahun_akademik' => $tahun_akademik,
-			'jenis_pembayaran' => $jenis_pembayaran,
+			'gelombang' => $gelombang,
 		);
 		$this->load->view('default', $data);
 	}

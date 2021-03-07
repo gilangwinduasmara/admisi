@@ -56,6 +56,8 @@ $route['admin/(:any)'] = 'Admin_pages_controller/$1';
 $route['default_controller'] = 'pages/landing';
 $route['register'] = 'pages/register';
 $route['login'] = 'pages/login';
+$route['verify'] = 'pages/verify';
+$route['request_verification'] = 'pages/request_verification';
 $route['logout'] = 'pages/logout';
 $route['scrap-sekolah'] = 'pages/scrap_sekolah';
 $route['pengumuman'] = 'pages/pengumuman';
@@ -71,3 +73,9 @@ $route['assets/(:any)'] = 'assets/$1';
 
 
 $route['api/daerah'] = 'api/Daerah_controller';
+
+
+
+
+
+// $route['service/api/registrasi_ulang']['put'] = 'service/api/registrasi_ulang/registrasi_ulang_put';

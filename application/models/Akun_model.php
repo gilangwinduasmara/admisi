@@ -9,9 +9,42 @@ class Akun_model extends CI_Model{
 	public $updated_at;
 	
 	public function create($data){
-		return $this->db->insert($this->table_name, $data);
+		$this->db->insert($this->table_name, $data);
+		$akun_id = $this->db->insert_id();
+		$verificationCode = $this->generateVerificationEmail($akun_id);
+		$this->sendVerificationEmail($verificationCode);
+		return $verificationCode;
 	}
 
+	public function generateVerificationEmail($akun_id){
+		$verificationCode = md5(now());
+		$this->db->insert('email_verification', array(
+			'akun_id' =>$akun_id,
+			'code' => $verificationCode
+		));
+		return $verificationCode;
+	}
+
+	public function verify($akun_id, $code){
+		$verification = $this->db->where('akun_id', $akun_id)->where('code', $code)->get('email_verification')->result_array();
+		if(count($verification) == 0){
+			return FALSE;
+		}
+		$this->db->update($this->table_name, array('email_verified_at' => 'now()'), array('id' => $akun_id));
+		return TRUE;
+	}
+
+	public function sendVerificationEmail(){
+		
+	}
+
+	public function find($id){
+		$result = $this->db->where('id', $id)->limit(1)->get($this->table_name);
+		if($result->num_rows() > 0){
+			return $result->row();
+		}
+		return FALSE;
+	}
 	public function findByEmail($email){
 		$result = $this->db->where('email', $email)->limit(1)->get($this->table_name);
 		if($result->num_rows() > 0){

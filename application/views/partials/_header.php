@@ -104,6 +104,8 @@
 											<a class="dropdown-item" href="<?php echo base_url("admin/master_tahun_akademik") ?>">Master Tahun Akademik</a>
 											<a class="dropdown-item" href="<?php echo base_url("admin/master_jalur_pendaftaran") ?>">Master Jalur Pendaftaran</a>
 											<a class="dropdown-item" href="<?php echo base_url("admin/master_prodi") ?>">Master Prodi</a>
+											<a class="dropdown-item" href="<?php echo base_url("admin/master_gelombang") ?>">Master Gelombang</a>
+											<a class="dropdown-item" href="<?php echo base_url("admin/jadwal_pendaftaran") ?>">Jadwal Pendaftaran</a>
 										</div>
 									</div>
 								</div>

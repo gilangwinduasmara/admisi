@@ -15,7 +15,11 @@ class Pendaftaran extends CI_Controller
 		$this->load->model('hasil_penerimaan_model');
 		$this->load->model('daftar_omb_model');
 		$this->load->model('tahun_akademik_model');
+		$this->load->model('jadwal_model');
 		$this->akun_id = $this->session->userdata('id');
+		if($this->session->userdata('not_validated')){
+			redirect('/verify');
+		}
 		if(empty($this->session->userdata('id'))){
 			redirect('/login');
 		}else{
@@ -30,20 +34,27 @@ class Pendaftaran extends CI_Controller
 	{
 		$akun_id = $this->session->userdata('id');
 		$pendaftarans = $this->pendaftaran_model->findByAkunId($akun_id);
+		$tahun_akademik = $this->tahun_akademik_model->get();
 		$data = array(
 			"page" => 'pages/pendaftaran/data_camaru.php',
 			"subheader" => [
 				'Pendaftaran',
 				'Data Camaru'
 			],
-			"pendaftarans" => $pendaftarans
+			"pendaftarans" => $pendaftarans,
+			"tahun_akademik" => $tahun_akademik
 		);
 		$this->load->view('default', $data);
 	}
 	public function formulir()
 	{
 		// cek jadwal
-
+		$jadwal = $this->jadwal_model->find(idate('w', now()));
+		$current_hour = (int)date('H');
+		if($current_hour < $jadwal['jam_mulai'] || $current_hour >= $jadwal['jam_selesai']){
+			$this->session->set_flashdata('warnings', ['Pendaftaran belum dibuka']);
+			redirect('pendaftaran/data_camaru');
+		}
 		$jenjangs = $this->jenjang_model->get();
 		$jalur_pendaftarans = $this->jalur_pendaftaran_model->get();
 		$tahun_akademik = $this->tahun_akademik_model->findByStatus('AKTIF')[0]['tahun_akademik'] ?? null;

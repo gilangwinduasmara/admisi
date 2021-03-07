@@ -306,6 +306,7 @@ class Pendaftaran_model extends CI_Model{
 		$query = $this->db->where('akun_id', $akun_id)->get($this->table_name);
 		$pendaftarans = $query->result_array();
 		foreach($pendaftarans as $key=>&$pendaftaran){
+			$pendaftaran['tahun_akademik'] = $this->tahun_akademik_model->find($pendaftaran['tahun_akademik_id']);
 			$pendaftaran['pembayaran'] = $this->db->where('pendaftaran_id', $pendaftaran['id'])->limit(1)->get('pembayaran')->result_array();
 			if($registrasi_ulang){
 				$pendaftaran['hasil_penerimaan'] = $this->hasil_penerimaan_model->findByPendaftaran($pendaftaran['id'], "DITERIMA");

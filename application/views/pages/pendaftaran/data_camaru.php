@@ -19,13 +19,28 @@
 		<a href="<?php echo base_url('/pendaftaran/formulir') ?>" class="btn btn-warning"><i class="fas fa-plus"></i> Formulir</a>
 	</div>
 	<div>
-
+	<div class="row">
+		<div class="col-md-3">
+			<label for="">Cari berdasarkan tahun akademik</label>
+			<select class="form-control" id="search_tahun_akademik">
+				<option value="">All</option>
+				<?php 
+					foreach($tahun_akademik as $tahun){
+						?>
+							<option value="<?php echo $tahun['tahun_akademik'] ?>"><?php echo $tahun["tahun_akademik"] ?></option>
+						<?php
+					}
+				?>
+			</select>
+		</div>
+	</div>
 	</div>
 	<div class="mt-12">
 		<table class="table table-bordered" id="data_pendaftar">
 			<thead>
 				<tr>
 					<th>No. Formulir</th>
+					<th>Tahun Akademik</th>
 					<th>Nama Camaru</th>
 					<th>Tanggal Daftar</th>
 					<th style="min-width: 100px;">Aksi</th>
@@ -47,6 +62,7 @@
 						?>
 						<tr>
 								<td><?php echo($pendaftaran['id'])?></td>
+								<td><?php echo($pendaftaran['tahun_akademik']['tahun_akademik'] ?? '')?></td>
 								<td><?php echo($pendaftaran['nama'])?></td>
 								<td><?php echo(explode(" ", $pendaftaran['created_at'])[0])?></td>
 								<td class="text-center">
@@ -58,7 +74,7 @@
 										<?php
 									}else{
 										?>
-											<a class="btn btn-icon btn-light btn-sm" data-toggle="toltip" title="Informasi Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-info-circle"></i></a>
+											<a class="btn btn-icon btn-light btn-sm" data-toggle="toltip" title="Pilih Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-info-circle"></i></a>
 											<a class="btn btn-icon btn-light btn-sm" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-check-circle"></i></a>
 										<?php
 									}
