@@ -293,6 +293,7 @@ class Pendaftaran_model extends CI_Model{
 				$lunas = null;
 			}
 			$pendaftaran['detail_prestasi'] = $this->detail_prestasi_model->findByPendaftaran($pendaftaran['id']);
+			$pendaftaran['pembayaran'] = $this->pembayaran_model->findByPendaftaranId($pendaftaran['id']);
 			$pendaftaran['pembayaran_validasi'] = $validasi;
 			$pendaftaran['pembayaran_lunas'] = $lunas;
 			$pendaftaran['detail_pendidikan'] = $this->detail_pendidikan_model->findByPendaftaran($pendaftaran['id']);

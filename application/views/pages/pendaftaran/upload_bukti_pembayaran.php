@@ -16,9 +16,30 @@
 										<label for="" class="col-md-3 col-form-label">Nama Camaru</label>
 										<input type="text" class="form-control" disabled value="<?php echo $pendaftaran['nama'] ?? '' ?>">
 									</div>
+										<input type="text" class="form-control" name="pembayaran_id" hidden value="<?php echo $pendaftaran['pembayaran'][0]['id'] ?>">
 									<div class="form-group row">
 										<label for="" class="col-md-3 col-form-label">No. Pembayaran</label>
-										<input type="text" class="form-control" name="pembayaran_id">
+										<input type="text" class="form-control" disabled value="<?php echo $pendaftaran['pembayaran'][0]['id'] ?>">
+									</div>
+									<div class="form-group row">
+										<label for="" class="col-md-3 col-form-label">Bank Penerima</label>
+										<input type="text" class="form-control" disabled value="<?php echo $pendaftaran['pembayaran'][0]['jenis_pembayaran']['jenis_pembayaran'] ?>">
+									</div>
+									<div class="form-group row">
+										<label for="" class="col-md-3 col-form-label">Asal Bank Pengirim</label>
+										<input type="text" class="form-control" name="bank_pengirim">
+									</div>
+									<div class="form-group row">
+										<label for="" class="col-md-3 col-form-label">No Rek Pengirim</label>
+										<input type="text" class="form-control" name="no_rek_pengirim">
+									</div>
+									<div class="form-group row">
+										<label for="" class="col-md-3 col-form-label">Nama Rek Pengirim</label>
+										<input type="text" class="form-control" name="nama_rek_pengirim">
+									</div>
+									<div class="form-group row">
+										<label for="" class="col-md-3 col-form-label">Tgl Transfer</label>
+										<input type="date" class="form-control" name="tgl_transfer">
 									</div>
 									<div class="form-group row">
 										<label for="" class="col-md-3 col-form-label">Total Pembayaran</label>

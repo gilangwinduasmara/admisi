@@ -21,6 +21,7 @@
 							<option value="BELUM LUNAS">Belum Bayar</option>
 							<option value="VALIDASI">Menunggu Validasi</option>
 							<option value="LUNAS">Sudah Bayar</option>
+							<option value="DITOLAK">Ditolak</option>
 						</select>
 					</div>
 					

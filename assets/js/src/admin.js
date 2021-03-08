@@ -33,15 +33,29 @@ $("#table_data_pendaftar").on('click', '[data-toggle="validasi_pembayaran"]', fu
 	}
 	Swal.fire({
         title: "Validasi Pemabayaran",
-        text: "Apakah Anda yakin akan memvalidasi pembayaran camaru atas nama "+$(this).data('nama'),
-        icon: "warning",
+        text: "Apakah Anda yakin akan memvalidasi pembayaran camaru atas nama "+$(this).data('nama')+"?",
+        icon: "info",
         showCancelButton: true,
         confirmButtonText: "Validasi",
-        cancelButtonText: "Tidak",
+        cancelButtonText: "Tolak",
         reverseButtons: true
     }).then(function(result) {
         if (result.value) {
             post(BASE_URL+'/api/admin/validasi_pembayaran', data)
+        }else if (result.dismiss === "cancel") {
+            Swal.fire({
+				title: "Tolak Pemabayaran",
+				text: "Apakah Anda yakin akan menolak pembayaran?",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Ya",
+				cancelButtonText: "Kembali",
+				reverseButtons: true
+			}).then(function(result){
+				if(result.value){
+					post(BASE_URL+'/api/admin/tolak_pembayaran', data)
+				}
+			})
         }
     });
 })

@@ -36,6 +36,16 @@ class Admin_controller extends CI_Controller {
 		redirect('/admin/data_pendaftar');
 	}
 
+	public function tolak_pembayaran()
+	{
+		$pembayaran = $this->pembayaran_model->save([
+			'id' => $this->input->post('pembayaran_id'),
+			'status' => 'LUNAS'
+		]);
+		$this->session->set_flashdata('success', ['Pembayaran berhasil ditolak']);
+		redirect('/admin/data_pendaftar');
+	}
+
 	public function validasi_pembayaran_registrasi_ulang()
 	{
 		$registrasi_ulang = $this->registrasi_ulang_model->save([

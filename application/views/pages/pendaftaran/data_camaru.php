@@ -56,7 +56,8 @@
 						'BELUM LUNAS' => 'warning', 
 						'VALIDASI' => 'info', 
 						'LUNAS' => 'success', 
-						'EXPIRED' => 'danger'
+						'EXPIRED' => 'danger',
+						'DITOLAK' => 'danger'
 					];
 					foreach($pendaftarans as $pendaftaran){
 						?>

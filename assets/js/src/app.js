@@ -125,3 +125,13 @@ $('table').on('click', '[data-toggle="sudah_bayar"]', function(){
 	};
 	toastr.info('Anda sudah melakukan pembayaran')
 })
+
+$('[name="jenis_pembayaran"]').change(function(){
+	$(`[data-info]`).hide()
+	if($(this).val()){
+		$('.info-pembayaran-wrapper').show()
+		$(`[data-info="${$(this).val()}"]`).show()
+	}else{
+		$('.info-pembayaran-wrapper').hide()
+	}
+})

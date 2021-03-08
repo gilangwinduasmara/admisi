@@ -423,6 +423,41 @@ const forms = {
 				}
 			},
 			{
+				name: 'bank_pengirim',
+				label: 'Asal Bank Pengirim',
+				rules: {
+					required: true,
+				}
+			},
+			{
+				name: 'no_rek_pengirim',
+				label: 'No Rek Pengirim',
+				rules: {
+					required: true,
+				}
+			},
+			{
+				name: 'nama_rek_pengirim',
+				label: 'Nama Rek Pengirim',
+				rules: {
+					required: true,
+				}
+			},
+			{
+				name: 'tgl_transfer',
+				label: 'Tanggal Transfer',
+				rules: {
+					required: true,
+				}
+			},
+			{
+				name: 'total_bayar',
+				label: 'Total Bayar',
+				rules: {
+					required: true,
+				}
+			},
+			{
 				name: 'upload_bukti',
 				label: 'Bukti Bayar',
 				rules: {

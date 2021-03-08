@@ -74,6 +74,36 @@ class Pendaftaran extends CI_Controller
 		);
 		$this->load->view('default', $data);
 	}
+
+	public function metode_pembayaran()
+	{
+		$pendaftaran = $this->pendaftaran_model->find($this->input->get("id"));
+		$jenis_pembayarans = $this->jenis_pembayaran_model->get();
+		if($pendaftaran){
+			if($pendaftaran['akun_id'] != $this->akun_id){
+				$pendaftaran = null;
+				$this->session->set_flashdata('errors', ["Terjadi Kesalahan"]);
+			}
+		} else{
+			$this->session->set_flashdata('errors', ["Data tidak ditemukan"]);
+		}
+
+		$data = array(
+			"page" => 'pages/pendaftaran/metode_pembayaran.php',
+			"subheader" => [
+				'Pendaftaran',
+				[
+					'text' => 'Data Camaru',
+					'href' => '/pendaftaran/data_camaru'
+				],
+				'Informasi Pembayaran'
+			],
+			"pendaftaran" => $pendaftaran,
+			"jenis_pembayarans" => $jenis_pembayarans
+		);
+		
+		$this->load->view('default', $data);
+	}
 	public function informasi_pembayaran()
 	{
 		$pendaftaran = $this->pendaftaran_model->find($this->input->get("id"));

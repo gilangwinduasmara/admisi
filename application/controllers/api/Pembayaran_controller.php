@@ -22,18 +22,9 @@ class Pembayaran_controller extends CI_Controller{
 				'nama_camaru' => $this->input->post("nama_camaru"),
 				'jenis_pembayaran_id' => $this->input->post("jenis_pembayaran"),
 			);
-			// $pembayaran = $this->pembayaran_model->findByPendaftaranId($data['pendaftaran_id']);
-			// if(count($pembayaran)>0){
-			// 	// save
-			// 	$data['id'] = $pembayaran['id'];
-			// 	$this->pembayaran_model->save($data);
-			// }{
-				
-			// }
 			$data['status'] = 'BELUM LUNAS';
 			$nomor_pembayaran = $this->pembayaran_model->create($data);
 			$this->session->set_flashdata('nomor_pembayaran', $nomor_pembayaran);
-			// $this->session->set_flashdata('success', ['Informasi pembayaran berhasil disimpan']);
 			redirect("/pendaftaran/informasi_pembayaran?id=".$data['pendaftaran_id']);
 		}
 	}
@@ -41,6 +32,10 @@ class Pembayaran_controller extends CI_Controller{
 	public function upload_bukti(){
 		$this->form_validation->set_rules('id', 'No Formulir', 'required');
 		$this->form_validation->set_rules('total_bayar', 'Total Bayar', 'required');
+		$this->form_validation->set_rules('bank_pengirim', 'Bank Pengirim', 'required');
+		$this->form_validation->set_rules('no_rek_pengirim', 'No Rek Pengirim', 'required');
+		$this->form_validation->set_rules('nama_rek_pengirim', 'Nama Rek Pengirim', 'required');
+		$this->form_validation->set_rules('tgl_transfer', 'Tanggal Transfer', 'required');
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('errors', $this->form_validation->error_array());
 		}else{
@@ -55,6 +50,10 @@ class Pembayaran_controller extends CI_Controller{
 				'id' => $pembayaran,
 				'status' => 'VALIDASI',
 				'total_bayar' => $this->input->post('total_bayar'),
+				'bank_pengirim' => $this->input->post('bank_pengirim'),
+				'no_rek_pengirim' => $this->input->post('no_rek_pengirim'),
+				'nama_rek_pengirim' => $this->input->post('nama_rek_pengirim'),
+				'tgl_transfer' => $this->input->post('tgl_transfer'),
 				'upload_bukti_bayar' => $this->upload('upload_bukti')
 			);
 			$this->pembayaran_model->save($data);

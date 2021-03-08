@@ -3,6 +3,14 @@
 class Pembayaran_model extends CI_Model{
 
 	public $table_name = "pembayaran";
+
+	
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('jenis_pembayaran_model');
+	}
+	
 	
 	public function find($id){
 		$query = $this->db->where('id', $id)->limit(1)->get($this->table_name);
@@ -23,7 +31,11 @@ class Pembayaran_model extends CI_Model{
 			$this->db->where("status", $validasi);
 		}
 		$query = $this->db->where('pendaftaran_id', $pendaftaran_id)->get($this->table_name);
-		return $query->result_array();
+		$pembarayan = $query->result_array();
+		foreach($pembarayan as &$p){
+			$p['jenis_pembayaran'] = $this->jenis_pembayaran_model->find($p['jenis_pembayaran_id']);
+		}
+		return $pembarayan;
 	}
 
 	public function isValidating($pendaftaran_id){

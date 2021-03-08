@@ -9,6 +9,16 @@
 		public function create($data){
 			$this->db->insert($this->table_name, $data);
 		}
+
+		public function find($id){
+			$query = $this->db->where('id', $id)->limit(1)->get($this->table_name);
+			if($query->num_rows()>0){
+				return $query->result_array()[0];
+			}else{
+				return null;
+			}
+		}
+	
 	
 		public function save($data){
 			$id = $data['id'];

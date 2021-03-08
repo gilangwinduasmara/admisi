@@ -10,6 +10,10 @@ const statusPembayaran = {
 	"BELUM LUNAS": {
 		label: "Belum Bayar",
 		color: "success"
+	},
+	"DITOLAK": {
+		label: "Ditolak",
+		color: "danger"
 	}
 }
 const statusPenerimaan = {
