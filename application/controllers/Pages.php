@@ -61,13 +61,14 @@ class Pages extends CI_Controller{
 		}else{
 			$valid = $this->akun_model->verify($akun_id, $code);
 			if($valid){
-				$this->session->userdata('not_validated', FALSE);
+				$this->session->unset_userdata('not_validated');
 			}
 			$data = array(
 				'page' => 'pages/verify_with_code.php',
 				'valid' => $valid
 			);
 		}
+		
 		$this->load->view('default', $data);
 	}
 
@@ -76,7 +77,6 @@ class Pages extends CI_Controller{
 		$data = array(
 			'page' => 'pages/login.php'
 		);
-		// $this->load->database();
 		$this->load->view('default', $data);
 	}
 
