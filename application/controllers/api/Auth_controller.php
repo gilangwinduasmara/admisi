@@ -80,7 +80,6 @@ class Auth_controller extends CI_Controller
 			);
 			$this->session->set_userdata($user_data);
 			$this->session->set_flashdata('success', ['Link aktivasi telah dikirim ke email anda '.base_url('/verify?code='.$verificationCode)]);
-			// $this->session->set_flashdata('success', ['Registrasi berhasil, silahkan login']);
 			redirect('verify');
 		}
 		

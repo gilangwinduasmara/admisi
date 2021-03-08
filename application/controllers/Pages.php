@@ -18,18 +18,15 @@ class Pages extends CI_Controller{
 		$data = array(
 			'page' => 'pages/index.php'
 		);
-		// $this->load->database();
 		$this->load->view('default', $data);
 	}
 
-	// auth
 	public function register()
 	{
 		$this->load->library('session');
 		$data = array(
 			'page' => 'pages/register.php'
 		);
-		// $this->load->database();
 		$this->load->view('default', $data);
 	}
 
