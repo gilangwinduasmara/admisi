@@ -33,6 +33,14 @@
 	<div class="row justify-content-center">
 		<div class="col-lg-12 mb-4">
 			<div class="row gutter-b">
+				<div class="col-md-2">
+					<label for="">Dari</label>
+					<input type="date" id="search_date_from" class="form-control search-by-date">
+				</div>
+				<div class="col-md-2">
+					<label for="">Sampai</label>
+					<input type="date" id="search_date_to" class="form-control search-by-date">
+				</div>
 				<div class="col-md-4">
 					<label for="">Cari berdasarkan status penerimaan</label>
 					<select class="form-control" id="search_status_registrasi_ulang">
@@ -53,14 +61,7 @@
 						?>
 					</select>
 				</div>
-				<div class="col-md-2">
-					<label for="">Dari</label>
-					<input type="date" id="search_date_from" class="form-control search-by-date">
-				</div>
-				<div class="col-md-2">
-					<label for="">Sampai</label>
-					<input type="date" id="search_date_to" class="form-control search-by-date">
-				</div>
+				
 				
 			</div>
 			<div class="row gutter-b">

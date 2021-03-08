@@ -6,7 +6,14 @@
 			</div>
 			<div class="card-body">
 				<div class="row gutter-b">
-					
+					<div class="col-md-4">
+						<label for="">Dari</label>
+						<input type="date" id="search_date_from" class="form-control search-by-date">
+					</div>
+					<div class="col-md-4">
+						<label for="">Sampai</label>
+						<input type="date" id="search_date_to" class="form-control search-by-date">
+					</div>
 					<div class="col-md-4">
 						<label for="">Cari berdasarkan status pembayaran</label>
 						<select class="form-control" id="search_status_pembayaran">
@@ -16,14 +23,7 @@
 							<option value="LUNAS">Sudah Bayar</option>
 						</select>
 					</div>
-					<div class="col-md-4">
-						<label for="">Dari</label>
-						<input type="date" id="search_date_from" class="form-control search-by-date">
-					</div>
-					<div class="col-md-4">
-						<label for="">Sampai</label>
-						<input type="date" id="search_date_to" class="form-control search-by-date">
-					</div>
+					
 					
 
 				</div>
