@@ -30,7 +30,12 @@ class Hasil_penerimaan_model extends CI_Model {
 	}
 
 	public function countByProdi(){
-		$sql = 'select prodi_id, nama_prodi, count(*) from hasil_penerimaan join prodi on prodi.id = prodi_id group by prodi_id, nama_prodi order by prodi_id';
+		$sql = '
+		select prodi.id as prodi_id, nama_prodi, count(hasil_penerimaan.prodi_id) 
+		from hasil_penerimaan 
+		right join prodi on prodi.id = prodi_id 
+		group by prodi.id, nama_prodi 
+		order by prodi_id';
 		return $this->db->query($sql)->result_array();
 	}
 

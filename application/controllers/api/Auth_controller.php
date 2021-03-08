@@ -34,6 +34,8 @@ class Auth_controller extends CI_Controller
 				$this->session->set_userdata( $user_data );
 				if($this->session->role == 'USER'){
 					redirect("/pendaftaran/data_camaru");
+				}else if($this->session->role == 'ADMIN'){
+					redirect("/admin/dashboard");
 				}else{
 					redirect("/admin/data_pendaftar");
 				}

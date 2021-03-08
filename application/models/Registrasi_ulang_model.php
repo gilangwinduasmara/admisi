@@ -21,7 +21,13 @@ class Registrasi_ulang_model extends CI_Model {
 	}
 
 	public function countByProdi(){
-		$sql = 'select prodi_id, nama_prodi, count(*) from registrasi_ulang join prodi on prodi.id = prodi_id group by prodi_id, nama_prodi order by prodi_id';
+		$sql = '
+		select prodi.id as prodi_id, nama_prodi, count(registrasi_ulang.prodi_id) 
+		from registrasi_ulang 
+		right join prodi on prodi.id = prodi_id 
+		group by prodi.id, nama_prodi 
+		order by prodi_id
+		';
 		return $this->db->query($sql)->result_array();
 	}
 

@@ -94,6 +94,9 @@
 						
 						if($this->session->userdata('role') == 'ADMIN'){
 							?>
+								<div class="topbar-item mr-4" data-offset="10px,0px">
+									<a href="<?php echo base_url('admin/Dashboard')?>">Dashboard</a>
+								</div>
 								<div class="topbar-item mr-4" data-toggle="dropdown" data-offset="10px,0px">
 									<div class="dropdown">
 										<button class="btn btn-link dropdown-toggle" type="button" id="dropdownMasterData" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

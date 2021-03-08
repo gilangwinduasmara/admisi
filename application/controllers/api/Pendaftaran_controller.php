@@ -288,7 +288,7 @@ class Pendaftaran_controller extends CI_Controller{
 	
 		$data_diri = array();
 
-		foreach(['NISN', 'NIK', 'nama', 'email', 'no_hp', 'kota_kelahiran', 'tgl_lahir', 'jenis_kelamin', 'pekerjaan', 'tinggi_badan', 'berat_badan', 'kewarganegaraan', 'negara', 'kelurahan', 'alamat_asal', 'status_sipil', 'gol_darah', 'agama'] as $field){
+		foreach(['KK', 'NIK', 'nama', 'email', 'no_hp', 'kota_kelahiran', 'tgl_lahir', 'jenis_kelamin', 'pekerjaan', 'tinggi_badan', 'berat_badan', 'kewarganegaraan', 'negara', 'kelurahan', 'alamat_asal', 'status_sipil', 'gol_darah', 'agama', 'status_tinggal', 'suku'] as $field){
 			$data_diri[$field] = $this->input->post($field);
 		}
 		if($data_diri['gol_darah'] == ''){

@@ -267,7 +267,7 @@ $(document).ready(function(){
 				plotOptions: {
 				  bar: {
 					horizontal: false,
-					columnWidth: "15%",
+					columnWidth: "5%",
 					endingShape: "rounded"
 				  }
 				},
@@ -280,8 +280,17 @@ $(document).ready(function(){
 				  colors: ["transparent"]
 				},
 				xaxis: {
-					// prodi
-				  categories: data.prodi
+				  
+				  categories: [ ...data.prodi],
+				  labels: {
+					style: {
+						colors: [],
+						fontSize: '10px',
+						fontFamily: 'Helvetica, Arial, sans-serif',
+						cssClass: 'apexcharts-xaxis-label',
+					},
+					trim: true
+				  }
 				},
 				yaxis: {
 				  title: {
