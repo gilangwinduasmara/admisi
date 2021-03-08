@@ -75,11 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'postgres',
-	'password' => 'root',
-	'port' => '5433',
-	'database' => 'admisi',
+	'hostname' => getenv('DB_HOST'),
+	'username' => getenv('DB_USERNAME'),
+	'password' => getenv('DB_PASSWORD'),
+	'port' => 	  getenv('DB_PORT'),
+	'database' => getenv('DB_DATABASE'),
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
