@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link href="<?php echo base_url('assets/plugins/global/plugins.bundle.css')?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/plugins/custom/prismjs/prismjs.bundle.css')?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/css/style.bundle.css')?>" rel="stylesheet" type="text/css" />
-		<link href="<?php echo base_url('assets/css/style.css?')?>" rel="stylesheet" type="text/css" />
+		<link href="<?php echo base_url('assets/css/style.css?'.now())?>" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url('assets/plugins/custom/datatables/datatables.bundle.css')?>" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 
@@ -106,7 +106,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/scripts.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/pages/widgets.js?')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/app.js?v=2')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/app.js?v=2'.now())?>"></script>
 		<script src="<?php echo base_url('assets/js/src/inputmask.js')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/validate.js?v=3'.now())?>"></script>
 		<script src="<?php echo base_url('assets/js/src/dropzone.js?')?>"></script>

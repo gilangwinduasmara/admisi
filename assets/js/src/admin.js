@@ -232,8 +232,7 @@ function showDataDiri(data){
 
 $(document).ready(function(){
 	const chartEl = $('#chart')
-
-	
+	if(chartEl.length == 0) return false
 
 	fetch(BASE_URL+'/api/admin/chart', {
 		headers: {
