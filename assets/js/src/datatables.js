@@ -62,7 +62,7 @@ $(document).ready(function(){
 		// Order settings
 		order: [[1, 'desc']]
 	})
-	$('#data_pendaftar_filter').hide()
+	// $('#data_pendaftar_filter').hide()
 	$('#data_pendaftar_length').hide()
 
 	$('#search_query').keyup(function(){

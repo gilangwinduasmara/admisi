@@ -116,7 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			if(($subheader[1] ?? 'null') != 'Isi Formulir'){
 				?>
 					<script src="<?php echo base_url('assets/plugins/custom/datatables/datatables.bundle.js?')?>"></script>
-					<script src="<?php echo base_url('assets/js/src/datatables.js?')?>"></script>
+					<script src="<?php echo base_url('assets/js/src/datatables.js?v=2')?>"></script>
 				<?php
 			}
 		?>
