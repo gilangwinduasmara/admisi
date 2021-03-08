@@ -267,7 +267,7 @@ $(document).ready(function(){
 				plotOptions: {
 				  bar: {
 					horizontal: false,
-					columnWidth: "5%",
+					columnWidth: "15%",
 					endingShape: "rounded"
 				  }
 				},
