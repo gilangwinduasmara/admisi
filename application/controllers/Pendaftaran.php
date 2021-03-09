@@ -107,6 +107,9 @@ class Pendaftaran extends CI_Controller
 	public function informasi_pembayaran()
 	{
 		$pendaftaran = $this->pendaftaran_model->find($this->input->get("id"));
+		if($pendaftaran['akun_id'] != $this->session->userdata('id')){
+			redirect('pendaftaran/data_camaru');
+		}
 		$jenis_pembayarans = $this->jenis_pembayaran_model->get();
 		if($pendaftaran){
 			if($pendaftaran['akun_id'] != $this->akun_id){
@@ -137,8 +140,14 @@ class Pendaftaran extends CI_Controller
 	public function upload_pembayaran()
 	{
 		$pendaftaran = $this->pendaftaran_model->find($this->input->get("id"));
+		if($pendaftaran['akun_id'] != $this->session->userdata('id')){
+			redirect('pendaftaran/data_camaru');
+		}
 		$pembayaran = $this->pembayaran_model->findByPendaftaranId($pendaftaran['id']);
 		$isValidating = $this->pembayaran_model->isValidating($pendaftaran['id']);
+		if(empty($pendaftaran['pembayaran'])){
+			redirect('pendaftaran/informasi_pembayaran?id='.$this->input->get("id"));
+		}
 		$data = array(
 			"page" => 'pages/pendaftaran/upload_bukti_pembayaran.php',
 			"subheader" => [
