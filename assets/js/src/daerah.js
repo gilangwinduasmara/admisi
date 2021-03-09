@@ -76,7 +76,7 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 						`<div class="form-group row" data-sekolah="true" style="display: none">
 							<label for="" class="col-md-2 col-form-label">Nama Sekolah/Universitas</label>
 							<div class="col-md-10">
-								<select name="${withArray('sekolah', key)}" class="form-control" >
+								<select style="width: 100%" name="${withArray('sekolah', key)}" class="form-control" >
 									<option value="">Pilih</option>
 								</select>
 							</div>
@@ -90,7 +90,7 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 						`<div class="form-group row" data-${daerahs[i].name}="true" style="display: none">
 							<label for="" class="col-md-2 col-form-label">${daerahs[i].label}</label>
 							<div class="col-md-10">
-								<select name="${withArray(daerahs[i].name, key)}" class="form-control" >
+								<select style="width: 100%" name="${withArray(daerahs[i].name, key)}" class="form-control" >
 									<option value="">Pilih</option>
 								</select>
 							</div>
@@ -99,6 +99,7 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 					)
 				}
 			}
+			
 			const provinsiSelect = $(that).find('[data-provinsi] > div > select')
 			if(provinsiSelect.children().length == 1){
 				axios.get(daerahs[0].fetch(daerahs[0].parent)).then((res) => {
@@ -106,6 +107,7 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 						$(provinsiSelect).append(`<option value="${item.id}">${item.provinsi}</option>`)
 					})
 					$(that).find('[data-provinsi]').show()
+					$('[data-provinsi]').find('select').select2()
 					removeLoader(element)
 				});
 			}else{
@@ -131,6 +133,7 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 						$(`[data-${nextDaerah.name}] > div > select`).append(`<option value="${item.id}">${item[nextDaerah.name]}</option>`)
 					})
 					$(that).find(`[data-${nextDaerah.name}]`).show()
+					$(that).find(`[data-${nextDaerah.name}]`).find('select').select2()
 					removeLoader(element)
 				});
 

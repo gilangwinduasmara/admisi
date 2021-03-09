@@ -671,7 +671,8 @@ function setInvalid(field, error){
 
 function resetError(field){
 	field.removeClass('is-invalid')
-	field.next().remove()
+	field.parent().find('.invalid-feedback').remove()
+	
 }
 
 

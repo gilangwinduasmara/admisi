@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	// $('select').select2()
+	$('select').select2()
+	console.log('select2')
 	$('[data-toggle="tooltip"]').tooltip()
 	if($('.dropzone').length){
 		$('.dropzone').dropzone({url: "/"});
