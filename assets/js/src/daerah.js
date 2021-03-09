@@ -217,13 +217,19 @@ $('input[name="same_address"]').change(function(){
 		$('.alamat-wali').hide()
 		$('[name="alamat"]').val($('[name="alamat"]').data('alamat-camaru'))
 		$('[name="alamat"]').attr('readonly', true)
-		// $('.same-address').hide()
+		$('.daerah-wrapper').find('select')
+		$.each($('.daerah-wrapper').find('select'), function(){
+			$(this).attr('disabled', true)
+		})
 	}else{
 		// $('.same-address').show()
 		$('[name="alamat"]').val(storedAlamat)
 		$('[name="alamat"]').attr('readonly', false)
 		$('.alamat-wali').show()
 		$('.alamat-camaru').hide()
+		$.each($('.daerah-wrapper').find('select'), function(){
+			$(this).attr('disabled', false)
+		})
 	}
 })
 
