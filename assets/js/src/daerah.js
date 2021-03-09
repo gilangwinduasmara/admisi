@@ -71,7 +71,7 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 				if(i==4)break;
 				
 				if(daerahs[i].name==until){
-					if($(`[name="${withArray('sekolah', key)}"]`).length) break
+					if($(that).find(`[name="${withArray('sekolah', key)}"]`).length) break
 					$(that).append(
 						`<div class="form-group row" data-sekolah="true" style="display: none">
 							<label for="" class="col-md-2 col-form-label">Nama Sekolah/Universitas</label>
