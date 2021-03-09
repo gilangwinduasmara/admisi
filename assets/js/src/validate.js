@@ -257,6 +257,53 @@ const forms = {
 					required: true
 				}
 			},
+			{
+				name: 'alamat',
+				label: 'Detail Alamat',
+				rules: {
+					required: true
+				}
+			},
+			{
+				name: 'provinsi',
+				label: 'Provinsi',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'kota_kab',
+				label: 'Kabupaten',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'kecamatan',
+				label: 'Provinsi',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			},
+			{
+				name: 'kelurahan',
+				label: 'Kabupaten',
+				rules: {
+					required: true,
+				},
+				dict: {
+					required: '%label% belum dipilih'
+				}
+			}
 		]
 	},
 	data_pendidikan: {

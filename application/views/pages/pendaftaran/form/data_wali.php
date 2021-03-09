@@ -237,7 +237,7 @@
 															<?php
 															
 														}else{
-															echo "nope";
+															// echo "nope";
 														}
 
 													?>

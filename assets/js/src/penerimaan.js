@@ -13,7 +13,7 @@ $(document).ready(function(){
 						</div>
 					`)
 				}
-				if(item.status == 'DITERIMA'){
+				if(item.status == 'DITOLAK'){
 					$('.penerimaan-list').append(`
 						<div class="d-flex flex-column align-items-center mt-24">
 							<div for="" class="">${item.prodi.fakultas.nama_fakultas+' <b>'+item.prodi.nama_prodi}</b></div>

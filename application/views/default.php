@@ -111,7 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/src/validate.js?v=3'.now())?>"></script>
 		<script src="<?php echo base_url('assets/js/src/dropzone.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/daerah.js?'.now())?>"></script>
-		<script src="<?php echo base_url('assets/js/src/penerimaan.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/penerimaan.js?'.now())?>"></script>
 		<?php
 			if(($subheader[1] ?? 'null') != 'Isi Formulir'){
 				?>

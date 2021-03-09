@@ -40,7 +40,7 @@ class Admin_controller extends CI_Controller {
 	{
 		$pembayaran = $this->pembayaran_model->save([
 			'id' => $this->input->post('pembayaran_id'),
-			'status' => 'LUNAS'
+			'status' => 'DITOLAK'
 		]);
 		$this->session->set_flashdata('success', ['Pembayaran berhasil ditolak']);
 		redirect('/admin/data_pendaftar');
