@@ -14,7 +14,7 @@ class Kelurahan_model extends CI_Model{
 	}
 	
 
-	public function getParents(){
+	public function getParents($kelurahan_id){
 		$query = $this->db->query("
 		WITH daerah AS (
 			SELECT kelurahan.id AS selected_kelurahan_id, kecamatan.id AS selected_kecamatan_id, kota.id AS selected_kota_id, provinsi.id AS selected_provinsi_id
@@ -35,7 +35,7 @@ class Kelurahan_model extends CI_Model{
 				on kota.id = kecamatan.kota_id
 			join provinsi 
 				on provinsi.id = kota.provinsi_id 
-		where kelurahan.id = '5'");
+		where kelurahan.id = '$kelurahan_id'");
 		$parent_ids = $query->result_array()[0];
 		return $parent_ids;
 	}

@@ -172,6 +172,7 @@ class Formulir extends CI_Controller{
 				$d['upload_daftar_nilai[]'][$i] = $pendidikan[$i]['upload_daftar_nilai'] ?? null;
 
 				$d['sekolah_parentIds[]'][$i] = $this->sekolah_model->getParents($pendidikan[$i]['sekolah_id']);
+				$d['provinsi[]'][$i] = $this->provinsi_model->find($d['sekolah_parentIds[]'][$i]['selected_provinsi_id']);
 				$d['kota_kab[]'][$i] = $this->kota_model->findByProvinsi($d['sekolah_parentIds[]'][$i]['selected_provinsi_id']);
 				$d['data_sekolah[]'][$i] = $this->sekolah_model->findByKota($d['sekolah_parentIds[]'][$i]['selected_kota_id']);
 
@@ -185,6 +186,7 @@ class Formulir extends CI_Controller{
 		$daerah = null;
 		if(!empty($data_diri['kelurahan_id'])){
 			$parentsIds = $this->kelurahan_model->getParents($data_diri['kelurahan_id']);
+			$daerah['parentsIds'] = $parentsIds;
 			$daerah['provinsi'] = $this->provinsi_model->get();
 			$daerah['kota_kab'] = $this->kota_model->findByProvinsi($parentsIds['selected_provinsi_id']);
 			$daerah['kecamatan'] = $this->kecamatan_model->findByKota($parentsIds['selected_kota_id']);
@@ -195,6 +197,7 @@ class Formulir extends CI_Controller{
 		$daerah_wali = null;
 		if(!empty($data_wali['kelurahan_id'])){
 			$parentsIds = $this->kelurahan_model->getParents($data_wali['kelurahan_id']);
+			$daerah_wali['parentsIds'] = $parentsIds;
 			$daerah_wali['provinsi'] = $this->provinsi_model->get();
 			$daerah_wali['kota_kab'] = $this->kota_model->findByProvinsi($parentsIds['selected_provinsi_id']);
 			$daerah_wali['kecamatan'] = $this->kecamatan_model->findByKota($parentsIds['selected_kota_id']);
@@ -202,7 +205,7 @@ class Formulir extends CI_Controller{
 		}
 
 		$data_akademik = $this->session->userdata('form')[$this->input->get('id')]['data_akademik'] ?? null;
-
+		$prodi = $this->prodi_model->get();
 		$data = array(
 			"page" => 'pages/pendaftaran/form/submit.php',
 			"subheader" => [
@@ -215,7 +218,9 @@ class Formulir extends CI_Controller{
 			"data_wali" => $data_wali,
 			"data_pendidikan" => $data_pendidikan,
 			"provinsi" => $provinsi,
-			"data_akademik" => $data_akademik
+			"data_akademik" => $data_akademik,
+			"daerah" => $daerah,
+			"prodi" => $prodi
 		);
 
 		clean($data);
