@@ -314,8 +314,12 @@ switch (ENVIRONMENT)
  */
 
 require_once BASEPATH . 'dotenv/autoloader.php';
-	
+
+// Sentry\init(['dsn' => 'https://94963da9af76416187ad2b865f514c4e@o324060.ingest.sentry.io/5667907' ]);
+
+
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
+
 
 require_once BASEPATH.'core/CodeIgniter.php';

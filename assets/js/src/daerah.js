@@ -123,6 +123,9 @@ function daerahSelectorInit(element = $('.daerah-wrapper')){
 					$(that).find(`[data-${daerahs[i].name}] > div > select`).empty().append(`<option value="">Pilih</option>`)
 				}
 				let nextDaerah = daerahs[daerahs.map(d=>withArray(d.name, key)).indexOf(selectName)+1]
+				if(!nextDaerah){
+					return;
+				}
 				if(nextDaerah.name == 'kecamatan' && $(that).data('pendidikan')){
 					nextDaerah = daerahs[4]
 				}

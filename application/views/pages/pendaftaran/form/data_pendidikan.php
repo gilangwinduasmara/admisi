@@ -34,11 +34,6 @@
 						$pendidikans = ['SMA', 'S1', 'S2'];
 					}
 				?>
-				<?php 
-					foreach($pendidikans as $key=>$pendidikan){
-						// echo $data_pendidikan['sekolah[]'][$key];
-					}
-				?>
 				<input type="text" class="form-control" readonly name="form_type" hidden value="data_pendidikan">
 				<input type="text" class="form-control" readonly name="id" hidden value="<?php echo $pendaftaran['id'] ?>">
 				<?php 

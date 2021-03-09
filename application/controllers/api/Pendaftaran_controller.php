@@ -246,7 +246,8 @@ class Pendaftaran_controller extends CI_Controller{
 		unset($data_wali['negara']);
 		$pendaftaran = $this->pendaftaran_model->find($this->input->post('id'));
 		if($this->input->post('same_address')){
-			if($pendaftaran['kewarganegaraan' == 'WNI']){
+			$data_wali['kewarganegaraan'] = $pendaftaran['kewarganegaraan'];
+			if($pendaftaran['kewarganegaraan'] == 'WNI'){
 				$data_wali['kelurahan_id'] = $pendaftaran['kelurahan_id'];
 				$data_wali['alamat'] = $pendaftaran['alamat_asal'];
 				$data_wali['negara'] = 'Indonesia';
@@ -256,7 +257,7 @@ class Pendaftaran_controller extends CI_Controller{
 				$data_wali['negara'] = $pendaftaran['negara'];
 			}
 		}else{
-			if($data_wali['kewarganegaraan' == 'WNI']){
+			if($data_wali['kewarganegaraan'] == 'WNI'){
 				$data_wali['negara'] = 'Indonesia';
 			}else{
 				$data_wali['kelurahan_id'] = null;
@@ -289,7 +290,7 @@ class Pendaftaran_controller extends CI_Controller{
 		$data_diri = array();
 
 		foreach(['KK', 'NIK', 'nama', 'email', 'no_hp', 'kota_kelahiran', 'tgl_lahir', 'jenis_kelamin', 'pekerjaan', 'tinggi_badan', 'berat_badan', 'kewarganegaraan', 'negara', 'kelurahan', 'alamat_asal', 'status_sipil', 'gol_darah', 'agama', 'status_tinggal', 'suku'] as $field){
-			$data_diri[$field] = $this->input->post($field);
+			$data_diri[$field] = $this->input->post($field, TRUE);
 		}
 		if($data_diri['gol_darah'] == ''){
 			$data_diri['gol_darah'] = null;

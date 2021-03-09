@@ -33,7 +33,7 @@
 							<div class="form-group row">
 								<label for="" class="col-md-2 col-form-label">No. Pendaftaran</label>
 								<div class="col-md-10">
-									<input type="text" class="form-control" readonly disabled name="form_type" hidden value="data_diri">
+									<input type="text" class="form-control" readonly name="form_type" hidden value="data_diri">
 									<input type="text" class="form-control" readonly disabled name="id" hidden value="<?php echo $pendaftaran['id'] ?>">
 									<input type="text" class="form-control" disabled value="<?php echo $pendaftaran['id'] ?>">
 								</div>
@@ -41,14 +41,13 @@
 							<div class="form-group row">
 								<label for="" class="col-md-2 col-form-label">Nama Camaru</label>
 								<div class="col-md-10">
-									<input type="text" class="form-control" disabled value="<?php echo $pendaftaran['nama'] ?>">
+									<input type="text" disabled name="nama" class="form-control" value="<?php echo $pendaftaran['nama'] ?>">
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="" class="col-md-2 col-form-label">NISN</label>
+								<label for="" class="col-md-2 col-form-label">No Kartu Keluarga</label>
 								<div class="col-md-10">
-									<input type="number" class="form-control" disabled name="NISN" value="<?php echo $data_diri['NISN'] ?? null ?>">
-									<!-- <div class="invalid-feedback">Shucks, check the formatting of that and try again.</div> -->
+									<input type="number" class="form-control" disabled name="KK" value="<?php echo $data_diri['KK'] ?? null ?>">
 								</div>
 							</div>
 							<div class="form-group row">
@@ -105,6 +104,21 @@
 								</div>
 							</div>
 							<div class="form-group row">
+								<label for="" class="col-md-2 col-form-label">Agama</label>
+								<div class="col-md-10">
+									<select type="text" class="form-control" disabled name="agama">
+										<option value="">Pilih</option>
+										<?php 
+											foreach(['Kristen', 'Islam', 'Katolik', 'Hindu', 'Budha', 'Konghucu'] as $agama){
+												?>
+													<option <?php if ($pendaftaran['agama'] == $agama) echo 'selected'  ?> value="<?php echo $agama ?>"><?php echo $agama ?></option>
+												<?php
+											}
+										?>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
 								<label for="" class="col-md-2 col-form-label">Status Pernikahan</label>
 								<div class="col-md-10">
 									<select disabled name="status_sipil" id="" class="form-control">
@@ -120,7 +134,7 @@
 								<label for="" class="col-md-2 col-form-label">Golongan Darah</label>
 								<div class="col-md-10">
 									<select disabled name="gol_darah" id="" class="form-control">
-										<option value="">Pilih</option>
+										<option value="">-</option>
 										<option value="A" <?php echo (($data_diri['gol_darah'] ?? null) == 'A' ? 'selected': '') ?>>A</option>
 										<option value="B" <?php echo (($data_diri['gol_darah'] ?? null) == 'B' ? 'selected': '') ?>>B</option>
 										<option value="AB" <?php echo (($data_diri['gol_darah'] ?? null) == 'AB' ? 'selected': '') ?>>AB</option>
@@ -129,15 +143,32 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="" class="col-md-2 col-form-label">Tinggi Badan</label>
+								<label for="" class="col-md-2 col-form-label">Tinggi Badan (cm)</label>
 								<div class="col-md-10">
 									<input type="number" class="form-control" disabled name="tinggi_badan" value="<?php echo $data_diri['tinggi_badan'] ?? null ?>">
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="" class="col-md-2 col-form-label">Berat Badan</label>
+								<label for="" class="col-md-2 col-form-label">Berat Badan (kg)</label>
 								<div class="col-md-10">
 									<input type="number" class="form-control" disabled name="berat_badan" value="<?php echo $data_diri['berat_badan'] ?? null ?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="" class="col-md-2 col-form-label">Suku</label>
+								<div class="col-md-10">
+									<input class="form-control" disabled name="suku" value="<?php echo $data_diri['suku'] ?? null ?>">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="" class="col-md-2 col-form-label">Status Tinggal</label>
+								<div class="col-md-10">
+									<select disabled name="status_tinggal" class="form-control">
+										<option value="">Pilih</option>
+										<option <?php echo ($data_diri['status_tinggal'] ?? null) == 'Kost/kontrak' ? 'selected': '' ?> value="Kost/kontrak">Kost/kontrak</option>
+										<option <?php echo ($data_diri['status_tinggal'] ?? null) == 'Tinggal bersama keluarga' ? 'selected': '' ?> value="Tinggal bersama keluarga">Tinggal bersama keluarga</option>
+										<option <?php echo ($data_diri['status_tinggal'] ?? null) == 'Rumah sendiri' ? 'selected': '' ?> value="Rumah sendiri">Rumah sendiri</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group row">
@@ -161,7 +192,7 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<div class="accordion accordion-toggle-arrow" id="accordion-alamat">
 				<div class="card">
 					<div class="card-header">
@@ -269,14 +300,14 @@
 				</div>
 			</div>
 			
-			<div class="accordion accordion-toggle-arrow" id="accordion-personal">
+			<div class="accordion accordion-toggle-arrow" id="accordion-personal-wali">
 				<div class="card">
 					<div class="card-header">
-						<div class="card-title" data-toggle="collapse" data-target="#collapse-personal">
+						<div class="card-title" data-toggle="collapse" data-target="#collapse-personal-wali">
 							Data Wali
 						</div>
 					</div>
-					<div id="collapse-personal" class="collapse" data-parent="#accordion-personal">
+					<div id="collapse-personal-wali" class="collapse" data-parent="#accordion-personal-wali">
 						<div class="card-body">
 							<input type="text" class="form-control" readonly disabled name="form_type" hidden value="data_wali">
 							<input type="text" class="form-control" readonly disabled name="id" hidden value="<?php echo $pendaftaran['id'] ?>">
@@ -370,6 +401,214 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="accordion accordion-toggle-arrow" id="accordion-alamat-wali">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title" data-toggle="collapse" data-target="#collapse-alamat-wali">
+							Alamat Wali
+						</div>
+					</div>
+					<div id="collapse-alamat-wali" class="collapse" data-parent="">
+						<div class="card-body">
+							<div class="form-group row ml-1" style="display: none;">
+								<label class="checkbox checkbox-outline checkbox-success">
+									<input type="checkbox" disabled name="same_address" value="true" <?php echo (($data_wali['same_address'] ?? null) == 'true' ? 'checked': '') ?>/>
+									<span></span>
+									Alamat wali sama dengan alamat camaru
+								</label>
+							</div>
+								
+							<div class="same-address">
+								<?php
+									if(!empty($data_wali['kelurahan_id'])){
+										?>
+										<div class="alamat-wali">
+											<div class="form-group row">
+												<label for="" class="col-md-2 col-form-label">Kewarganegaraan</label>
+												<div class="col-md-10">
+													<div class="radio-inline">
+														<label class="radio">
+															<input type="radio" disabled name="kewarganegaraan" value="WNI" <?php echo (($data_wali['kewarganegaraan'] ?? 'WNI') == 'WNI' ? 'checked': '') ?>/>
+															<span></span>
+															WNI
+														</label>
+														<label class="radio">
+															<input type="radio" disabled name="kewarganegaraan" value="WNA" <?php echo (($data_wali['kewarganegaraan'] ?? 'WNI') == 'WNA' ? 'checked': '') ?>/>
+															<span></span>
+															WNA
+														</label>
+													</div>
+												</div>
+											</div>	
+											<div class="form-group row">
+												<label for="" class="col-md-2 col-form-label">Negara</label>
+												<div class="col-md-10">
+													<input type="text" class="form-control" disabled name="negara" value="<?php echo $data_wali['negara'] ?? null ?>">
+												</div>
+											</div>
+											<div class="daerah-wrapper" >
+												<?php 
+													if(!empty($daerah)){
+														?>
+															<div class="form-group row" data-provinsi="true" >
+																<label for="" class="col-md-2 col-form-label">Provinsi</label>
+																<div class="col-md-10">
+																	<select disabled name="provinsi" class="form-control" >
+																		<option value="">Pilih</option>
+																		<?php
+																			foreach($daerah['provinsi'] as $provinsi){
+																				echo '<option '.($provinsi['id'] == $parentIds['selected_provinsi_id'] ? 'selected': '').' value="'.$provinsi['id'].'">'.$provinsi['provinsi'].'</option>';
+																			}
+																		?>
+																		
+																	</select>
+																</div>
+															</div>
+
+															<div class="form-group row" data-kota_kab="true" >
+																<label for="" class="col-md-2 col-form-label">Kabupaten/Kota</label>
+																<div class="col-md-10">
+																	<select disabled name="kota_kab" class="form-control" >
+																		<option value="">Pilih</option>
+																		<?php
+																			foreach($daerah['kota_kab'] as $kota_kab){
+																				echo '<option '.($kota_kab['id'] == $parentIds['selected_kota_id'] ? 'selected': '').' value="'.$kota_kab['id'].'">'.$kota_kab['kota_kab'].'</option>';
+																			}
+																		?>
+																		
+																	</select>
+																</div>
+															</div>
+
+															<div class="form-group row" data-kecamatan="true" >
+																<label for="" class="col-md-2 col-form-label">Kecamatan</label>
+																<div class="col-md-10">
+																	<select disabled name="kecamatan" class="form-control" >
+																		<option value="">Pilih</option>
+																		<?php
+																			foreach($daerah['kecamatan'] as $kecamatan){
+																				echo '<option '.($kecamatan['id'] == $parentIds['selected_kecamatan_id'] ? 'selected': '').' value="'.$kecamatan['id'].'">'.$kecamatan['kecamatan'].'</option>';
+																			}
+																		?>
+																		
+																	</select>
+																</div>
+															</div>
+
+															<div class="form-group row" data-kelurahan="true" >
+																<label for="" class="col-md-2 col-form-label">Kelurahan</label>
+																<div class="col-md-10">
+																	<select disabled name="kelurahan" class="form-control" >
+																		<option value="">Pilih</option>
+																		<?php
+																			foreach($daerah['kelurahan'] as $kelurahan){
+																				echo '<option '.($kelurahan['id'] == $data_wali['kelurahan_id'] ? 'selected': '').' value="'.$kelurahan['id'].'">'.$kelurahan['kelurahan'].'</option>';
+																			}
+																		?>
+																		
+																	</select>
+																</div>
+															</div>
+
+														<?php
+														
+													}else{
+														echo "nope";
+													}
+
+												?>
+											</div>
+										</div>
+										<?php
+									}else{
+										?>
+											<div class="alamat-wali">
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Kewarganegaraan</label>
+													<div class="col-md-10">
+														<div class="radio-inline">
+															<label class="radio">
+																<input type="radio" disabled name="kewarganegaraan" value="WNI" <?php echo (($data_wali['kewarganegaraan'] ?? 'WNI') == 'WNI' ? 'checked': '') ?>/>
+																<span></span>
+																WNI
+															</label>
+															<label class="radio">
+																<input type="radio" disabled name="kewarganegaraan" value="WNA" <?php echo (($data_wali['kewarganegaraan'] ?? 'WNI') == 'WNA' ? 'checked': '') ?>/>
+																<span></span>
+																WNA
+															</label>
+														</div>
+													</div>
+												</div>	
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Negara</label>
+													<div class="col-md-10">
+														<input type="text" class="form-control" disabled name="negara" value="<?php echo $data_wali['negara'] ?? null ?>">
+													</div>
+												</div>
+												<div class="daerah-wrapper" data>
+										
+												</div>
+											</div>
+										<?php
+									}
+								?>
+								<?php
+									if(($pendaftaran['kewarganegaraan']) == 'WNI'){
+										?>
+											<div class="alamat-camaru" style="display: none;">
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Provinsi</label>
+													<div class="col-md-10">
+														<input type="text" class="form-control" value="<?php echo $alamat_camaru['provinsi']['provinsi'] ?>" disabled>
+													</div>
+												</div>	
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Kab/Kota</label>
+													<div class="col-md-10">
+														<input type="text" class="form-control" value="<?php echo $alamat_camaru['kota']['kota_kab'] ?>" disabled>
+													</div>
+												</div>	
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Kecamatan</label>
+													<div class="col-md-10">
+														<input type="text" class="form-control" value="<?php echo $alamat_camaru['kecamatan']['kecamatan'] ?>" disabled>
+													</div>
+												</div>	
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Kelurahan</label>
+													<div class="col-md-10">
+														<input type="text" class="form-control" value="<?php echo $alamat_camaru['kelurahan']['kelurahan'] ?>" disabled>
+													</div>
+												</div>	
+											</div>
+										<?php
+									}else{
+										?>
+											<div class="alamat-camaru" style="display: none;">
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Negara</label>
+													<div class="col-md-10">
+														<input type="text" class="form-control" value="<?php echo $pendaftaran['negara'] ?>" disabled>
+													</div>
+												</div>
+											</div>
+										<?php
+									}
+								?>
+								<div class="form-group row">
+									<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
+									<div class="col-md-10">
+										<textarea disabled name="alamat" cols="30" rows="10" class="form-control"><?php echo ($data_wali['alamat'] ?? null) ?></textarea>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 				
 			<?php
 				$pendidikans = ['SMA'];
@@ -401,7 +640,7 @@
 											<input type="text" disabled name="status_pendidikan[]" value="<?php echo $pendidikan ?>" readonly hidden>
 										</div>
 										<div class="form-group row">
-											<label for="" class="col-md-2 col-form-label">NPSN / NIM</label>
+											<label for="" class="col-md-2 col-form-label">NISN / NIM</label>
 											<div class="col-md-10">
 												<input type="number" class="form-control" disabled name="npsn[]" value="<?php echo ($data_pendidikan['npsn[]'][$key] ?? null) ?>">
 											</div>
@@ -505,11 +744,14 @@
 												<?php
 													if(empty($data_pendidikan['upload_ijazah[]'][$key])){
 														?>
-															<input type="file" disabled name="upload_ijazah[]" accept="application/pdf">
+															<input type="file" disabled name="upload_ijazah_<?php echo $pendidikan ?>" accept="application/pdf">
 														<?php
 													}else{
 														?>
 															<a href="<?php echo base_url('uploads/'.$data_pendidikan['upload_ijazah[]'][$key]) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
+															<!-- <button type="button" data disabled-name="upload_ijazah_<?php echo $pendidikan ?>" data-id="<?php echo $pendidikan ?>" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_ijazah[]">
+																<i class="fas fa-pen"></i> Sunting
+															</button> -->
 														<?php
 													}
 												?>
@@ -521,11 +763,14 @@
 												<?php
 													if(empty($data_pendidikan['upload_daftar_nilai[]'][$key])){
 														?>
-															<input type="file" disabled name="upload_daftar_nilai[]" accept="application/pdf">
+															<input type="file" disabled name="upload_daftar_nilai_<?php echo $pendidikan ?>" accept="application/pdf">
 														<?php
 													}else{
 														?>
 															<a href="<?php echo base_url('uploads/'.$data_pendidikan['upload_daftar_nilai[]'][$key]) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
+															<!-- <button type="button" class="btn btn-light-primary" data disabled-name="upload_daftar_nilai<?php echo $pendidikan ?>" data-id="<?php echo $pendidikan ?>" data-toggle="sunting" data-target="upload" data-field="upload_daftar_nilai[]">
+																<i class="fas fa-pen"></i> Sunting
+															</button> -->
 														<?php
 													}
 												?>
@@ -539,6 +784,109 @@
 				}
 			?>
 
+			<div class="accordion accordion-toggle-arrow" id="accordion-program-studi">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title" data-toggle="collapse" data-target="#collapse-program-studi">
+							Pilihan Program Studi
+						</div>
+					</div>
+					<div id="collapse-program-studi" class="collapse" data-parent="#accordion-program-studi">
+						<div class="card-body">
+							<div class="form-group row">
+								<label for="" class="col-md-2 col-form-label">Pilihan Pertama</label>
+								<div class="col-md-10">
+									<select disabled name="prodi_1_id"  class="form-control">
+										<option value="">Pilih</option>
+										<?php
+											foreach($prodi as $p){
+												echo '<option '.($p["id"] == ($pendaftaran['prodi_1_id'] ?? null) ? 'selected': null).' value="'.$p['id'].'">'.$p['nama_prodi'].'</option>';
+											}
+										?>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="" class="col-md-2 col-form-label">Pilihan Kedua</label>
+								<div class="col-md-10">
+									<select disabled name="prodi_2_id" class="form-control">
+										<option value="">Pilih</option>
+										<?php
+											foreach($prodi as $p){
+												echo '<option '.($p["id"] == ($pendaftaran['prodi_2_id'] ?? null) ? 'selected': null).' value="'.$p['id'].'">'.$p['nama_prodi'].'</option>';
+											}
+										?>
+									</select>
+								</div>
+							</div>						
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion accordion-toggle-arrow" id="accordion-prestasi">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title" data-toggle="collapse" data-target="#collapse-prestasi">
+							Prestasi Akademik yang Pernah Diraih (Opsional)
+						</div>
+					</div>
+					<div id="collapse-prestasi" class="collapse" data-parent="#accordion-prestasi">
+						<div class="card-body">
+								<div class="prestasi-wrapper">
+									<?php 
+										foreach($pendaftaran['detail_prestasi'] as $prestasi){
+											?>
+												<input type="hidden" disabled name="detail_prestasi_id[]" value="<?php echo $prestasi['id'] ?>">
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Jenis prestasi</label>
+													<div class="col-md-10">
+														<select disabled name="jenis_prestasi[]"  class="form-control">
+															<option value="">Pilih</option>
+															<option <?php  if ($prestasi['jenis_prestasi'] == 'NASIONAL') echo 'selected' ?> value="NASIONAL">Nasional</option>
+															<option <?php  if ($prestasi['jenis_prestasi'] == 'INTERNASIONAL') echo 'selected' ?> value="INTERNASIONAL">Internasional</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Nama Kegiatan</label>
+													<div class="col-md-10">
+														<input value="<?php  echo $prestasi['nama_kegiatan'] ?>" type="text" class="form-control" disabled name="nama_kegiatan[]">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Tanggal Kegiatan</label>
+													<div class="col-md-10">
+														<input value="<?php  echo $prestasi['tgl_kegiatan'] ?>" type="date" class="form-control" disabled name="tgl_kegiatan[]">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="" class="col-md-2 col-form-label">Unggah Bukti Prestasi</label>
+													<?php 
+														if(empty($prestasi['upload_bukti_prestasi'])){
+															?>
+																<input type="file" disabled name="upload_bukti_prestasi_<?php echo $prestasi['id'] ?>">
+															<?php
+														}else{
+															?>
+																<a href="<?php echo base_url('uploads/'.$prestasi['upload_bukti_prestasi']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
+																<!-- <button type="button" class="btn btn-light-primary" data disabled-name="upload_bukti_prestasi_<?php echo $prestasi['id'] ?>" data-toggle="sunting" data-target="upload" >
+																	<i class="fas fa-pen"></i> Sunting
+																</button> -->
+															<?php
+														}
+													?>
+												</div>
+												<div class="separator separator-solid mb-8"></div>
+											<?php
+										}
+									?>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="accordion accordion-toggle-arrow" id="accordion-berkas">
 				<div class="card">
 					<div class="card-header">
@@ -548,80 +896,89 @@
 					</div>
 					<div id="collapse-berkas" class="collapse" data-parent="#accordion-berkas">
 						<div class="card-body">
-							<div >
-								<input type="text" class="form-control" readonly disabled name="form_type" hidden value="unggah_berkas">
-								<input type="text" class="form-control" readonly disabled name="id" hidden value="<?php echo $pendaftaran['id'] ?>">
-								<div class="form-group row">
-									<label for="" class="col-md-2 col-form-label">Unggah Foto</label>
-									<div class="col-md-10">
-										<?php
-											if(empty($pendaftaran['upload_foto'])){
-												?>
-													<input type="file" accept="application/pdf, image/jpeg, image/png" disabled name="upload_foto">
-												<?php
-											}else{
-												?>
-													<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_foto']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
-												<?php
-											}
+						<input type="text" class="form-control" readonly disabled name="form_type" hidden value="unggah_berkas">
+						<input type="text" class="form-control" readonly disabled name="id" hidden value="<?php echo $pendaftaran['id'] ?>">
+						<div class="form-group row">
+							<label for="" class="col-md-2 col-form-label">Unggah Foto</label>
+							<div class="col-md-10">
+								<?php
+									if(empty($pendaftaran['upload_foto'])){
 										?>
-									</div>
-								</div>
-								<div class="form-group row">
-									<label for="" class="col-md-2 col-form-label">Unggah Kartu Keluarga</label>
-									<div class="col-md-10">
+											<input type="file" accept="application/pdf, image/jpeg, image/png" disabled name="upload_foto">
 										<?php
-											if(empty($pendaftaran['upload_kk'])){
-												?>
-													<input type="file" accept="application/pdf, image/jpeg, image/png" disabled name="upload_kk">
-												<?php
-											}else{
-												?>
-													<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_kk']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
-												<?php
-											}
+									}else{
 										?>
-									</div>
-								</div>
-								<div class="form-group row">
-									<label for="" class="col-md-2 col-form-label">Unggah Akta Kelahiran</label>
-									<div class="col-md-10">
+											<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_foto']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
+											<!-- <button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_foto">
+												<i class="fas fa-pen"></i> Sunting
+											</button> -->
 										<?php
-											if(empty($pendaftaran['upload_akta_lahir'])){
-												?>
-													<input type="file" accept="application/pdf, image/jpeg, image/png" disabled name="upload_akta_lahir">
-												<?php
-											}else{
-												?>
-													<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_akta_lahir']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
-												<?php
-											}
-										?>
-									</div>
-								</div>
-								<div class="form-group row">
-									<label for="" class="col-md-2 col-form-label">Surat Pernyataan</label>
-									<div class="col-md-10">
-										<?php
-											if(empty($pendaftaran['upload_srt_pernyataan'])){
-												?>
-													<input type="file" accept="application/pdf, image/jpeg, image/png" disabled name="upload_srt_pernyataan">
-												<?php
-											}else{
-												?>
-													<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_srt_pernyataan']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
-												<?php
-											}
-										?>
-									</div>
-								</div>
-
+									}
+								?>
 							</div>
+						</div>
+						<div class="form-group row">
+							<label for="" class="col-md-2 col-form-label">Unggah Kartu Keluarga</label>
+							<div class="col-md-10">
+								<?php
+									if(empty($pendaftaran['upload_kk'])){
+										?>
+											<input type="file" accept="application/pdf, image/jpeg, image/png" disabled name="upload_kk">
+										<?php
+									}else{
+										?>
+										<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_kk']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
+											<!-- <button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_kk">
+												<i class="fas fa-pen"></i> Sunting
+											</button> -->
+										<?php
+									}
+								?>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="" class="col-md-2 col-form-label">Unggah Akta Kelahiran</label>
+							<div class="col-md-10">
+								<?php
+									if(empty($pendaftaran['upload_akta_lahir'])){
+										?>
+											<input type="file" accept="application/pdf, image/jpeg, image/png" disabled name="upload_akta_lahir">
+										<?php
+									}else{
+										?>
+											<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_akta_lahir']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
+											<!-- <button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_akta_lahir">
+												<i class="fas fa-pen"></i> Sunting
+											</button> -->
+										<?php
+									}
+								?>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="" class="col-md-2 col-form-label">Surat Pernyataan</label>
+							<div class="col-md-10">
+								<?php
+									if(empty($pendaftaran['upload_srt_pernyataan'])){
+										?>
+											<input type="file" accept="application/pdf, image/jpeg, image/png" disabled name="upload_srt_pernyataan">
+										<?php
+									}else{
+										?>
+											<a href="<?php echo base_url('uploads/'.$pendaftaran['upload_srt_pernyataan']) ?>" download class="btn btn-link bg-hover-primary text-hover-white"> <i class="fas fa-file-download text-primary"></i> Unduh Berkas</a>
+											<!-- <button type="button" class="btn btn-light-primary" data-toggle="sunting" data-target="upload" data-field="upload_srt_pernyataan">
+												<i class="fas fa-pen"></i> Sunting
+											</button> -->
+										<?php
+									}
+								?>
+							</div>
+						</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 			<form action="<?php echo base_url('/api/pendaftaran/update_form')?>" method="POST" name="submit">
 				<input type="text" class="form-control" readonly name="form_type" hidden value="submit">
 				<input type="text" class="form-control" readonly name="id" hidden value="<?php echo $pendaftaran['id'] ?>">

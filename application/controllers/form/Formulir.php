@@ -36,6 +36,7 @@ class Formulir extends CI_Controller{
 			$daerah['kecamatan'] = $this->kecamatan_model->findByKota($parentsIds['selected_kota_id']);
 			$daerah['kelurahan'] = $this->kelurahan_model->findByKecamatan($parentsIds['selected_kecamatan_id']);
 		}
+		clean($data_diri);
 		$data = array(
 			"page" => 'pages/pendaftaran/form/data_personal.php',
 			"subheader" => [
@@ -85,6 +86,7 @@ class Formulir extends CI_Controller{
 			"alamat_camaru" => $alamat_camaru
 			
 		);
+		clean($data);
 		$this->load->view('default', $data);
 	}
 	
@@ -121,8 +123,9 @@ class Formulir extends CI_Controller{
 			"data_pendidikan" => $data_pendidikan,
 			"provinsi" => $provinsi
 		);
+		clean($data);
 		$this->load->view('default', $data);
-		}
+	}
 		
 	public function data_akademik(){
 		$prodi = $this->prodi_model->get();
@@ -137,6 +140,7 @@ class Formulir extends CI_Controller{
 			"prodi" => $prodi,
 			"data_akademik" =>$data_akademik
 		);
+		clean($data);
 		$this->load->view('default', $data);
 	}
 
@@ -196,6 +200,9 @@ class Formulir extends CI_Controller{
 			$daerah_wali['kecamatan'] = $this->kecamatan_model->findByKota($parentsIds['selected_kota_id']);
 			$daerah_wali['kelurahan'] = $this->kelurahan_model->findByKecamatan($parentsIds['selected_kecamatan_id']);
 		}
+
+		$data_akademik = $this->session->userdata('form')[$this->input->get('id')]['data_akademik'] ?? null;
+
 		$data = array(
 			"page" => 'pages/pendaftaran/form/submit.php',
 			"subheader" => [
@@ -207,8 +214,11 @@ class Formulir extends CI_Controller{
 			"daerah_wali" => $daerah_wali,
 			"data_wali" => $data_wali,
 			"data_pendidikan" => $data_pendidikan,
-			"provinsi" => $provinsi
+			"provinsi" => $provinsi,
+			"data_akademik" => $data_akademik
 		);
+
+		clean($data);
 		$this->load->view('default', $data);
 	}
 }

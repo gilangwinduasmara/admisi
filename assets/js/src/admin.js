@@ -247,13 +247,15 @@ function showDataDiri(data){
 $(document).ready(function(){
 	const chartEl = $('#chart')
 	if(chartEl.length == 0) return false
-
 	fetch(BASE_URL+'/api/admin/chart', {
 		headers: {
 			'Content-type': 'application/json'
 		}
 	}).then(res => {
 		res.json().then(data => {
+			$('.spinner-wrapper').hide()
+			$('.data-wrapper').show()
+
 			console.log(data)
 			$('#formulir_keluar').text(data.formulir_keluar)
 			$('#formulir_submit').text(data.formulir_submit)

@@ -12,3 +12,9 @@ function last_segment($uri){
 	$last_segment = $uri->segment($last);
 	return $last_segment;
 }
+
+function clean(&$data){
+	array_walk_recursive($data, function (&$val){
+		$val = htmlentities($val, ENT_QUOTES);
+	});
+}
