@@ -208,13 +208,20 @@ $('[data-toggle="sunting"]').click(function(){
 	}
 })
 
+var storedAlamat = ""
+
 $('input[name="same_address"]').change(function(){
 	if($(this).is(':checked')){
+		storedAlamat = $('[name="alamat"]').val()
 		$('.alamat-camaru').show()
 		$('.alamat-wali').hide()
+		$('[name="alamat"]').val($('[name="alamat"]').data('alamat-camaru'))
+		$('[name="alamat"]').attr('readonly', true)
 		// $('.same-address').hide()
 	}else{
 		// $('.same-address').show()
+		$('[name="alamat"]').val(storedAlamat)
+		$('[name="alamat"]').attr('readonly', false)
 		$('.alamat-wali').show()
 		$('.alamat-camaru').hide()
 	}

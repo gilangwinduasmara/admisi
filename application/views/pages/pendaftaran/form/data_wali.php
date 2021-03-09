@@ -323,7 +323,7 @@
 									<div class="form-group row">
 										<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
 										<div class="col-md-10">
-											<textarea name="alamat" cols="30" rows="10" class="form-control"><?php echo ($data_wali['alamat'] ?? null) ?></textarea>
+											<textarea name="alamat" data-alamat-camaru="<?php echo $pendaftaran['alamat_asal'] ?>" cols="30" rows="10" class="form-control"><?php echo ($data_wali['alamat'] ?? null) ?></textarea>
 										</div>
 									</div>
 									
