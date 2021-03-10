@@ -37,12 +37,20 @@ class Jenis_pembayaran extends RestController {
 	}
 
 	public function index_post(){
-		$this->jenis_pembayaran_model->create([
-			'jenis_pembayaran' => $this->input->post('jenis_pembayaran'),
-			'info_pembayaran' => $this->input->post('info_pembayaran') ?? null
-		]);
+		if($this->input->post('edit')){
+			$this->jenis_pembayaran_model->save([
+				'id' => $this->input->post('id'),
+				'jenis_pembayaran' => $this->input->post('jenis_pembayaran'),
+				'info_pembayaran' => $this->input->post('info_pembayaran') ?? null
+			]);
+		}else{
+			$this->jenis_pembayaran_model->create([
+				'jenis_pembayaran' => $this->input->post('jenis_pembayaran'),
+				'info_pembayaran' => $this->input->post('info_pembayaran') ?? null
+			]);
+		}
 		$this->session->set_flashdata('success', ['Data berhasil disimpan']);
-		redirect('/admin/master_data');
+		redirect('/admin/master_pembayaran');
 	}
 
 }

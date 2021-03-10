@@ -9,7 +9,6 @@
 					<div class="card-toolbar">
 						<a href="#" class="btn btn-success font-weight-bolder font-size-sm" id="button_tambah_pembayaran">
 						<span class="svg-icon svg-icon-md svg-icon-white">
-							<!--begin::Svg Icon | path:/metronic/theme/html/demo5/dist/assets/media/svg/icons/Communication/Add-user.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<polygon points="0 0 24 0 24 24 0 24"></polygon>
@@ -17,7 +16,6 @@
 									<path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
 								</g>
 							</svg>
-							<!--end::Svg Icon-->
 						</span>Tambah</a>
 					</div>
 				</div>
@@ -29,7 +27,7 @@
 									<th>Id</th>
 									<th>Jenis Pembayaran</th>
 									<th>Informasi Pembayaran</th>
-									<!-- <th class="text-right">Aksi</th> -->
+									<th class="text-right">Aksi</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -118,6 +116,38 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary font-weight-bold">Simpan</button>
+				</div>
+			</form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_edit_pembayaran" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+			<form action="<?php echo base_url('service/api/jenis_pembayaran') ?>" method="POST" id="form_edit">
+				<div class="modal-body">
+					<div class="form-group" hidden>
+						<input type="text" class="form-control" name="id">
+					</div>
+					<div class="form-group">
+						<label for="">Jenis Pembayaran</label>
+						<input type="text" class="form-control" name="jenis_pembayaran">
+					</div>
+					<div class="form-group">
+						<label for="">Info</label>
+						<textarea type="text" class="form-control" name="info_pembayaran"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+					<button type="submit" name="edit" value="true" class="btn btn-primary font-weight-bold">Simpan</button>
 				</div>
 			</form>
         </div>

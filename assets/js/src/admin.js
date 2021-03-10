@@ -323,3 +323,11 @@ $(document).ready(function(){
 	})
 
 })
+
+$('table').on('click', '[data-toggle="edit_pembayaran"]', function(){
+	console.log($(this).data('id'))
+	$('#form_edit').find('[name="jenis_pembayaran"]').val($(this).data('jenis_pembayaran'))
+	$('#form_edit').find('[name="info_pembayaran"]').val($(this).data('info_pembayaran'))
+	$('#form_edit').find('[name="id"]').val($(this).data('id'))
+	$('#modal_edit_pembayaran').modal('show')
+})

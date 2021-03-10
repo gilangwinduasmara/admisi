@@ -102,6 +102,7 @@
 									<label for="" class="col-md-2 col-form-label">Pekerjaan</label>
 									<div class="col-md-10">
 										<input type="text" class="form-control" name="pekerjaan" value="<?php echo $data_diri['pekerjaan'] ?? null ?>">
+										<span class="form-text text-muted">Jika belum bekerja, masukkan pekerjaan: Pelajar</span>
 									</div>
 								</div>
 								<div class="form-group row">

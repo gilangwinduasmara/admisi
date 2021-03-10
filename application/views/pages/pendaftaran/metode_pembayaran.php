@@ -35,7 +35,7 @@
 											<div class="card-body">
 												<?php 
 													foreach($jenis_pembayarans as $jenis_pembayaran){
-														echo '<p style="display: none"'.'data-info="'.$jenis_pembayaran['id'].'"'.'>'.($jenis_pembayaran["info_pembayaran"] ?? "").'</p>';
+														echo '<pre style="display: none"'.'data-info="'.$jenis_pembayaran['id'].'"'.'>'.($jenis_pembayaran["info_pembayaran"] ?? "").'</pre>';
 													}
 												?>
 											</div>

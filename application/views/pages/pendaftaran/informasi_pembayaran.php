@@ -5,6 +5,7 @@
 				?>
 				<div class="card card-custom">
 					<div class="card-body">
+						<div class="gutter-b">Anda harus memilih metode pembayaran terlebih dahulu</div>
 						<a class="btn btn-primary" href="<?php echo base_url('pendaftaran/metode_pembayaran?id='.$this->input->get('id')) ?>">Pilih Metode Pembayaran</a>
 					</div>
 				</div>
