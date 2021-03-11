@@ -3,7 +3,7 @@ const STATUS_REGISTRASI_ULANG = {
 	'VALIDASI NIM': 'Sedang divalidasi',
 	'VALIDASI KEUANGAN': 'Sedang divalidasi',
 	'BELUM BAYAR': 'Belum Registrasi Ulang',
-	'LUNAS': 'Sudah Registrasi Ulang'
+	'SUDAH REGISTRASI': 'Sudah Registrasi Ulang'
 }
 let hasil_penerimaan = null
 let registrasi_ulang = []

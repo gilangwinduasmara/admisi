@@ -42,7 +42,7 @@ class Registrasi_ulang_model extends CI_Model {
 								ON daftar_omb.registrasi_ulang_id = registrasi_ulang.id
 							Join prodi
 								ON prodi.id = registrasi_ulang.prodi_id
-							WHERE registrasi_ulang.nim = '$nim' and registrasi_ulang.status = 'LUNAS'");
+							WHERE registrasi_ulang.nim = '$nim' and registrasi_ulang.status = 'SUDAH REGISTRASI'");
 		return $query->result_array();
 	}
 
@@ -55,7 +55,7 @@ class Registrasi_ulang_model extends CI_Model {
 								ON registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
 							JOIN daftar_omb
 								ON daftar_omb.registrasi_ulang_id = registrasi_ulang.id
-							WHERE pendaftaran.akun_id = '$akun_id' and registrasi_ulang.status = 'LUNAS' and hasil_penerimaan.status = 'DITERIMA'");
+							WHERE pendaftaran.akun_id = '$akun_id' and registrasi_ulang.status = 'SUDAH REGISTRASI' and hasil_penerimaan.status = 'DITERIMA'");
 		return $query->result_array();
 	}
 	

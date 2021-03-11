@@ -31,11 +31,11 @@ class Registrasi_ulang extends RestController {
 		$get = $this->get();
 		$status = urldecode((array_keys($get)[0]) ?? null);
 		if($status){
-			$enum = ["LUNAS", "VALIDASI NIM", "VALIDASI KEUANGAN", "BELUM BAYAR"];
+			$enum = ["LUNAS", "VALIDASI NIM", "VALIDASI KEUANGAN", "BELUM BAYAR", "SUDAH REGISTRASI"];
 			if(!in_array($status, $enum)){
 				$this->response(array(
 					"error" => true,
-					"message" => 'must be any enum of LUNAS, VALIDASI NIM, VALIDASI KEUANGAN, BELUM BAYAR'
+					"message" => 'must be any enum of LUNAS, VALIDASI NIM, VALIDASI KEUANGAN, BELUM BAYAR, SUDAH REGISTRASI'
 				), 200);	
 			}
 			$data = $this->registrasi_ulang_model->get($status);
@@ -53,6 +53,11 @@ class Registrasi_ulang extends RestController {
 				$data[$field] = $this->put($field);
 			}
 		}
+
+		if(!empty($data['nim'])){
+			$data['status'] = 'SUDAH REGISTRASI';
+		}
+
 		$data = $this->registrasi_ulang_model->save($data);
 		$this->response(array(
 			'success' => true,

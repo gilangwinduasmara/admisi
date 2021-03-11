@@ -44,7 +44,7 @@ const statusRegistrasiUlang = {
 		label: "Belum Registrasi",
 		color: 'warning'
 	},
-	"LUNAS": {
+	"SUDAH REGISTRASI": {
 		label: "Sudah Registrasi",
 		color: 'success'
 	},

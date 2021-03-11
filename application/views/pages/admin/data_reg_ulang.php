@@ -23,7 +23,7 @@
 			'label' => 'Belum Registrasi',
 			'color' => 'success'
 		],
-		'LUNAS' => [
+		'SUDAH REGISTRASI' => [
 			'label' => 'Sudah Registrasi',
 			'color' => 'danger'
 		]
@@ -47,7 +47,7 @@
 						<option value="">ALL</option>
 						<option value="BELUM BAYAR">Belum Registrasi Ulang</option>
 						<option value="VALIDASI KEUANGAN">Validasi</option>
-						<option value="LUNAS">Sudah Registrasi Ulang</option>
+						<option value="SUDAH REGISTRASI">Sudah Registrasi Ulang</option>
 					</select>
 				</div>
 				<div class="col-md-3">
