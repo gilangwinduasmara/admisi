@@ -59,6 +59,19 @@ class Registrasi_ulang_model extends CI_Model {
 		return $query->result_array();
 	}
 	
+	public function find($id){
+		$this->db->where('id', $id);
+		$registrasi_ulang = $this->db->where('hasil_penerimaan_id is not null')->get($this->table_name)->result_array();
+		foreach($registrasi_ulang as &$registrasi){
+			$registrasi['hasil_penerimaan'] = $this->hasil_penerimaan_model->find($registrasi['hasil_penerimaan_id']);
+			if(!empty($registrasi['hasil_penerimaan'])){
+				$formulir = $this->pendaftaran_model->findByHasilPenerimaan($registrasi['hasil_penerimaan']['pendaftaran_id']);
+				$registrasi['hasil_penerimaan']['pendaftaran'] = $formulir;
+			}
+			$registrasi['prodi'] = $this->prodi_model->find($registrasi['prodi_id']);
+		}
+		return $registrasi_ulang;
+	}
 	public function get($status = false){
 		if(!empty($status)){
 			$this->db->where('status', $status);
