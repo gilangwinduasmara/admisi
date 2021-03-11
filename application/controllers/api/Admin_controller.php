@@ -50,8 +50,8 @@ class Admin_controller extends CI_Controller {
 	{
 		$registrasi_ulang = $this->registrasi_ulang_model->save([
 			'id' => $this->input->post('registrasi_ulang_id'),
-			'status' => 'VALIDASI NIM',
-			'nim' => rand(100000000,999999999)
+			'status' => 'VALIDASI NIM'
+			// 'nim' => rand(100000000,999999999)
 		]);
 		print_r($registrasi_ulang);
 		
