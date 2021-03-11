@@ -144,3 +144,8 @@ $('[name="jenis_pembayaran"]').change(function(){
 		$('.info-pembayaran-wrapper').hide()
 	}
 })
+
+
+$('table').on('click', '[data-toggle="informasi-pembayaran"]', function(){
+	$('#modal_informasi_pembayaran').modal('show')
+})

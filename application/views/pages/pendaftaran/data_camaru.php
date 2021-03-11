@@ -81,8 +81,11 @@
 									}
 									?>
 								</td>
-								<td>
-									<span class="label label-lg label-light-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> label-inline"><?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?></span>
+								<td class="text-center">
+									<div class="label label-lg label-light-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> label-inline"><?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?></div>
+									<div>
+										<a href="#" data-status="<?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?>" data-toggle="informasi-pembayaran"><i class="la la-check-circle mt-4"></i>Info</a href="#">
+									</div>
 								</td>
 								<td> 
 								<?php
@@ -160,3 +163,36 @@
 	</div>
 </div>
 
+
+
+
+<div class="modal fade" id="modal_informasi_pembayaran" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">INFORMASI</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+			<p>
+			Setelah mengunggah bukti bayar Anda:
+			</p>
+			<br>
+			<p>
+			1. Jika status pembayaran Anda "VALIDASI", silahkan menunggu proses validasi pembayaran.
+			</p>
+			<p>
+			2. Jika status pembayaran Anda "LUNAS", silahkan melanjutkan untuk pengisian formulir.
+			</p>
+			<p>
+			3.Jika status pembayaran Anda "DITOLAK", silahkan membayar dan melakukan upload bukti pembayaran kembali).
+			</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
