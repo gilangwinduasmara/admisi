@@ -177,11 +177,10 @@
             </div>
             <div class="modal-body">
 			<p>
-			Kolom ini akan memunculkan status pembayaran Anda setelah memilih metode pembayaran melalui tombol "PILIH PEMBAYARAN" di kolom "AKSI". Terdapat 4 status:
+			Kolom ini akan memunculkan status pembayaran Anda. Terdapat 4 status:
 			</p>
-			<br>
 			<p>
-			1. Jika status pembayaran Anda "BELUM LUNAS" maka Anda harus segera melakukan pembayaran dan mengunggah buktinya di tombol "UPLOAD BUKTI PEMBAYARAN" di yang berada di kolom "AKSI"
+			1. Jika status pembayaran Anda "BELUM LUNAS" maka Anda harus memilih metode pembayaran melalui tombol "PILIH PEMBAYARAN" di kolom "AKSI". Kemudian lakukan pembayaran sesuai petunjuk dan mengunggah buktinya di tombol "UPLOAD BUKTI PEMBAYARAN" yang berada di kolom "AKSI"
 			</p>
 			<p>
 			2. Jika status pembayaran Anda "VALIDASI", silahkan menunggu proses validasi pembayaran.
@@ -191,6 +190,7 @@
 			</p>
 			<p>
 			4.Jika status pembayaran Anda "DITOLAK", silahkan membayar dan melakukan upload bukti pembayaran kembali.
+			</p>
 			</p>
             </div>
             <div class="modal-footer">
