@@ -59,6 +59,7 @@ class Daftar_omb_model extends CI_Model {
 
 
 	public function count(){
+		$this->db->where('ukuran_jas_alma !=', null);
 		return $this->db->get($this->table_name)->num_rows();
 	}
 
