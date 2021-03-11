@@ -121,8 +121,10 @@ class Pendaftaran_controller extends CI_Controller{
 		if($data1['prodi_id'] != null){
 			$this->hasil_penerimaan_model->create($data1);
 		}
-		if($data2['prodi_id'] != null){
-			$this->hasil_penerimaan_model->create($data2);
+		if($data1['prodi_id'] != $data1['prodi_id']){
+			if($data2['prodi_id'] != null){
+				$this->hasil_penerimaan_model->create($data2);
+			}
 		}
 
 		$this->pendaftaran_model->save([
