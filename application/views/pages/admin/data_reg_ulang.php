@@ -42,7 +42,7 @@
 					<input type="date" id="search_date_to" class="form-control search-by-date">
 				</div>
 				<div class="col-md-4">
-					<label for="">Cari berdasarkan status penerimaan</label>
+					<label for="">Cari berdasarkan status registrasi</label>
 					<select class="form-control" id="search_status_registrasi_ulang">
 						<option value="">ALL</option>
 						<option value="BELUM BAYAR">Belum Registrasi Ulang</option>
@@ -119,6 +119,7 @@
 							<th>NIM</th>
 							<th class="text-center" style="min-width: 200px;">Registrasi Ulang</th>
 							<th>Bukti Registrasi Ulang</th>
+							<th>Informasi Pembayaran</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>

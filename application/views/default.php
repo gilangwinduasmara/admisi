@@ -120,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<?php
 			}
 		?>
-		<script src="<?php echo base_url('assets/js/src/registrasi-ulang.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/registrasi-ulang.js?'.now())?>"></script>
 		<script src="<?php echo base_url('assets/js/src/omb.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/prestasi.js?')?>"></script>
 		

@@ -76,6 +76,8 @@
 							<th>Tanggal Daftar</th>
 							<th style="min-width: 200px;">Status Pembayaran</th>
 							<th>Bukti Pembayaran</th>
+							<th>Metode Bayar</th>
+							<th>Informasi Pembayaran</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>

@@ -1,5 +1,8 @@
 <?php
 
+require_once APPPATH.'libraries/JWT.php';
+use Firebase\JWT\JWT;
+
 class Auth_controller extends CI_Controller
 {
 
@@ -89,5 +92,12 @@ class Auth_controller extends CI_Controller
 		
 	}
 
+	public function generate_token(){
+		echo JWT::encode(array('user' => $this->input->get('user')), 'admisi')	;
+	}
+	public function verify_token(){
+		// echo JWT::encode(array('user' => 'tester'), 'admisi')
+		print_r(JWT::decode($this->input->get('token'), 'admisi', array('HS256')));
+	}
 
 }

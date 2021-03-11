@@ -179,7 +179,7 @@ $(document).ready(function(){
 					let html = `<span class="label label-lg label-light-${statusPembayaran[data].color} label-inline">${statusPembayaran[data].label}</span>`
 					return html
 				}
-			},  
+			},
 			{ 
 				"data": "upload_bukti_bayar",
 				"orderable": false,
@@ -189,7 +189,23 @@ $(document).ready(function(){
 					}
 					return ""
 				}
-			 },  
+			},  
+			{
+				"data": "jenis_pembayaran",
+			},  
+			{
+				"render": function (data, type, row){
+					return(
+						`
+							<div>
+								<p>${row.nama_rek_pengirim || '-'}</p>
+								<p>${row.no_rek_pengirim || '-'}</p>
+								<p>${row.bank_pengirim || '-'}</p>
+							</div>
+						`
+					)
+				}
+			},  
 			{ 
 				"data": "status",
 				"orderable": false,
@@ -403,6 +419,19 @@ $(document).ready(function(){
 					return `
 						<img class="img-preview" style="max-height: 50px; obj-fit: contain" src="${BASE_URL}/uploads/${data}" alt="">
 					`
+				}
+			},  
+			{
+				"render": function (data, type, row){
+					return(
+						`
+							<div>
+								<p>${row.nama_rek_pengirim || '-'}</p>
+								<p>${row.no_rek_pengirim || '-'}</p>
+								<p>${row.bank_pengirim || '-'}</p>
+							</div>
+						`
+					)
 				}
 			},  
 			{ 

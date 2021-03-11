@@ -326,6 +326,10 @@ class Pendaftaran_controller extends CI_Controller{
 				'nama_camaru' => $pendaftaran['nama'],
 				'prodi_id' => $hasil_penerimaan['prodi_id'],
 				'upload_bukti_bayar' => $this->upload('upload_bukti_pembayaran_1'),
+				'bank_pengirim' => $this->input->post('bank_pengirim_1'),
+				'no_rek_pengirim' => $this->input->post('no_rek_pengirim_1'),
+				'nama_rek_pengirim' => $this->input->post('nama_rek_pengirim_1'),
+				'tgl_transfer' => $this->input->post('tgl_transfer_1'),
 				'status' => 'VALIDASI KEUANGAN'
 			]);
 
@@ -340,6 +344,10 @@ class Pendaftaran_controller extends CI_Controller{
 				'nama_camaru' => $pendaftaran['nama'],
 				'prodi_id' => $hasil_penerimaan['prodi_id'],
 				'upload_bukti_bayar' => $this->upload('upload_bukti_pembayaran_2'),
+				'bank_pengirim' => $this->input->post('bank_pengirim_2'),
+				'no_rek_pengirim' => $this->input->post('no_rek_pengirim_2'),
+				'nama_rek_pengirim' => $this->input->post('nama_rek_pengirim_2'),
+				'tgl_transfer' => $this->input->post('tgl_transfer_2'),
 				'status' => 'VALIDASI KEUANGAN'
 			]);
 
@@ -356,7 +364,11 @@ class Pendaftaran_controller extends CI_Controller{
 				'nama_camaru' => $pendaftaran['nama'],
 				'prodi_id' => $hasil_penerimaan['prodi_id'],
 				'upload_bukti_bayar' => $this->upload('upload_bukti_pembayaran'),
-				'status' => 'VALIDASI KEUANGAN'
+				'status' => 'VALIDASI KEUANGAN',
+				'bank_pengirim' => $this->input->post('bank_pengirim'),
+				'no_rek_pengirim' => $this->input->post('no_rek_pengirim'),
+				'nama_rek_pengirim' => $this->input->post('nama_rek_pengirim'),
+				'tgl_transfer' => $this->input->post('tgl_transfer'),
 			]);
 
 			$this->daftar_omb_model->create([

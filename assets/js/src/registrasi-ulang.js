@@ -108,6 +108,7 @@ $('[name="id"]').change(function(){
 		})
 		singleDegree()
 		detailEl.show();
+		$('[name]').attr('required', true)
 	}).catch(err => {
 		console.log(err)
 	})
@@ -131,6 +132,30 @@ function doubleDegree(){
 			</div>
 		</div>
 		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">Bank Pengirim</label>
+			<div class="col-md-9">
+				<input class="form-control" name="bank_pengirim_1">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">No rek pengirim</label>
+			<div class="col-md-9">
+				<input class="form-control" name="no_rek_pengirim_1">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">Nama rek pengirim</label>
+			<div class="col-md-9">
+				<input class="form-control" name="nama_rek_pengirim_1">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">Tanggal Transfer</label>
+			<div class="col-md-9">
+				<input class="form-control" type="date" name="tgl_transfer_1">
+			</div>
+		</div>
+		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Upload Bukti Pembayaran</label>
 			<div class="col-md-9">
 				<input class="form-control" type="file" name="upload_bukti_pembayaran_1">
@@ -148,6 +173,30 @@ function doubleDegree(){
 			<label for="" class="col-md-3 col-form-label">No. SKR</label>
 			<div class="col-md-9">
 				<input class="form-control" readonly name="skpm_2" value="${hasil_penerimaan[1].kode_skpm}">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">Bank Pengirim</label>
+			<div class="col-md-9">
+				<input class="form-control" name="bank_pengirim_1">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">No rek pengirim</label>
+			<div class="col-md-9">
+				<input class="form-control" name="no_rek_pengirim_1">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">Nama rek pengirim</label>
+			<div class="col-md-9">
+				<input class="form-control" name="nama_rek_pengirim_1">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">Tanggal Transfer</label>
+			<div class="col-md-9">
+				<input class="form-control" type="date" name="tgl_transfer_1">
 			</div>
 		</div>
 		<div class="form-group row">
@@ -180,6 +229,30 @@ function singleDegree(){
 			<label for="" class="col-md-3 col-form-label">No. SKR</label>
 			<div class="col-md-9">
 				<input class="form-control" name="skpm" readonly>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">Bank Pengirim</label>
+			<div class="col-md-9">
+				<input class="form-control" name="bank_pengirim">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">No rek pengirim</label>
+			<div class="col-md-9">
+				<input class="form-control" name="no_rek_pengirim">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">Nama rek pengirim</label>
+			<div class="col-md-9">
+				<input class="form-control" name="nama_rek_pengirim">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="" class="col-md-3 col-form-label">Tanggal Transfer</label>
+			<div class="col-md-9">
+				<input class="form-control" type="date" name="tgl_transfer">
 			</div>
 		</div>
 		<div class="form-group row">
