@@ -15,8 +15,12 @@ class Registrasi_ulang extends RestController {
 	
 	public function index_get(){
 		$status = $this->get('status');
-		// $this->response($this->get(), 200);	
-		
+		$id = last_segment($this->uri);
+		if(is_numeric($id)){
+			$data = $this->registrasi_ulang_model->find($id);
+			$this->response($data, 200);	
+		}
+
 		$data = $this->registrasi_ulang_model->get();
 		$this->response($data, 200);
 	}
