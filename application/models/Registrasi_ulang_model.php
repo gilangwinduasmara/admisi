@@ -163,7 +163,6 @@ class Registrasi_ulang_model extends CI_Model {
 
 	public function save($data){
 		$id = $data['id'];
-		print_r($id);
 		unset($data['id']);
 		$this->db->update($this->table_name, $data, array('id' => $id));
 		return $this->db->where('id', $id)->get($this->table_name)->result_array()[0];

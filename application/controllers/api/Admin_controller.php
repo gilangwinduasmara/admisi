@@ -50,7 +50,7 @@ class Admin_controller extends CI_Controller {
 	{
 		$registrasi_ulang = $this->registrasi_ulang_model->save([
 			'id' => $this->input->post('registrasi_ulang_id'),
-			'status' => 'LUNAS',
+			'status' => 'VALIDASI NIM',
 			'nim' => rand(100000000,999999999)
 		]);
 		print_r($registrasi_ulang);
@@ -60,7 +60,7 @@ class Admin_controller extends CI_Controller {
 		]);
 
 		$this->session->set_flashdata('success', ['Pembayaran berhasil divalidasi']);
-		redirect('/admin/data_pendaftar');
+		redirect('/admin/data_registrasi_ulang');
 	}
 
 	public function hasil_penerimaan()

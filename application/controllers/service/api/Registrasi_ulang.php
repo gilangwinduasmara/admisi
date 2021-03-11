@@ -41,6 +41,7 @@ class Registrasi_ulang extends RestController {
 	}
 
 	public function index_put(){
+		// echo "tes";
 		$id = last_segment($this->uri);
 		$data = array('id' => $id);
 		foreach(["hasil_penerimaan_id","nama_camaru","upload_bukti_bayar","nim","prodi_id","status"] as $field){
@@ -48,10 +49,11 @@ class Registrasi_ulang extends RestController {
 				$data[$field] = $this->put($field);
 			}
 		}
-		$this->registrasi_ulang_model->save($data);
+		$data = $this->registrasi_ulang_model->save($data);
 		$this->response(array(
 			'success' => true,
-			'message' => "Data successfully updated"
+			'message' => "Data successfully updated",
+			'data' => $data
 		), 200);
 	}
 

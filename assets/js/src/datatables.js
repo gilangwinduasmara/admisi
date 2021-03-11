@@ -33,8 +33,12 @@ const statusPenerimaan = {
 
 const statusRegistrasiUlang = {
 	"VALIDASI KEUANGAN": {
-		label: "Sedang Validasi",
+		label: "Validasi Pembayaran",
 		color: 'info'
+	},
+	"VALIDASI NIM": {
+		label: "Validasi NIM",
+		color: 'primary'
 	},
 	"BELUM BAYAR": {
 		label: "Belum Registrasi",
@@ -211,7 +215,7 @@ $(document).ready(function(){
 				"orderable": false,
 				"render": function(data, type, row){
 					if(data == 'VALIDASI'){
-						return `<button class="btn btn-primary" data-toggle="validasi_pembayaran" data-id="${row.id}" data-nama="${row.nama}">Validasi</button>`
+						return `<button class="btn btn-primary" data-toggle="validasi_pembayaran" data-id="${row.pembayaran_id}" data-nama="${row.nama}">Validasi</button>`
 					}else{
 						return `<button class="btn btn-primary" disabled >Validasi</button>`
 					}
