@@ -31,6 +31,7 @@
 							if(empty($pendaftaran['upload_foto'])){
 								?>
 									<input type="file" accept="application/pdf, image/jpeg, image/png" name="upload_foto">
+									<span class="text-muted">(pdf, jpg, jpeg, png)</span>
 								<?php
 							}else{
 								?>
@@ -50,6 +51,7 @@
 							if(empty($pendaftaran['upload_kk'])){
 								?>
 									<input type="file" accept="application/pdf, image/jpeg, image/png" name="upload_kk">
+									<span class="text-muted">(pdf, jpg, jpeg, png)</span>
 								<?php
 							}else{
 								?>
@@ -69,6 +71,7 @@
 							if(empty($pendaftaran['upload_akta_lahir'])){
 								?>
 									<input type="file" accept="application/pdf, image/jpeg, image/png" name="upload_akta_lahir">
+									<span class="text-muted">(pdf, jpg, jpeg, png)</span>
 								<?php
 							}else{
 								?>
@@ -88,6 +91,7 @@
 							if(empty($pendaftaran['upload_srt_pernyataan'])){
 								?>
 									<input type="file" accept="application/pdf, image/jpeg, image/png" name="upload_srt_pernyataan">
+									<span class="text-muted">(pdf, jpg, jpeg, png)</span>
 								<?php
 							}else{
 								?>

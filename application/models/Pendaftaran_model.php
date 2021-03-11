@@ -62,7 +62,7 @@ class Pendaftaran_model extends CI_Model{
 			JOIN daftar_omb ON daftar_omb.registrasi_ulang_id = registrasi_ulang.id
 			WHERE pen.status_formulir = 'AKTIF'
 			AND hasil_penerimaan.status = 'DITERIMA'
-			AND registrasi_ulang.status = 'LUNAS'
+			AND registrasi_ulang.status = 'SUDAH REGISTRASI'
 			and pen.akun_id='$akun_id'
 			and daftar_omb.ukuran_jas_alma is null";
 		$sql .= $where;

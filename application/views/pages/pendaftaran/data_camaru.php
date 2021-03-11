@@ -83,8 +83,8 @@
 								</td>
 								<td class="text-center">
 									<div class="label label-lg label-light-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> label-inline"><?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?></div>
-									<div>
-										<a href="#" data-status="<?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?>" data-toggle="informasi-pembayaran"><i class="la la-check-circle mt-4"></i>Info</a href="#">
+									<div class="d-flex align-items-center justify-content-center mt-2">
+										<a href="#" data-status="<?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?>" data-toggle="informasi-pembayaran"><i class="fas fa-info-circle mr-4"></i>Info</a href="#">
 									</div>
 								</td>
 								<td> 
@@ -177,17 +177,20 @@
             </div>
             <div class="modal-body">
 			<p>
-			Setelah mengunggah bukti bayar Anda:
+			Kolom ini akan memunculkan status pembayaran Anda setelah memilih metode pembayaran melalui tombol "PILIH PEMBAYARAN" di kolom "AKSI". Terdapat 4 status:
 			</p>
 			<br>
 			<p>
-			1. Jika status pembayaran Anda "VALIDASI", silahkan menunggu proses validasi pembayaran.
+			1. Jika status pembayaran Anda "BELUM LUNAS" maka Anda harus segera melakukan pembayaran dan mengunggah buktinya di tombol "UPLOAD BUKTI PEMBAYARAN" di yang berada di kolom "AKSI"
 			</p>
 			<p>
-			2. Jika status pembayaran Anda "LUNAS", silahkan melanjutkan untuk pengisian formulir.
+			2. Jika status pembayaran Anda "VALIDASI", silahkan menunggu proses validasi pembayaran.
 			</p>
 			<p>
-			3.Jika status pembayaran Anda "DITOLAK", silahkan membayar dan melakukan upload bukti pembayaran kembali).
+			3. Jika status pembayaran Anda "LUNAS", silahkan melanjutkan untuk melakukan pengisian formulir melalui tombol di kolom "ISI FORMULIR"
+			</p>
+			<p>
+			4.Jika status pembayaran Anda "DITOLAK", silahkan membayar dan melakukan upload bukti pembayaran kembali.
 			</p>
             </div>
             <div class="modal-footer">

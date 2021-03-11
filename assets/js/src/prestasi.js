@@ -28,7 +28,8 @@ $('button[data-prestasi-create]').click(function(){
 		</div>
 		<div class="form-group row">
 			<label for="" class="col-md-2 col-form-label">Unggah Bukti Prestasi</label>
-			<input type="file" name="unggah_bukti_prestasi[]">
+			<input type="file" name="unggah_bukti_prestasi[]" accept="application/pdf, image/jpeg, image/png">
+			<span class="text-muted">(pdf, jpg, jpeg, png)</span>
 		</div>
 		<div class="separator separator-solid mb-8"></div>
 	`)

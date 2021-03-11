@@ -157,6 +157,7 @@
 														if(empty($data_pendidikan['upload_ijazah[]'][$key])){
 															?>
 																<input type="file" name="upload_ijazah_<?php echo $pendidikan ?>" accept="application/pdf">
+																<span class="text-muted">(pdf)</span>
 															<?php
 														}else{
 															?>
@@ -176,6 +177,7 @@
 														if(empty($data_pendidikan['upload_daftar_nilai[]'][$key])){
 															?>
 																<input type="file" name="upload_daftar_nilai_<?php echo $pendidikan ?>" accept="application/pdf">
+																<span class="text-muted">(pdf)</span>
 															<?php
 														}else{
 															?>
