@@ -309,8 +309,11 @@ $(document).ready(function(){
 				},
 				yaxis: {
 				  title: {
-					text: "Formulir"
-				  }
+					text: "Jumlah"
+				  },
+				//   min: 0,
+				//   max: 500,
+				  tickAmount: 1
 				},
 				fill: {
 				  opacity: 1
