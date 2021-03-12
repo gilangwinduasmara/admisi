@@ -135,7 +135,7 @@
 							<div class="card-body">
 								<div class="form-group row ml-1">
 									<label class="checkbox checkbox-outline checkbox-success">
-										<input type="checkbox" name="same_address" value="true" <?php echo (($data_wali['same_address'] ?? null) == 'true' ? 'checked': '') ?>/>
+										<input type="checkbox" data-kewarganegaraan-camaru="<?php $pendaftaran['kewarganegaraan'] ?>" name="same_address" value="true" <?php echo (($data_wali['same_address'] ?? null) == 'true' ? 'checked': '') ?>/>
 										<span></span>
 										Alamat wali sama dengan alamat camaru
 									</label>
@@ -322,13 +322,13 @@
 									<div class="form-group row">
 										<label for="" class="col-md-2 col-form-label">RT</label>
 										<div class="col-md-10">
-											<input name="rt" data-rt-camaru="<?php echo $pendaftaran['rt'] ?>" value="<?php echo ($data_wali['rt']??null) ?>" cols="30" rows="10" class="form-control">
+											<input name="rt" data-kewarganegaraan-camaru data-rt-camaru="<?php echo $pendaftaran['rt'] ?>" value="<?php echo ($data_wali['rt']??null) ?>" cols="30" rows="10" class="form-control">
 										</div>
 									</div>
 									<div class="form-group row">
 										<label for="" class="col-md-2 col-form-label">RW</label>
 										<div class="col-md-10">
-											<input name="rw" data-rw-camaru="<?php echo $pendaftaran['rw'] ?>" value="<?php echo ($data_wali['rw']??null) ?>" class="form-control">
+											<input name="rw" data-kewarganegaraan-camaru data-rw-camaru="<?php echo $pendaftaran['rw'] ?>" value="<?php echo ($data_wali['rw']??null) ?>" class="form-control">
 										</div>
 									</div>
 									<div class="form-group row">

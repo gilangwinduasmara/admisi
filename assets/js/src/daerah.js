@@ -213,6 +213,7 @@ var storedRt = ""
 var storedW = ""
 
 $('input[name="same_address"]').change(function(){
+	const kewarganegaraan = $(this).data('kewarganegaraan')
 	if($(this).is(':checked')){
 		storedAlamat = $('[name="alamat"]').val()
 		storedRt = $('[name="rt"]').val()
@@ -227,6 +228,17 @@ $('input[name="same_address"]').change(function(){
 		$.each($('.daerah-wrapper').find('select'), function(){
 			$(this).attr('disabled', true)
 		})
+		if(kewarganegaraan == 'WNI'){
+			$('[name="rt"]').parent().parent().show();
+			$('[name="rt"]').attr('disabled', false);
+			$('[name="rw"]').parent().parent().show();
+			$('[name="rw"]').attr('disabled', false);
+		}else{
+			$('[name="rt"]').parent().parent().hide();
+			$('[name="rt"]').attr('disabled', true);
+			$('[name="rw"]').parent().parent().hide();
+			$('[name="rw"]').attr('disabled', true);
+		}
 	}else{
 		// $('.same-address').show()
 		$('[name="alamat"]').val(storedAlamat)
@@ -238,6 +250,10 @@ $('input[name="same_address"]').change(function(){
 		$.each($('.daerah-wrapper').find('select'), function(){
 			$(this).attr('disabled', false)
 		})
+		$('[name="rt"]').parent().parent().show();
+		$('[name="rt"]').attr('disabled', false);
+		$('[name="rw"]').parent().parent().show();
+		$('[name="rw"]').attr('disabled', false);
 	}
 })
 
