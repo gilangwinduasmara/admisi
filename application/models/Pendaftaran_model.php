@@ -350,7 +350,7 @@ class Pendaftaran_model extends CI_Model{
 		// gelombang
 		$gelombang = $this->gelombang_model->getCurrentActiveGelombang();
 		if(!empty($gelombang)){
-			$id.= explode(" ", $gelombang['nama_gelombang'])[1];
+			// $id.= explode(" ", $gelombang['nama_gelombang'])[1];
 		}
 		// no urut
 		$count = $this->db->where('tahun_akademik_id', $data['tahun_akademik_id'])->get($this->table_name)->num_rows();
