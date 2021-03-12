@@ -24,7 +24,7 @@
 					<?php 
 						foreach($pengumuman as $p){
 							?>
-								<div class="pengumuman-slider-item d-flex align-items-center justify-content-between" style="height: 84px; min-width: 100%">
+								<div class="pengumuman-slider-item d-flex align-items-center justify-content-between" style="height: 124px; min-width: 100%">
 									<div class="display-4 px-4 text-white"><?php echo $p['judul'] ?></div>
 									<div class="px-4">
 										<a class="btn btn-warning" href="<?php echo base_url('pengumuman?id='.$p['id'])?>">Lihat Selengkapnya</a>
