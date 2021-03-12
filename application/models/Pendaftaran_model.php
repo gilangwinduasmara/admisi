@@ -345,8 +345,8 @@ class Pendaftaran_model extends CI_Model{
 		$data['tahun_akademik_id'] = $tahun_akademik['id'];
 		// tahun
 		$id = substr(explode("/", $tahun_akademik['tahun_akademik'])[0], -2);
-		// reg/pin (0 / 1)
-		$id .= "0";
+		// reg/pin (1 / 0)
+		$id .= "1";
 		// gelombang
 		$gelombang = $this->gelombang_model->getCurrentActiveGelombang();
 		if(!empty($gelombang)){
