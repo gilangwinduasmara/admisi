@@ -265,7 +265,6 @@ class Pendaftaran_model extends CI_Model{
 			)
 			left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
 			join (select id as jenis_pembayaran_id, jenis_pembayaran from jenis_pembayaran) as jenis_pembayaran on pem.jenis_pembayaran_id = jenis_pembayaran.jenis_pembayaran_id
-			) 
 		");
 
 		$query = $this->db->query($sql);
