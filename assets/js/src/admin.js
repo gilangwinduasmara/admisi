@@ -32,7 +32,7 @@ $("#table_data_pendaftar").on('click', '[data-toggle="validasi_pembayaran"]', fu
 		pembayaran_id: $(this).data('id')
 	}
 	Swal.fire({
-        title: "Validasi Pemabayaran",
+        title: "Validasi Pembayaran",
         text: "Apakah Anda yakin akan memvalidasi pembayaran camaru atas nama "+$(this).data('nama')+"?",
         icon: "info",
         showCancelButton: true,
@@ -44,7 +44,7 @@ $("#table_data_pendaftar").on('click', '[data-toggle="validasi_pembayaran"]', fu
             post(BASE_URL+'/api/admin/validasi_pembayaran', data)
         }else if (result.dismiss === "cancel") {
             Swal.fire({
-				title: "Tolak Pemabayaran",
+				title: "Tolak Pembayaran",
 				text: "Apakah Anda yakin akan menolak pembayaran?",
 				icon: "warning",
 				showCancelButton: true,
@@ -65,7 +65,7 @@ $('#table_data_registrasi_ulang').on('click', '[data-toggle="validasi_registrasi
 		registrasi_ulang_id: $(this).data('id')
 	}
 	Swal.fire({
-        title: "Validasi Pemabayaran",
+        title: "Validasi Pembayaran",
         text: "Apakah Anda yakin akan memvalidasi registrasi ulang atas nama "+$(this).data('nama'),
         icon: "warning",
         showCancelButton: true,

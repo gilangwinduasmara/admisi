@@ -173,7 +173,7 @@ $(document).ready(function(){
 			{ 
 				"data": "created_at", 
 				"render": function(data, type, row){
-					return data.split(" ")[0]
+					return formatDate(data.split(" ")[0])
 				}
 			},  
 			{ 
@@ -205,7 +205,7 @@ $(document).ready(function(){
 								<p>${row.nama_rek_pengirim || '-'}</p>
 								<p>${row.no_rek_pengirim || '-'}</p>
 								<p>${row.bank_pengirim || '-'}</p>
-								<p>${row.tgl_transfer || '-'}</p>
+								<p>${formatDate(row.tgl_transfer) || '-'}</p>
 							</div>
 						`
 					)
@@ -262,7 +262,7 @@ $(document).ready(function(){
 			{ "data": "nim" }, 
 			{ "data": "nama_camaru" },  
 			{ "data": "nama_prodi" },  
-			{ "data": "created_at" },  
+			{ "data": "created_at", "render": (data) => (formatDate(data)) },  
 			{ "data": "ukuran_jas_alma" },  
 			
 		],
@@ -310,7 +310,7 @@ $(document).ready(function(){
 			{ 
 				"data": "created_at",
 				"render": function(data){
-					return data.split(" ")[0]
+					return formatDate(data.split(" ")[0])
 				}
 			},  // 
 			{ 

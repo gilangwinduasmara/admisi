@@ -123,7 +123,7 @@
 								<tr>
 									<td><?php echo $p['id'] ?></td>
 									<td><?php echo $p['nama'] ?></td>
-									<td><?php echo explode(' ', $p['created_at'])[0]  ?></td>
+									<td><?php echo explode(' ', formatDate($p['created_at'])[0])  ?></td>
 									<td class="text-center">
 										<?php 
 											if(!empty($p['hasil_penerimaan'][0])){

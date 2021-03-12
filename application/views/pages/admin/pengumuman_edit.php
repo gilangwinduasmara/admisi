@@ -13,7 +13,7 @@
 						?>
 						<div class="form-group">
 							<label for="">Judul</label>
-							<input required type="text" name="judul" value="<?php echo $pengumuman['judul'] ?? '' ?>" class="form-control">
+							<input required type="text" name="judul" value="<?php echo $pengumuman['judul'] ?? '' ?>" class="form-control" maxlength="40">
 						</div>
 						<div class="form-group">
 							<label for="">Foto</label><br>

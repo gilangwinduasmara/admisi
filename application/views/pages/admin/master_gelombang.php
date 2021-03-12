@@ -41,8 +41,8 @@
 											<td><?php echo $g['id'] ?></td>
 											<td><?php echo $g['tahun_akademik'] ?></td>
 											<td><?php echo $g['nama_gelombang'] ?></td>
-											<td><?php echo $g['tanggal_mulai'] ?></td>
-											<td><?php echo $g['tanggal_selesai'] ?></td>
+											<td><?php echo formatDate($g['tanggal_mulai']) ?></td>
+											<td><?php echo formatDate($g['tanggal_selesai']) ?></td>
 										</tr>
 									<?php
 								}

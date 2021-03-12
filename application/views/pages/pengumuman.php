@@ -10,9 +10,9 @@
 								<div class="card-title">
 									<?php echo $p['judul'] ?>
 								</div>
-								<div class="card-text">
+								<!-- <div class="card-text">
 									<?php echo $p['isi'] ?>
-								</div>
+								</div> -->
 								<div class="d-flex justify-content-end">
 									<a href="<?php echo base_url('/pengumuman?id='.$p['id']) ?>" class="btn btn-primary">Read more</a>
 								</div>

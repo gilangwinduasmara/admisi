@@ -65,7 +65,7 @@
 								<td><?php echo($pendaftaran['id'])?></td>
 								<td><?php echo($pendaftaran['tahun_akademik']['tahun_akademik'] ?? '')?></td>
 								<td><?php echo($pendaftaran['nama'])?></td>
-								<td><?php echo(explode(" ", $pendaftaran['created_at'])[0])?></td>
+								<td><?php echo(formatDate(explode(" ", $pendaftaran['created_at'])[0]))?></td>
 								<td class="text-center">
 									<?php
 									if(($pendaftaran['pembayaran'][0]['status']??'BELUM DIBAYAR') == 'LUNAS'){

@@ -23,3 +23,13 @@ function clean(&$data){
 function sendEmailLink($context){
 	
 }
+
+function formatDate($date){
+	try{
+		$splited = explode("-", $date);
+		$formated = $splited[2]."-".$splited[1]."-".$splited[0];
+		return $formated;
+	}catch(Exception $e){
+		return $date;
+	}
+}

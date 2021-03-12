@@ -161,3 +161,29 @@ $('[name="jenis_pembayaran"]').change(function(){
 $('table').on('click', '[data-toggle="informasi-pembayaran"]', function(e){
 	$('#modal_informasi_pembayaran').modal('show')
 })
+
+function formatDate(date){
+	try{
+		const splited = date.split("-")
+		return splited[2]+"-"+splited[1]+"-"+splited[0]
+	}catch(e){
+		return date
+	}
+}
+
+
+$(document).ready(function(){
+	let i = 1;
+	setInterval(()=>{
+		if(i>=$('.pengumuman-slider').children().length){
+			scrollDuration = 0
+			i = 0;
+		} else{
+			scrollDuration = 500
+		}
+		let scrollVal = $($('.pengumuman-slider-item')[0]).width()*(i++)
+		console.log(scrollVal)
+		// $('.pengumuman-slider').scrollLeft(scrollVal)
+		$('.pengumuman-slider').animate({scrollLeft: scrollVal}, scrollDuration)
+	}, 25000)
+})

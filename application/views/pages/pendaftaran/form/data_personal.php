@@ -125,10 +125,8 @@
 									<div class="col-md-10">
 										<select name="status_sipil" id="" class="form-control">
 											<option value="">Pilih</option>
-											<option value="NIKAH" <?php echo (($data_diri['status_sipil'] ?? null) == 'NIKAH' ? 'selected': '') ?>>Nikah</option>
-											<option value="BELUM NIKAH" <?php echo (($data_diri['status_sipil'] ?? null) == 'BELUM NIKAH' ? 'selected': '') ?>>Belum Nikah</option>
-											<option value="JANDA" <?php echo (($data_diri['status_sipil'] ?? null) == 'JANDA' ? 'selected': '') ?>>Janda</option>
-											<option value="DUDA" <?php echo (($data_diri['status_sipil'] ?? null) == 'DUDA' ? 'selected': '') ?>>Duda</option>
+											<option value="TIDAK" <?php echo (($data_diri['status_sipil'] ?? null) == 'TIDAK' ? 'selected': '') ?>>Tidak</option>
+											<option value="YA" <?php echo (($data_diri['status_sipil'] ?? null) == 'YA' ? 'selected': '') ?>>Ya</option>
 										</select>
 									</div>
 								</div>

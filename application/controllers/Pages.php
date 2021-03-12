@@ -15,8 +15,10 @@ class Pages extends CI_Controller{
 	
 
 	public function landing(){
+		$pengumuman = $this->pengumuman_model->get();
 		$data = array(
-			'page' => 'pages/index.php'
+			'page' => 'pages/index.php',
+			'pengumuman' => $pengumuman
 		);
 		$this->load->view('default', $data);
 	}
