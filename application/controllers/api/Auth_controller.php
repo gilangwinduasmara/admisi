@@ -109,7 +109,7 @@ class Auth_controller extends CI_Controller
 				');
 			$email_status = $this->email->send() ? ' yay': ' nope';
 			$this->session->set_userdata($user_data);
-			$this->session->set_flashdata('success', ['Link aktivasi telah dikirim ke email anda '.base_url('/verify?code='.$verificationCode)]);
+			$this->session->set_flashdata('success', ['Link aktivasi telah dikirim ke email anda']);
 			redirect('verify');
 		}
 		

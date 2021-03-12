@@ -62,7 +62,7 @@ class Pages extends CI_Controller{
 				</html>
 				');
 			$email_status = $this->email->send() ? ' yay': ' nope';
-		$this->session->set_flashdata('success', ['Link aktivasi telah dikirim ke email anda '.base_url('/verify?code='.$verificationCode).$email_status]);
+		$this->session->set_flashdata('success', ['Link aktivasi telah dikirim ke email anda ']);
 		redirect('verify');
 	}
 
