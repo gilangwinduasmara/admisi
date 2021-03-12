@@ -30,6 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php $this->load->view('layout.php')?>
 		<script>
 			var HOST_URL = '<?php echo base_url() ?>';
+			var jenis_pembayaran = <?php echo json_encode($jenis_pembayaran ?? []) ?>
 		</script>
 
 		<script>

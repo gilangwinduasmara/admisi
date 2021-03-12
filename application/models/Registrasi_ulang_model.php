@@ -99,6 +99,7 @@ class Registrasi_ulang_model extends CI_Model {
 			)
 		JOIN (select id as prodi_id, nama_prodi from prodi) as prodi
 			on hp.prodi_id = prodi.prodi_id
+		left JOIN (select id as jenis_pembayaran_id, jenis_pembayaran from jenis_pembayaran) as jenis_pembayaran on jenis_pembayaran.jenis_pembayaran_id = registrasi_ulang.jenis_pembayaran_id
 		where lower(registrasi_ulang.nama_camaru) like lower('%$search%')";
 		if(!empty($status)){
 			$sql .= " and registrasi_ulang.status = '$status' ";

@@ -330,6 +330,7 @@ class Pendaftaran_controller extends CI_Controller{
 				'bank_pengirim' => $this->input->post('bank_pengirim_1'),
 				'no_rek_pengirim' => $this->input->post('no_rek_pengirim_1'),
 				'nama_rek_pengirim' => $this->input->post('nama_rek_pengirim_1'),
+				'jenis_pembayaran_id' => $this->input->post('jenis_pembayaran_id_1'),
 				'tgl_transfer' => $this->input->post('tgl_transfer_1'),
 				'status' => 'VALIDASI KEUANGAN'
 			]);
@@ -349,6 +350,7 @@ class Pendaftaran_controller extends CI_Controller{
 				'no_rek_pengirim' => $this->input->post('no_rek_pengirim_2'),
 				'nama_rek_pengirim' => $this->input->post('nama_rek_pengirim_2'),
 				'tgl_transfer' => $this->input->post('tgl_transfer_2'),
+				'jenis_pembayaran_id' => $this->input->post('jenis_pembayaran_id_2'),
 				'status' => 'VALIDASI KEUANGAN'
 			]);
 
@@ -370,6 +372,7 @@ class Pendaftaran_controller extends CI_Controller{
 				'no_rek_pengirim' => $this->input->post('no_rek_pengirim'),
 				'nama_rek_pengirim' => $this->input->post('nama_rek_pengirim'),
 				'tgl_transfer' => $this->input->post('tgl_transfer'),
+				'jenis_pembayaran_id' => $this->input->post('jenis_pembayaran_id'),
 			]);
 
 			$this->daftar_omb_model->create([

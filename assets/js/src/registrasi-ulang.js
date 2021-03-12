@@ -132,6 +132,7 @@ function doubleDegree(){
 				<input class="form-control" readonly name="skpm_1" value="${hasil_penerimaan[0].kode_skpm}">
 			</div>
 		</div>
+		<div data-field="jenis_pembayaran_id_1" class="pembayaran-wrapper"></div>
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Bank Pengirim</label>
 			<div class="col-md-9">
@@ -176,28 +177,29 @@ function doubleDegree(){
 				<input class="form-control" readonly name="skpm_2" value="${hasil_penerimaan[1].kode_skpm}">
 			</div>
 		</div>
+		<div data-field="jenis_pembayaran_id_2" class="pembayaran-wrapper"></div>
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Bank Pengirim</label>
 			<div class="col-md-9">
-				<input class="form-control" name="bank_pengirim_1">
+				<input class="form-control" name="bank_pengirim_2">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">No rek pengirim</label>
 			<div class="col-md-9">
-				<input class="form-control" name="no_rek_pengirim_1">
+				<input class="form-control" name="no_rek_pengirim_2">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Nama rek pengirim</label>
 			<div class="col-md-9">
-				<input class="form-control" name="nama_rek_pengirim_1">
+				<input class="form-control" name="nama_rek_pengirim_2">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Tanggal Transfer</label>
 			<div class="col-md-9">
-				<input class="form-control" type="date" name="tgl_transfer_1">
+				<input class="form-control" type="date" name="tgl_transfer_2">
 			</div>
 		</div>
 		<div class="form-group row">
@@ -212,6 +214,7 @@ function doubleDegree(){
 		</div>
 	`
 	pembayaran.append(html)
+	initPembayaran()
 }
 
 function singleDegree(){
@@ -232,6 +235,7 @@ function singleDegree(){
 				<input class="form-control" name="skpm" readonly>
 			</div>
 		</div>
+		<div data-field="jenis_pembayaran_id" class="pembayaran-wrapper"></div>
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Bank Pengirim</label>
 			<div class="col-md-9">
@@ -282,6 +286,26 @@ function singleDegree(){
 		console.log($(this).val())
 		$('[name="skpm"]').val($(this).val())
 	})
+	initPembayaran()
 	
 }
 
+function initPembayaran(){
+	$.each($('.pembayaran-wrapper'), function(){
+		$(this).empty()
+		html = `
+			<div class="form-group row">
+				<label for="" class="col-md-3 col-form-label">Pilih Metode Pembayaran</label>
+				<div class="col-md-9">
+					<select class="form-control" name="${$(this).data('field')}">
+						<option value="" >Pilih</option>
+					</select>
+				</div>
+			</div>
+		`
+		$(this).html(html)
+		jenis_pembayaran.map((item, index) => {
+			$(`[name="${$(this).data('field')}"]`).append(`<option value="${item.id}">${item.jenis_pembayaran}</option>`)
+		})
+	})
+}

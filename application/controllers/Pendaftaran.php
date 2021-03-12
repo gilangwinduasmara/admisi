@@ -180,6 +180,7 @@ class Pendaftaran extends CI_Controller
 	}
 	public function registrasi_ulang()
 	{
+		$jenis_pembayaran = $this->jenis_pembayaran_model->get();
 		$pendaftaran = $this->pendaftaran_model->findByAkunId($this->session->userdata('id'), true);
 		$data = array(
 			"page" => 'pages/pendaftaran/registrasi_ulang.php',
@@ -187,7 +188,8 @@ class Pendaftaran extends CI_Controller
 				'Pendaftaran',
 				'Registrasi Ulang'
 			],
-			"pendaftaran" => $pendaftaran
+			"pendaftaran" => $pendaftaran,
+			"jenis_pembayaran" => $jenis_pembayaran
 		);
 		$this->load->view('default', $data);
 	}

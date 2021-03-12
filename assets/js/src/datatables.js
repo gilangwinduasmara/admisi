@@ -205,6 +205,7 @@ $(document).ready(function(){
 								<p>${row.nama_rek_pengirim || '-'}</p>
 								<p>${row.no_rek_pengirim || '-'}</p>
 								<p>${row.bank_pengirim || '-'}</p>
+								<p>${row.tgl_transfer || '-'}</p>
 							</div>
 						`
 					)
@@ -426,6 +427,17 @@ $(document).ready(function(){
 				}
 			},  
 			{
+				"render": function(data, type, row){
+					return(
+						`
+							<div>
+								<p>${row.jenis_pembayaran || '-'}</p>
+							</div>
+						`
+					)
+				}
+			},
+			{
 				"render": function (data, type, row){
 					return(
 						`
@@ -433,6 +445,7 @@ $(document).ready(function(){
 								<p>${row.nama_rek_pengirim || '-'}</p>
 								<p>${row.no_rek_pengirim || '-'}</p>
 								<p>${row.bank_pengirim || '-'}</p>
+								<p>${row.tgl_transfer || '-'}</p>
 							</div>
 						`
 					)

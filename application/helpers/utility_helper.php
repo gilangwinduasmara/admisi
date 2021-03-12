@@ -18,3 +18,8 @@ function clean(&$data){
 		$val = htmlentities($val, ENT_QUOTES);
 	});
 }
+
+
+function sendEmailLink($context){
+	
+}

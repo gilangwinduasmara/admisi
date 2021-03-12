@@ -46,7 +46,8 @@
 					<select class="form-control" id="search_status_registrasi_ulang">
 						<option value="">ALL</option>
 						<option value="BELUM BAYAR">Belum Registrasi Ulang</option>
-						<option value="VALIDASI KEUANGAN">Validasi</option>
+						<option value="VALIDASI KEUANGAN">Validasi Keuangan</option>
+						<option value="VALIDASI NIM">Validasi NIM</option>
 						<option value="SUDAH REGISTRASI">Sudah Registrasi Ulang</option>
 					</select>
 				</div>
@@ -111,14 +112,15 @@
 			<table class="table table-bordered " id="table_data_registrasi_ulang">
 					<thead>
 						<tr>
-							<th >No. Pendaftaran</th>
+							<th >ID Registrasi Ulang</th>
 							<th>Tahun Akademik</th>
 							<th>Kode Skpm</th>
 							<th>Prodi</th>
 							<th>Nama Camaru</th>
 							<th>NIM</th>
 							<th class="text-center" style="min-width: 200px;">Registrasi Ulang</th>
-							<th>Bukti Registrasi Ulang</th>
+							<th>Bukti Pembayaran</th>
+							<th>Metode Pembayaran</th>
 							<th>Informasi Pembayaran</th>
 							<th>Aksi</th>
 						</tr>

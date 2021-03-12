@@ -7,6 +7,14 @@ class Akun_model extends CI_Model{
 	public $email_verified_at;
 	public $created_at;
 	public $updated_at;
+
+	
+	public function __construct()
+	{
+		parent::__construct();
+		
+	}
+	
 	
 	public function create($data){
 		$this->db->insert($this->table_name, $data);
@@ -21,16 +29,17 @@ class Akun_model extends CI_Model{
 		$this->db->insert('email_verification', array(
 			'akun_id' =>$akun_id,
 			'code' => $verificationCode
-		));
+		));		
+
 		return $verificationCode;
 	}
 
-	public function verify($akun_id, $code){
-		$verification = $this->db->where('akun_id', $akun_id)->where('code', $code)->get('email_verification')->result_array();
+	public function verify($code){
+		$verification = $this->db->where('code', $code)->get('email_verification')->result_array();
 		if(count($verification) == 0){
 			return FALSE;
 		}
-		$this->db->update($this->table_name, array('email_verified_at' => 'now()'), array('id' => $akun_id));
+		$this->db->update($this->table_name, array('email_verified_at' => 'now()'), array('id' => $verification[0]['akun_id']));
 		return TRUE;
 	}
 

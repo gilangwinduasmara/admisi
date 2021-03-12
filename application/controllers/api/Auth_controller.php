@@ -81,6 +81,33 @@ class Auth_controller extends CI_Controller
 				'role' => $akun->role,
 				'not_validated' => true
 			);
+			$config = [
+				'mailtype'  => 'html',
+				'charset'   => 'utf-8',
+				'protocol'  => 'smtp',
+				'smtp_host' => 'mail.promager.com',
+				'smtp_user' => 'admisi@promager.com',  // Email gmail
+				'smtp_pass'   => '@dm1s!!@#',  // Password gmail
+				'smtp_crypto' => 'ssl',
+				'smtp_port'   => 465,
+				'crlf'    => "\r\n",
+				'newline' => "\r\n"
+			];
+		
+			$this->load->library('email', $config);
+			$this->email->from('admisi@promager.com', 'ADMISI');
+			$this->email->to($akun->email);
+			$this->email->subject('Aktivasi Akun');
+			$link = base_url('/verify?code='.$verificationCode);
+			$this->email->message('
+				<html>
+					<head>Aktifasi Akun</head>
+					<body>
+						Untuk mengaktifkan akun, klik tautan di bawah ini <br> <a href="'.$link.'">'.$link.'</a>
+					</body>
+				</html>
+				');
+			$email_status = $this->email->send() ? ' yay': ' nope';
 			$this->session->set_userdata($user_data);
 			$this->session->set_flashdata('success', ['Link aktivasi telah dikirim ke email anda '.base_url('/verify?code='.$verificationCode)]);
 			redirect('verify');

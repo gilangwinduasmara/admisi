@@ -36,27 +36,51 @@ class Pages extends CI_Controller{
 			redirect('login');
 		}
 		$verificationCode = $this->akun_model->generateVerificationEmail($akun->id);
-		$this->session->set_flashdata('success', ['Link aktivasi telah dikirim ke email anda '.base_url('/verify?code='.$verificationCode)]);
+		$config = [
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8',
+			'protocol'  => 'smtp',
+			'smtp_host' => 'mail.promager.com',
+			'smtp_user' => 'admisi@promager.com',  // Email gmail
+			'smtp_pass'   => '@dm1s!!@#',  // Password gmail
+			'smtp_crypto' => 'ssl',
+			'smtp_port'   => 465,
+			'crlf'    => "\r\n",
+			'newline' => "\r\n"
+		];
+		$this->load->library('email', $config);
+		$this->email->from('admisi@promager.com', 'ADMISI');
+		$this->email->to($akun->email);
+		$this->email->subject('Aktivasi Akun');
+		$link = base_url('/verify?code='.$verificationCode);
+			$this->email->message('
+				<html>
+					<head>Aktifasi Akun</head>
+					<body>
+						Untuk mengaktifkan akun, klik tautan di bawah ini <br> <a href="'.$link.'">'.$link.'</a>
+					</body>
+				</html>
+				');
+			$email_status = $this->email->send() ? ' yay': ' nope';
+		$this->session->set_flashdata('success', ['Link aktivasi telah dikirim ke email anda '.base_url('/verify?code='.$verificationCode).$email_status]);
 		redirect('verify');
 	}
 
 	public function verify()
 	{
 		$akun_id = $this->session->userdata('id');
-		if(empty($akun_id)){
-			redirect('login');
-		}
-		$akun = $this->akun_model->find($akun_id);
-		if(!empty($akun->email_verified_at)){
-			redirect('data_camaru');
-		}
+	
 		$code = $this->input->get('code');
 		if(empty($code)){
 			$data = array(
 				'page' => 'pages/verify.php'
 			);
 		}else{
-			$valid = $this->akun_model->verify($akun_id, $code);
+			$valid = $this->akun_model->verify($code);
+			if(empty($akun_id)){
+				$this->session->set_flashdata('success', ['Validasi berhasil, silahkan login kembali']);
+				redirect('login');
+			}
 			if($valid){
 				$this->session->unset_userdata('not_validated');
 			}
