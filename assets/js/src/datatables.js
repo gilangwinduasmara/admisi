@@ -325,6 +325,7 @@ $(document).ready(function(){
 					return `
 						<div class="text-center">${row.prodi_1}</div>
 						<div class="text-center label label-xl label-light-${statusPenerimaan[data].color} my-lg-0 my-2 label-inline font-weight-bolder">${statusPenerimaan[data].label}</div>
+						<div class="text-center">${row.no_test_1 || '-'}</div>
 					`
 				} 
 			}, 
@@ -337,6 +338,7 @@ $(document).ready(function(){
 						return `
 							<div class="text-center">${row.prodi_2}</div>
 							<div class="text-center label label-xl label-light-${statusPenerimaan[data].color} my-lg-0 my-2 label-inline font-weight-bolder">${statusPenerimaan[data].label}</div>
+							<div class="text-center">${row.no_test_2 || '-'}</div>
 						`
 					}else return "-"
 				} 

@@ -14,6 +14,7 @@ class Hasil_penerimaan_model extends CI_Model {
 		$this->load->model('prodi_model');
 		$this->load->model('registrasi_ulang_model');
 		$this->load->model('pendaftaran_model');
+		$this->load->model('tahun_akademik_model');
 	}
 
 	public function findByRegistrasiUlang($registrasi_ulang_id){
@@ -68,8 +69,24 @@ class Hasil_penerimaan_model extends CI_Model {
 	}
 
 	public function create($data){
+		$pendaftaran = $this->pendaftaran_model->find($data['pendaftaran_id']);
+		$tahun_akademik = $this->tahun_akademik_model->find($pendaftaran['tahun_akademik_id']);
+		
+		// tahun
+		$no_test = substr(explode("/", $tahun_akademik['tahun_akademik'])[0], -2);
+		// gelombang
+		$gelombang = $this->gelombang_model->getCurrentActiveGelombang();
+		if(!empty($gelombang)){
+			$no_test.= explode(" ", $gelombang['nama_gelombang'])[1];
+		}
+		// no urut
+		$count_prodi = $this->db->where('prodi_id', $data['prodi_id'])->get($this->table_name)->num_rows();
+		$count_prodi+=1;
+		$no_test .=  str_pad(strval($count_prodi), 4, "0", STR_PAD_LEFT);
+		$no_test .= "-" . $data['prodi_id'];
+		$data['no_test'] = $no_test;
 		$this->db->insert($this->table_name, $data);
-		return $this->db->insert_id();
+		return $no_test;
 	}
 
 	public function save($data){

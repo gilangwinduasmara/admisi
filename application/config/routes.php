@@ -57,6 +57,7 @@ $route['default_controller'] = 'pages/landing';
 $route['register'] = 'pages/register';
 $route['login'] = 'pages/login';
 $route['verify'] = 'pages/verify';
+$route['tes'] = 'pages/tes';
 $route['request_verification'] = 'pages/request_verification';
 $route['logout'] = 'pages/logout';
 $route['scrap-sekolah'] = 'pages/scrap_sekolah';

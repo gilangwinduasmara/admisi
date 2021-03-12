@@ -16,6 +16,7 @@ class Pendaftaran_model extends CI_Model{
 		$this->load->model('detail_prestasi_model');
 		$this->load->model('tahun_akademik_model');
 		$this->load->model('jenjang_model');
+		$this->load->model('gelombang_model');
 	}
 
 	public function count(){
@@ -102,10 +103,10 @@ class Pendaftaran_model extends CI_Model{
 
 	public function data_camaru_filter($search, $limit, $start, $order_field, $order_ascdesc, $status_formulir=null, $date_from=null, $date_to=null, $prodi=null, $jalur_pendaftaran=null, $tahun_akademik=null){
 		$sql = ("SELECT * FROM pendaftaran AS pen
-		right JOIN (SELECT id AS status_penerimaan_1_id, status AS status_penerimaan_1 FROM hasil_penerimaan) AS hp1 ON hp1.status_penerimaan_1_id = (
+		right JOIN (SELECT id AS status_penerimaan_1_id, status AS status_penerimaan_1, no_test as no_test_1 FROM hasil_penerimaan) AS hp1 ON hp1.status_penerimaan_1_id = (
 			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_1_id LIMIT 1
 		)
-		left JOIN (SELECT id AS status_penerimaan_2_id, status AS status_penerimaan_2 FROM hasil_penerimaan) AS hp2 ON hp2.status_penerimaan_2_id = (
+		left JOIN (SELECT id AS status_penerimaan_2_id, status AS status_penerimaan_2, no_test as no_test_2 FROM hasil_penerimaan) AS hp2 ON hp2.status_penerimaan_2_id = (
 			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_2_id  LIMIT 1
 		)
 		left join (select id as jalur_pendaftaran_id, jalur_pendaftaran from jalur_pendaftaran) as jp on jp.jalur_pendaftaran_id = pen.jalur_pendaftaran_id
@@ -340,8 +341,24 @@ class Pendaftaran_model extends CI_Model{
 	}
 
 	public function create($data){
-		$data['tahun_akademik_id'] = $this->tahun_akademik_model->findByStatus('AKTIF')[0]['id'] ?? null;
-		return $this->db->insert($this->table_name, $data);
+		$tahun_akademik = $this->tahun_akademik_model->findByStatus('AKTIF')[0];
+		$data['tahun_akademik_id'] = $tahun_akademik['id'];
+		// tahun
+		$id = substr(explode("/", $tahun_akademik['tahun_akademik'])[0], -2);
+		// reg/pin (0 / 1)
+		$id .= "0";
+		// gelombang
+		$gelombang = $this->gelombang_model->getCurrentActiveGelombang();
+		if(!empty($gelombang)){
+			$id.= explode(" ", $gelombang['nama_gelombang'])[1];
+		}
+		// no urut
+		$count = $this->db->get($this->table_name)->num_rows();
+		$count+=1;
+		$id .= str_pad(strval($count), 6, '0', STR_PAD_LEFT);
+		$data['id'] = $id;
+		$this->db->insert($this->table_name, $data);
+		return $id;
 	}
 
 	public function save($data){

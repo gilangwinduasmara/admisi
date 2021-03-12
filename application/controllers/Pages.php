@@ -11,6 +11,9 @@ class Pages extends CI_Controller{
 		parent::__construct();
 		$this->load->model('pengumuman_model');
 		$this->load->model('akun_model');
+		$this->load->model('gelombang_model');
+		$this->load->model('pendaftaran_model');
+		$this->load->model('hasil_penerimaan_model');
 	}
 	
 
@@ -141,6 +144,13 @@ class Pages extends CI_Controller{
 			'page' => 'pages/scrap-sekolah.php',
 		);
 		$this->load->view('default', $data);
+	}
+
+	public function tes(){
+		echo $this->hasil_penerimaan_model->create(array(
+			'pendaftaran_id' => '50',
+			'prodi_id' => '111'
+		));
 	}
 
 }
