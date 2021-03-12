@@ -113,7 +113,7 @@ class Pendaftaran_model extends CI_Model{
 		left join (select id as prodi_1_id, nama_prodi as prodi_1 from prodi) as prod1 on pen.prodi_1_id = prod1.prodi_1_id
 		left join (select id as prodi_2_id, nama_prodi as prodi_2 from prodi) as prod2 on pen.prodi_2_id = prod2.prodi_2_id
 		left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
-		WHERE LOWER(pen.nama) like LOWER('%$search%') AND pen.status_formulir = 'AKTIF' ");
+		WHERE LOWER(pen.nama) like LOWER('%$search%') AND pen.status_formulir = 'AKTIF'");
 
 
 		if(!empty($status_formulir)){
@@ -164,17 +164,17 @@ class Pendaftaran_model extends CI_Model{
 
 	public function data_camaru_count_filter($search, $status_formulir=null, $date_from=null, $date_to=null, $prodi=null, $jalur_pendaftaran, $tahun_akademik=null){
 		$sql = ("SELECT * FROM pendaftaran AS pen
-		right JOIN (SELECT id AS status_penerimaan_1_id, status AS status_penerimaan_1 FROM hasil_penerimaan) AS hp1 ON hp1.status_penerimaan_1_id = (
+		right JOIN (SELECT id AS status_penerimaan_1_id, status AS status_penerimaan_1, no_test as no_test_1 FROM hasil_penerimaan) AS hp1 ON hp1.status_penerimaan_1_id = (
 			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_1_id LIMIT 1
 		)
-		left JOIN (SELECT id AS status_penerimaan_2_id, status AS status_penerimaan_2 FROM hasil_penerimaan) AS hp2 ON hp2.status_penerimaan_2_id = (
+		left JOIN (SELECT id AS status_penerimaan_2_id, status AS status_penerimaan_2, no_test as no_test_2 FROM hasil_penerimaan) AS hp2 ON hp2.status_penerimaan_2_id = (
 			SELECT id FROM hasil_penerimaan WHERE hasil_penerimaan.pendaftaran_id = pen.id AND hasil_penerimaan.prodi_id = pen.prodi_2_id  LIMIT 1
 		)
 		left join (select id as jalur_pendaftaran_id, jalur_pendaftaran from jalur_pendaftaran) as jp on jp.jalur_pendaftaran_id = pen.jalur_pendaftaran_id
 		left join (select id as prodi_1_id, nama_prodi as prodi_1 from prodi) as prod1 on pen.prodi_1_id = prod1.prodi_1_id
 		left join (select id as prodi_2_id, nama_prodi as prodi_2 from prodi) as prod2 on pen.prodi_2_id = prod2.prodi_2_id
 		left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
-		WHERE LOWER(pen.nama) like LOWER('%$search%') AND pen.status_formulir = 'AKTIF' ");
+		WHERE LOWER(pen.nama) like LOWER('%$search%') AND pen.status_formulir = 'AKTIF'");
 
 		if(!empty($status_formulir)){
 			$sql .= " AND (status_penerimaan_1 = '$status_formulir' OR status_penerimaan_2 = '$status_formulir')";

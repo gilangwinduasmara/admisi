@@ -119,7 +119,7 @@
 														if(!empty($pendaftaran['hasil_penerimaan'][0]['status'])){
 															?>
 																<div class="label label-xl label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][0]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][0]['status'] ?? 'x')?></div>
-																<div><?php echo "No Test: ".($pendaftaran['hasil_penerimaan'][0]['no_test'] ?? null) ?><div>
+																<div><?php echo "No. Test: ".($pendaftaran['hasil_penerimaan'][0]['no_test'] ?? null) ?><div>
 															<?php
 														}
 													?>
@@ -141,7 +141,7 @@
 														if(!empty($pendaftaran['hasil_penerimaan'][1]['status'])){
 															?>
 																<div class="label label-xl label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][1]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][1]['status'] ?? 'x')?></div>
-																<div><?php echo ($pendaftaran['hasil_penerimaan'][1]['no_test'] ?? null) ?><div>
+																<div><?php echo "No. Test: ".($pendaftaran['hasil_penerimaan'][1]['no_test'] ?? null) ?><div>
 															<?php
 														}
 													?>

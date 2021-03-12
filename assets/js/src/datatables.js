@@ -325,7 +325,7 @@ $(document).ready(function(){
 					return `
 						<div class="text-center">${row.prodi_1}</div>
 						<div class="text-center label label-xl label-light-${statusPenerimaan[data].color} my-lg-0 my-2 label-inline font-weight-bolder">${statusPenerimaan[data].label}</div>
-						<div class="text-center">No Test: ${row.no_test_1 || '-'}</div>
+						<div class="text-center">No. Test: ${row.no_test_1 || '-'}</div>
 					`
 				} 
 			}, 
@@ -338,7 +338,7 @@ $(document).ready(function(){
 						return `
 							<div class="text-center">${row.prodi_2}</div>
 							<div class="text-center label label-xl label-light-${statusPenerimaan[data].color} my-lg-0 my-2 label-inline font-weight-bolder">${statusPenerimaan[data].label}</div>
-							<div class="text-center">No Test: ${row.no_test_2 || '-'}</div>
+							<div class="text-center">No. Test: ${row.no_test_2 || '-'}</div>
 						`
 					}else return "-"
 				} 
@@ -481,6 +481,7 @@ $(document).ready(function(){
 	tablePengumuman = $('#table_pengumuman').DataTable()
 
 	$('#search_query').keyup(function(){
+		console.log($(this).val())
 		data_pendaftar.search($(this).val()).draw()
 		tableDataPendaftar.search($(this).val()).draw()
 		tableDataCamaru.search($(this).val()).draw()
