@@ -1,7 +1,7 @@
 
 const STATUS_REGISTRASI_ULANG = {
-	'VALIDASI NIM': 'Sedang divalidasi',
-	'VALIDASI KEUANGAN': 'Sedang divalidasi',
+	'VALIDASI NIM': 'Sedang Validasi NIM',
+	'VALIDASI KEUANGAN': 'Sedang Validasi Pembayaran',
 	'BELUM BAYAR': 'Belum Registrasi Ulang',
 	'SUDAH REGISTRASI': 'Sudah Registrasi Ulang'
 }
