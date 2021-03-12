@@ -77,7 +77,7 @@ class Hasil_penerimaan_model extends CI_Model {
 		// gelombang
 		$gelombang = $this->gelombang_model->getCurrentActiveGelombang();
 		if(!empty($gelombang)){
-			$no_test.= explode(" ", $gelombang['nama_gelombang'])[1];
+			// $no_test.= explode(" ", $gelombang['nama_gelombang'])[1];
 		}
 		// no urut
 		$count_prodi = $this->db->where('prodi_id', $data['prodi_id'])->get($this->table_name)->num_rows();
