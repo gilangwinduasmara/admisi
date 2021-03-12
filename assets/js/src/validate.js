@@ -21,7 +21,8 @@ const forms = {
 				name: 'email',
 				label: 'Email',
 				rules: {
-					required: true
+					required: true,
+					email: true
 				}
 			},
 			{
@@ -198,7 +199,8 @@ const forms = {
 				name: 'email',
 				label: 'Email',
 				rules: {
-					required: true
+					required: true,
+					email: true
 				}
 			},
 			{
@@ -581,7 +583,8 @@ const forms = {
 				name: "email",
 				label: "Email",
 				rules: {
-					required: true
+					required: true,
+					email: true
 				}
 			},
 			{
@@ -609,6 +612,7 @@ const validationDict = {
 	min: '%label% harus minimal %min% karakter',
 	max: '%label% tidak boleh lebih dari %max% karakter',
 	sameAs: '%label% harus sama dengan %ref%',
+	email: 'Format email tidak sesuai'
 }
 
 $('.lanjut').click(function(){
@@ -635,6 +639,10 @@ $('.lanjut').click(function(){
 			default:
 				form.submit();
 		}
+	}else{
+		$([document.documentElement, document.body]).animate({
+			scrollTop: $(".is-invalid").offset().top-200
+		}, 500);
 	}
 })
 
@@ -695,6 +703,16 @@ function validateField(field){
 				const refField = $(`[name="${field.rules.sameAs}"]`)
 				if(currentField.val() != refField.val()){
 					let error = validationDict.sameAs.replace('%label%', field.label).replace('%ref%', field.rules.sameAs)
+					setInvalid(currentField, error)
+					isError = true
+				}
+			}
+			
+			if(field.rules.email){
+				resetError(currentField)
+				const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				if(!re.test(String(currentField.val()).toLowerCase())){
+					let error = validationDict.email
 					setInvalid(currentField, error)
 					isError = true
 				}

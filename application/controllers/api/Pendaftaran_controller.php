@@ -121,7 +121,7 @@ class Pendaftaran_controller extends CI_Controller{
 		if($data1['prodi_id'] != null){
 			$this->hasil_penerimaan_model->create($data1);
 		}
-		if($data1['prodi_id'] != $data1['prodi_id']){
+		if($data2['prodi_id'] != $data1['prodi_id']){
 			if($data2['prodi_id'] != null){
 				$this->hasil_penerimaan_model->create($data2);
 			}
@@ -238,7 +238,7 @@ class Pendaftaran_controller extends CI_Controller{
 
 		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required');
 		$data_wali = array();
-		foreach(['nama', 'NIK', 'no_hp','email','pendidikan_terakhir', 'status_hubungan', 'pekerjaan','nama_instansi','alamat_instansi','telp_instansi','penghasilan_perbulan','nama_ibu_kandung','same_address','negara', 'kelurahan', 'alamat', 'kewarganegaraan'] as $field){
+		foreach(['nama', 'NIK', 'rt', 'rw', 'no_hp','email','pendidikan_terakhir', 'status_hubungan', 'pekerjaan','nama_instansi','alamat_instansi','telp_instansi','penghasilan_perbulan','nama_ibu_kandung','same_address','negara', 'kelurahan', 'alamat', 'kewarganegaraan'] as $field){
 			$data_wali[$field] = $this->input->post($field);
 		}
 
@@ -285,13 +285,12 @@ class Pendaftaran_controller extends CI_Controller{
 	}
 
 	private function update_data_diri(){
-		print_r("tes");
 
 		$this->form_validation->set_rules('jenjang', 'Jenjang', 'required');
 	
 		$data_diri = array();
 
-		foreach(['KK', 'NIK', 'nama', 'email', 'no_hp', 'kota_kelahiran', 'tgl_lahir', 'jenis_kelamin', 'pekerjaan', 'tinggi_badan', 'berat_badan', 'kewarganegaraan', 'negara', 'kelurahan', 'alamat_asal', 'status_sipil', 'gol_darah', 'agama', 'status_tinggal', 'suku'] as $field){
+		foreach(['KK', 'rt', 'rw', 'NIK', 'nama', 'email', 'no_hp', 'kota_kelahiran', 'tgl_lahir', 'jenis_kelamin', 'pekerjaan', 'tinggi_badan', 'berat_badan', 'kewarganegaraan', 'negara', 'kelurahan', 'alamat_asal', 'status_sipil', 'gol_darah', 'agama', 'status_tinggal', 'suku'] as $field){
 			$data_diri[$field] = $this->input->post($field, TRUE);
 		}
 		if($data_diri['gol_darah'] == ''){

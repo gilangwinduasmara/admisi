@@ -17,14 +17,12 @@ class Daerah extends CI_Controller{
 		$provinsi_result = json_decode($this->curl->simple_get('http://dev.farizdotid.com/api/daerahindonesia/provinsi'));
 		echo "Daerah<br>";
 		foreach($provinsi_result->provinsi as $key=>$provinsi){
-			if($key > 5) break;
 			$provinsi_id = $this->provinsi_model->create([
 				'provinsi' => $provinsi->nama
 			]);
 			$kota_result = json_decode($this->curl->simple_get('http://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='.$provinsi->id));
 			echo "|__".$provinsi->nama."<br>";
 			foreach($kota_result->kota_kabupaten as $key=>$kota){
-				if($key > 5) break;
 				$kecamatan_result = json_decode($this->curl->simple_get('http://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota='.$kota->id));
 				$kota_id = $this->kota_model->create([
 					'kota_kab' => $kota->nama,
@@ -32,7 +30,6 @@ class Daerah extends CI_Controller{
 				]);
 				echo "|____".$kota->nama."<br>";
 				foreach($kecamatan_result->kecamatan as $key=>$kecamatan){
-					if($key > 5) break;
 					$kelurahan_result = json_decode($this->curl->simple_get('http://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan='.$kecamatan->id));
 					$kecamatan_id = $this->kecamatan_model->create([
 						'kecamatan' => $kecamatan->nama,
@@ -40,7 +37,6 @@ class Daerah extends CI_Controller{
 					]);
 					echo "    |____".$kecamatan->nama."<br>";
 					foreach($kelurahan_result->kelurahan as $key=>$kelurahan){
-						// if($key > 5) break;
 						$kelurahan_id = $this->kelurahan_model->create([
 							'kelurahan' => $kelurahan->nama,
 							'kecamatan_id' => $kecamatan_id

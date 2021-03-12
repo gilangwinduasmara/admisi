@@ -7,6 +7,9 @@ $('input[type=number]').on('mousewheel', function(){
   })
 
 $(document).ready(function(){
+	$('.max-today').prop('max', function(){
+		return new Date().toJSON().split("T")[0]
+	})
 	$('select').select2()
 	console.log('select2')
 	$('[data-toggle="tooltip"]').tooltip()
@@ -47,6 +50,11 @@ $(document).ready(function(){
 function onKewarganegaraanChange(el){
 	console.log(el.val())
 	if(el.val() == 'WNI'){
+		$('[name="rt"]').attr('disabled', false)
+		$('[name="rw"]').attr('disabled', false)
+		$('[name="rt"]').parent().parent().show()
+		$('[name="rw"]').parent().parent().show()
+
 		$('[name="negara"]').attr('disabled', true)
 		$('[name="negara"]').parent().parent().hide()
 		$('[name="provinsi"]').attr('disabled', false)
@@ -56,6 +64,10 @@ function onKewarganegaraanChange(el){
 		$('[name="provinsi"]').parent().parent().parent().show()
 		$('[data-target="daerah_selector"]').parent().parent().show()
 	}else{
+		$('[name="rt"]').attr('disabled', true)
+		$('[name="rw"]').attr('disabled', true)
+		$('[name="rt"]').parent().parent().hide()
+		$('[name="rw"]').parent().parent().hide()
 		$('[name="negara"]').attr('disabled', false)
 		$('[name="negara"]').parent().parent().show()
 		$('[name="provinsi"]').attr('disabled', true)

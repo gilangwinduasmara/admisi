@@ -53,7 +53,6 @@ class Admin_controller extends CI_Controller {
 			'status' => 'VALIDASI NIM'
 			// 'nim' => rand(100000000,999999999)
 		]);
-		print_r($registrasi_ulang);
 		
 		$this->daftar_omb_model->create([
 			'registrasi_ulang_id' => $registrasi_ulang['id']

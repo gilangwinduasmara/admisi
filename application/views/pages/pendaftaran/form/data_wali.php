@@ -21,7 +21,6 @@
 	</ul>
 	<div class="tab-content mt-5" id="myTabContent">
 		<div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_2">
-			<?php print_r($data_wali) ?>
 			<form action="<?php echo base_url('/api/pendaftaran/update_form') ?>" method="post" name="data_wali">
 				<div class="accordion accordion-toggle-arrow" id="accordion-personal">
 					<div class="card">
@@ -66,7 +65,7 @@
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Email</label>
 									<div class="col-md-10">
-										<input type="email" class="form-control input-email" name="email" value="<?php echo $data_wali['email'] ?? null ?>">
+										<input type="email" required class="form-control input-email" name="email" value="<?php echo $data_wali['email'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -320,6 +319,18 @@
 											<?php
 										}
 									?>
+									<div class="form-group row">
+										<label for="" class="col-md-2 col-form-label">RT</label>
+										<div class="col-md-10">
+											<input name="rt" data-rt-camaru="<?php echo $pendaftaran['rt'] ?>" value="<?php echo ($data_wali['rt']??null) ?>" cols="30" rows="10" class="form-control">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="" class="col-md-2 col-form-label">RW</label>
+										<div class="col-md-10">
+											<input name="rw" data-rw-camaru="<?php echo $pendaftaran['rw'] ?>" value="<?php echo ($data_wali['rw']??null) ?>" class="form-control">
+										</div>
+									</div>
 									<div class="form-group row">
 										<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
 										<div class="col-md-10">

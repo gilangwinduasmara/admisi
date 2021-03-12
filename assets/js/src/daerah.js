@@ -209,13 +209,19 @@ $('[data-toggle="sunting"]').click(function(){
 })
 
 var storedAlamat = ""
+var storedRt = ""
+var storedW = ""
 
 $('input[name="same_address"]').change(function(){
 	if($(this).is(':checked')){
 		storedAlamat = $('[name="alamat"]').val()
+		storedRt = $('[name="rt"]').val()
+		storedRw = $('[name="rw"]').val()
 		$('.alamat-camaru').show()
 		$('.alamat-wali').hide()
 		$('[name="alamat"]').val($('[name="alamat"]').data('alamat-camaru'))
+		$('[name="rt"]').val($('[name="rt"]').data('rt-camaru'))
+		$('[name="rw"]').val($('[name="rw"]').data('rw-camaru'))
 		$('[name="alamat"]').attr('readonly', true)
 		$('.daerah-wrapper').find('select')
 		$.each($('.daerah-wrapper').find('select'), function(){
@@ -224,6 +230,8 @@ $('input[name="same_address"]').change(function(){
 	}else{
 		// $('.same-address').show()
 		$('[name="alamat"]').val(storedAlamat)
+		$('[name="rt"]').val(storedRt)
+		$('[name="rw"]').val(storedRw)
 		$('[name="alamat"]').attr('readonly', false)
 		$('.alamat-wali').show()
 		$('.alamat-camaru').hide()

@@ -39,7 +39,7 @@
 									</div>
 									<div class="form-group row">
 										<label for="" class="col-md-3 col-form-label">Tgl Transfer</label>
-										<input type="date" class="form-control" name="tgl_transfer">
+										<input type="date" class="form-control max-today" name="tgl_transfer">
 									</div>
 									<div class="form-group row">
 										<label for="" class="col-md-3 col-form-label">Total Pembayaran</label>

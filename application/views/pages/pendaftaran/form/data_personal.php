@@ -60,7 +60,7 @@
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Email</label>
 									<div class="col-md-10">
-										<input type="email" class="form-control" name="email" value="<?php echo $data_diri['email'] ?? null ?>">
+										<input type="email" required class="form-control" name="email" value="<?php echo $data_diri['email'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -291,6 +291,18 @@
 										<?php
 									}
 								?>
+								<div class="form-group row">
+									<label for="" class="col-md-2 col-form-label">RT</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control" name="rt" value="<?php echo($data_diri['rt'] ?? null) ?>">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="" class="col-md-2 col-form-label">RW</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control" name="rw" value="<?php echo($data_diri['rt'] ?? null) ?>">
+									</div>
+								</div>
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Detail Alamat</label>
 									<div class="col-md-10">
