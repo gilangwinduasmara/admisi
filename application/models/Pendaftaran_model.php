@@ -353,7 +353,7 @@ class Pendaftaran_model extends CI_Model{
 			$id.= explode(" ", $gelombang['nama_gelombang'])[1];
 		}
 		// no urut
-		$count = $this->db->get($this->table_name)->num_rows();
+		$count = $this->db->where('tahun_akademik_id', $data['tahun_akademik_id'])->get($this->table_name)->num_rows();
 		$count+=1;
 		$id .= str_pad(strval($count), 6, '0', STR_PAD_LEFT);
 		$data['id'] = $id;
