@@ -167,9 +167,6 @@ class Admin_controller extends CI_Controller {
 			'nama_gelombang' => $this->input->post('nama_gelombang'),
 			'tanggal_mulai' => $this->input->post('tanggal_mulai'),
 			'tanggal_selesai' => $this->input->post('tanggal_selesai'),
-			"column" => [
-
-			]
 		]);
 
 		$this->session->set_flashdata('success', ['Data berhasil disimpan']);
