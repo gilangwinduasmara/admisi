@@ -47,7 +47,7 @@ class Pendaftaran_model extends CI_Model{
 									ON daftar_omb.kode_hasil_seleksi = registrasi_ulang.id
 								Join prodi
 								ON prodi.id = registrasi_ulang.prodi_id
-							WHERE registrasi_ulang.nim = '$nim' and registrasi_ulang.status = 'LUNAS'");
+							WHERE registrasi_ulang.nim = '$nim' and registrasi_ulang.status = 'SUDAH REGISTRASI'");
 		return $query->result_array();
 	}
 
