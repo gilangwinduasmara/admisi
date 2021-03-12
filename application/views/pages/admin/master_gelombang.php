@@ -81,7 +81,14 @@
 				</div>
                 <div class="form-group">
 					<label for="">Nama Gelombang</label>
-					<input type="text" class="form-control" required name="nama_gelombang">
+					<select name="nama_gelombang" required class="form-control">
+						<option value="">Pilih</option>
+						<option value="Gelombang 1">Gelombang 1</option>
+						<option value="Gelombang 2">Gelombang 2</option>
+						<option value="Gelombang 3">Gelombang 3</option>
+						<option value="Gelombang 4">Gelombang 4</option>
+						<option value="Gelombang 5">Gelombang 5</option>
+					</select>
 				</div>
                 <div class="form-group">
 					<label for="">Tanggal Mulai</label>
