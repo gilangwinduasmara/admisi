@@ -209,7 +209,6 @@ class Pendaftaran_model extends CI_Model{
 			left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
 			join (select id as jenis_pembayaran_id, jenis_pembayaran from jenis_pembayaran) as jenis_pembayaran on pem.jenis_pembayaran_id = jenis_pembayaran.jenis_pembayaran_id
 			where status is not null and LOWER(pen.nama) like LOWER('%$search%') 
-			
 		");
 
 		if(!empty($tahun_akademik)){
@@ -233,11 +232,12 @@ class Pendaftaran_model extends CI_Model{
 	public function count_filter($search, $status_pembayaran, $date_from=null, $date_to=null, $tahun_akademik=null){
 		$sql = ("SELECT * 
 		FROM pendaftaran AS pen
-			LEFT JOIN pembayaran AS pem 
-			ON pem.id = (
+			LEFT JOIN (select id as pembayaran_id, jenis_pembayaran_id, pendaftaran_id, nama_camaru, upload_bukti_bayar, tgl_bayar, total_bayar, status, bank_pengirim, no_rek_pengirim, nama_rek_pengirim, tgl_transfer from pembayaran) AS pem 
+			ON pem.pembayaran_id = (
 				SELECT id FROM pembayaran WHERE pembayaran.pendaftaran_id = pen.id ORDER BY status = 'LUNAS' DESC, status = 'VALIDASI' DESC, status = 'BELUM LUNAS' DESC LIMIT 1
 			)
 			left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
+			join (select id as jenis_pembayaran_id, jenis_pembayaran from jenis_pembayaran) as jenis_pembayaran on pem.jenis_pembayaran_id = jenis_pembayaran.jenis_pembayaran_id
 			where status is not null and LOWER(pen.nama) like LOWER('%$search%') 
 		");
 
@@ -259,10 +259,13 @@ class Pendaftaran_model extends CI_Model{
 	public function count_all(){
 		$sql = ("SELECT * 
 		FROM pendaftaran AS pen
-			LEFT JOIN pembayaran AS pem 
-			ON pem.id = (
+			LEFT JOIN (select id as pembayaran_id, jenis_pembayaran_id, pendaftaran_id, nama_camaru, upload_bukti_bayar, tgl_bayar, total_bayar, status, bank_pengirim, no_rek_pengirim, nama_rek_pengirim, tgl_transfer from pembayaran) AS pem 
+			ON pem.pembayaran_id = (
 				SELECT id FROM pembayaran WHERE pembayaran.pendaftaran_id = pen.id ORDER BY status = 'LUNAS' DESC, status = 'VALIDASI' DESC, status = 'BELUM LUNAS' DESC LIMIT 1
 			)
+			left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
+			join (select id as jenis_pembayaran_id, jenis_pembayaran from jenis_pembayaran) as jenis_pembayaran on pem.jenis_pembayaran_id = jenis_pembayaran.jenis_pembayaran_id
+			) 
 		");
 
 		$query = $this->db->query($sql);
