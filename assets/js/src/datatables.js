@@ -262,7 +262,7 @@ $(document).ready(function(){
 			{ "data": "nim" }, 
 			{ "data": "nama_camaru" },  
 			{ "data": "nama_prodi" },  
-			{ "data": "created_at", "render": (data) => (formatDate(data)) },  
+			{ "data": "created_at", "render": (data) => (formatDate(data.split(' ')[0])) },  
 			{ "data": "ukuran_jas_alma" },  
 			
 		],
