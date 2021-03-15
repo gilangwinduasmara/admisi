@@ -74,7 +74,7 @@ class Daftar_omb_model extends CI_Model {
 			ON daftar_omb.kode_hasil_seleksi = registrasi_ulang.id
 		Join (select id, nama_prodi from prodi) as prodi
 			ON prodi.id = registrasi_ulang.prodi_id
-		WHERE lower(registrasi_ulang.nama_camaru) like lower('%$search%') and registrasi_ulang.status = 'LUNAS' and hasil_penerimaan.status = 'DITERIMA' and daftar_omb.ukuran_jas_alma is not null");
+		WHERE lower(registrasi_ulang.nama_camaru) like lower('%$search%') and registrasi_ulang.status = 'SUDAH REGISTRASI' and hasil_penerimaan.status = 'DITERIMA' and daftar_omb.ukuran_jas_alma is not null");
 
 
 		if(!empty($date_from)){
