@@ -21,7 +21,8 @@ class Pages extends CI_Controller{
 		$pengumuman = $this->pengumuman_model->get();
 		$data = array(
 			'page' => 'pages/index.php',
-			'pengumuman' => $pengumuman
+			'pengumuman' => $pengumuman,
+			'fluid' => TRUE
 		);
 		$this->load->view('default', $data);
 	}

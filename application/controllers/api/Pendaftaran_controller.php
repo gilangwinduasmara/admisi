@@ -335,10 +335,6 @@ class Pendaftaran_controller extends CI_Controller{
 				'status' => 'VALIDASI KEUANGAN'
 			]);
 
-			// $this->daftar_omb_model->create([
-			// 	'registrasi_ulang_id' => $registrasi_ulang['id']
-			// ]);
-
 			$hasil_penerimaan = $this->hasil_penerimaan_model->findBySkpm($this->input->post('skpm_2'));
 			$pendaftaran = $this->pendaftaran_model->find($hasil_penerimaan['pendaftaran_id']);
 			$registrasi_ulang = $this->registrasi_ulang_model->create([

@@ -15,7 +15,7 @@
 					<?php $this->load->view('partials/_header.php') ?>
 
 					<!--begin::Content-->
-					<div class="content-fluid d-flex flex-column flex-column-fluid" id="kt_content">
+					<div class="content<?php echo(!empty($fluid)?'-fluid':'') ?> d-flex flex-column flex-column-fluid" id="kt_content">
 						<div class="container">
 							<div class="row justify-content-center">
 								<?php 
