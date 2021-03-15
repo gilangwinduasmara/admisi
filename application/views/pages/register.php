@@ -13,7 +13,7 @@
 						<div class="form-group row align-items-center">
 							<label class="col-md-3 col-form-label">No. HP</label>
 							<div class="col-md-9">
-								<input required class="form-control" type="phone" value="" name="no_hp">
+								<input required class="form-control" type="text" value="" name="no_hp">
 							</div>
 						</div>
 						<div class="form-group row align-items-center">
