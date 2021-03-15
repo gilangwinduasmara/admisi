@@ -666,6 +666,22 @@ function validate(form){
 	return isValid
 }
 
+function validateSize(file) {
+	var FileSize = file[0].files[0].size / 1024 / 1024; // in MiB
+	if (FileSize > 2) {
+		$(file).val('');
+		return false
+	} else {
+		return true
+	}
+}
+
+$('input[type="file"]').change(function(){
+	// if(!validateSize($(this))){
+	// 	setInvalid($(this), "tes")
+	// }
+})
+
 function validateField(field){
 	let isError = false;
 	$.each($(`[name^="${field.name}"]`),function(){
@@ -688,7 +704,6 @@ function validateField(field){
 					isError = true
 				}
 			}
-		
 			if(field.rules.min){
 				resetError(currentField)
 				if(currentField.val().length < field.rules.min){
@@ -697,7 +712,6 @@ function validateField(field){
 					isError = true
 				}
 			}
-
 			if(field.rules.sameAs){
 				resetError(currentField)
 				const refField = $(`[name="${field.rules.sameAs}"]`)
@@ -707,7 +721,16 @@ function validateField(field){
 					isError = true
 				}
 			}
-			
+			if(currentField.attr('type') == 'file'){
+				console.log('input file')
+				if(currentField[0].files[0]?.size){
+					var fileSize = currentField[0].files[0].size / 1024 / 1024; // in MiB
+					if (fileSize > 2) {
+						isError = true
+						setInvalid(currentField, "Ukuran berkas melebihi batas 2MB")
+					} 
+				}
+			}
 			if(field.rules.email){
 				resetError(currentField)
 				const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -729,7 +752,7 @@ function validateField(field){
 }
 
 function setInvalid(field, error){
-	console.log('set invalid', console.log(error))
+	console.log('set invalid', console.log(error), console.log(field.attr('name')))
 	field.addClass('is-invalid')
 	field.after('<div class="invalid-feedback">'+error+'</div>')
 }

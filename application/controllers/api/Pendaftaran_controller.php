@@ -241,7 +241,7 @@ class Pendaftaran_controller extends CI_Controller{
 		foreach(['nama', 'NIK', 'rt', 'rw', 'no_hp','email','pendidikan_terakhir', 'status_hubungan', 'pekerjaan','nama_instansi','alamat_instansi','telp_instansi','penghasilan_perbulan','nama_ibu_kandung','same_address','negara', 'kelurahan', 'alamat', 'kewarganegaraan'] as $field){
 			$data_wali[$field] = $this->input->post($field);
 		}
-
+		$data_wali['penghasilan_perbulan'] = str_replace('.', '', $data_wali['penghasilan_perbulan']);
 		$data_wali['kelurahan_id'] = $data_wali['kelurahan'];
 		$data_wali['pendaftaran_id'] = $this->input->post('id');
 		unset($data_wali['kelurahan']);

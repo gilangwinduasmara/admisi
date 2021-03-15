@@ -1,7 +1,7 @@
 <div class="footer py-4 d-flex flex-lg-column mt-8" style="background-color: #F7C806" id="kt_footer">
 	<div class="container d-flex flex-column flex-md-row align-items-center">
-		<div class="px-24 gutter-b">
-			<img src="<?php echo base_url('/assets/media/logo ukit 1.png')?>" alt="">
+		<div class="px-24">
+			<img src="<?php echo base_url('/assets/media/logo ukit 1.png')?>" alt="" style="height: 96px">
 		</div>
 		<div style="color: #B22D34">
 			<div>Universitas Kristen Indonesia Toraja</div>

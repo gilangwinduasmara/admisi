@@ -113,7 +113,7 @@ class Pendaftaran_model extends CI_Model{
 		left join (select id as prodi_1_id, nama_prodi as prodi_1 from prodi) as prod1 on pen.prodi_1_id = prod1.prodi_1_id
 		left join (select id as prodi_2_id, nama_prodi as prodi_2 from prodi) as prod2 on pen.prodi_2_id = prod2.prodi_2_id
 		left JOIN (SELECT id AS tahun_akademik_id , tahun_akademik from tahun_akademik) AS ta ON ta.tahun_akademik_id = pen.tahun_akademik_id
-		WHERE LOWER(pen.nama) like LOWER('%$search%') AND pen.status_formulir = 'AKTIF'");
+		WHERE LOWER(pen.nama) like LOWER('%$search%') AND pen.status_formulir = 'AKTIF' ");
 
 
 		if(!empty($status_formulir)){

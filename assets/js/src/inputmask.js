@@ -3,3 +3,6 @@ $(".input-hp").inputmask("mask", {
 });
 
 
+$('.input-uang').mask('000.000.000.000.000', {
+	reverse: true
+});

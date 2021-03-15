@@ -43,7 +43,7 @@
 							<div class="text-center">
 								<img src="<?php echo base_url('assets/media/landing-icons/1.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
-									Buat Akun
+									1. Buat Akun
 								</div>
 							</div>
 						</div>
@@ -51,15 +51,15 @@
 							<div class="text-center">
 								<img src="<?php echo base_url('assets/media/landing-icons/2.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
-									Membayar Biaya Formulir
+									2. Membayar Biaya Formulir
 								</div>
 							</div>
 						</div>
 						<div class="col-md-2 mb-4 d-flex flex-column align-items-center">
-							<div style="text-center">
-								<img src="<?php echo base_url('assets/media/landing-icons/3.png') ?>" alt="" style="max-height: 100px">
+							<div class="text-center">
+								<img src="<?php echo base_url('assets/media/landing-icons/3.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
-									Isi Form Pendaftaran
+									3. Isi Form Pendaftaran
 								</div>
 							</div>
 						</div>
@@ -67,7 +67,7 @@
 							<div class="text-center">
 								<img src="<?php echo base_url('assets/media/landing-icons/4.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
-									Seleksi
+									4. Seleksi
 								</div>
 							</div>
 						</div>
@@ -75,7 +75,7 @@
 							<div class="text-center">
 								<img src="<?php echo base_url('assets/media/landing-icons/5.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
-									Registrasi Ulang
+									5. Registrasi Ulang
 								</div>
 							</div>
 						</div>
@@ -83,7 +83,7 @@
 							<div class="text-center">
 								<img src="<?php echo base_url('assets/media/landing-icons/6.png') ?>" alt="" style="max-width: 100px">
 								<div class="text-center font-weight-bold" style="height: 100px">
-									Pendaftaran Orientasi Mahasiswa Baru
+									6. Pendaftaran Orientasi Mahasiswa Baru
 								</div>
 							</div>
 						</div>

@@ -7,6 +7,7 @@ $('input[type=number]').on('mousewheel', function(){
   })
 
 $(document).ready(function(){
+	
 	$('.max-today').prop('max', function(){
 		return new Date().toJSON().split("T")[0]
 	})

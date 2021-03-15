@@ -182,7 +182,7 @@
 			Kolom ini akan memunculkan status pembayaran Anda. Terdapat 4 status:
 			</p>
 			<p>
-			1. Jika status pembayaran Anda "BELUM LUNAS" maka Anda harus memilih metode pembayaran melalui tombol "PILIH PEMBAYARAN" di kolom "AKSI". Kemudian lakukan pembayaran sesuai petunjuk dan mengunggah buktinya di tombol "UPLOAD BUKTI PEMBAYARAN" yang berada di kolom "AKSI"
+			1. Jika status pembayaran Anda "BELUM LUNAS" maka Anda harus memilih metode pembayaran melalui tombol "PILIH PEMBAYARAN" <i class="la la-info-circle"></i> di kolom "AKSI". Kemudian lakukan pembayaran sesuai petunjuk dan mengunggah buktinya di tombol "UPLOAD BUKTI PEMBAYARAN" <i class="la la-check-circle"></i> yang berada di kolom "AKSI"
 			</p>
 			<p>
 			2. Jika status pembayaran Anda "VALIDASI", silahkan menunggu proses validasi pembayaran.

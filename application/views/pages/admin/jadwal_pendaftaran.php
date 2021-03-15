@@ -24,7 +24,7 @@
 											<td>
 												<select class="form-control" name="jam_mulai_<?php echo $j['id'] ?>">
 													<?php
-														for($i=1; $i<=24; $i++){
+														for($i=0; $i<=23; $i++){
 															?>
 																<option <?php if($j['jam_mulai'] == $i) echo 'selected' ?> value="<?php echo $i ?>"><?php echo (sprintf("%02d", $i).":00") ?></option>
 															<?php
@@ -35,7 +35,7 @@
 											<td>
 												<select class="form-control" name="jam_selesai_<?php echo $j['id'] ?>">
 													<?php
-														for($i=1; $i<=24; $i++){
+														for($i=0; $i<=23; $i++){
 															?>
 																<option <?php if($j['jam_selesai'] == $i) echo 'selected' ?> value="<?php echo $i ?>"><?php echo (sprintf("%02d", $i).":00") ?></option>
 															<?php

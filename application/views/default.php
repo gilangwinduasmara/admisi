@@ -108,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/pages/widgets.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/app.js?v=2'.now())?>"></script>
-		<script src="<?php echo base_url('assets/js/src/inputmask.js')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/inputmask.js?'.now())?>"></script>
 		<script src="<?php echo base_url('assets/js/src/validate.js?v=3'.now())?>"></script>
 		<script src="<?php echo base_url('assets/js/src/dropzone.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/daerah.js?'.now())?>"></script>
@@ -123,7 +123,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		?>
 		<script src="<?php echo base_url('assets/js/src/registrasi-ulang.js?'.now())?>"></script>
 		<script src="<?php echo base_url('assets/js/src/omb.js?')?>"></script>
-		<script src="<?php echo base_url('assets/js/src/prestasi.js?')?>"></script>
+		<script src="<?php echo base_url('assets/js/src/prestasi.js?'.now())?>"></script>
 		
 		<script src="<?php echo base_url('assets/js/src/pengumuman.js?')?>"></script>
 		<script src="<?php echo base_url('assets/js/src/admin.js?v=2'.now())?>"></script>

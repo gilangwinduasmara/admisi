@@ -43,12 +43,12 @@
 									</div>
 									<div class="form-group row">
 										<label for="" class="col-md-3 col-form-label">Total Pembayaran</label>
-										<input type="number" class="form-control" name="total_bayar">
+										<input class="form-control input-uang" name="total_bayar">
 									</div>
 									<div class="form-group row">
 										<label for="" class="col-md-3 col-form-label">Upload Bukti Pembayaran</label>
 										<input type="file" class="form-control" name="upload_bukti" accept="image/jpeg, image/png">
-										<span class="text-muted p">(jpeg, png)</span>
+										<span class="text-muted p">(jpeg, png) maks 2 MB</span>
 									</div>
 									<div class="d-flex justify-content-center">
 										<button type="button" value="Submit" class="btn btn-primary lanjut">Submit</button>

@@ -110,7 +110,7 @@
 								<div class="form-group row">
 									<label for="" class="col-md-2 col-form-label">Penghasilan Per Bulan</label>
 									<div class="col-md-10">
-										<input type="number" class="form-control input-uang" name="penghasilan_perbulan" value="<?php echo $data_wali['penghasilan_perbulan'] ?? null ?>">
+										<input class="form-control input-uang" name="penghasilan_perbulan" value="<?php echo $data_wali['penghasilan_perbulan'] ?? null ?>">
 									</div>
 								</div>
 								<div class="form-group row">

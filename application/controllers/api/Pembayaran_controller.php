@@ -49,7 +49,7 @@ class Pembayaran_controller extends CI_Controller{
 			$data = array(
 				'id' => $pembayaran,
 				'status' => 'VALIDASI',
-				'total_bayar' => $this->input->post('total_bayar'),
+				'total_bayar' => str_replace(".", "", $this->input->post('total_bayar')),
 				'bank_pengirim' => $this->input->post('bank_pengirim'),
 				'no_rek_pengirim' => $this->input->post('no_rek_pengirim'),
 				'nama_rek_pengirim' => $this->input->post('nama_rek_pengirim'),
