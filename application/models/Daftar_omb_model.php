@@ -112,15 +112,15 @@ class Daftar_omb_model extends CI_Model {
 	public function data_omb_count_filter($search, $date_from=null, $date_to=null, $prodi=null){
 		$sql = ("SELECT *, registrasi_ulang.id AS registrasi_ulang_id
 		FROM pendaftaran
-		JOIN hasil_penerimaan
+		JOIN (select id as hasil_penerimaan_id, pendaftaran_id, status, kode_skpm from hasil_penerimaan) as hasil_penerimaan
 			ON pendaftaran.id = hasil_penerimaan.pendaftaran_id
 		JOIN registrasi_ulang
-			ON registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.id
+			ON registrasi_ulang.hasil_penerimaan_id = hasil_penerimaan.hasil_penerimaan_id
 		LEFT JOIN (SELECT ukuran_jas_alma, registrasi_ulang_id AS kode_hasil_seleksi from daftar_omb) AS daftar_omb
 			ON daftar_omb.kode_hasil_seleksi = registrasi_ulang.id
-		Join prodi
+		Join (select id, nama_prodi from prodi) as prodi
 			ON prodi.id = registrasi_ulang.prodi_id
-			WHERE lower(registrasi_ulang.nama_camaru) like lower('%$search%') and registrasi_ulang.status = 'LUNAS' and hasil_penerimaan.status = 'DITERIMA' and daftar_omb.ukuran_jas_alma is not null");
+		WHERE lower(registrasi_ulang.nama_camaru) like lower('%$search%') and registrasi_ulang.status = 'SUDAH REGISTRASI' and hasil_penerimaan.status = 'DITERIMA' and daftar_omb.ukuran_jas_alma is not null");
 
 
 		if(!empty($prodi)){
