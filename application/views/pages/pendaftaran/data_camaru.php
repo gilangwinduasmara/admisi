@@ -169,11 +169,19 @@
 			</tbody>
 		</table>
 		<?php } ?>
-		<div class="text-center">
-			<?php
-				if(count($pendaftarans)==0)
-				echo ('Belum ada data camaru/formulir. Silahkan klik tombol "Tambah Formulir" untuk mendapatkan nomor formulir.');
-			?>
+		<div class="row justify-content-center align-items-center">
+			<div class="col-md-4">
+				<div class="text-primary d-flex align-items-center justify-content-around p-4" style="border: 1px solid #B22D34">
+					<?php if(count($pendaftarans)==0){?>
+						<div>
+							<img src="<?php echo base_url('assets/media/alert-circle 1.png') ?>" alt="">
+						</div>
+						<div class="ml-4">
+							Belum ada data camaru. Silahkan klik tombol "Tambah Formulir" untuk memulai pendaftaran.
+						</div>
+					<?php } ?>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
