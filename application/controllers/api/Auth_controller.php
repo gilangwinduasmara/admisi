@@ -121,6 +121,12 @@ class Auth_controller extends CI_Controller
 		if(empty($email)){
 			redirect('/');
 		}
+
+		$akun = $this->akun_model->findByEmail($this->input->post('email'));
+		if(empty($akun)){
+			return redirect('/forgot_password?link_sent=true');
+		}
+
 		$reset_password = $this->reset_password_model->create([
 			'email' => $email,
 			'token' => md5(now())
