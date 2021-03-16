@@ -17,7 +17,7 @@
 						<?php 
 							if($pendaftaran['pembayaran'][0]){
 								?>
-									<p>Nomor pembayaran Anda <b><?php echo $pendaftaran['pembayaran'][0]['id'] ?></b>, silahkan melakukan pembayaran sesuai metode yang dipilih. <br>Nomor pendaftaran berlaku 24 jam ke depan.</p>
+									<p>Nomor pembayaran Anda <b><?php echo $pendaftaran['pembayaran'][0]['id'] ?></b>,<br> Silahkan lakukan pembayaran melalui metode yang sudah dipilih. <br> Lalu, upload bukti pembayaran pada tombol "Upload Bukti" pada kolom "Aksi Pembayaran"</p>
 									<div class="d-flex justify-content-center">
 										<a href="<?php echo base_url('/pendaftaran/data_camaru') ?>" class="btn btn-primary">Kembali</a>
 									</div>

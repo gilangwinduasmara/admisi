@@ -132,7 +132,7 @@ class Pendaftaran_controller extends CI_Controller{
 			'status_formulir' => 'AKTIF'
 		]);
 
-		$this->session->set_flashdata('success', ['Pendaftaran Berhasil, Silahkan mengunggu proses seleksi']);
+		$this->session->set_flashdata('success', ['Selamat Anda sudah mendapatkan nomor formulir. Silahkan memilih metode pembayaran dan upload bukti bayar pada kolom "Aksi Pembayaran", agar dapat mengisi formulir pendaftaran.']);
 		
 
 		redirect('/pendaftaran/data_camaru');

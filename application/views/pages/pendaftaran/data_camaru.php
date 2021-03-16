@@ -45,7 +45,7 @@
 					<th>Tanggal Daftar</th>
 					<th style="min-width: 100px;">Aksi Pembayaran</th>
 					<th>Status Pembayaran</th>
-					<th>Isi Formulir</th>
+					<th style="min-width: 100px;">Isi Formulir</th>
 					<th style="min-width: 200px;" class="text-center">Status Pendaftaran <br> Pilihan 1</th>
 					<th style="min-width: 200px;" class="text-center">Status Pendaftaran <br> Pilihan 2</th>
 				</tr>
@@ -70,25 +70,25 @@
 									<?php
 									if(($pendaftaran['pembayaran'][0]['status']??'BELUM DIBAYAR') == 'LUNAS'){
 										?>
-											<a class="btn btn-primary btn-shadow disabled" style="margin-bottom: 4px; min-width: 128px" data-toggle="tooltip" title="Pilih Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>">Pilih Metode</a><br >
-											<a class="btn btn-warning btn-shadow disabled" style="margin-bottom: 4px; min-width: 128px" data-toggle="tooltip" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>">Upload Bukti</a>
+											<a class="font-size-xs btn btn-secondary disabled" style="margin-bottom: 4px; width: 100px" data-toggle="tooltip" title="Pilih Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>">Pilih Metode</a><br >
+											<a class="font-size-xs btn btn-secondary disabled" style="margin-bottom: 4px; width: 100px" data-toggle="tooltip" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>">Upload Bukti</a>
 										<?php
 									}else{
 										?>
-											<a class="btn btn-primary btn-shadow" style="margin-bottom: 4px; min-width: 128px" data-toggle="tooltip" title="Pilih Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>">Pilih Metode</a><br >
-											<a class="btn btn-warning btn-shadow" style="margin-bottom: 4px; min-width: 128px" data-toggle="tooltip" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>">Upload Bukti</a>
+											<a class="font-size-xs btn btn-primary btn-shadow" style="margin-bottom: 4px; width: 100px" data-toggle="tooltip" title="Pilih Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>">Pilih Metode</a><br >
+											<a class="font-size-xs btn btn-warning btn-shadow" style="margin-bottom: 4px; width: 100px" data-toggle="tooltip" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>">Upload Bukti</a>
 										<?php
 									}
 									?>
 								</td>
 								<td class="text-center">
 									<a href="#" data-status="<?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?>" data-toggle="informasi-pembayaran">
-										<div class="label label-lg label-light-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> label-inline bg-hover-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> text-hover-white"><?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?></div>
+										<div class="font-size-xs btn btn-light-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> label-inline bg-hover-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> text-hover-white"><?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?></div>
 									</a href="#">
 									<!-- <div class="d-flex align-items-center justify-content-center mt-2">
 									</div> -->
 								</td>
-								<td> 
+								<td class="text-center"> 
 								<?php
 									if(($pendaftaran['pembayaran'][0]['status']??'BELUM DIBAYAR') == 'LUNAS'){
 										?>
@@ -96,8 +96,8 @@
 											<?php 
 											if(count($pendaftaran['hasil_penerimaan'])==0){
 												?>
-												<a data-toggle="tooltip" title="Isi Formulir Pendaftaran" href="<?php echo base_url('pendaftaran/formulir/data_diri?id='.$pendaftaran['id']) ?>" class="btn btn-icon btn-light btn-sm">
-													<i class="la la-arrow-right text-hover-primary"></i>
+												<a data-toggle="tooltip" title="Isi Formulir Pendaftaran" href="<?php echo base_url('pendaftaran/formulir/data_diri?id='.$pendaftaran['id']) ?>" class="btn btn-primary font-size-xs">
+													Isi Formulir
 												</a>
 												<?php
 											}
