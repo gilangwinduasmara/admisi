@@ -5,6 +5,7 @@ $(document).ready(function(){
 			let selectedFormulir = pendaftaran.filter((obj, i) => (obj.id == $(this).val()))[0]
 			$('#nama_camaru').val(selectedFormulir.nama)
 			$('.penerimaan-list').empty()
+			let countDiproses = 0;
 			selectedFormulir.hasil_penerimaan.map((item, index) => {
 				if(item.status == 'DITERIMA'){
 					$('.penerimaan-list').append(`
@@ -22,7 +23,19 @@ $(document).ready(function(){
 						</div>
 					`)
 				}
+				if(item.status == 'DIPROSES'){
+					countDiproses++
+				}
 			})
+			if(countDiproses == selectedFormulir.hasil_penerimaan.length){
+				$('.penerimaan-list').append(`
+					<div class="card card-custom bg-light mt-8 mx-0">
+						<div class="card-body">
+							Sedang dalam proses seleksi
+						</div>
+					</div>
+				`)
+			}
 			$('.penerimaan-wrapper').show()
 		}else{
 			$('.penerimaan-wrapper').hide()
