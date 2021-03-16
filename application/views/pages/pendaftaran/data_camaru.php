@@ -14,7 +14,7 @@
 		]
 	)
 ?>
-<div class="container">
+<div class="container-fluid">
 	<div class="d-flex justify-content-center">
 		<a href="<?php echo base_url('/pendaftaran/formulir') ?>" class="btn btn-warning"><i class="fas fa-plus"></i> Formulir</a>
 	</div>
