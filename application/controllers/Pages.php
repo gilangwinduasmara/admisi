@@ -35,6 +35,23 @@ class Pages extends CI_Controller{
 		);
 		$this->load->view('default', $data);
 	}
+	
+	public function forgot_password()
+	{
+		$this->load->model('reset_password_model');
+		$token = $this->input->get('token');
+		if(!empty($token)){
+			$stored_token = $this->reset_password_model->findByToken($token);
+			if(empty($stored_token)){
+				redirect('/forgot_password?invalid=true');
+			}
+		}
+		$data = array(
+			'page' => 'pages/forgot_password.php',
+			'link_sent' => !empty($this->input->get('link_sent'))
+		);
+		$this->load->view('default', $data);
+	}
 
 	public function request_verification(){
 		$akun = $this->akun_model->find($this->session->userdata('id'));

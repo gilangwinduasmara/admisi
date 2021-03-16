@@ -114,5 +114,10 @@ class Akun_model extends CI_Model{
 		return $user;
 	}
 
+	public function save($data){
+		$id = $data['id'];
+		unset($data['id']);
+		$this->db->update($this->table_name, $data, array('id' => $id));
+	}
 	
 }

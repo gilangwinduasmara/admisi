@@ -115,6 +115,71 @@ class Auth_controller extends CI_Controller
 		
 	}
 
+	public function forgot_password(){
+		$this->load->model('reset_password_model');
+		$email = $this->input->post('email');
+		if(empty($email)){
+			redirect('/');
+		}
+		$reset_password = $this->reset_password_model->create([
+			'email' => $email,
+			'token' => md5(now())
+		]);
+
+		$config = [
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8',
+			'protocol'  => 'smtp',
+			'smtp_host' => 'mail.promager.com',
+			'smtp_user' => 'admisi@promager.com',  // Email gmail
+			'smtp_pass'   => '@dm1s!!@#',  // Password gmail
+			'smtp_crypto' => 'ssl',
+			'smtp_port'   => 465,
+			'crlf'    => "\r\n",
+			'newline' => "\r\n"
+		];
+	
+		$this->load->library('email', $config);
+		$this->email->from('admisi@promager.com', 'ADMISI');
+		$this->email->to($email);
+		$this->email->subject('Reset Password');
+		$link = base_url('/forgot_password?token='.$reset_password['token']);
+		$this->email->message('
+			<html>
+				<head>Aktifasi Akun</head>
+				<body>
+					Untuk mereset akun, klik tautan di bawah ini <br> <a href="'.$link.'">'.$link.'</a>
+				</body>
+			</html>
+			');
+		$email_status = $this->email->send();
+
+		return redirect('/forgot_password?link_sent=true');
+	}
+
+	public function reset_password(){
+		$token = $this->input->post('token');
+		$password = $this->input->post('password');
+		if(empty($token) || empty($password)){
+			redirect('/forgot_password');
+		}
+		$this->load->model('reset_password_model');
+		$stored_reset_password = $this->reset_password_model->findByToken($this->input->post('token'));
+		if(empty($stored_reset_password)){
+			redirect('/forgot_password?invalid=true');
+		}
+		$akun = $this->akun_model->findByEmail($stored_reset_password['email']);
+		$this->akun_model->save([
+			'id' =>$akun->id,
+			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
+		]);
+
+		$this->session->set_flashdata('success', ['Password anda berhasil diubah']);
+		
+		redirect('/login');
+	}
+	
+
 	public function verify_email(){
 		
 	}

@@ -604,6 +604,26 @@ const forms = {
 				}
 			}
 		]
+	},
+	reset_password: {
+		fields: [
+			{
+				name: "password",
+				label: "Password",
+				rules: {
+					required: true,
+					min: 8
+				}
+			},
+			{
+				name: "confirm_password",
+				label: "Konfirmasi",
+				rules: {
+					required: true,
+					sameAs: "password"
+				}
+			}
+		]
 	}
 }
 

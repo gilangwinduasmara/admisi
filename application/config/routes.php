@@ -56,6 +56,7 @@ $route['admin/(:any)'] = 'Admin_pages_controller/$1';
 $route['default_controller'] = 'pages/landing';
 $route['register'] = 'pages/register';
 $route['login'] = 'pages/login';
+$route['forgot_password'] = 'pages/forgot_password';
 $route['verify'] = 'pages/verify';
 $route['tes'] = 'pages/tes';
 $route['request_verification'] = 'pages/request_verification';
