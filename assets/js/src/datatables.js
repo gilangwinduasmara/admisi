@@ -63,13 +63,15 @@ $(document).ready(function(){
 	let data_pendaftar = $('#data_pendaftar').DataTable({
 		// dom: 'liprt',
 		// dom: '<"row"<"col-md-2"l><"col-md-10 d-flex justify-content-between"ip>>rt',
-		dom: '<"row"<"col-md-2"l><"col-md-8"i><"col-md-2"p>>rt',
+		dom: '<"row"<"col-md-8"l><"col-md-2"i><"col-md-2"p>>rt',
+		language: {
+			lengthMenu: "_MENU_",
+			info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+			infoFiltered: ""
+		},
 		responsive: true,
 		lengthMenu: [5, 10, 25, 50],
 		pageLength: 10,
-		language: {
-			'lengthMenu': 'Display _MENU_',
-		},
 		// Order settings
 		order: [[1, 'desc']]
 	})

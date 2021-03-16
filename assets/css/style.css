@@ -34,3 +34,15 @@ body{
 	padding: 0
 }
 
+.btn-primary{
+	background: #B22D34 !important;
+	border-color: #B22D34 !important;
+}
+
+.text-primary{
+	color: #B22D34 !important;
+}
+
+a{
+	/* color: #B22D34 !important; */
+}

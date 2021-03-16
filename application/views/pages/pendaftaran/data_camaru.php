@@ -16,7 +16,7 @@
 ?>
 <div class="container-fluid">
 	<div class="d-flex justify-content-center">
-		<a href="<?php echo base_url('/pendaftaran/formulir') ?>" class="btn btn-warning"><i class="fas fa-plus"></i> Formulir</a>
+		<a href="<?php echo base_url('/pendaftaran/formulir') ?>" class="btn btn-primary"><i class="la la-plus-circle"></i> Formulir</a>
 	</div>
 	<div>
 	<div class="row justify-content-between align-items-end">
@@ -42,6 +42,7 @@
 	</div>
 	</div>
 	<div class="mt-12 ">
+		<?php if(count($pendaftarans)>0){?>
 		<table class="table table-bordered" id="data_pendaftar">
 			<thead >
 				<tr>
@@ -167,10 +168,11 @@
 				?>
 			</tbody>
 		</table>
+		<?php } ?>
 		<div class="text-center">
 			<?php
 				if(count($pendaftarans)==0)
-				// echo ("Belum ada data camaru" )
+				echo ("Belum ada data camaru" )
 			?>
 		</div>
 	</div>
