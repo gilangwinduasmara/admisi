@@ -59,7 +59,6 @@
 								</button>
 								<div class="dropdown-menu" aria-labelledby="dropdownData">
 									<a class="dropdown-item" href="<?php echo base_url("pendaftaran/data_camaru") ?>">Data Camaru</a>
-									<a class="dropdown-item" href="<?php echo base_url("pendaftaran/formulir") ?>">Formulir Pendaftaran</a>
 									<a class="dropdown-item" href="<?php echo base_url("pendaftaran/hasil_penerimaan") ?>">Hasil Penerimaan</a>
 									<a class="dropdown-item" href="<?php echo base_url("pendaftaran/registrasi_ulang") ?>">Registrasi Ulang</a>
 									<a class="dropdown-item" href="<?php echo base_url("pendaftaran/omb") ?>">Pendaftaran OMB</a>

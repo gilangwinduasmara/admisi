@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$('#formulir_selector').attr('disabled', false)
 	$('#formulir_selector').change(function(){
 		if($(this).val()){
 			let selectedFormulir = pendaftaran.filter((obj, i) => (obj.id == $(this).val()))[0]
@@ -27,4 +28,12 @@ $(document).ready(function(){
 			$('.penerimaan-wrapper').hide()
 		}
 	})
+	if($('#formulir_selector').length){
+		var url = new URL(window.location);
+		var id = url.searchParams.get("id");
+		if(id){
+			$('#formulir_selector').val(id)
+			$('#formulir_selector').change()
+		}
+	}
 })

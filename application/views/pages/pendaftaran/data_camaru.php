@@ -75,8 +75,8 @@
 										<?php
 									}else{
 										?>
-											<a class="btn btn-icon btn-light btn-sm" data-toggle="toltip" title="Pilih Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-info-circle"></i></a>
-											<a class="btn btn-icon btn-light btn-sm" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-check-circle"></i></a>
+											<a class="btn btn-icon btn-light btn-sm" data-toggle="tooltip" title="Pilih Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-info-circle"></i></a>
+											<a class="btn btn-icon btn-light btn-sm" data-toggle="tooltip" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-check-circle"></i></a>
 										<?php
 									}
 									?>
@@ -95,7 +95,7 @@
 											<?php 
 											if(count($pendaftaran['hasil_penerimaan'])==0){
 												?>
-												<a title="Isi Formulir Pendaftaran" href="<?php echo base_url('pendaftaran/formulir/data_diri?id='.$pendaftaran['id']) ?>" class="btn btn-icon btn-light btn-sm">
+												<a data-toggle="tooltip" title="Isi Formulir Pendaftaran" href="<?php echo base_url('pendaftaran/formulir/data_diri?id='.$pendaftaran['id']) ?>" class="btn btn-icon btn-light btn-sm">
 													<i class="la la-arrow-right text-hover-primary"></i>
 												</a>
 												<?php
@@ -118,7 +118,7 @@
 													<?php 
 														if(!empty($pendaftaran['hasil_penerimaan'][0]['status'])){
 															?>
-																<div class="label label-xl label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][0]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][0]['status'] ?? 'x')?></div>
+																<a data-toggle="tooltip" title="Hasil Penerimaan" href="<?php echo base_url('pendaftaran/hasil_penerimaan?id='.$pendaftaran['id']) ?>" class="label label-xl label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][0]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][0]['status'] ?? 'x')?></a>
 																<div><?php echo "No. Test: ".($pendaftaran['hasil_penerimaan'][0]['no_test'] ?? null) ?><div>
 															<?php
 														}
@@ -140,7 +140,7 @@
 													<?php 
 														if(!empty($pendaftaran['hasil_penerimaan'][1]['status'])){
 															?>
-																<div class="label label-xl label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][1]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][1]['status'] ?? 'x')?></div>
+																<a data-toggle="tooltip" title="Hasil Penerimaan" href="<?php echo base_url('pendaftaran/hasil_penerimaan?id='.$pendaftaran['id']) ?>" class="label label-xl label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][1]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][1]['status'] ?? 'x')?></a>
 																<div><?php echo "No. Test: ".($pendaftaran['hasil_penerimaan'][1]['no_test'] ?? null) ?><div>
 															<?php
 														}
@@ -159,7 +159,7 @@
 		<div class="text-center">
 			<?php
 				if(count($pendaftarans)==0)
-				echo ("Belum ada data camaru" )
+				// echo ("Belum ada data camaru" )
 			?>
 		</div>
 	</div>

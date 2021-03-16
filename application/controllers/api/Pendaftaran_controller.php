@@ -255,7 +255,7 @@ class Pendaftaran_controller extends CI_Controller{
 				$data_wali['negara'] = 'Indonesia';
 			}else{
 				$data_wali['kelurahan_id'] = null;
-				$data_wali['alamat'] = null;
+				$data_wali['alamat'] = $pendaftaran['alamat_asal'] ?? null;
 				$data_wali['negara'] = $pendaftaran['negara'];
 			}
 		}else{
@@ -263,7 +263,7 @@ class Pendaftaran_controller extends CI_Controller{
 				$data_wali['negara'] = 'Indonesia';
 			}else{
 				$data_wali['kelurahan_id'] = null;
-				$data_wali['alamat'] = null;
+				// $data_wali['alamat'] = null;
 				$data_wali['negara'] = $this->input->post('negara');
 			}
 		}

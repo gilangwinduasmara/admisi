@@ -5,7 +5,7 @@
 				<div class="card-body">
 					<div class="form-group row">
 						<label for="" class="col-md-3 col-form-label">No. Formulir</label>
-						<select name="" id="formulir_selector" class="form-control">
+						<select name="" id="formulir_selector" class="form-control" disabled>
 							<option value="" >Pilih</option>
 							<?php
 								foreach($pendaftaran as $p){

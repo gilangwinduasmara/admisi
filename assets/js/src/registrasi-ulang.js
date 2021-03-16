@@ -154,13 +154,14 @@ function doubleDegree(){
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Tanggal Transfer</label>
 			<div class="col-md-9">
-				<input class="form-control" type="date" name="tgl_transfer_1">
+				<input class="form-control max-today" type="date" name="tgl_transfer_1">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Upload Bukti Pembayaran</label>
 			<div class="col-md-9">
-				<input class="form-control" type="file" name="upload_bukti_pembayaran_1">
+				<input class="form-control " type="file" name="upload_bukti_pembayaran_1">
+				<span class="text-muted">(jpg, jpeg, png) maks 2 MB</span>
 			</div>
 		</div>
 		<div class="separator separator-solid mb-8"></div>
@@ -199,13 +200,14 @@ function doubleDegree(){
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Tanggal Transfer</label>
 			<div class="col-md-9">
-				<input class="form-control" type="date" name="tgl_transfer_2">
+				<input class="form-control max-today" type="date" name="tgl_transfer_2">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Upload Bukti Pembayaran</label>
 			<div class="col-md-9">
-				<input class="form-control" type="file" name="upload_bukti_pembayaran_2">
+				<input class="form-control " type="file" name="upload_bukti_pembayaran_2">
+				<span class="text-muted">(jpg, jpeg, png) maks 2 MB</span>
 			</div>
 		</div>
 
@@ -257,13 +259,14 @@ function singleDegree(){
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Tanggal Transfer</label>
 			<div class="col-md-9">
-				<input class="form-control" type="date" name="tgl_transfer">
+				<input class="form-control max-today" type="date" name="tgl_transfer">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="" class="col-md-3 col-form-label">Upload Bukti Pembayaran</label>
 			<div class="col-md-9">
-				<input class="form-control" type="file" name="upload_bukti_pembayaran" accept="image/png,image/jpeg">
+				<input class="form-control " type="file" name="upload_bukti_pembayaran" accept="image/png,image/jpeg">
+				<span class="text-muted">(jpg, jpeg, png) maks 2 MB</span>
 			</div>
 		</div>
 
@@ -307,5 +310,8 @@ function initPembayaran(){
 		jenis_pembayaran.map((item, index) => {
 			$(`[name="${$(this).data('field')}"]`).append(`<option value="${item.id}">${item.jenis_pembayaran}</option>`)
 		})
+	})
+	$('.max-today').prop('max', function(){
+		return new Date().toJSON().split("T")[0]
 	})
 }
