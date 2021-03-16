@@ -61,6 +61,9 @@ $(document).ready(function(){
 	
 
 	let data_pendaftar = $('#data_pendaftar').DataTable({
+		// dom: 'liprt',
+		// dom: '<"row"<"col-md-2"l><"col-md-10 d-flex justify-content-between"ip>>rt',
+		dom: '<"row"<"col-md-2"l><"col-md-8"i><"col-md-2"p>>rt',
 		responsive: true,
 		lengthMenu: [5, 10, 25, 50],
 		pageLength: 10,
