@@ -39,6 +39,11 @@ body{
 	border-color: #B22D34 !important;
 }
 
+.bg-primary{
+	background: #B22D34 !important;
+	border-color: #B22D34 !important;
+}
+
 .text-primary{
 	color: #B22D34 !important;
 }
