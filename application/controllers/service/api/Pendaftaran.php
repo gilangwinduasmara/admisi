@@ -181,7 +181,7 @@ class Pendaftaran extends RestController {
 				<li>Undang-undang Nomor 20 Tahun 2003 tentang Sistem Pendidikan Nasional;</li>
 				<li>Peraturan Pemerintah No. 60 Tahun 1999 tentang Pendidikan Tinggi;</li>
 			</ol>
-			<p><b>Memperhatikan:</b><br>Hasil seleksi Panitia Admisi Mahasiswa Baru tahun akademik xxx</p>
+			<p><b>Memperhatikan:</b><br>Hasil seleksi Panitia Admisi Mahasiswa Baru tahun akademik '.$pendaftaran["tahun_akademik"]["tahun_akademik"].'</p>
 			<div style="text-align: center; font-size: 8px">MEMUTUSKAN</div>
 			<p><b>Menetapkan</b></p>
 		</div>
@@ -221,7 +221,7 @@ class Pendaftaran extends RestController {
 				<tr>
 					<td>Kedua </td>
 					<td style="width: 8px">:</td>
-					<td colspan="3">Bagi yang telah dinyatakan lulus seleksi, wajib melakukan Registrasi Ulang dengan mengumpulkan persyaratan seperti terlampir dan membayar kewajiban keuangan yang diperinci di bawah ini sebelum tanggal xxx</td>
+					<td colspan="3">Bagi yang telah dinyatakan lulus seleksi, wajib melakukan Registrasi Ulang dengan mengumpulkan persyaratan seperti terlampir dan membayar kewajiban keuangan yang diperinci di bawah ini sebelum tanggal 25-04-2021</td>
 				</tr>
 			</tbody>
 		</table>
@@ -233,57 +233,57 @@ class Pendaftaran extends RestController {
 				<thead></thead>
 				<tbody>
 					<tr>
-						<td style="width: 100px">1.</td>
-						<td style="width: 300px">Uang SPP</td>
+						<td style="width: 296px; text-align: center">1.</td>
+						<td style="width: 200px">Uang SPP</td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
-						<td style="width: 100px">2.</td>
-						<td style="width: 300px">Uang Kuliah Standar</td>
+						<td style="width: 296px; text-align: center">2.</td>
+						<td style="width: 200px">Uang Kuliah Standar</td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
-						<td style="width: 100px">3.</td>
-						<td style="width: 300px">Uang Kuliah 20 SKS</td>
+						<td style="width: 296px; text-align: center">3.</td>
+						<td style="width: 200px">Uang Kuliah 20 SKS</td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
-						<td style="width: 100px">4.</td>
-						<td style="width: 300px">Uang Senat/Semester</td>
+						<td style="width: 296px; text-align: center">4.</td>
+						<td style="width: 200px">Uang Senat/Semester</td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
-						<td style="width: 100px">5.</td>
-						<td style="width: 300px">Uang Ujian/Semester</td>
+						<td style="width: 296px; text-align: center">5.</td>
+						<td style="width: 200px">Uang Ujian/Semester</td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
-						<td style="width: 100px">6.</td>
-						<td style="width: 300px">Uang Perpustakaan/Semester</td>
+						<td style="width: 296px; text-align: center">6.</td>
+						<td style="width: 200px">Uang Perpustakaan/Semester</td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
-						<td style="width: 100px">7.</td>
-						<td style="width: 300px">Uang Jas Almamater</td>
+						<td style="width: 296px; text-align: center">7.</td>
+						<td style="width: 200px">Uang Jas Almamater</td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
-						<td style="width: 100px">8.</td>
-						<td style="width: 300px">Uang Penyambutan MABA</td>
+						<td style="width: 296px; text-align: center">8.</td>
+						<td style="width: 200px">Uang Penyambutan MABA</td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
-						<td style="width: 100px">9.</td>
-						<td style="width: 300px">Kartu Tanda Mahasiswa (KTM)</td>
+						<td style="width: 296px; text-align: center">9.</td>
+						<td style="width: 200px">Kartu Tanda Mahasiswa (KTM)</td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
-						<td style="width: 100px"></td>
-						<td style="width: 300px"><b>Total</b></td>
+						<td style="width: 296px; text-align: center"></td>
+						<td style="width: 200px"><b>Total</b></td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
-						<td colspan="2">Minimal pembayaran Registrasi Ulang (Pembayaran I)</td>
+						<td colspan="2" style="text-align: right">Minimal pembayaran Registrasi Ulang (Pembayaran I)</td>
 						<td>Rp. xxx</td>
 					</tr>
 					<tr>
@@ -367,6 +367,7 @@ class Pendaftaran extends RestController {
 
 		$pdf->AddPage();
 
+		$pdf->setPrintHeader(false);
 		$pdf->setPrintFooter(false);
 		$footer = 
 		'
