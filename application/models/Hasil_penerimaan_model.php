@@ -55,6 +55,7 @@ class Hasil_penerimaan_model extends CI_Model {
 	public function find($id){
 		$hasil_penerimaan = $this->db->where('id', $id)->limit(1)->get($this->table_name)->result_array();
 		if(count($hasil_penerimaan) > 0){
+			$hasil_penerimaan[0]['prodi'] = $this->prodi_model->find($hasil_penerimaan[0]['prodi_id']);
 			return $hasil_penerimaan[0];
 		}
 		return null;

@@ -9,7 +9,7 @@ $(document).ready(function(){
 					$('.penerimaan-list').append(`
 						<div class="d-flex flex-column align-items-center mt-24">
 							<div for="" class="">${item.prodi.fakultas.nama_fakultas+' <b>'+item.prodi.nama_prodi}</b></div>
-							<button class="btn btn-primary">Download Surat Keputusan Penerimaan</button>
+							<a href="${BASE_URL+'/service/api/pendaftaran/generate_skr?hasil_penerimaan_id='+item.id}" class="btn btn-primary">Download Surat Keputusan Penerimaan</a>
 						</div>
 					`)
 				}

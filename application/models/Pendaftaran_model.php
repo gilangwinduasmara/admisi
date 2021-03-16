@@ -302,6 +302,8 @@ class Pendaftaran_model extends CI_Model{
 			}else{
 				$lunas = null;
 			}
+			$pendaftaran['jalur_pendaftaran'] = $this->jalur_pendaftaran_model->find($pendaftaran['jalur_pendaftaran_id']);
+			$pendaftaran['tahun_akademik'] = $this->tahun_akademik_model->find($pendaftaran['tahun_akademik_id']);
 			$pendaftaran['detail_prestasi'] = $this->detail_prestasi_model->findByPendaftaran($pendaftaran['id']);
 			$pendaftaran['pembayaran'] = $this->pembayaran_model->findByPendaftaranId($pendaftaran['id']);
 			$pendaftaran['pembayaran_validasi'] = $validasi;
