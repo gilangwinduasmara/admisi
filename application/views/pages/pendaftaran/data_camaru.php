@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	</div>
-	<div class="mt-12 table-responsive">
+	<div class="mt-12 ">
 		<table class="table table-bordered" id="data_pendaftar">
 			<thead>
 				<tr>
