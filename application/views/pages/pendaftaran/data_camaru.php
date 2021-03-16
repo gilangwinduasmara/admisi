@@ -37,17 +37,17 @@
 	</div>
 	<div class="mt-12 ">
 		<table class="table table-bordered" id="data_pendaftar">
-			<thead>
+			<thead >
 				<tr>
-					<th>No. Formulir</th>
-					<th>Tahun Akademik</th>
-					<th>Nama Camaru</th>
-					<th>Tanggal Daftar</th>
-					<th style="min-width: 100px;">Aksi Pembayaran</th>
-					<th>Status Pembayaran</th>
-					<th style="min-width: 100px;">Isi Formulir</th>
-					<th style="min-width: 200px;" class="text-center">Status Pendaftaran <br> Pilihan 1</th>
-					<th style="min-width: 200px;" class="text-center">Status Pendaftaran <br> Pilihan 2</th>
+					<th> <div class="font-size-xs">No. Formulir</div></th>
+					<th><div class="font-size-xs">Tahun Akademik</div></th>
+					<th><div class="font-size-xs">Nama Camaru</div></th>
+					<th style="max-width: 70px;"><div class="font-size-xs">Tanggal Daftar</div></th>
+					<th style="min-width: 100px;"><div class="font-size-xs">Aksi Pembayaran</div></th>
+					<th><div class="font-size-xs">Status Pembayaran</div></th>
+					<th style="min-width: 100px;"><div class="font-size-xs">Isi Formulir</div></th>
+					<th style="min-width: 120px;" class="text-center"><div class="font-size-xs">Status Pendaftaran <br> Pilihan 1</div></th>
+					<th style="min-width: 120px;" class="text-center"><div class="font-size-xs">Status Pendaftaran <br> Pilihan 2</div></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -108,48 +108,52 @@
 										?>
 								</td>
 								<td class="text-center" style="vertical-align: bottom">
-									<?php 
-										if(!empty($pendaftaran['hasil_penerimaan'][0])){
-											?>
-												<div>
-													<?php 
-														echo $pendaftaran['hasil_penerimaan'][0]['prodi']['nama_prodi'];
-													?>
-												</div>
-												<?php 
-													if(!empty($pendaftaran['hasil_penerimaan'][0]['status'])){
-														?>
-															<a data-toggle="tooltip" title="Hasil Penerimaan" href="<?php echo base_url('pendaftaran/hasil_penerimaan?id='.$pendaftaran['id']) ?>" class="label label-xl label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][0]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][0]['status'] ?? 'x')?></a>
-															<div><?php echo "No. Test: ".($pendaftaran['hasil_penerimaan'][0]['no_test'] ?? null) ?><div>
-														<?php
-													}
+									<div class="font-size-xs">
+										<?php 
+											if(!empty($pendaftaran['hasil_penerimaan'][0])){
 												?>
-											<?php
-										}
-									?>
-								</td>
-								<td class="text-center" style="vertical-align: bottom">
-									<?php 
-										if(!empty($pendaftaran['hasil_penerimaan'][1])){
-											?>
-												<div>
 													<div>
 														<?php 
-															echo $pendaftaran['hasil_penerimaan'][1]['prodi']['nama_prodi'];
+															echo $pendaftaran['hasil_penerimaan'][0]['prodi']['nama_prodi'];
 														?>
 													</div>
 													<?php 
-														if(!empty($pendaftaran['hasil_penerimaan'][1]['status'])){
+														if(!empty($pendaftaran['hasil_penerimaan'][0]['status'])){
 															?>
-																<a data-toggle="tooltip" title="Hasil Penerimaan" href="<?php echo base_url('pendaftaran/hasil_penerimaan?id='.$pendaftaran['id']) ?>" class="label label-xl label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][1]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][1]['status'] ?? 'x')?></a>
-																<div><?php echo "No. Test: ".($pendaftaran['hasil_penerimaan'][1]['no_test'] ?? null) ?><div>
+																<a data-toggle="tooltip" title="Hasil Penerimaan" href="<?php echo base_url('pendaftaran/hasil_penerimaan?id='.$pendaftaran['id']) ?>" class="label label-xs label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][0]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][0]['status'] ?? 'x')?></a>
+																<div><?php echo "No. Test: ".($pendaftaran['hasil_penerimaan'][0]['no_test'] ?? null) ?><div>
 															<?php
 														}
 													?>
-												</div>
-											<?php
-										}
-									?>
+												<?php
+											}
+										?>
+									</div>
+								</td>
+								<td class="text-center" style="vertical-align: bottom">
+									<div class="font-size-xs">
+										<?php 
+											if(!empty($pendaftaran['hasil_penerimaan'][1])){
+												?>
+													<div>
+														<div>
+															<?php 
+																echo $pendaftaran['hasil_penerimaan'][1]['prodi']['nama_prodi'];
+															?>
+														</div>
+														<?php 
+															if(!empty($pendaftaran['hasil_penerimaan'][1]['status'])){
+																?>
+																	<a data-toggle="tooltip" title="Hasil Penerimaan" href="<?php echo base_url('pendaftaran/hasil_penerimaan?id='.$pendaftaran['id']) ?>" class="label label-xs label-<?php echo $status_pendaftaran[$pendaftaran['hasil_penerimaan'][1]['status']]['color']?> my-lg-0 my-2 label-inline font-weight-bolder"><?php echo ($pendaftaran['hasil_penerimaan'][1]['status'] ?? 'x')?></a>
+																	<div><?php echo "No. Test: ".($pendaftaran['hasil_penerimaan'][1]['no_test'] ?? null) ?><div>
+																<?php
+															}
+														?>
+													</div>
+												<?php
+											}
+										?>
+									</div>
 								</td>
 						</tr>
 						<?php
