@@ -19,7 +19,7 @@
 		<a href="<?php echo base_url('/pendaftaran/formulir') ?>" class="btn btn-warning"><i class="fas fa-plus"></i> Formulir</a>
 	</div>
 	<div>
-	<div class="row">
+	<div class="row justify-content-between align-items-end">
 		<div class="col-md-3">
 			<label for="">Cari berdasarkan tahun akademik</label>
 			<select class="form-control" id="search_tahun_akademik">
@@ -33,6 +33,12 @@
 				?>
 			</select>
 		</div>
+		<div class="col-md-3">
+			<div class="input-icon">
+				<input type="text" class="form-control" placeholder="Cari..." id="search_query">
+				<span><i class="flaticon2-search-1 text-muted"></i></span>
+			</div>
+		</div>
 	</div>
 	</div>
 	<div class="mt-12 ">
@@ -40,7 +46,7 @@
 			<thead >
 				<tr>
 					<th> <div class="font-size-xs">No. Formulir</div></th>
-					<th><div class="font-size-xs">Tahun Akademik</div></th>
+					<th style="max-width: 70px;"><div class="font-size-xs">Tahun Akademik</div></th>
 					<th><div class="font-size-xs">Nama Camaru</div></th>
 					<th style="max-width: 70px;"><div class="font-size-xs">Tanggal Daftar</div></th>
 					<th style="min-width: 100px;"><div class="font-size-xs">Aksi Pembayaran</div></th>
@@ -62,10 +68,10 @@
 					foreach($pendaftarans as $pendaftaran){
 						?>
 						<tr>
-								<td><?php echo($pendaftaran['id'])?></td>
-								<td><?php echo($pendaftaran['tahun_akademik']['tahun_akademik'] ?? '')?></td>
-								<td><?php echo($pendaftaran['nama'])?></td>
-								<td><?php echo(formatDate(explode(" ", $pendaftaran['created_at'])[0]))?></td>
+								<td><div class="font-size-xs"><?php echo($pendaftaran['id'])?></div></td>
+								<td><div class="font-size-xs"><?php echo($pendaftaran['tahun_akademik']['tahun_akademik'] ?? '')?></div></td>
+								<td><div class="font-size-xs"><?php echo($pendaftaran['nama'])?></div></td>
+								<td><div class="font-size-xs"><?php echo(formatDate(explode(" ", $pendaftaran['created_at'])[0]))?></div></td>
 								<td class="text-center">
 									<?php
 									if(($pendaftaran['pembayaran'][0]['status']??'BELUM DIBAYAR') == 'LUNAS'){
