@@ -213,7 +213,8 @@ var storedRt = ""
 var storedW = ""
 
 $('input[name="same_address"]').change(function(){
-	const kewarganegaraan = $(this).data('kewarganegaraan')
+	const kewarganegaraan = $(this).data('kewarganegaraan-camaru')
+	console.log(kewarganegaraan)
 	if($(this).is(':checked')){
 		storedAlamat = $('[name="alamat"]').val()
 		storedRt = $('[name="rt"]').val()

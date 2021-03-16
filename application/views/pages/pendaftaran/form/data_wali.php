@@ -135,7 +135,7 @@
 							<div class="card-body">
 								<div class="form-group row ml-1">
 									<label class="checkbox checkbox-outline checkbox-success">
-										<input type="checkbox" data-kewarganegaraan-camaru="<?php $pendaftaran['kewarganegaraan'] ?>" name="same_address" value="true" <?php echo (($data_wali['same_address'] ?? null) == 'true' ? 'checked': '') ?>/>
+										<input type="checkbox" data-kewarganegaraan-camaru="<?php echo $pendaftaran['kewarganegaraan'] ?>" name="same_address" value="true" <?php echo (($data_wali['same_address'] ?? null) == 'true' ? 'checked': '') ?>/>
 										<span></span>
 										Alamat wali sama dengan alamat camaru
 									</label>
