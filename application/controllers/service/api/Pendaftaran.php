@@ -386,7 +386,7 @@ class Pendaftaran extends RestController {
 		$pdf->writeHTMLCell(0, 0, '', '', $footer, 0, 1, 0, true, '', true);
 
 
-		$pdf->Output('example_001.pdf', 'I');
+		$pdf->Output('surat_keputusan_rektor_'.$hasil_penerimaan['kode_skpm'].'_.pdf', 'I');
 	}
 
 }
