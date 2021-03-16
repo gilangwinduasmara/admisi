@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	</div>
-	<div class="mt-12">
+	<div class="mt-12 table-responsive">
 		<table class="table table-bordered" id="data_pendaftar">
 			<thead>
 				<tr>
@@ -43,7 +43,7 @@
 					<th>Tahun Akademik</th>
 					<th>Nama Camaru</th>
 					<th>Tanggal Daftar</th>
-					<th style="min-width: 100px;">Aksi</th>
+					<th style="min-width: 100px;">Aksi Pembayaran</th>
 					<th>Status Pembayaran</th>
 					<th>Isi Formulir</th>
 					<th style="min-width: 200px;" class="text-center">Status Pendaftaran <br> Pilihan 1</th>
@@ -70,22 +70,23 @@
 									<?php
 									if(($pendaftaran['pembayaran'][0]['status']??'BELUM DIBAYAR') == 'LUNAS'){
 										?>
-											<button class="btn btn-icon btn-light btn-sm" data-toggle="sudah_bayar" href="#"><i class="la la-info-circle"></i></button>
-											<button class="btn btn-icon btn-light btn-sm" data-toggle="sudah_bayar" href=""><i class="la la-check-circle"></i></button>
+											<a class="btn btn-primary btn-shadow disabled" style="margin-bottom: 4px; min-width: 128px" data-toggle="tooltip" title="Pilih Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>">Pilih Metode</a><br >
+											<a class="btn btn-warning btn-shadow disabled" style="margin-bottom: 4px; min-width: 128px" data-toggle="tooltip" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>">Upload Bukti</a>
 										<?php
 									}else{
 										?>
-											<a class="btn btn-icon btn-light btn-sm" data-toggle="tooltip" title="Pilih Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-info-circle"></i></a>
-											<a class="btn btn-icon btn-light btn-sm" data-toggle="tooltip" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>"><i class="la la-check-circle"></i></a>
+											<a class="btn btn-primary btn-shadow" style="margin-bottom: 4px; min-width: 128px" data-toggle="tooltip" title="Pilih Pembayaran" href="<?php echo base_url("pendaftaran/informasi_pembayaran?id=".$pendaftaran["id"]) ?>">Pilih Metode</a><br >
+											<a class="btn btn-warning btn-shadow" style="margin-bottom: 4px; min-width: 128px" data-toggle="tooltip" title="Upload Bukti Pembayaran" href="<?php echo base_url("pendaftaran/upload_pembayaran?id=".$pendaftaran["id"]) ?>">Upload Bukti</a>
 										<?php
 									}
 									?>
 								</td>
 								<td class="text-center">
-									<div class="label label-lg label-light-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> label-inline"><?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?></div>
-									<div class="d-flex align-items-center justify-content-center mt-2">
-										<a href="#" data-status="<?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?>" data-toggle="informasi-pembayaran"><i class="fas fa-info-circle mr-4"></i>Info</a href="#">
-									</div>
+									<a href="#" data-status="<?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?>" data-toggle="informasi-pembayaran">
+										<div class="label label-lg label-light-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> label-inline bg-hover-<?php echo ($status_pembayaran[$pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS'])?> text-hover-white"><?php echo ($pendaftaran['pembayaran'][0]['status']??'BELUM LUNAS')?></div>
+									</a href="#">
+									<!-- <div class="d-flex align-items-center justify-content-center mt-2">
+									</div> -->
 								</td>
 								<td> 
 								<?php
@@ -182,7 +183,7 @@
 			Kolom ini akan memunculkan status pembayaran Anda. Terdapat 4 status:
 			</p>
 			<p>
-			1. Jika status pembayaran Anda "BELUM LUNAS" maka Anda harus memilih metode pembayaran melalui tombol "PILIH PEMBAYARAN" <i class="la la-info-circle"></i> di kolom "AKSI". Kemudian lakukan pembayaran sesuai petunjuk dan mengunggah buktinya di tombol "UPLOAD BUKTI PEMBAYARAN" <i class="la la-check-circle"></i> yang berada di kolom "AKSI"
+			1. Jika status pembayaran Anda "BELUM LUNAS" maka Anda harus memilih metode pembayaran melalui tombol "PILIH PEMBAYARAN" di kolom "AKSI PEMBAYARAN". Kemudian lakukan pembayaran sesuai petunjuk dan mengunggah buktinya di tombol "UPLOAD BUKTI" yang berada di kolom "AKSI PEMBAYARAN"
 			</p>
 			<p>
 			2. Jika status pembayaran Anda "VALIDASI", silahkan menunggu proses validasi pembayaran.

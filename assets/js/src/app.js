@@ -160,6 +160,7 @@ $('[name="jenis_pembayaran"]').change(function(){
 
 
 $('table').on('click', '[data-toggle="informasi-pembayaran"]', function(e){
+	e.preventDefault();
 	$('#modal_informasi_pembayaran').modal('show')
 })
 
