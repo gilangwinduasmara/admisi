@@ -16,7 +16,7 @@
 ?>
 <div class="container-fluid">
 	<div class="d-flex justify-content-center">
-		<a href="<?php echo base_url('/pendaftaran/formulir') ?>" class="btn btn-primary"><i class="la la-plus-circle"></i> Formulir</a>
+		<a href="<?php echo base_url('/pendaftaran/formulir') ?>" class="btn btn-primary"><i class="la la-plus-circle"></i>Tambah Formulir</a>
 	</div>
 	<div>
 	<div class="row justify-content-between align-items-end">
@@ -172,7 +172,7 @@
 		<div class="text-center">
 			<?php
 				if(count($pendaftarans)==0)
-				echo ("Belum ada data camaru" )
+				echo ('Belum ada data camaru/formulir. Silahkan klik tombol "Tambah Formulir" untuk mendapatkan nomor formulir.');
 			?>
 		</div>
 	</div>
