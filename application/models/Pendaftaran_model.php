@@ -17,6 +17,8 @@ class Pendaftaran_model extends CI_Model{
 		$this->load->model('tahun_akademik_model');
 		$this->load->model('jenjang_model');
 		$this->load->model('gelombang_model');
+		$this->load->model('jalur_pendaftaran_model');
+		$this->load->model('kelurahan_model');
 	}
 
 	public function count(){
@@ -32,6 +34,10 @@ class Pendaftaran_model extends CI_Model{
 		if(count($pendaftaran) > 0){
 			$pendaftaran = $pendaftaran[0];
 			$pendaftaran['jenjang'] = $this->jenjang_model->findById($pendaftaran['jenjang_id']);
+			$pendaftaran['kelurahan'] = $this->kelurahan_model->find($pendaftaran['kelurahan_id']);
+			$pendaftaran['tahun_akademik'] = $this->tahun_akademik_model->find($pendaftaran['tahun_akademik_id']);
+			$pendaftaran['jalur_pendaftaran'] = $this->jalur_pendaftaran_model->find($pendaftaran['jalur_pendaftaran_id']);
+			$pendaftaran['detail_wali'] = $this->detail_wali_model->findByPendaftaran($pendaftaran['id']);
 			return $pendaftaran;
 		}
 		return $pendaftaran;

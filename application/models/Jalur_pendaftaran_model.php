@@ -10,6 +10,15 @@ class Jalur_pendaftaran_model extends CI_Model {
 		parent::__construct();
 	}
 
+	public function find($id){
+		$data = $this->db->where('id', $id)->get($this->table_name)->result_array();
+		if(count($data) > 0){
+			return $data[0];
+		}else{
+			return null;
+		}
+	}
+
 	public function get(){
 		return $this->db->get($this->table_name)->result_array();
 	}
